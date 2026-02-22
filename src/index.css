@@ -29,6 +29,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Nav link hover underline */
+a:hover > .hover-line {
+  transform: translateX(-50%) scaleX(1);
+}
+
 /* Animated background blobs */
 @keyframes blob-drift-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }

@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { GlassCard } from './components/ui/GlassCard'
 import { Button } from './components/ui/Button'
+import { Navbar } from './components/layout/Navbar'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-bg">
+      <Navbar />
+
       {/* Animated gradient blobs */}
       <div className="pointer-events-none fixed inset-0" aria-hidden="true">
         <div className="blob blob-indigo" style={{ top: '-10%', left: '-5%' }} />
@@ -15,7 +18,7 @@ function App() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 py-24">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 pt-28 pb-24">
         {/* Hero */}
         <header className="text-center mb-20">
           <div className="inline-block mb-6">
