@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { AnimatedSection } from '../ui/AnimatedSection'
 import { GlassCard } from '../ui/GlassCard'
 
@@ -51,6 +53,44 @@ function QuoteIcon() {
   )
 }
 
+function TestimonialCard({ testimonial, index }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-60px' })
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.7,
+        delay: index * 0.08,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      <GlassCard premium className="h-full flex flex-col">
+        <QuoteIcon />
+        <p className="text-sm text-text leading-[1.8] flex-1 mb-6">
+          {testimonial.quote}
+        </p>
+        <div className="flex items-center gap-3 pt-4 border-t border-border/40">
+          <div className="w-10 h-10 rounded-full btn-gradient flex items-center justify-center text-white text-xs font-bold shrink-0">
+            {testimonial.name.split(' ').map(n => n[0]).join('')}
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-text">
+              {testimonial.name}
+            </p>
+            <p className="text-xs text-text-secondary">
+              {testimonial.role}, {testimonial.company}
+            </p>
+          </div>
+        </div>
+      </GlassCard>
+    </motion.div>
+  )
+}
+
 export function Testimonials() {
   return (
     <section className="py-32 relative overflow-hidden">
@@ -67,27 +107,11 @@ export function Testimonials() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {TESTIMONIALS.map((testimonial, i) => (
-            <AnimatedSection key={testimonial.name} delay={i * 0.08}>
-              <GlassCard premium className="h-full flex flex-col">
-                <QuoteIcon />
-                <p className="text-sm text-text leading-[1.8] flex-1 mb-6">
-                  {testimonial.quote}
-                </p>
-                <div className="flex items-center gap-3 pt-4 border-t border-border/40">
-                  <div className="w-10 h-10 rounded-full btn-gradient flex items-center justify-center text-white text-xs font-bold shrink-0">
-                    {testimonial.name.split(' ').map(n => n[0]).join('')}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-text">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-xs text-text-secondary">
-                      {testimonial.role}, {testimonial.company}
-                    </p>
-                  </div>
-                </div>
-              </GlassCard>
-            </AnimatedSection>
+            <TestimonialCard
+              key={testimonial.name}
+              testimonial={testimonial}
+              index={i}
+            />
           ))}
         </div>
       </div>

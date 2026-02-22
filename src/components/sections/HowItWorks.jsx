@@ -28,7 +28,6 @@ const STEPS = [
 export function HowItWorks() {
   return (
     <section className="py-32 relative">
-      {/* Grid line background */}
       <div className="absolute inset-0 bg-grid-lines opacity-50 pointer-events-none" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto px-6 relative">
@@ -55,7 +54,6 @@ export function HowItWorks() {
               viewport={{ once: true }}
               transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             />
-            {/* Traveling dot */}
             <motion.div
               className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary shadow-lg shadow-primary/50"
               initial={{ left: '0%', opacity: 0 }}
@@ -77,7 +75,6 @@ export function HowItWorks() {
           {STEPS.map((step, i) => (
             <AnimatedSection key={step.number} delay={i * 0.15}>
               <GlassCard premium className="relative z-10 text-center h-full flex flex-col items-center">
-                {/* Step number badge */}
                 <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                   <span className="text-xs font-mono font-semibold text-primary">
                     {step.number}
