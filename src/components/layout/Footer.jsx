@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Mic } from 'lucide-react'
+import { Logo } from '../ui/Logo'
 
 const PRODUCT_LINKS = [
   { label: 'AI Phone Receptionist', to: '/products' },
@@ -25,8 +26,8 @@ const LEGAL_LINKS = [
 function FooterColumn({ title, links }) {
   return (
     <div>
-      <h4 className="text-sm font-semibold text-white mb-4">{title}</h4>
-      <ul className="space-y-2.5 list-none p-0 m-0">
+      <h4 className="text-sm font-semibold text-white mb-5">{title}</h4>
+      <ul className="space-y-3 list-none p-0 m-0">
         {links.map(({ label, to }) => (
           <li key={label}>
             <Link
@@ -43,26 +44,50 @@ function FooterColumn({ title, links }) {
 }
 
 export function Footer() {
+  const [email, setEmail] = useState('')
+
   return (
-    <footer className="bg-dark text-white">
+    <footer className="bg-dark text-white relative">
+      {/* Gradient line at top */}
+      <div className="h-px" style={{ background: 'linear-gradient(90deg, transparent, #2563EB, #6366F1, #0EA5E9, transparent)' }} />
+
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           {/* Brand column */}
-          <div>
-            <Link to="/" className="flex items-center gap-2.5 no-underline mb-4">
-              <div className="w-8 h-8 rounded-[10px] btn-gradient flex items-center justify-center">
-                <Mic size={16} color="#fff" strokeWidth={1.5} />
-              </div>
-              <span className="text-lg tracking-[-0.02em]">
-                <span className="font-bold text-white">Jotil</span>
-                <span className="font-bold text-accent">Labs</span>
-              </span>
-            </Link>
-            <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
+          <div className="lg:col-span-4">
+            <div className="mb-5">
+              <Logo size="md" dark />
+            </div>
+            <p className="text-sm text-slate-400 leading-relaxed max-w-xs mb-6">
               AI-powered automation for customer communications. We help businesses
               scale with intelligent voice agents, chatbots, SMS, and CRM tools.
             </p>
-            <div className="flex items-center gap-3 mt-6">
+
+            {/* Newsletter */}
+            <div className="mb-6">
+              <p className="text-xs font-semibold text-slate-300 mb-2.5">Stay updated</p>
+              <form
+                onSubmit={(e) => { e.preventDefault(); setEmail('') }}
+                className="flex gap-2"
+              >
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@company.com"
+                  className="flex-1 bg-white/5 border border-white/10 rounded-[10px] px-3.5 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none focus:border-primary/40 transition-colors"
+                />
+                <button
+                  type="submit"
+                  className="px-4 py-2.5 text-sm font-semibold text-white btn-gradient rounded-[10px] border-none cursor-pointer hover:shadow-lg hover:shadow-primary/25 transition-all duration-300"
+                >
+                  Subscribe
+                </button>
+              </form>
+            </div>
+
+            {/* Social icons */}
+            <div className="flex items-center gap-3">
               <a
                 href="https://linkedin.com"
                 target="_blank"
@@ -102,12 +127,19 @@ export function Footer() {
             </div>
           </div>
 
-          <FooterColumn title="Products" links={PRODUCT_LINKS} />
-          <FooterColumn title="Company" links={COMPANY_LINKS} />
-          <FooterColumn title="Legal" links={LEGAL_LINKS} />
+          {/* Link columns */}
+          <div className="lg:col-span-2 lg:col-start-6">
+            <FooterColumn title="Products" links={PRODUCT_LINKS} />
+          </div>
+          <div className="lg:col-span-2">
+            <FooterColumn title="Company" links={COMPANY_LINKS} />
+          </div>
+          <div className="lg:col-span-2">
+            <FooterColumn title="Legal" links={LEGAL_LINKS} />
+          </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-14 pt-6 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-500">
             {new Date().getFullYear()} Jotil Labs. All rights reserved.
           </p>

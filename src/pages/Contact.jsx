@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Mail, Phone, MapPin, ArrowRight, Clock } from 'lucide-react'
 import { GlassCard } from '../components/ui/GlassCard'
 import { IconBox } from '../components/ui/IconBox'
@@ -42,28 +43,29 @@ export function Contact() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
+      <section className="relative pt-36 pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute inset-0 bg-dot-grid opacity-40" />
           <div
-            className="absolute w-[400px] h-[400px] opacity-20"
+            className="absolute w-[500px] h-[500px] opacity-20"
             style={{
-              top: '10%',
-              left: '70%',
-              background: 'radial-gradient(circle, rgba(14, 165, 233, 0.4) 0%, transparent 70%)',
-              filter: 'blur(80px)',
+              top: '5%',
+              left: '65%',
+              background: 'radial-gradient(circle, rgba(14, 165, 233, 0.4) 0%, transparent 60%)',
+              filter: 'blur(100px)',
             }}
           />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <AnimatedSection>
+          <AnimatedSection blur>
             <span className="text-xs font-semibold text-primary tracking-widest uppercase">
               Contact Us
             </span>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-[-0.03em] text-text mt-3">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.04em] text-text mt-3 leading-tight">
               Let&apos;s Build Something{' '}
               <span className="text-gradient">Together</span>
             </h1>
-            <p className="text-lg text-text-secondary mt-4 max-w-xl mx-auto">
+            <p className="text-lg sm:text-xl text-text-secondary mt-5 max-w-xl mx-auto leading-[1.8]">
               Whether you need a demo, have a question, or want to discuss a custom
               solution — we would love to hear from you.
             </p>
@@ -72,19 +74,19 @@ export function Contact() {
       </section>
 
       {/* Contact grid */}
-      <section className="pb-24">
+      <section className="pb-32">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             {/* Form */}
             <AnimatedSection className="lg:col-span-3">
-              <GlassCard className="p-8">
-                <h2 className="text-xl font-semibold text-text mb-6">
+              <GlassCard premium className="p-8 sm:p-10">
+                <h2 className="text-xl font-semibold text-text mb-8">
                   Send Us a Message
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-text mb-1.5" htmlFor="name">
+                      <label className="block text-sm font-medium text-text mb-2" htmlFor="name">
                         Full Name
                       </label>
                       <input
@@ -94,12 +96,12 @@ export function Contact() {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-border-hover transition-colors"
+                        className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.06)] transition-all"
                         placeholder="John Doe"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-text mb-1.5" htmlFor="email">
+                      <label className="block text-sm font-medium text-text mb-2" htmlFor="email">
                         Email
                       </label>
                       <input
@@ -109,7 +111,7 @@ export function Contact() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-border-hover transition-colors"
+                        className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.06)] transition-all"
                         placeholder="john@company.com"
                       />
                     </div>
@@ -117,7 +119,7 @@ export function Contact() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-text mb-1.5" htmlFor="company">
+                      <label className="block text-sm font-medium text-text mb-2" htmlFor="company">
                         Company
                       </label>
                       <input
@@ -126,12 +128,12 @@ export function Contact() {
                         type="text"
                         value={formData.company}
                         onChange={handleChange}
-                        className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-border-hover transition-colors"
+                        className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.06)] transition-all"
                         placeholder="Your Company"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-text mb-1.5" htmlFor="phone">
+                      <label className="block text-sm font-medium text-text mb-2" htmlFor="phone">
                         Phone
                       </label>
                       <input
@@ -140,14 +142,14 @@ export function Contact() {
                         type="tel"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-border-hover transition-colors"
+                        className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.06)] transition-all"
                         placeholder="+1 (555) 000-0000"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-text mb-1.5" htmlFor="inquiryType">
+                    <label className="block text-sm font-medium text-text mb-2" htmlFor="inquiryType">
                       Inquiry Type
                     </label>
                     <select
@@ -155,7 +157,7 @@ export function Contact() {
                       name="inquiryType"
                       value={formData.inquiryType}
                       onChange={handleChange}
-                      className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text outline-none focus:border-border-hover transition-colors cursor-pointer"
+                      className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.06)] transition-all cursor-pointer"
                     >
                       <option value="">Select an option</option>
                       {INQUIRY_TYPES.map((type) => (
@@ -165,7 +167,7 @@ export function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-text mb-1.5" htmlFor="message">
+                    <label className="block text-sm font-medium text-text mb-2" htmlFor="message">
                       Message
                     </label>
                     <textarea
@@ -174,7 +176,7 @@ export function Contact() {
                       rows={5}
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-border-hover transition-colors resize-none"
+                      className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.06)] transition-all resize-none"
                       placeholder="Tell us about your needs..."
                     />
                   </div>
@@ -188,16 +190,16 @@ export function Contact() {
             </AnimatedSection>
 
             {/* Sidebar */}
-            <AnimatedSection delay={0.2} className="lg:col-span-2 space-y-5">
+            <AnimatedSection delay={0.15} className="lg:col-span-2 space-y-6">
               {/* Contact info */}
-              <GlassCard>
-                <h3 className="text-lg font-semibold text-text mb-5">
+              <GlassCard premium>
+                <h3 className="text-lg font-semibold text-text mb-6">
                   Contact Information
                 </h3>
-                <div className="space-y-4">
+                <div className="space-y-5">
                   {CONTACT_INFO.map((item) => (
                     <div key={item.label} className="flex items-center gap-3">
-                      <IconBox size="sm">
+                      <IconBox size="sm" glow>
                         <item.icon size={18} strokeWidth={1.5} className="text-primary" />
                       </IconBox>
                       <div>
@@ -217,18 +219,27 @@ export function Contact() {
 
               {/* Book a Demo card */}
               <div
-                className="rounded-[20px] p-6 text-white"
-                style={{ background: 'linear-gradient(135deg, #2563EB 0%, #4F46E5 100%)' }}
+                className="rounded-[20px] p-7 text-white relative overflow-hidden"
+                style={{ background: 'linear-gradient(135deg, #2563EB 0%, #4F46E5 50%, #6366F1 100%)' }}
               >
-                <h3 className="text-lg font-semibold mb-2">Book a Demo</h3>
-                <p className="text-sm text-white/70 mb-5 leading-relaxed">
-                  See Jotil Labs in action. Get a personalized walkthrough of our
-                  AI voice agents and automation tools.
-                </p>
-                <button className="inline-flex items-center gap-2 text-sm font-semibold text-primary bg-white px-5 py-2.5 rounded-[10px] border-none cursor-pointer hover:bg-white/90 transition-colors">
-                  Schedule Now
-                  <ArrowRight size={14} strokeWidth={1.5} />
-                </button>
+                {/* Subtle pattern */}
+                <div className="absolute inset-0 opacity-10 pointer-events-none" aria-hidden="true">
+                  <div className="absolute inset-0 bg-dot-grid" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+                </div>
+                <div className="relative z-10">
+                  <h3 className="text-lg font-semibold mb-2">Book a Demo</h3>
+                  <p className="text-sm text-white/60 mb-6 leading-relaxed">
+                    See Jotil Labs in action. Get a personalized walkthrough of our
+                    AI voice agents and automation tools.
+                  </p>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-primary bg-white px-5 py-2.5 rounded-[10px] border-none no-underline hover:bg-white/90 transition-colors shadow-lg"
+                  >
+                    Schedule Now
+                    <ArrowRight size={14} strokeWidth={1.5} />
+                  </Link>
+                </div>
               </div>
             </AnimatedSection>
           </div>

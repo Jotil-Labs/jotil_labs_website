@@ -37,28 +37,29 @@ export function About() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
+      <section className="relative pt-36 pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute inset-0 bg-grid-lines opacity-40" />
           <div
-            className="absolute w-[400px] h-[400px] opacity-20"
+            className="absolute w-[500px] h-[500px] opacity-20"
             style={{
-              top: '0%',
-              left: '60%',
-              background: 'radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%)',
-              filter: 'blur(80px)',
+              top: '-5%',
+              left: '55%',
+              background: 'radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 60%)',
+              filter: 'blur(100px)',
             }}
           />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <AnimatedSection className="max-w-3xl">
+          <AnimatedSection blur className="max-w-3xl">
             <span className="text-xs font-semibold text-primary tracking-widest uppercase">
               About Us
             </span>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-[-0.03em] text-text mt-3">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.04em] text-text mt-3 leading-tight">
               Building the Future of{' '}
               <span className="text-gradient">Business Communication</span>
             </h1>
-            <p className="text-lg text-text-secondary mt-4 leading-relaxed">
+            <p className="text-lg sm:text-xl text-text-secondary mt-5 leading-[1.8]">
               Jotil Labs was founded on a simple observation: businesses spend too much
               time on repetitive communication tasks that AI can handle better, faster,
               and around the clock.
@@ -68,22 +69,22 @@ export function About() {
       </section>
 
       {/* Story */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection>
-              <h2 className="text-3xl font-bold tracking-[-0.02em] text-text mb-4">
+              <h2 className="text-3xl sm:text-[40px] font-bold tracking-[-0.03em] text-text mb-5 leading-tight">
                 Our Story
               </h2>
-              <div className="space-y-4 text-text-secondary leading-relaxed">
+              <div className="space-y-5 text-text-secondary leading-[1.8]">
                 <p>
                   We started Jotil Labs after watching small and mid-size businesses
                   struggle with the same problem: they were losing customers because
-                  they couldn't answer every call, respond to every chat, or follow
+                  they couldn&apos;t answer every call, respond to every chat, or follow
                   up with every lead.
                 </p>
                 <p>
-                  Hiring more staff wasn't scalable. Off-the-shelf tools were too
+                  Hiring more staff wasn&apos;t scalable. Off-the-shelf tools were too
                   generic. What businesses needed was AI that understood their context,
                   spoke their language, and integrated seamlessly into their existing
                   workflows.
@@ -97,23 +98,27 @@ export function About() {
               </div>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.2}>
-              <div className="grid grid-cols-2 gap-4">
-                <GlassCard className="text-center py-8">
-                  <div className="flex items-center justify-center mb-3">
-                    <Target size={24} strokeWidth={1.5} className="text-primary" />
+            <AnimatedSection delay={0.15}>
+              <div className="grid grid-cols-2 gap-5">
+                <GlassCard premium className="text-center py-10">
+                  <div className="flex items-center justify-center mb-4">
+                    <IconBox size="lg" glow>
+                      <Target size={24} strokeWidth={1.5} className="text-primary" />
+                    </IconBox>
                   </div>
-                  <h3 className="text-lg font-bold text-text mb-1">Mission</h3>
-                  <p className="text-sm text-text-secondary">
+                  <h3 className="text-lg font-bold text-text mb-2">Mission</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed">
                     Make AI automation accessible to every business, regardless of size or technical expertise.
                   </p>
                 </GlassCard>
-                <GlassCard className="text-center py-8">
-                  <div className="flex items-center justify-center mb-3">
-                    <Eye size={24} strokeWidth={1.5} className="text-primary" />
+                <GlassCard premium className="text-center py-10">
+                  <div className="flex items-center justify-center mb-4">
+                    <IconBox size="lg" glow>
+                      <Eye size={24} strokeWidth={1.5} className="text-primary" />
+                    </IconBox>
                   </div>
-                  <h3 className="text-lg font-bold text-text mb-1">Vision</h3>
-                  <p className="text-sm text-text-secondary">
+                  <h3 className="text-lg font-bold text-text mb-2">Vision</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed">
                     A world where no business loses a customer due to missed communication.
                   </p>
                 </GlassCard>
@@ -123,29 +128,35 @@ export function About() {
         </div>
       </section>
 
+      {/* Gradient divider */}
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="gradient-divider" />
+      </div>
+
       {/* Why Jotil Labs */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <AnimatedSection className="text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-[-0.02em] text-text">
-              Why Jotil Labs
+          <AnimatedSection blur className="text-center mb-14">
+            <h2 className="text-3xl sm:text-[40px] font-bold tracking-[-0.03em] text-text leading-tight">
+              Why{' '}
+              <span className="text-gradient">Jotil Labs</span>
             </h2>
-            <p className="text-text-secondary mt-3 max-w-xl mx-auto">
+            <p className="text-lg text-text-secondary mt-4 max-w-xl mx-auto leading-[1.8]">
               We combine cutting-edge AI with deep business understanding to deliver
               automation that actually works.
             </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {VALUES.map((value, i) => (
               <AnimatedSection key={value.title} delay={i * 0.1}>
-                <GlassCard className="h-full">
+                <GlassCard premium className="h-full">
                   <div className="flex items-start gap-4">
-                    <IconBox size="lg" className="shrink-0">
+                    <IconBox size="lg" glow className="shrink-0">
                       <value.icon size={24} strokeWidth={1.5} className="text-primary" />
                     </IconBox>
                     <div>
-                      <h3 className="text-base font-semibold text-text mb-1">
+                      <h3 className="text-base font-semibold text-text mb-1.5">
                         {value.title}
                       </h3>
                       <p className="text-sm text-text-secondary leading-relaxed">
@@ -161,24 +172,30 @@ export function About() {
       </section>
 
       {/* Team */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <AnimatedSection className="text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-[-0.02em] text-text">
+          <AnimatedSection blur className="text-center mb-14">
+            <h2 className="text-3xl sm:text-[40px] font-bold tracking-[-0.03em] text-text leading-tight">
               The Team
             </h2>
-            <p className="text-text-secondary mt-3 max-w-xl mx-auto">
+            <p className="text-lg text-text-secondary mt-4 max-w-xl mx-auto leading-[1.8]">
               A small, focused team of engineers, AI researchers, and business operators.
             </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {TEAM.map((member, i) => (
               <AnimatedSection key={member.name} delay={i * 0.1}>
-                <GlassCard className="text-center">
-                  <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-xl font-bold text-white"
-                    style={{ background: 'linear-gradient(135deg, #2563EB, #6366F1)' }}
+                <GlassCard premium className="text-center py-8">
+                  <div className="w-18 h-18 rounded-full mx-auto mb-5 flex items-center justify-center text-xl font-bold text-white relative"
+                    style={{
+                      width: 72,
+                      height: 72,
+                      background: 'linear-gradient(135deg, #2563EB, #6366F1)',
+                    }}
                   >
+                    {/* Glow ring */}
+                    <div className="absolute inset-[-4px] rounded-full border border-primary/20" />
                     {member.initials}
                   </div>
                   <h3 className="text-base font-semibold text-text">
