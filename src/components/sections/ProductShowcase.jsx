@@ -6,7 +6,7 @@ import { ArrowRight,
   PhoneOutgoing, Send,
   BarChart3, GraduationCap,
 } from 'lucide-react'
-import { GlassCard } from '../ui/GlassCard'
+import { SpotlightCard } from '../ui/SpotlightCard'
 import { IconBox } from '../ui/IconBox'
 import { AnimatedSection } from '../ui/AnimatedSection'
 import { productCategories } from '../../data/products'
@@ -43,7 +43,7 @@ export function ProductShowcase() {
           </p>
         </AnimatedSection>
 
-        {/* Tab navigation with connecting line */}
+        {/* Pill tab navigation */}
         <AnimatedSection delay={0.1} className="relative flex flex-wrap justify-center gap-2 mb-14">
           {productCategories.map((cat) => (
             <button
@@ -60,7 +60,7 @@ export function ProductShowcase() {
           ))}
         </AnimatedSection>
 
-        {/* Product cards */}
+        {/* Product cards with SpotlightCard */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -79,7 +79,10 @@ export function ProductShowcase() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.45, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <GlassCard premium className="h-full flex flex-col group">
+                  <SpotlightCard
+                    className="h-full flex flex-col group"
+                    spotlightColor="rgba(37, 99, 235, 0.06)"
+                  >
                     <IconBox glow className="mb-5 animate-icon-bob" style={{ animationDelay: `${i * 0.3}s` }}>
                       {Icon && <Icon size={22} strokeWidth={1.5} className="text-primary" />}
                     </IconBox>
@@ -95,7 +98,7 @@ export function ProductShowcase() {
                         <ArrowRight size={12} strokeWidth={1.5} />
                       </span>
                     </div>
-                  </GlassCard>
+                  </SpotlightCard>
                 </motion.div>
               )
             })}
