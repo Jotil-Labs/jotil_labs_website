@@ -28,7 +28,7 @@ const STEPS = [
 export function HowItWorks() {
   return (
     <section className="py-32 relative">
-      <div className="absolute inset-0 bg-grid-lines opacity-50 pointer-events-none" aria-hidden="true" />
+      <div className="gradient-divider absolute top-0 left-6 right-6" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto px-6 relative">
         <AnimatedSection blur className="text-center mb-16">

@@ -6,11 +6,9 @@ import { ArrowRight,
   PhoneOutgoing, Send,
   BarChart3, GraduationCap,
 } from 'lucide-react'
-import { SpotlightCard } from '../ui/SpotlightCard'
 import { IconBox } from '../ui/IconBox'
 import { AnimatedSection } from '../ui/AnimatedSection'
 import { productCategories } from '../../data/products'
-import { DotPattern } from '../ui/backgrounds/DotPattern'
 
 const ICON_MAP = {
   Phone, MessageSquare, Mic, MessageCircle,
@@ -19,17 +17,28 @@ const ICON_MAP = {
   BarChart3, GraduationCap,
 }
 
+const FEATURE_TAGS = {
+  'AI Phone Receptionist': ['24/7', 'No Code', 'Real-time'],
+  'AI Web Chatbot': ['Multi-turn', 'Lead Capture', 'API Ready'],
+  'AI Web Voicebot': ['Browser-based', 'Multi-language'],
+  'SMS Texting Agent': ['A2P Compliant', 'Two-way', 'Automated'],
+  'AI CRM': ['Auto-logging', 'Lead Scoring', 'Analytics'],
+  'Smart Ticketing': ['Auto-categorize', 'SLA Tracking'],
+  'AI Calendar': ['Multi-calendar', 'Natural Language'],
+  'Automated Calls': ['Human-like', 'DNC Compliant', 'Analytics'],
+  'Automated SMS': ['Personalized', 'A/B Testing', 'Opt-in'],
+  'AI Automation': ['Custom Workflows', 'Multi-system'],
+  'AI Consultancy': ['Strategy', 'Implementation', 'Training'],
+}
+
 export function ProductShowcase() {
   const [activeTab, setActiveTab] = useState('inbound')
   const activeCategory = productCategories.find((c) => c.id === activeTab)
 
   return (
-    <section className="py-32 relative">
-      {/* SVG dot pattern background */}
-      <DotPattern size={36} dotSize={1} color="rgba(37, 99, 235, 0.06)" />
-
-      <div className="max-w-7xl mx-auto px-6 relative">
-        <AnimatedSection blur className="text-center mb-14">
+    <section className="py-28 relative">
+      <div className="max-w-7xl mx-auto px-6">
+        <AnimatedSection className="text-center mb-14">
           <span className="text-xs font-semibold text-primary tracking-widest uppercase">
             What We Offer
           </span>
@@ -44,15 +53,15 @@ export function ProductShowcase() {
         </AnimatedSection>
 
         {/* Pill tab navigation */}
-        <AnimatedSection delay={0.1} className="relative flex flex-wrap justify-center gap-2 mb-14">
+        <AnimatedSection className="flex flex-wrap justify-center gap-2 mb-14">
           {productCategories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveTab(cat.id)}
-              className={`relative px-5 py-2.5 text-sm font-medium rounded-full border cursor-pointer transition-all duration-300 ${
+              className={`px-5 py-2.5 text-sm font-medium rounded-full border cursor-pointer transition-all duration-200 ${
                 activeTab === cat.id
                   ? 'bg-primary text-white border-primary shadow-lg shadow-primary/25'
-                  : 'bg-white/60 text-text-secondary border-border hover:border-border-hover hover:text-text hover:shadow-sm'
+                  : 'bg-white/60 text-text-secondary border-border hover:border-border-hover hover:text-text'
               }`}
             >
               {cat.label}
@@ -60,45 +69,55 @@ export function ProductShowcase() {
           ))}
         </AnimatedSection>
 
-        {/* Product cards with SpotlightCard */}
+        {/* Product cards */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
           >
             {activeCategory?.products.map((product, i) => {
               const Icon = ICON_MAP[product.icon]
+              const tags = FEATURE_TAGS[product.name] || []
               return (
                 <motion.div
                   key={product.name}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.4, delay: i * 0.08, ease: 'easeOut' }}
                 >
-                  <SpotlightCard
-                    className="h-full flex flex-col group"
-                    spotlightColor="rgba(37, 99, 235, 0.06)"
-                  >
-                    <IconBox glow className="mb-5 animate-icon-bob" style={{ animationDelay: `${i * 0.3}s` }}>
+                  <div className="glass-premium rounded-[20px] p-7 h-full flex flex-col group">
+                    <IconBox glow className="mb-5">
                       {Icon && <Icon size={22} strokeWidth={1.5} className="text-primary" />}
                     </IconBox>
                     <h3 className="text-base font-semibold text-text mb-2">
                       {product.name}
                     </h3>
-                    <p className="text-sm text-text-secondary leading-relaxed flex-1">
+                    <p className="text-sm text-text-secondary leading-relaxed flex-1 mb-4">
                       {product.description}
                     </p>
-                    <div className="mt-4 pt-4 border-t border-border/40">
-                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary group-hover:gap-2.5 transition-all duration-300 cursor-pointer">
+                    {tags.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 mb-4">
+                        {tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[11px] font-medium text-primary/70 bg-primary/5 border border-primary/10 rounded-full px-2.5 py-0.5"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <div className="pt-4 border-t border-border/40">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary group-hover:gap-2.5 transition-all duration-200 cursor-pointer">
                         Learn more
                         <ArrowRight size={12} strokeWidth={1.5} />
                       </span>
                     </div>
-                  </SpotlightCard>
+                  </div>
                 </motion.div>
               )
             })}

@@ -6,7 +6,6 @@ import { GlassCard } from '../components/ui/GlassCard'
 import { IconBox } from '../components/ui/IconBox'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
 import { Button } from '../components/ui/Button'
-import { Aurora } from '../components/ui/backgrounds/Aurora'
 
 const INQUIRY_TYPES = [
   'General Inquiry',
@@ -102,14 +101,15 @@ export function Contact() {
       {/* Hero */}
       <section className="relative pt-36 pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <Aurora />
           <div
-            className="absolute w-[500px] h-[500px] opacity-20"
+            className="absolute rounded-full"
             style={{
+              width: 500,
+              height: 500,
               top: '5%',
               left: '65%',
-              background: 'radial-gradient(circle, rgba(14, 165, 233, 0.4) 0%, transparent 60%)',
-              filter: 'blur(100px)',
+              background: 'radial-gradient(circle, rgba(14, 165, 233, 0.10) 0%, transparent 70%)',
+              filter: 'blur(80px)',
             }}
           />
         </div>

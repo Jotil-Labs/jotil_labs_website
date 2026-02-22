@@ -10,8 +10,6 @@ import { SpotlightCard } from '../components/ui/SpotlightCard'
 import { GlassCard } from '../components/ui/GlassCard'
 import { IconBox } from '../components/ui/IconBox'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
-import { Aurora } from '../components/ui/backgrounds/Aurora'
-import { DotPattern } from '../components/ui/backgrounds/DotPattern'
 import { productCategories } from '../data/products'
 
 const ICON_MAP = {
@@ -43,15 +41,26 @@ export function Products() {
       {/* Hero banner */}
       <section className="relative pt-36 pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <Aurora />
-          <DotPattern size={40} dotSize={0.8} color="rgba(37, 99, 235, 0.05)" />
           <div
-            className="absolute w-[600px] h-[400px] opacity-20"
+            className="absolute rounded-full"
             style={{
-              top: '5%',
+              width: 500,
+              height: 500,
+              top: '-10%',
               right: '-5%',
-              background: 'radial-gradient(circle, rgba(37, 99, 235, 0.4) 0%, transparent 60%)',
-              filter: 'blur(100px)',
+              background: 'radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, transparent 70%)',
+              filter: 'blur(80px)',
+            }}
+          />
+          <div
+            className="absolute rounded-full"
+            style={{
+              width: 400,
+              height: 400,
+              bottom: '10%',
+              left: '-5%',
+              background: 'radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%)',
+              filter: 'blur(80px)',
             }}
           />
         </div>

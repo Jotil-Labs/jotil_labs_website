@@ -20,16 +20,15 @@
   --color-border-hover: rgba(37, 99, 235, 0.2);
 
   --animate-float: float 6s ease-in-out infinite;
-  --animate-float-slow: float 8s ease-in-out infinite;
-  --animate-pulse-ring: pulse-ring 2s ease-out infinite;
-  --animate-waveform: waveform 1.2s ease-in-out infinite;
-  --animate-blob-1: blob-drift-1 20s ease-in-out infinite;
-  --animate-blob-2: blob-drift-2 25s ease-in-out infinite;
-  --animate-blob-3: blob-drift-3 22s ease-in-out infinite;
-  --animate-scroll-x: scroll-x 30s linear infinite;
-  --animate-dot-travel: dot-travel 3s ease-in-out infinite;
   --animate-icon-bob: icon-bob 3s ease-in-out infinite;
-  --animate-gradient-shift: gradient-shift 8s ease-in-out infinite;
+  --animate-orb-1: orb-drift-1 30s ease-in-out infinite;
+  --animate-orb-2: orb-drift-2 35s ease-in-out infinite;
+  --animate-orb-3: orb-drift-3 28s ease-in-out infinite;
+  --animate-orb-4: orb-drift-4 32s ease-in-out infinite;
+  --animate-ring-pulse: ring-pulse 3s ease-in-out infinite;
+  --animate-ring-pulse-reverse: ring-pulse-reverse 3s ease-in-out infinite;
+  --animate-ring-rotate: ring-rotate 60s linear infinite;
+  --animate-orbit: orbit 25s linear infinite;
 }
 
 /* ─── Keyframes ─── */
@@ -39,96 +38,59 @@
   50% { transform: translateY(-12px); }
 }
 
-@keyframes pulse-ring {
-  0% { transform: scale(1); opacity: 0.6; }
-  100% { transform: scale(2); opacity: 0; }
-}
-
-@keyframes waveform {
-  0%, 100% { transform: scaleY(0.3); }
-  50% { transform: scaleY(1); }
-}
-
-@keyframes blob-drift-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(80px, -60px) scale(1.1); }
-  50% { transform: translate(-40px, 80px) scale(0.95); }
-  75% { transform: translate(60px, 40px) scale(1.05); }
-}
-
-@keyframes blob-drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(-70px, 50px) scale(1.08); }
-  50% { transform: translate(60px, -70px) scale(0.92); }
-  75% { transform: translate(-50px, -40px) scale(1.12); }
-}
-
-@keyframes blob-drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(50px, 70px) scale(0.95); }
-  50% { transform: translate(-80px, -30px) scale(1.1); }
-  75% { transform: translate(30px, -80px) scale(1.02); }
-}
-
-@keyframes scroll-x {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@keyframes dot-travel {
-  0% { left: 0%; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { left: 100%; opacity: 0; }
-}
-
 @keyframes icon-bob {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
 
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+/* Hero gradient orbs — CSS only, slow drifts */
+@keyframes orb-drift-1 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(40px, -30px); }
+  50% { transform: translate(-20px, 40px); }
+  75% { transform: translate(30px, 20px); }
 }
 
-@keyframes aurora-drift-1 {
-  0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
-  33% { transform: translateX(5%) translateY(-3%) rotate(1deg); }
-  66% { transform: translateX(-3%) translateY(2%) rotate(-1deg); }
+@keyframes orb-drift-2 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-35px, 25px); }
+  50% { transform: translate(30px, -35px); }
+  75% { transform: translate(-25px, -20px); }
 }
 
-@keyframes aurora-drift-2 {
-  0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
-  33% { transform: translateX(-4%) translateY(4%) rotate(-1.5deg); }
-  66% { transform: translateX(6%) translateY(-2%) rotate(1deg); }
+@keyframes orb-drift-3 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(25px, 35px); }
+  50% { transform: translate(-40px, -15px); }
+  75% { transform: translate(15px, -40px); }
 }
 
-@keyframes aurora-drift-3 {
-  0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
-  50% { transform: translateX(3%) translateY(-5%) rotate(2deg); }
+@keyframes orb-drift-4 {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(-30px, -25px); }
+  66% { transform: translate(20px, 30px); }
 }
 
-@keyframes wave-flow-1 {
-  0%, 100% { d: path("M0,160 C360,60 720,260 1080,120 C1260,60 1380,100 1440,160"); }
-  50% { d: path("M0,180 C360,240 720,80 1080,200 C1260,140 1380,180 1440,140"); }
+/* Voice orb rings */
+@keyframes ring-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
 }
 
-@keyframes wave-flow-2 {
-  0%, 100% { d: path("M0,200 C240,280 480,80 720,200 C960,320 1200,100 1440,180"); }
-  50% { d: path("M0,140 C240,60 480,260 720,140 C960,40 1200,220 1440,160"); }
+@keyframes ring-pulse-reverse {
+  0%, 100% { transform: scale(1.03); }
+  50% { transform: scale(1); }
 }
 
-@keyframes wave-flow-3 {
-  0%, 100% { d: path("M0,120 C480,240 720,40 1080,180 C1260,260 1380,120 1440,160"); }
-  50% { d: path("M0,200 C480,80 720,280 1080,120 C1260,60 1380,200 1440,180"); }
+@keyframes ring-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-@keyframes particle-float {
-  0%, 100% { transform: translate(0, 0); opacity: 0.3; }
-  25% { transform: translate(8px, -12px); opacity: 0.7; }
-  50% { transform: translate(-4px, -20px); opacity: 0.5; }
-  75% { transform: translate(12px, -8px); opacity: 0.8; }
+/* Floating dots orbit */
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); }
 }
 
 /* ─── Base ─── */
@@ -160,7 +122,7 @@ body {
 }
 
 .glass-hover {
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.2s ease;
 }
 
 .glass-hover:hover {
@@ -169,7 +131,7 @@ body {
     0 16px 48px rgba(37, 99, 235, 0.08),
     0 4px 16px rgba(0, 0, 0, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  transform: translateY(-2px);
+  transform: translateY(-6px);
 }
 
 .glass-dark {
@@ -177,7 +139,6 @@ body {
   border: 1px solid rgba(15, 23, 42, 0.06);
 }
 
-/* Glass card with gradient border on hover */
 .glass-premium {
   position: relative;
   background: rgba(255, 255, 255, 0.65);
@@ -187,7 +148,16 @@ body {
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.2s ease;
+}
+
+.glass-premium:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 20px 56px rgba(37, 99, 235, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border-color: rgba(37, 99, 235, 0.15);
 }
 
 .glass-premium::before {
@@ -203,16 +173,7 @@ body {
   mask-composite: exclude;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.glass-premium:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 20px 56px rgba(37, 99, 235, 0.1),
-    0 4px 16px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  border-color: rgba(37, 99, 235, 0.12);
+  transition: opacity 0.2s ease;
 }
 
 .glass-premium:hover::before {
@@ -233,35 +194,17 @@ body {
   background: linear-gradient(135deg, #2563EB, #4F46E5);
 }
 
-.btn-gradient-accent {
-  background: linear-gradient(135deg, #0EA5E9, #2563EB);
-}
-
 .icon-gradient-bg {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(99, 102, 241, 0.1));
 }
 
-/* Gradient divider line */
 .gradient-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), rgba(99, 102, 241, 0.2), transparent);
 }
 
-/* ─── Background Patterns ─── */
+/* ─── Icon glow ─── */
 
-.bg-dot-grid {
-  background-image: radial-gradient(circle, rgba(37, 99, 235, 0.07) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-
-.bg-grid-lines {
-  background-image:
-    linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-
-/* ─── Icon glow */
 .icon-glow {
   position: relative;
 }
@@ -276,6 +219,7 @@ body {
 }
 
 /* ─── Nav underline hover effect ─── */
+
 .nav-link-hover {
   position: relative;
 }
@@ -289,7 +233,7 @@ body {
   height: 2px;
   background: linear-gradient(90deg, #2563EB, #6366F1);
   border-radius: 1px;
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.3s ease;
   transform: translateX(-50%);
 }
 
