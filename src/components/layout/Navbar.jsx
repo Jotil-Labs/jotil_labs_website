@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Mic, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { cn } from '../../lib/utils'
+import { Logo } from '../ui/Logo'
 
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
@@ -33,7 +34,7 @@ export function Navbar() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out',
         scrolled
-          ? 'bg-bg/75 backdrop-blur-[24px] border-b border-border shadow-[0_1px_8px_rgba(0,0,0,0.04)]'
+          ? 'bg-white/70 backdrop-blur-[24px] border-b border-border shadow-[0_1px_12px_rgba(0,0,0,0.04)]'
           : 'bg-transparent border-b border-transparent'
       )}
     >
@@ -43,16 +44,7 @@ export function Navbar() {
           scrolled ? 'h-16' : 'h-20'
         )}
       >
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 no-underline">
-          <div className="w-8 h-8 rounded-[10px] btn-gradient flex items-center justify-center">
-            <Mic size={16} color="#fff" strokeWidth={1.5} />
-          </div>
-          <span className="text-lg tracking-[-0.02em]">
-            <span className="font-bold text-text">Jotil</span>
-            <span className="font-bold text-primary">Labs</span>
-          </span>
-        </Link>
+        <Logo size="md" />
 
         {/* Desktop nav links */}
         <div className="hidden md:flex items-center gap-1">
@@ -63,17 +55,18 @@ export function Navbar() {
                 key={to}
                 to={to}
                 className={cn(
-                  'relative no-underline px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-[10px]',
+                  'relative no-underline px-4 py-2 text-sm font-medium rounded-[10px] nav-link-hover',
                   isActive
                     ? 'text-primary'
-                    : 'text-text-secondary hover:text-text hover:bg-surface'
+                    : 'text-text-secondary hover:text-text'
                 )}
               >
                 {label}
                 {isActive && (
                   <motion.span
                     layoutId="nav-indicator"
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary"
+                    className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-5 h-0.5 rounded-full"
+                    style={{ background: 'linear-gradient(90deg, #2563EB, #6366F1)' }}
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -86,7 +79,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             to="/contact"
-            className="hidden md:inline-flex items-center no-underline text-sm font-semibold text-white btn-gradient px-5 py-2.5 rounded-[10px] shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300"
+            className="hidden md:inline-flex items-center no-underline text-sm font-semibold text-white btn-gradient px-5 py-2.5 rounded-[10px] shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-300"
           >
             Book a Demo
           </Link>
@@ -136,7 +129,7 @@ export function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-            className="md:hidden overflow-hidden bg-bg/90 backdrop-blur-[24px] border-b border-border"
+            className="md:hidden overflow-hidden bg-white/80 backdrop-blur-[24px] border-b border-border"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
               {NAV_LINKS.map(({ label, to }, i) => {
