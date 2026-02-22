@@ -171,6 +171,64 @@ export function Products() {
         </div>
       </section>
 
+      {/* Comparison table */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <AnimatedSection blur className="text-center mb-14">
+            <span className="text-xs font-semibold text-primary tracking-widest uppercase">
+              Compare
+            </span>
+            <h2 className="text-3xl sm:text-[40px] font-bold tracking-[-0.03em] text-text mt-3 leading-tight">
+              Feature{' '}
+              <span className="text-gradient">Comparison</span>
+            </h2>
+          </AnimatedSection>
+
+          <AnimatedSection>
+            <GlassCard className="overflow-x-auto !p-0">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left px-6 py-4 font-semibold text-text">Feature</th>
+                    <th className="text-center px-4 py-4 font-semibold text-text">Inbound</th>
+                    <th className="text-center px-4 py-4 font-semibold text-text">Lead Mgmt</th>
+                    <th className="text-center px-4 py-4 font-semibold text-text">Outbound</th>
+                    <th className="text-center px-4 py-4 font-semibold text-text">Enterprise</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ['AI Voice Calls', true, false, true, true],
+                    ['Web Chatbot', true, false, false, true],
+                    ['SMS Automation', true, false, true, true],
+                    ['Lead Scoring', false, true, false, true],
+                    ['CRM Integration', true, true, true, true],
+                    ['Calendar Booking', true, true, false, true],
+                    ['Analytics Dashboard', true, true, true, true],
+                    ['Custom Workflows', false, false, false, true],
+                    ['Dedicated Support', false, false, false, true],
+                    ['TCPA Compliance', true, true, true, true],
+                  ].map(([feature, ...cols], i) => (
+                    <tr key={feature} className={i % 2 === 0 ? 'bg-white/30' : ''}>
+                      <td className="px-6 py-3 text-text font-medium">{feature}</td>
+                      {cols.map((has, j) => (
+                        <td key={j} className="text-center px-4 py-3">
+                          {has ? (
+                            <Check size={16} strokeWidth={2} className="text-primary mx-auto" />
+                          ) : (
+                            <span className="text-text-secondary/40">—</span>
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </GlassCard>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Bottom CTA */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">

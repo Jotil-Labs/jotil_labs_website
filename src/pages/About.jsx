@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { Target, Eye, Lightbulb, Shield, Clock, HeartHandshake, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { GlassCard } from '../components/ui/GlassCard'
@@ -37,7 +36,7 @@ const TEAM = [
 ]
 
 const MILESTONES = [
-  { year: '2023', title: 'Founded', description: 'Jotil Labs launched with a mission to make AI automation accessible to every business.' },
+  { year: '2024', title: 'Founded', description: 'Jotil Labs launched with a mission to make AI automation accessible to every business.' },
   { year: '2024', title: 'Product Suite', description: 'Expanded from voice AI to a full communication platform: chatbots, SMS, CRM, and automation.' },
   { year: '2025', title: 'Enterprise', description: 'Launched enterprise solutions and AI consultancy for mid-market and large organizations.' },
   { year: '2026', title: 'Scale', description: 'Serving businesses across industries with 50+ integrations and 99.9% uptime.' },
@@ -45,7 +44,7 @@ const MILESTONES = [
 
 const COMPANY_STATS = [
   { value: 500, suffix: '+', label: 'Businesses Served' },
-  { value: 2, suffix: 'M+', label: 'AI Conversations' },
+  { value: 11, suffix: '', label: 'Products' },
   { value: 99.9, suffix: '%', label: 'Uptime', decimals: 1 },
   { value: 50, suffix: '+', label: 'Integrations' },
 ]

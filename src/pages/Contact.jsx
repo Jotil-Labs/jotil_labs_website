@@ -16,9 +16,9 @@ const INQUIRY_TYPES = [
 ]
 
 const CONTACT_INFO = [
-  { icon: Mail, label: 'Email', value: 'support@jotillabs.com', href: 'mailto:support@jotillabs.com' },
+  { icon: Mail, label: 'Email', value: 'hello@jotillabs.com', href: 'mailto:hello@jotillabs.com' },
   { icon: Phone, label: 'Phone', value: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-  { icon: MapPin, label: 'Location', value: 'New York, NY', href: null },
+  { icon: MapPin, label: 'Location', value: 'Lehi, Utah', href: null },
   { icon: Clock, label: 'Response Time', value: 'Within 24 hours', href: null },
 ]
 
