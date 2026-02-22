@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { GlassCard } from '../ui/GlassCard'
 import { AnimatedSection } from '../ui/AnimatedSection'
 
@@ -11,6 +12,25 @@ const INTEGRATIONS = [
   { name: 'Google Calendar', letter: 'G', color: '#4285F4' },
   { name: 'Slack', letter: 'S', color: '#4A154B' },
 ]
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.06,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
+}
 
 export function IntegrationStrip() {
   return (
@@ -31,27 +51,50 @@ export function IntegrationStrip() {
 
         <AnimatedSection delay={0.1}>
           <GlassCard className="py-10 px-6">
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6">
-              {INTEGRATIONS.map((integration) => (
-                <div
+            <motion.div
+              className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {INTEGRATIONS.map((integration, i) => (
+                <motion.div
                   key={integration.name}
                   className="flex flex-col items-center gap-3 group"
+                  variants={itemVariants}
                 >
-                  <div
-                    className="w-14 h-14 rounded-[16px] flex items-center justify-center text-lg font-bold text-white shadow-lg transition-transform duration-300 group-hover:-translate-y-1"
+                  <motion.div
+                    className="w-14 h-14 rounded-[16px] flex items-center justify-center text-lg font-bold text-white shadow-lg"
                     style={{
                       background: `linear-gradient(135deg, ${integration.color}dd, ${integration.color})`,
                       boxShadow: `0 4px 16px ${integration.color}25`,
                     }}
+                    whileHover={{ y: -4, scale: 1.05 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    animate={{
+                      y: [0, -4, 0],
+                    }}
+                    // Continuous subtle float staggered by index
+                    {...{
+                      transition: {
+                        y: {
+                          duration: 3 + (i % 3) * 0.5,
+                          delay: i * 0.2,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                        },
+                      },
+                    }}
                   >
                     {integration.letter}
-                  </div>
+                  </motion.div>
                   <span className="text-xs text-text-secondary font-medium text-center">
                     {integration.name}
                   </span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </GlassCard>
         </AnimatedSection>
       </div>
