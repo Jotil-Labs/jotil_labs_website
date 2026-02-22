@@ -21,7 +21,7 @@ const WAVEFORM_BARS = Array.from({ length: 13 }, (_, i) => ({
 
 const FLOATING_DOTS = Array.from({ length: 16 }, (_, i) => {
   const angle = (i / 16) * Math.PI * 2
-  const radius = 200 + Math.random() * 60
+  const radius = 160 + Math.random() * 50
   return {
     x: Math.cos(angle) * radius,
     y: Math.sin(angle) * radius,
@@ -45,8 +45,8 @@ function VoiceVisualization() {
       <div
         className="absolute rounded-full"
         style={{
-          width: 600,
-          height: 600,
+          width: 500,
+          height: 500,
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
@@ -81,10 +81,10 @@ function VoiceVisualization() {
         />
       ))}
 
-      {/* Main glass circle — 420px */}
+      {/* Main glass circle */}
       <div
         className="glass rounded-full flex flex-col items-center justify-center relative"
-        style={{ width: 340, height: 340 }}
+        style={{ width: 300, height: 300 }}
       >
         {/* Ambient concentric rings */}
         <div className="absolute inset-2 rounded-full border border-primary/8" />
@@ -123,7 +123,7 @@ function VoiceVisualization() {
           />
         ))}
 
-        {/* Mic button — larger */}
+        {/* Mic button */}
         <motion.button
           className={`relative z-10 w-24 h-24 rounded-full border-none cursor-pointer flex items-center justify-center transition-shadow duration-500 ${
             active
@@ -146,8 +146,8 @@ function VoiceVisualization() {
           )}
         </motion.button>
 
-        {/* Waveform bars — wider spread */}
-        <div className="flex items-center gap-[3px] mt-6 h-12">
+        {/* Waveform bars */}
+        <div className="flex items-center gap-[3px] mt-5 h-10">
           {WAVEFORM_BARS.map((bar, i) => (
             <motion.div
               key={i}
@@ -168,19 +168,19 @@ function VoiceVisualization() {
           ))}
         </div>
 
-        <p className={`text-xs mt-3 font-medium transition-colors duration-300 ${
+        <p className={`text-xs mt-2 font-medium transition-colors duration-300 ${
           active ? 'text-primary' : 'text-text-secondary'
         }`}>
           {active ? 'Listening...' : 'Tap to speak'}
         </p>
       </div>
 
-      {/* Outer decorative ring */}
+      {/* Outer decorative rings */}
       <div
         className="absolute rounded-full border border-primary/6 pointer-events-none"
         style={{
-          width: 420,
-          height: 420,
+          width: 370,
+          height: 370,
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
@@ -189,8 +189,8 @@ function VoiceVisualization() {
       <div
         className="absolute rounded-full pointer-events-none"
         style={{
-          width: 450,
-          height: 450,
+          width: 400,
+          height: 400,
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
@@ -205,10 +205,9 @@ function VoiceVisualization() {
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 pb-16">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 pb-16">
       {/* Background layers */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        {/* Aurora sweep */}
         <Aurora />
 
         {/* Gradient mesh orbs */}
@@ -247,68 +246,74 @@ export function Hero() {
         <div className="absolute inset-0 bg-dot-grid opacity-50" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="inline-flex items-center gap-2.5 glass rounded-full px-5 py-2.5 mb-8"
-        >
-          <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span className="text-xs font-medium text-text-secondary tracking-wide uppercase">
-            AI-Powered Voice and Automation
-          </span>
-        </motion.div>
+      {/* Content: Left-Right Split */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          {/* Left side: Text content */}
+          <div className="text-center lg:text-left">
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-flex items-center gap-2.5 glass rounded-full px-5 py-2.5 mb-8"
+            >
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-xs font-medium text-text-secondary tracking-wide uppercase">
+                AI-Powered Voice and Automation
+              </span>
+            </motion.div>
 
-        {/* Headline */}
-        <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-bold tracking-[-0.04em] leading-[1.06] mb-6">
-          <SplitText
-            text="Intelligent Automation,"
-            className="block text-text"
-          />
-          <SplitText
-            text="Human Results"
-            className="block text-gradient"
-            delay={0.3}
-          />
-        </h1>
+            {/* Headline */}
+            <h1 className="text-[clamp(2.5rem,5.5vw,4.2rem)] font-bold tracking-[-0.04em] leading-[1.08] mb-6">
+              <SplitText
+                text="Intelligent Automation,"
+                className="block text-text"
+              />
+              <SplitText
+                text="Human Results"
+                className="block text-gradient"
+                delay={0.3}
+              />
+            </h1>
 
-        {/* Subtext */}
-        <motion.p
-          className="text-lg sm:text-xl text-text-secondary leading-[1.8] max-w-2xl mx-auto mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          Jotil Labs builds AI systems that handle your calls, chats, leads,
-          and workflows — so your team can focus on what actually matters.
-        </motion.p>
+            {/* Subtext */}
+            <motion.p
+              className="text-lg sm:text-xl text-text-secondary leading-[1.8] max-w-xl mb-10 mx-auto lg:mx-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Jotil Labs builds AI systems that handle your calls, chats, leads,
+              and workflows — so your team can focus on what actually matters.
+            </motion.p>
 
-        {/* CTAs */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <Link to="/contact">
-            <Button size="lg">
-              Book a Demo
-              <ArrowRight size={16} strokeWidth={1.5} />
-            </Button>
-          </Link>
-          <Link to="/products">
-            <Button variant="outline" size="lg">
-              See Products
-            </Button>
-          </Link>
-        </motion.div>
-      </div>
+            {/* CTAs */}
+            <motion.div
+              className="flex flex-wrap justify-center lg:justify-start gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Link to="/contact">
+                <Button size="lg">
+                  Book a Demo
+                  <ArrowRight size={16} strokeWidth={1.5} />
+                </Button>
+              </Link>
+              <Link to="/products">
+                <Button variant="outline" size="lg">
+                  See Products
+                </Button>
+              </Link>
+            </motion.div>
+          </div>
 
-      {/* Voice visualization below CTAs */}
-      <div className="relative z-10">
-        <VoiceVisualization />
+          {/* Right side: Voice visualization */}
+          <div className="flex justify-center lg:justify-end">
+            <VoiceVisualization />
+          </div>
+        </div>
       </div>
     </section>
   )
