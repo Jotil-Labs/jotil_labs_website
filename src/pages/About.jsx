@@ -1,7 +1,11 @@
-import { Target, Eye, Lightbulb, Shield, Clock, HeartHandshake } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Target, Eye, Lightbulb, Shield, Clock, HeartHandshake, ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { GlassCard } from '../components/ui/GlassCard'
 import { IconBox } from '../components/ui/IconBox'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
+import { CountUp } from '../components/ui/CountUp'
+import { Aurora } from '../components/ui/backgrounds/Aurora'
 
 const VALUES = [
   {
@@ -33,13 +37,27 @@ const TEAM = [
   { name: 'Marcus Chen', role: 'Head of Product', initials: 'MC' },
 ]
 
+const MILESTONES = [
+  { year: '2023', title: 'Founded', description: 'Jotil Labs launched with a mission to make AI automation accessible to every business.' },
+  { year: '2024', title: 'Product Suite', description: 'Expanded from voice AI to a full communication platform: chatbots, SMS, CRM, and automation.' },
+  { year: '2025', title: 'Enterprise', description: 'Launched enterprise solutions and AI consultancy for mid-market and large organizations.' },
+  { year: '2026', title: 'Scale', description: 'Serving businesses across industries with 50+ integrations and 99.9% uptime.' },
+]
+
+const COMPANY_STATS = [
+  { value: 500, suffix: '+', label: 'Businesses Served' },
+  { value: 2, suffix: 'M+', label: 'AI Conversations' },
+  { value: 99.9, suffix: '%', label: 'Uptime', decimals: 1 },
+  { value: 50, suffix: '+', label: 'Integrations' },
+]
+
 export function About() {
   return (
     <>
       {/* Hero */}
       <section className="relative pt-36 pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute inset-0 bg-grid-lines opacity-40" />
+          <Aurora />
           <div
             className="absolute w-[500px] h-[500px] opacity-20"
             style={{
@@ -128,10 +146,54 @@ export function About() {
         </div>
       </section>
 
-      {/* Gradient divider */}
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="gradient-divider" />
-      </div>
+      {/* Company stats */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="gradient-divider mb-16" />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+            {COMPANY_STATS.map((stat, i) => (
+              <AnimatedSection key={stat.label} delay={i * 0.1}>
+                <GlassCard className="text-center py-8">
+                  <p className="text-3xl sm:text-4xl font-bold text-gradient mb-2 tracking-tight">
+                    <CountUp
+                      end={stat.value}
+                      suffix={stat.suffix}
+                      decimals={stat.decimals || 0}
+                    />
+                  </p>
+                  <p className="text-sm text-text-secondary font-medium">{stat.label}</p>
+                </GlassCard>
+              </AnimatedSection>
+            ))}
+          </div>
+          <div className="gradient-divider mt-16" />
+        </div>
+      </section>
+
+      {/* Timeline / Milestones */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <AnimatedSection blur className="text-center mb-14">
+            <h2 className="text-3xl sm:text-[40px] font-bold tracking-[-0.03em] text-text leading-tight">
+              Our <span className="text-gradient">Journey</span>
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {MILESTONES.map((milestone, i) => (
+              <AnimatedSection key={milestone.year} delay={i * 0.1}>
+                <GlassCard premium className="h-full relative">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                    <span className="text-sm font-bold text-primary font-mono">{milestone.year}</span>
+                  </div>
+                  <h3 className="text-base font-semibold text-text mb-2">{milestone.title}</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed">{milestone.description}</p>
+                </GlassCard>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Why Jotil Labs */}
       <section className="py-20">
@@ -187,14 +249,13 @@ export function About() {
             {TEAM.map((member, i) => (
               <AnimatedSection key={member.name} delay={i * 0.1}>
                 <GlassCard premium className="text-center py-8">
-                  <div className="w-18 h-18 rounded-full mx-auto mb-5 flex items-center justify-center text-xl font-bold text-white relative"
+                  <div className="rounded-full mx-auto mb-5 flex items-center justify-center text-xl font-bold text-white relative"
                     style={{
                       width: 72,
                       height: 72,
                       background: 'linear-gradient(135deg, #2563EB, #6366F1)',
                     }}
                   >
-                    {/* Glow ring */}
                     <div className="absolute inset-[-4px] rounded-full border border-primary/20" />
                     {member.initials}
                   </div>
@@ -208,6 +269,30 @@ export function About() {
               </AnimatedSection>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <AnimatedSection>
+            <GlassCard premium className="text-center py-14 px-8">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-[-0.02em] text-text mb-4">
+                Want to join our mission?
+              </h2>
+              <p className="text-text-secondary max-w-lg mx-auto mb-8 leading-[1.8]">
+                We are always looking for talented people passionate about AI and
+                building products that make a real difference for businesses.
+              </p>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-white btn-gradient px-6 py-3.5 rounded-[12px] shadow-lg shadow-primary/25 no-underline hover:shadow-xl hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-300"
+              >
+                Get in Touch
+                <ArrowRight size={16} strokeWidth={1.5} />
+              </Link>
+            </GlassCard>
+          </AnimatedSection>
         </div>
       </section>
     </>

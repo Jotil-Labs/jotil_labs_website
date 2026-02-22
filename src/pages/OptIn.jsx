@@ -34,195 +34,217 @@ export function OptIn() {
   }
 
   return (
-    <section className="pt-32 pb-24">
-      <div className="max-w-3xl mx-auto px-6">
-        <AnimatedSection>
-          <GlassCard hover={false} className="p-8 sm:p-12">
-            <h1 className="text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-text mb-2">
+    <>
+      {/* Hero */}
+      <section className="relative pt-36 pb-10 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div
+            className="absolute w-[400px] h-[400px] opacity-15"
+            style={{
+              top: '-5%',
+              left: '60%',
+              background: 'radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 60%)',
+              filter: 'blur(100px)',
+            }}
+          />
+        </div>
+        <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
+          <AnimatedSection blur>
+            <span className="text-xs font-semibold text-primary tracking-widest uppercase">
+              Legal
+            </span>
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-[-0.04em] text-text mt-3 leading-tight">
               Communication Consent
             </h1>
-            <p className="text-text-secondary mb-8 leading-relaxed">
+            <p className="text-text-secondary mt-4 max-w-lg mx-auto leading-relaxed">
               By submitting this form, you consent to receive AI-powered communications
-              from Jotil Labs, including automated phone calls, SMS/text messages, and
-              chat interactions. Please review each section carefully before providing
-              your consent.
+              from Jotil Labs. Please review each section carefully.
             </p>
+          </AnimatedSection>
+        </div>
+      </section>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Contact Information */}
-              <div className="space-y-4">
-                <h2 className="text-lg font-semibold text-text">Your Information</h2>
+      {/* Form */}
+      <section className="pb-24">
+        <div className="max-w-3xl mx-auto px-6">
+          <AnimatedSection>
+            <GlassCard hover={false} className="p-8 sm:p-12">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Contact Information */}
+                <div className="space-y-4">
+                  <h2 className="text-lg font-semibold text-text">Your Information</h2>
+
+                  <div>
+                    <label className="block text-sm font-medium text-text mb-1.5" htmlFor="fullName">
+                      Full Name *
+                    </label>
+                    <input
+                      id="fullName"
+                      name="fullName"
+                      type="text"
+                      required
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.06)] transition-all"
+                      placeholder="John Doe"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-text mb-1.5" htmlFor="optPhone">
+                        Phone Number *
+                      </label>
+                      <input
+                        id="optPhone"
+                        name="phone"
+                        type="tel"
+                        required
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.06)] transition-all"
+                        placeholder="+1 (555) 000-0000"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-text mb-1.5" htmlFor="optEmail">
+                        Email Address *
+                      </label>
+                      <input
+                        id="optEmail"
+                        name="email"
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.06)] transition-all"
+                        placeholder="john@company.com"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Consent Checkboxes */}
+                <div className="space-y-4">
+                  <h2 className="text-lg font-semibold text-text">Consent</h2>
+
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      checked={consents.aiCalls}
+                      onChange={() => handleConsent('aiCalls')}
+                      className="mt-0.5 w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-[#2563EB]"
+                    />
+                    <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
+                      I consent to receive AI-powered and automated telephone calls from
+                      Jotil Labs and its clients at the phone number provided above. I
+                      understand these calls may be generated or conducted by artificial
+                      intelligence technology.
+                    </span>
+                  </label>
+
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      checked={consents.sms}
+                      onChange={() => handleConsent('sms')}
+                      className="mt-0.5 w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-[#2563EB]"
+                    />
+                    <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
+                      I consent to receive automated SMS/text messages from Jotil Labs and
+                      its clients at the phone number provided above, including
+                      appointment reminders, follow-ups, and promotional messages.
+                    </span>
+                  </label>
+
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      checked={consents.dataRates}
+                      onChange={() => handleConsent('dataRates')}
+                      className="mt-0.5 w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-[#2563EB]"
+                    />
+                    <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
+                      I acknowledge that message and data rates may apply. Message
+                      frequency varies based on the services used.
+                    </span>
+                  </label>
+
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      checked={consents.agreeTerms}
+                      onChange={() => handleConsent('agreeTerms')}
+                      className="mt-0.5 w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-[#2563EB]"
+                    />
+                    <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
+                      I have read and agree to the Jotil Labs{' '}
+                      <Link to="/terms" className="text-primary hover:underline">
+                        Terms & Conditions
+                      </Link>
+                      .
+                    </span>
+                  </label>
+                </div>
+
+                {/* Submit */}
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full"
+                  disabled={!allRequired}
+                  style={{
+                    opacity: allRequired ? 1 : 0.5,
+                    cursor: allRequired ? 'pointer' : 'not-allowed',
+                  }}
+                >
+                  Submit Consent
+                </Button>
+              </form>
+
+              {/* Opt-out & TCPA */}
+              <div className="mt-8 pt-6 border-t border-border space-y-4">
+                <div>
+                  <h3 className="text-sm font-semibold text-text mb-2">
+                    How to Opt Out
+                  </h3>
+                  <p className="text-sm text-text-secondary leading-relaxed">
+                    You may withdraw your consent at any time:
+                  </p>
+                  <ul className="list-disc list-inside mt-2 text-sm text-text-secondary space-y-1">
+                    <li>Reply <strong className="text-text">STOP</strong> to any SMS message to stop text communications</li>
+                    <li>Email <a href="mailto:support@jotillabs.com" className="text-primary hover:underline">support@jotillabs.com</a> with the subject &ldquo;Opt Out&rdquo;</li>
+                    <li>Request opt-out during any phone call</li>
+                  </ul>
+                </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-text mb-1.5" htmlFor="fullName">
-                    Full Name *
-                  </label>
-                  <input
-                    id="fullName"
-                    name="fullName"
-                    type="text"
-                    required
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-border-hover transition-colors"
-                    placeholder="John Doe"
-                  />
+                  <h3 className="text-sm font-semibold text-text mb-2">
+                    TCPA Disclosure
+                  </h3>
+                  <p className="text-sm text-text-secondary leading-relaxed">
+                    By providing your phone number and checking the consent boxes above,
+                    you provide your prior express written consent under the Telephone
+                    Consumer Protection Act (TCPA), 47 U.S.C. &sect; 227, to receive
+                    autodialed calls and text messages, including AI-generated
+                    communications, from Jotil Labs and its clients. This consent is not
+                    a condition of purchase. You may revoke consent at any time using the
+                    opt-out methods described above.
+                  </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-text mb-1.5" htmlFor="optPhone">
-                      Phone Number *
-                    </label>
-                    <input
-                      id="optPhone"
-                      name="phone"
-                      type="tel"
-                      required
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-border-hover transition-colors"
-                      placeholder="+1 (555) 000-0000"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text mb-1.5" htmlFor="optEmail">
-                      Email Address *
-                    </label>
-                    <input
-                      id="optEmail"
-                      name="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-border-hover transition-colors"
-                      placeholder="john@company.com"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Consent Checkboxes */}
-              <div className="space-y-4">
-                <h2 className="text-lg font-semibold text-text">Consent</h2>
-
-                <label className="flex items-start gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={consents.aiCalls}
-                    onChange={() => handleConsent('aiCalls')}
-                    className="mt-0.5 w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-[#2563EB]"
-                  />
-                  <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
-                    I consent to receive AI-powered and automated telephone calls from
-                    Jotil Labs and its clients at the phone number provided above. I
-                    understand these calls may be generated or conducted by artificial
-                    intelligence technology.
-                  </span>
-                </label>
-
-                <label className="flex items-start gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={consents.sms}
-                    onChange={() => handleConsent('sms')}
-                    className="mt-0.5 w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-[#2563EB]"
-                  />
-                  <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
-                    I consent to receive automated SMS/text messages from Jotil Labs and
-                    its clients at the phone number provided above, including
-                    appointment reminders, follow-ups, and promotional messages.
-                  </span>
-                </label>
-
-                <label className="flex items-start gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={consents.dataRates}
-                    onChange={() => handleConsent('dataRates')}
-                    className="mt-0.5 w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-[#2563EB]"
-                  />
-                  <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
-                    I acknowledge that message and data rates may apply. Message
-                    frequency varies based on the services used.
-                  </span>
-                </label>
-
-                <label className="flex items-start gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={consents.agreeTerms}
-                    onChange={() => handleConsent('agreeTerms')}
-                    className="mt-0.5 w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-[#2563EB]"
-                  />
-                  <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
-                    I have read and agree to the Jotil Labs{' '}
-                    <Link to="/terms" className="text-primary hover:underline">
-                      Terms & Conditions
-                    </Link>
-                    .
-                  </span>
-                </label>
-              </div>
-
-              {/* Submit */}
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full"
-                disabled={!allRequired}
-                style={{
-                  opacity: allRequired ? 1 : 0.5,
-                  cursor: allRequired ? 'pointer' : 'not-allowed',
-                }}
-              >
-                Submit Consent
-              </Button>
-            </form>
-
-            {/* Opt-out & TCPA */}
-            <div className="mt-8 pt-6 border-t border-border space-y-4">
-              <div>
-                <h3 className="text-sm font-semibold text-text mb-2">
-                  How to Opt Out
-                </h3>
-                <p className="text-sm text-text-secondary leading-relaxed">
-                  You may withdraw your consent at any time:
-                </p>
-                <ul className="list-disc list-inside mt-2 text-sm text-text-secondary space-y-1">
-                  <li>Reply <strong className="text-text">STOP</strong> to any SMS message to stop text communications</li>
-                  <li>Email <a href="mailto:support@jotillabs.com" className="text-primary hover:underline">support@jotillabs.com</a> with the subject &ldquo;Opt Out&rdquo;</li>
-                  <li>Request opt-out during any phone call</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="text-sm font-semibold text-text mb-2">
-                  TCPA Disclosure
-                </h3>
-                <p className="text-sm text-text-secondary leading-relaxed">
-                  By providing your phone number and checking the consent boxes above,
-                  you provide your prior express written consent under the Telephone
-                  Consumer Protection Act (TCPA), 47 U.S.C. &sect; 227, to receive
-                  autodialed calls and text messages, including AI-generated
-                  communications, from Jotil Labs and its clients. This consent is not
-                  a condition of purchase. You may revoke consent at any time using the
-                  opt-out methods described above.
+                <p className="text-xs text-text-secondary/70">
+                  For full terms, see our{' '}
+                  <Link to="/terms" className="text-primary hover:underline">
+                    Terms & Conditions
+                  </Link>
+                  .
                 </p>
               </div>
-
-              <p className="text-xs text-text-secondary/70">
-                For full terms, see our{' '}
-                <Link to="/terms" className="text-primary hover:underline">
-                  Terms & Conditions
-                </Link>
-                .
-              </p>
-            </div>
-          </GlassCard>
-        </AnimatedSection>
-      </div>
-    </section>
+            </GlassCard>
+          </AnimatedSection>
+        </div>
+      </section>
+    </>
   )
 }

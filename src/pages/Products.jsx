@@ -4,11 +4,13 @@ import {
   Users, Ticket, Calendar,
   PhoneOutgoing, Send,
   BarChart3, GraduationCap,
-  ArrowRight,
+  ArrowRight, Check,
 } from 'lucide-react'
 import { GlassCard } from '../components/ui/GlassCard'
 import { IconBox } from '../components/ui/IconBox'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
+import { Aurora } from '../components/ui/backgrounds/Aurora'
+import { DotPattern } from '../components/ui/backgrounds/DotPattern'
 import { productCategories } from '../data/products'
 
 const ICON_MAP = {
@@ -18,28 +20,36 @@ const ICON_MAP = {
   BarChart3, GraduationCap,
 }
 
+const CATEGORY_DESCRIPTIONS = {
+  inbound: 'AI agents that handle incoming calls, chats, and messages — so no customer inquiry goes unanswered.',
+  lead: 'Organize, score, and nurture leads with AI that works across every communication channel.',
+  outbound: 'Reach more customers with personalized AI-powered calls and SMS campaigns at scale.',
+  enterprise: 'Custom automation solutions and strategic guidance for organizations ready to transform with AI.',
+}
+
+const WHY_CHOOSE = [
+  'Live within hours, not weeks',
+  'No code changes required',
+  'TCPA and SOC 2 compliant',
+  '24/7 uptime guarantee',
+  'Custom AI training on your data',
+  'Dedicated support team',
+]
+
 export function Products() {
   return (
     <>
       {/* Hero banner */}
       <section className="relative pt-36 pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute inset-0 bg-dot-grid opacity-40" />
+          <Aurora />
+          <DotPattern size={40} dotSize={0.8} color="rgba(37, 99, 235, 0.05)" />
           <div
             className="absolute w-[600px] h-[400px] opacity-20"
             style={{
               top: '5%',
               right: '-5%',
               background: 'radial-gradient(circle, rgba(37, 99, 235, 0.4) 0%, transparent 60%)',
-              filter: 'blur(100px)',
-            }}
-          />
-          <div
-            className="absolute w-[400px] h-[400px] opacity-15"
-            style={{
-              bottom: '-10%',
-              left: '10%',
-              background: 'radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 60%)',
               filter: 'blur(100px)',
             }}
           />
@@ -66,11 +76,16 @@ export function Products() {
         <section key={category.id} className="py-14">
           <div className="max-w-7xl mx-auto px-6">
             <AnimatedSection>
-              <div className="flex items-center gap-3 mb-10">
-                <div className="w-1 h-7 rounded-full bg-primary" />
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-[-0.02em] text-text">
-                  {category.label}
-                </h2>
+              <div className="flex items-start gap-4 mb-10">
+                <div className="w-1 h-12 rounded-full bg-primary shrink-0 mt-0.5" />
+                <div>
+                  <h2 className="text-2xl sm:text-3xl font-bold tracking-[-0.02em] text-text">
+                    {category.label}
+                  </h2>
+                  <p className="text-text-secondary mt-1.5 leading-relaxed max-w-xl">
+                    {CATEGORY_DESCRIPTIONS[category.id]}
+                  </p>
+                </div>
               </div>
             </AnimatedSection>
 
@@ -117,6 +132,31 @@ export function Products() {
           </div>
         </section>
       ))}
+
+      {/* Why choose section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <AnimatedSection blur className="text-center mb-14">
+            <h2 className="text-3xl sm:text-[40px] font-bold tracking-[-0.03em] text-text leading-tight">
+              Why Businesses Choose{' '}
+              <span className="text-gradient">Jotil Labs</span>
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {WHY_CHOOSE.map((item, i) => (
+              <AnimatedSection key={item} delay={i * 0.06}>
+                <GlassCard className="flex items-center gap-3.5">
+                  <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <Check size={14} strokeWidth={2} className="text-primary" />
+                  </div>
+                  <span className="text-sm font-medium text-text">{item}</span>
+                </GlassCard>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Bottom CTA */}
       <section className="py-20">

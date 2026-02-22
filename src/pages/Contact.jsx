@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Mail, Phone, MapPin, ArrowRight, Clock } from 'lucide-react'
+import { Mail, Phone, MapPin, ArrowRight, Clock, ChevronDown } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { GlassCard } from '../components/ui/GlassCard'
 import { IconBox } from '../components/ui/IconBox'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
 import { Button } from '../components/ui/Button'
+import { Aurora } from '../components/ui/backgrounds/Aurora'
 
 const INQUIRY_TYPES = [
   'General Inquiry',
@@ -21,6 +23,59 @@ const CONTACT_INFO = [
   { icon: Clock, label: 'Response Time', value: 'Within 24 hours', href: null },
 ]
 
+const FAQ_ITEMS = [
+  {
+    question: 'How long does setup take?',
+    answer: 'Most businesses are live within a few hours. Our team handles integration with your existing phone system, website, and CRM — no code changes required on your end.',
+  },
+  {
+    question: 'Do I need technical expertise?',
+    answer: 'Not at all. Jotil Labs is designed for business operators, not developers. We handle the technical setup and provide a simple dashboard to manage everything.',
+  },
+  {
+    question: 'Is Jotil Labs TCPA compliant?',
+    answer: 'Yes. All our voice and SMS products are built with TCPA compliance at the core, including proper opt-in/opt-out handling, AI disclosure, and consent management.',
+  },
+  {
+    question: 'Can I try before I commit?',
+    answer: 'Absolutely. We offer personalized demos and pilot programs so you can see the impact on your business before making a decision. Book a demo to get started.',
+  },
+]
+
+function FAQItem({ item, isOpen, onToggle }) {
+  return (
+    <GlassCard hover={false} className="!p-0 overflow-hidden">
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left cursor-pointer bg-transparent border-none"
+      >
+        <span className="text-sm font-medium text-text">{item.question}</span>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="shrink-0"
+        >
+          <ChevronDown size={16} strokeWidth={1.5} className="text-text-secondary" />
+        </motion.div>
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="px-6 pb-4">
+              <p className="text-sm text-text-secondary leading-relaxed">{item.answer}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </GlassCard>
+  )
+}
+
 export function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -30,6 +85,8 @@ export function Contact() {
     inquiryType: '',
     message: '',
   })
+
+  const [openFAQ, setOpenFAQ] = useState(null)
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -45,7 +102,7 @@ export function Contact() {
       {/* Hero */}
       <section className="relative pt-36 pb-20 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute inset-0 bg-dot-grid opacity-40" />
+          <Aurora />
           <div
             className="absolute w-[500px] h-[500px] opacity-20"
             style={{
@@ -74,7 +131,7 @@ export function Contact() {
       </section>
 
       {/* Contact grid */}
-      <section className="pb-32">
+      <section className="pb-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             {/* Form */}
@@ -222,9 +279,8 @@ export function Contact() {
                 className="rounded-[20px] p-7 text-white relative overflow-hidden"
                 style={{ background: 'linear-gradient(135deg, #2563EB 0%, #4F46E5 50%, #6366F1 100%)' }}
               >
-                {/* Subtle pattern */}
                 <div className="absolute inset-0 opacity-10 pointer-events-none" aria-hidden="true">
-                  <div className="absolute inset-0 bg-dot-grid" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+                  <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
                 </div>
                 <div className="relative z-10">
                   <h3 className="text-lg font-semibold mb-2">Book a Demo</h3>
@@ -242,6 +298,29 @@ export function Contact() {
                 </div>
               </div>
             </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="pb-32">
+        <div className="max-w-3xl mx-auto px-6">
+          <AnimatedSection blur className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-[-0.02em] text-text">
+              Frequently Asked Questions
+            </h2>
+          </AnimatedSection>
+
+          <div className="space-y-3">
+            {FAQ_ITEMS.map((item, i) => (
+              <AnimatedSection key={item.question} delay={i * 0.06}>
+                <FAQItem
+                  item={item}
+                  isOpen={openFAQ === i}
+                  onToggle={() => setOpenFAQ(openFAQ === i ? null : i)}
+                />
+              </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>
