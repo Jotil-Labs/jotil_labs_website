@@ -4,17 +4,32 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Mic } from 'lucide-react'
 import { SplitText } from '../ui/SplitText'
 import { Button } from '../ui/Button'
+import { Particles } from '../ui/backgrounds/Particles'
+import { Aurora } from '../ui/backgrounds/Aurora'
 
 const PULSE_RINGS = [
-  { delay: 0, duration: 2.4, scale: 1.5 },
-  { delay: 0.6, duration: 3.0, scale: 1.9 },
-  { delay: 1.2, duration: 3.6, scale: 2.3 },
+  { delay: 0, duration: 2.2, scale: 1.6 },
+  { delay: 0.5, duration: 2.8, scale: 2.0 },
+  { delay: 1.0, duration: 3.4, scale: 2.4 },
+  { delay: 1.5, duration: 4.0, scale: 2.8 },
 ]
 
-const WAVEFORM_BARS = Array.from({ length: 9 }, (_, i) => ({
-  delay: i * 0.08,
-  height: 16 + Math.sin(i * 1.2) * 20 + Math.random() * 10,
+const WAVEFORM_BARS = Array.from({ length: 13 }, (_, i) => ({
+  delay: i * 0.06,
+  height: 20 + Math.sin(i * 1.1) * 28 + Math.random() * 12,
 }))
+
+const FLOATING_DOTS = Array.from({ length: 16 }, (_, i) => {
+  const angle = (i / 16) * Math.PI * 2
+  const radius = 200 + Math.random() * 60
+  return {
+    x: Math.cos(angle) * radius,
+    y: Math.sin(angle) * radius,
+    size: 2 + Math.random() * 3,
+    duration: 5 + Math.random() * 4,
+    delay: i * 0.3,
+  }
+})
 
 function VoiceVisualization() {
   const [active, setActive] = useState(false)
@@ -22,38 +37,85 @@ function VoiceVisualization() {
   return (
     <motion.div
       className="relative flex flex-col items-center"
-      initial={{ opacity: 0, scale: 0.85 }}
+      initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 1.2, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* Outer glow ring */}
-      <div className="absolute inset-0 rounded-full opacity-40"
+      {/* Large radial glow behind everything */}
+      <div
+        className="absolute rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%)',
-          transform: 'scale(1.4)',
+          width: 600,
+          height: 600,
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          background: 'radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, rgba(99, 102, 241, 0.06) 40%, transparent 70%)',
         }}
       />
 
-      {/* Glass circle */}
-      <div className="glass rounded-full w-72 h-72 sm:w-80 sm:h-80 flex flex-col items-center justify-center relative">
-        {/* Ambient ring */}
-        <div className="absolute inset-2 rounded-full border border-primary/10" />
-        <div className="absolute inset-4 rounded-full border border-primary/5" />
+      {/* Floating dots around the circle */}
+      {FLOATING_DOTS.map((dot, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full"
+          style={{
+            width: dot.size,
+            height: dot.size,
+            background: `rgba(37, 99, 235, ${0.15 + (i % 3) * 0.1})`,
+            top: '50%',
+            left: '50%',
+          }}
+          animate={{
+            x: [dot.x, dot.x + (i % 2 ? 15 : -15), dot.x],
+            y: [dot.y, dot.y - 20, dot.y],
+            opacity: [0.2, 0.7, 0.2],
+            scale: [1, 1.3, 1],
+          }}
+          transition={{
+            duration: dot.duration,
+            delay: dot.delay,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
 
-        {/* Pulse rings */}
+      {/* Main glass circle — 420px */}
+      <div
+        className="glass rounded-full flex flex-col items-center justify-center relative"
+        style={{ width: 340, height: 340 }}
+      >
+        {/* Ambient concentric rings */}
+        <div className="absolute inset-2 rounded-full border border-primary/8" />
+        <div className="absolute inset-5 rounded-full border border-primary/5" />
+        <div className="absolute inset-8 rounded-full border border-primary/3" />
+
+        {/* Gradient stroke pulse rings */}
         {PULSE_RINGS.map((ring, i) => (
-          <motion.span
+          <motion.div
             key={i}
-            className="absolute inset-0 rounded-full border border-primary/15"
+            className="absolute inset-0 rounded-full"
+            style={{
+              border: '1.5px solid transparent',
+              backgroundImage: active
+                ? 'linear-gradient(135deg, rgba(37,99,235,0.3), rgba(99,102,241,0.2), rgba(14,165,233,0.3))'
+                : 'linear-gradient(135deg, rgba(37,99,235,0.1), rgba(99,102,241,0.05))',
+              backgroundOrigin: 'border-box',
+              backgroundClip: 'border-box',
+              WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
+              WebkitMaskComposite: 'xor',
+              maskComposite: 'exclude',
+            }}
             animate={active ? {
               scale: [1, ring.scale],
-              opacity: [0.4, 0],
+              opacity: [0.6, 0],
             } : {
-              scale: [1, 1.2],
-              opacity: [0.1, 0],
+              scale: [1, 1.15],
+              opacity: [0.15, 0],
             }}
             transition={{
-              duration: active ? ring.duration : 4,
+              duration: active ? ring.duration : 5,
               delay: ring.delay,
               repeat: Infinity,
               ease: [0.22, 1, 0.36, 1],
@@ -61,11 +123,11 @@ function VoiceVisualization() {
           />
         ))}
 
-        {/* Mic button */}
+        {/* Mic button — larger */}
         <motion.button
-          className={`relative z-10 w-20 h-20 rounded-full border-none cursor-pointer flex items-center justify-center transition-shadow duration-500 ${
+          className={`relative z-10 w-24 h-24 rounded-full border-none cursor-pointer flex items-center justify-center transition-shadow duration-500 ${
             active
-              ? 'bg-primary shadow-[0_0_40px_rgba(37,99,235,0.5),0_0_80px_rgba(37,99,235,0.2)]'
+              ? 'bg-primary shadow-[0_0_60px_rgba(37,99,235,0.5),0_0_120px_rgba(37,99,235,0.15)]'
               : 'btn-gradient shadow-xl shadow-primary/30'
           }`}
           whileHover={{ scale: 1.08 }}
@@ -73,27 +135,35 @@ function VoiceVisualization() {
           onClick={() => setActive((v) => !v)}
           aria-label={active ? 'Stop listening' : 'Start voice interaction'}
         >
-          <Mic size={28} color="#fff" strokeWidth={1.5} />
+          <Mic size={32} color="#fff" strokeWidth={1.5} />
+          {/* Inner glow ring on active */}
+          {active && (
+            <motion.div
+              className="absolute inset-[-6px] rounded-full border-2 border-primary/40"
+              animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.1, 0.4] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          )}
         </motion.button>
 
-        {/* Waveform bars */}
-        <div className="flex items-center gap-[3px] mt-5 h-10">
+        {/* Waveform bars — wider spread */}
+        <div className="flex items-center gap-[3px] mt-6 h-12">
           {WAVEFORM_BARS.map((bar, i) => (
             <motion.div
               key={i}
-              className={`w-[3px] rounded-full ${active ? 'bg-primary' : 'bg-primary/30'}`}
+              className={`w-[3px] rounded-full ${active ? 'bg-primary' : 'bg-primary/25'}`}
               animate={active ? {
                 height: [6, bar.height, 6],
               } : {
-                height: [6, 10, 6],
+                height: [4, 10, 4],
               }}
               transition={{
-                duration: active ? 0.6 : 2,
+                duration: active ? 0.55 : 2.5,
                 delay: bar.delay,
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              style={{ height: 6 }}
+              style={{ height: 4 }}
             />
           ))}
         </div>
@@ -104,6 +174,30 @@ function VoiceVisualization() {
           {active ? 'Listening...' : 'Tap to speak'}
         </p>
       </div>
+
+      {/* Outer decorative ring */}
+      <div
+        className="absolute rounded-full border border-primary/6 pointer-events-none"
+        style={{
+          width: 420,
+          height: 420,
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          width: 450,
+          height: 450,
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          border: '1px dashed rgba(37, 99, 235, 0.06)',
+        }}
+      />
+
       {/* // TODO: Connect to Retell API */}
     </motion.div>
   )
@@ -112,38 +206,45 @@ function VoiceVisualization() {
 export function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 pb-16">
-      {/* Background */}
+      {/* Background layers */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        {/* Aurora sweep */}
+        <Aurora />
+
         {/* Gradient mesh orbs */}
         <div
-          className="absolute w-[700px] h-[700px] rounded-full opacity-30 animate-blob-1"
+          className="absolute w-[800px] h-[800px] rounded-full opacity-25 animate-blob-1"
           style={{
-            top: '-10%',
-            left: '-5%',
-            background: 'radial-gradient(circle, rgba(37, 99, 235, 0.35) 0%, transparent 60%)',
-            filter: 'blur(100px)',
+            top: '-15%',
+            left: '-10%',
+            background: 'radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 60%)',
+            filter: 'blur(120px)',
           }}
         />
         <div
-          className="absolute w-[600px] h-[600px] rounded-full opacity-25 animate-blob-2"
+          className="absolute w-[700px] h-[700px] rounded-full opacity-20 animate-blob-2"
           style={{
-            top: '30%',
-            right: '-10%',
-            background: 'radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 60%)',
-            filter: 'blur(100px)',
+            top: '25%',
+            right: '-12%',
+            background: 'radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 60%)',
+            filter: 'blur(120px)',
           }}
         />
         <div
-          className="absolute w-[500px] h-[500px] rounded-full opacity-20 animate-blob-3"
+          className="absolute w-[600px] h-[600px] rounded-full opacity-15 animate-blob-3"
           style={{
-            bottom: '-5%',
-            left: '25%',
-            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.25) 0%, transparent 60%)',
-            filter: 'blur(100px)',
+            bottom: '-10%',
+            left: '20%',
+            background: 'radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 60%)',
+            filter: 'blur(120px)',
           }}
         />
-        {/* Dot grid */}
-        <div className="absolute inset-0 bg-dot-grid opacity-60" />
+
+        {/* Particles canvas */}
+        <Particles config={{ count: 40, speed: 0.2, connectDistance: 100, connectOpacity: 0.04 }} />
+
+        {/* Subtle grid */}
+        <div className="absolute inset-0 bg-dot-grid opacity-50" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
@@ -161,7 +262,7 @@ export function Hero() {
         </motion.div>
 
         {/* Headline */}
-        <h1 className="text-[clamp(2.5rem,6vw,4rem)] font-bold tracking-[-0.04em] leading-[1.08] mb-6">
+        <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-bold tracking-[-0.04em] leading-[1.06] mb-6">
           <SplitText
             text="Intelligent Automation,"
             className="block text-text"
@@ -186,7 +287,7 @@ export function Hero() {
 
         {/* CTAs */}
         <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-16"
+          className="flex flex-wrap justify-center gap-4 mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}

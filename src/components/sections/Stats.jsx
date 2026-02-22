@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { GlassCard } from '../ui/GlassCard'
 import { CountUp } from '../ui/CountUp'
 import { AnimatedSection } from '../ui/AnimatedSection'
+import { LightWaves } from '../ui/backgrounds/LightWaves'
 
 const STATS = [
   { value: 99.9, suffix: '%', label: 'Uptime guarantee', decimals: 1 },
@@ -13,7 +14,8 @@ const STATS = [
 export function Stats() {
   return (
     <section className="py-32 relative">
-      <div className="max-w-7xl mx-auto px-6">
+      <LightWaves />
+      <div className="max-w-7xl mx-auto px-6 relative">
         {/* Gradient divider */}
         <div className="gradient-divider mb-20" />
 

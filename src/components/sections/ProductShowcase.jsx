@@ -10,6 +10,7 @@ import { GlassCard } from '../ui/GlassCard'
 import { IconBox } from '../ui/IconBox'
 import { AnimatedSection } from '../ui/AnimatedSection'
 import { productCategories } from '../../data/products'
+import { DotPattern } from '../ui/backgrounds/DotPattern'
 
 const ICON_MAP = {
   Phone, MessageSquare, Mic, MessageCircle,
@@ -24,8 +25,8 @@ export function ProductShowcase() {
 
   return (
     <section className="py-32 relative">
-      {/* Subtle dot grid background */}
-      <div className="absolute inset-0 bg-dot-grid opacity-40 pointer-events-none" aria-hidden="true" />
+      {/* SVG dot pattern background */}
+      <DotPattern size={36} dotSize={1} color="rgba(37, 99, 235, 0.06)" />
 
       <div className="max-w-7xl mx-auto px-6 relative">
         <AnimatedSection blur className="text-center mb-14">
