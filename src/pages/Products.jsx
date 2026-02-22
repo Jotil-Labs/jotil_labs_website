@@ -6,6 +6,7 @@ import {
   BarChart3, GraduationCap,
   ArrowRight, Check,
 } from 'lucide-react'
+import { SpotlightCard } from '../components/ui/SpotlightCard'
 import { GlassCard } from '../components/ui/GlassCard'
 import { IconBox } from '../components/ui/IconBox'
 import { AnimatedSection } from '../components/ui/AnimatedSection'
@@ -94,7 +95,10 @@ export function Products() {
                 const Icon = ICON_MAP[product.icon]
                 return (
                   <AnimatedSection key={product.name} delay={i * 0.08}>
-                    <GlassCard premium className="h-full flex flex-col">
+                    <SpotlightCard
+                      className="h-full flex flex-col"
+                      spotlightColor="rgba(37, 99, 235, 0.06)"
+                    >
                       <div className="flex items-start gap-4 mb-5">
                         <IconBox size="lg" glow className="shrink-0">
                           {Icon && <Icon size={24} strokeWidth={1.5} className="text-primary" />}
@@ -124,7 +128,7 @@ export function Products() {
                           <ArrowRight size={14} strokeWidth={1.5} />
                         </span>
                       </div>
-                    </GlassCard>
+                    </SpotlightCard>
                   </AnimatedSection>
                 )
               })}
