@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { AnimatedSection } from '../ui/AnimatedSection'
 import { Button } from '../ui/Button'
@@ -13,36 +12,10 @@ export function CTASection() {
             className="relative overflow-hidden rounded-[28px] px-8 py-20 sm:px-16 sm:py-24 text-center"
             style={{
               background: 'linear-gradient(135deg, #2563EB 0%, #4F46E5 50%, #6366F1 100%)',
-              backgroundSize: '200% 200%',
             }}
           >
-            {/* Floating bokeh particles */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-              {[...Array(12)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute rounded-full"
-                  style={{
-                    width: 4 + (i % 3) * 4,
-                    height: 4 + (i % 3) * 4,
-                    background: `rgba(255, 255, 255, ${0.05 + (i % 4) * 0.03})`,
-                    left: `${8 + i * 7.5}%`,
-                    top: `${15 + (i % 4) * 20}%`,
-                  }}
-                  animate={{
-                    y: [0, -20 - i * 3, 0],
-                    x: [0, (i % 2 ? 10 : -10), 0],
-                    opacity: [0.3, 0.8, 0.3],
-                  }}
-                  transition={{
-                    duration: 4 + i * 0.3,
-                    delay: i * 0.2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-              ))}
-              {/* Gradient noise overlay */}
+            {/* Subtle radial overlays */}
+            <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
               <div
                 className="absolute inset-0 opacity-30"
                 style={{

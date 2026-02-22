@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { Check, Phone, Clock, Activity } from 'lucide-react'
 import { GlassCard } from '../ui/GlassCard'
 import { AnimatedSection } from '../ui/AnimatedSection'
@@ -10,6 +9,10 @@ const FEATURES = [
   'Handles objections and FAQ automatically',
   'Transfers to human agents when needed',
 ]
+
+const WAVEFORM_HEIGHTS = Array.from({ length: 24 }, (_, i) =>
+  4 + Math.sin(i * 0.6) * 12 + Math.abs(Math.sin(i * 0.3)) * 8
+)
 
 function MockCallUI() {
   return (
@@ -26,7 +29,7 @@ function MockCallUI() {
           </div>
         </div>
         <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 border border-green-200">
-          <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+          <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
           <span className="text-xs font-medium text-green-700">Live</span>
         </div>
       </div>
@@ -37,41 +40,21 @@ function MockCallUI() {
         <span className="text-xs text-text-secondary font-mono">02:34</span>
       </div>
 
-      {/* Waveform visualization */}
+      {/* Static waveform visualization */}
       <div className="flex items-center gap-[2px] h-8 mb-4">
-        {Array.from({ length: 24 }, (_, i) => {
-          const h = 4 + Math.sin(i * 0.6) * 12 + Math.random() * 8
-          return (
-            <motion.div
-              key={i}
-              className="w-[2px] rounded-full bg-primary/40"
-              animate={{ height: [h * 0.5, h, h * 0.5] }}
-              transition={{
-                duration: 0.8 + Math.random() * 0.4,
-                delay: i * 0.03,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              style={{ height: h * 0.5 }}
-            />
-          )
-        })}
+        {WAVEFORM_HEIGHTS.map((h, i) => (
+          <div
+            key={i}
+            className="w-[2px] rounded-full bg-primary/40"
+            style={{ height: h }}
+          />
+        ))}
       </div>
 
       {/* AI indicator */}
       <div className="flex items-center gap-2 px-3 py-2 rounded-[10px] bg-primary/5 border border-primary/10">
         <Activity size={14} strokeWidth={1.5} className="text-primary" />
         <span className="text-xs font-medium text-primary">AI is speaking</span>
-        <div className="flex gap-0.5 ml-auto">
-          {[0, 1, 2].map((i) => (
-            <motion.div
-              key={i}
-              className="w-1 h-1 rounded-full bg-primary"
-              animate={{ opacity: [0.3, 1, 0.3] }}
-              transition={{ duration: 1, delay: i * 0.2, repeat: Infinity }}
-            />
-          ))}
-        </div>
       </div>
 
       {/* Transcript preview */}
@@ -93,15 +76,15 @@ function MockCallUI() {
 
 export function FeatureHighlight() {
   return (
-    <section className="py-32 relative overflow-hidden">
+    <section className="py-28 relative overflow-hidden">
       {/* Background accent */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
-          className="absolute w-[500px] h-[500px] rounded-full opacity-15"
+          className="absolute w-[500px] h-[500px] rounded-full"
           style={{
             top: '10%',
             left: '-5%',
-            background: 'radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 60%)',
+            background: 'radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 60%)',
             filter: 'blur(80px)',
           }}
         />
@@ -129,20 +112,16 @@ export function FeatureHighlight() {
             </p>
 
             <ul className="space-y-3.5">
-              {FEATURES.map((feature, i) => (
-                <motion.li
+              {FEATURES.map((feature) => (
+                <li
                   key={feature}
                   className="flex items-start gap-3"
-                  initial={{ opacity: 0, x: -16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5 shrink-0">
                     <Check size={12} strokeWidth={2} className="text-primary" />
                   </div>
                   <span className="text-sm text-text-secondary leading-relaxed">{feature}</span>
-                </motion.li>
+                </li>
               ))}
             </ul>
           </AnimatedSection>

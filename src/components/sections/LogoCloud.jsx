@@ -7,37 +7,30 @@ const LOGOS = [
 
 function PlaceholderLogo({ name }) {
   return (
-    <div className="flex items-center gap-2 px-6 select-none">
-      <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-slate-300 to-slate-200" />
+    <div className="flex items-center gap-2.5 select-none">
+      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-slate-300 to-slate-200 shrink-0" />
       <span className="text-sm font-medium text-slate-400 whitespace-nowrap">{name}</span>
     </div>
   )
 }
 
 export function LogoCloud() {
-  const doubled = [...LOGOS, ...LOGOS]
-
   return (
-    <section className="py-16 relative overflow-hidden">
+    <section className="py-14 relative">
       <div className="max-w-7xl mx-auto px-6">
-        <AnimatedSection className="text-center mb-10">
+        <AnimatedSection className="text-center mb-8">
           <p className="text-sm text-text-secondary font-medium">
             Trusted by innovative companies
           </p>
         </AnimatedSection>
-      </div>
 
-      {/* Infinite scroll */}
-      <div className="relative">
-        {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-bg to-transparent pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-bg to-transparent pointer-events-none" />
-
-        <div className="flex animate-scroll-x" style={{ width: 'max-content' }}>
-          {doubled.map((name, i) => (
-            <PlaceholderLogo key={`${name}-${i}`} name={name} />
-          ))}
-        </div>
+        <AnimatedSection>
+          <div className="flex flex-wrap justify-center gap-x-10 gap-y-5">
+            {LOGOS.map((name) => (
+              <PlaceholderLogo key={name} name={name} />
+            ))}
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   )

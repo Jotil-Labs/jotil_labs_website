@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { GlassCard } from '../ui/GlassCard'
 import { AnimatedSection } from '../ui/AnimatedSection'
 
@@ -13,28 +12,9 @@ const INTEGRATIONS = [
   { name: 'Slack', letter: 'S', color: '#4A154B' },
 ]
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.06,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-  },
-}
-
 export function IntegrationStrip() {
   return (
-    <section className="py-32 relative">
+    <section className="py-28 relative">
       <div className="max-w-7xl mx-auto px-6">
         <AnimatedSection className="text-center mb-12">
           <span className="text-xs font-semibold text-primary tracking-widest uppercase">
@@ -44,57 +24,34 @@ export function IntegrationStrip() {
             Works With Your{' '}
             <span className="text-gradient">Favorite Tools</span>
           </h2>
-          <p className="text-text-secondary mt-4 max-w-lg mx-auto">
+          <p className="text-text-secondary mt-4 max-w-lg mx-auto leading-[1.8]">
             Seamlessly connects with the platforms you already use.
           </p>
         </AnimatedSection>
 
         <AnimatedSection delay={0.1}>
           <GlassCard className="py-10 px-6">
-            <motion.div
-              className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {INTEGRATIONS.map((integration, i) => (
-                <motion.div
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6">
+              {INTEGRATIONS.map((integration) => (
+                <div
                   key={integration.name}
                   className="flex flex-col items-center gap-3 group"
-                  variants={itemVariants}
                 >
-                  <motion.div
-                    className="w-14 h-14 rounded-[16px] flex items-center justify-center text-lg font-bold text-white shadow-lg"
+                  <div
+                    className="w-14 h-14 rounded-[16px] flex items-center justify-center text-lg font-bold text-white shadow-lg group-hover:-translate-y-1.5 group-hover:shadow-xl transition-all duration-200"
                     style={{
                       background: `linear-gradient(135deg, ${integration.color}dd, ${integration.color})`,
                       boxShadow: `0 4px 16px ${integration.color}25`,
                     }}
-                    whileHover={{ y: -4, scale: 1.05 }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    animate={{
-                      y: [0, -4, 0],
-                    }}
-                    // Continuous subtle float staggered by index
-                    {...{
-                      transition: {
-                        y: {
-                          duration: 3 + (i % 3) * 0.5,
-                          delay: i * 0.2,
-                          repeat: Infinity,
-                          ease: 'easeInOut',
-                        },
-                      },
-                    }}
                   >
                     {integration.letter}
-                  </motion.div>
+                  </div>
                   <span className="text-xs text-text-secondary font-medium text-center">
                     {integration.name}
                   </span>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </GlassCard>
         </AnimatedSection>
       </div>
