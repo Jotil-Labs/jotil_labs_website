@@ -49,7 +49,7 @@ export function OptIn() {
           />
         </div>
         <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
-          <AnimatedSection blur>
+          <AnimatedSection>
             <span className="text-xs font-semibold text-primary tracking-widest uppercase">
               Legal
             </span>

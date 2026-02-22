@@ -68,7 +68,7 @@ export function About() {
           />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <AnimatedSection blur className="max-w-3xl">
+          <AnimatedSection className="max-w-3xl">
             <span className="text-xs font-semibold text-primary tracking-widest uppercase">
               About Us
             </span>
@@ -172,7 +172,7 @@ export function About() {
       {/* Timeline */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <AnimatedSection blur className="text-center mb-14">
+          <AnimatedSection className="text-center mb-14">
             <h2 className="text-3xl sm:text-[40px] font-bold tracking-[-0.03em] text-text leading-tight">
               Our <span className="text-gradient">Journey</span>
             </h2>
@@ -197,7 +197,7 @@ export function About() {
       {/* Why Jotil Labs */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <AnimatedSection blur className="text-center mb-14">
+          <AnimatedSection className="text-center mb-14">
             <h2 className="text-3xl sm:text-[40px] font-bold tracking-[-0.03em] text-text leading-tight">
               Why{' '}
               <span className="text-gradient">Jotil Labs</span>
@@ -235,7 +235,7 @@ export function About() {
       {/* Team */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <AnimatedSection blur className="text-center mb-14">
+          <AnimatedSection className="text-center mb-14">
             <h2 className="text-3xl sm:text-[40px] font-bold tracking-[-0.03em] text-text leading-tight">
               The Team
             </h2>

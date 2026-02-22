@@ -65,7 +65,7 @@ export function Products() {
           />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <AnimatedSection blur>
+          <AnimatedSection>
             <span className="text-xs font-semibold text-primary tracking-widest uppercase">
               Our Products
             </span>
@@ -149,7 +149,7 @@ export function Products() {
       {/* Why choose section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <AnimatedSection blur className="text-center mb-14">
+          <AnimatedSection className="text-center mb-14">
             <h2 className="text-3xl sm:text-[40px] font-bold tracking-[-0.03em] text-text leading-tight">
               Why Businesses Choose{' '}
               <span className="text-gradient">Jotil Labs</span>
@@ -174,7 +174,7 @@ export function Products() {
       {/* Comparison table */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <AnimatedSection blur className="text-center mb-14">
+          <AnimatedSection className="text-center mb-14">
             <span className="text-xs font-semibold text-primary tracking-widest uppercase">
               Compare
             </span>

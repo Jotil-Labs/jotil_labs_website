@@ -114,7 +114,7 @@ export function Contact() {
           />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <AnimatedSection blur>
+          <AnimatedSection>
             <span className="text-xs font-semibold text-primary tracking-widest uppercase">
               Contact Us
             </span>
@@ -305,7 +305,7 @@ export function Contact() {
       {/* FAQ Section */}
       <section className="pb-32">
         <div className="max-w-3xl mx-auto px-6">
-          <AnimatedSection blur className="text-center mb-12">
+          <AnimatedSection className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-[-0.02em] text-text">
               Frequently Asked Questions
             </h2>
