@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion'
-import { GlassCard } from '../ui/GlassCard'
 import { AnimatedSection } from '../ui/AnimatedSection'
+import { GlassCard } from '../ui/GlassCard'
 
 const TESTIMONIALS = [
   {
@@ -41,28 +40,41 @@ const TESTIMONIALS = [
   },
 ]
 
+function QuoteIcon() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" className="mb-4 opacity-15">
+      <path
+        d="M10.5 18.5C10.5 21.5 8.5 24 5 24V21.5C7 21.5 8 20 8 18.5H5V12H12V18.5H10.5ZM23.5 18.5C23.5 21.5 21.5 24 18 24V21.5C20 21.5 21 20 21 18.5H18V12H25V18.5H23.5Z"
+        fill="#2563EB"
+      />
+    </svg>
+  )
+}
+
 export function Testimonials() {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <AnimatedSection className="text-center mb-12">
+        <AnimatedSection blur className="text-center mb-14">
           <span className="text-xs font-semibold text-primary tracking-widest uppercase">
             Testimonials
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-text mt-3">
-            Trusted by Growing Businesses
+          <h2 className="text-3xl sm:text-[40px] font-bold tracking-[-0.03em] text-text mt-3 leading-tight">
+            Trusted by{' '}
+            <span className="text-gradient">Growing Businesses</span>
           </h2>
         </AnimatedSection>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {TESTIMONIALS.map((testimonial, i) => (
             <AnimatedSection key={testimonial.name} delay={i * 0.08}>
-              <GlassCard className="h-full flex flex-col">
-                <p className="text-sm text-text leading-relaxed flex-1 mb-5">
-                  &ldquo;{testimonial.quote}&rdquo;
+              <GlassCard premium className="h-full flex flex-col">
+                <QuoteIcon />
+                <p className="text-sm text-text leading-[1.8] flex-1 mb-6">
+                  {testimonial.quote}
                 </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full btn-gradient flex items-center justify-center text-white text-sm font-semibold shrink-0">
+                <div className="flex items-center gap-3 pt-4 border-t border-border/40">
+                  <div className="w-10 h-10 rounded-full btn-gradient flex items-center justify-center text-white text-xs font-bold shrink-0">
                     {testimonial.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>

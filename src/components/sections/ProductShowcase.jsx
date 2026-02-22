@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import {
+import { ArrowRight,
   Phone, MessageSquare, Mic, MessageCircle,
   Users, Ticket, Calendar,
   PhoneOutgoing, Send,
@@ -23,31 +23,35 @@ export function ProductShowcase() {
   const activeCategory = productCategories.find((c) => c.id === activeTab)
 
   return (
-    <section className="py-24 relative">
-      <div className="max-w-7xl mx-auto px-6">
-        <AnimatedSection className="text-center mb-12">
+    <section className="py-32 relative">
+      {/* Subtle dot grid background */}
+      <div className="absolute inset-0 bg-dot-grid opacity-40 pointer-events-none" aria-hidden="true" />
+
+      <div className="max-w-7xl mx-auto px-6 relative">
+        <AnimatedSection blur className="text-center mb-14">
           <span className="text-xs font-semibold text-primary tracking-widest uppercase">
             What We Offer
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.03em] text-text mt-3">
-            Products Built for Growth
+          <h2 className="text-3xl sm:text-[40px] font-bold tracking-[-0.03em] text-text mt-3 leading-tight">
+            Products Built for{' '}
+            <span className="text-gradient">Growth</span>
           </h2>
-          <p className="text-text-secondary mt-4 max-w-xl mx-auto">
+          <p className="text-lg text-text-secondary mt-4 max-w-xl mx-auto leading-[1.8]">
             From inbound automation to enterprise AI, we have the tools to
             transform how your business communicates.
           </p>
         </AnimatedSection>
 
-        {/* Tab navigation */}
-        <AnimatedSection delay={0.1} className="flex flex-wrap justify-center gap-2 mb-12">
+        {/* Tab navigation with connecting line */}
+        <AnimatedSection delay={0.1} className="relative flex flex-wrap justify-center gap-2 mb-14">
           {productCategories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveTab(cat.id)}
-              className={`px-4 py-2 text-sm font-medium rounded-full border cursor-pointer transition-all duration-200 ${
+              className={`relative px-5 py-2.5 text-sm font-medium rounded-full border cursor-pointer transition-all duration-300 ${
                 activeTab === cat.id
-                  ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20'
-                  : 'bg-white/60 text-text-secondary border-border hover:border-border-hover hover:text-text'
+                  ? 'bg-primary text-white border-primary shadow-lg shadow-primary/25'
+                  : 'bg-white/60 text-text-secondary border-border hover:border-border-hover hover:text-text hover:shadow-sm'
               }`}
             >
               {cat.label}
@@ -59,10 +63,10 @@ export function ProductShowcase() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
           >
             {activeCategory?.products.map((product, i) => {
@@ -70,12 +74,12 @@ export function ProductShowcase() {
               return (
                 <motion.div
                   key={product.name}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.45, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <GlassCard className="h-full flex flex-col">
-                    <IconBox className="mb-4">
+                  <GlassCard premium className="h-full flex flex-col group">
+                    <IconBox glow className="mb-5 animate-icon-bob" style={{ animationDelay: `${i * 0.3}s` }}>
                       {Icon && <Icon size={22} strokeWidth={1.5} className="text-primary" />}
                     </IconBox>
                     <h3 className="text-base font-semibold text-text mb-2">
@@ -84,6 +88,12 @@ export function ProductShowcase() {
                     <p className="text-sm text-text-secondary leading-relaxed flex-1">
                       {product.description}
                     </p>
+                    <div className="mt-4 pt-4 border-t border-border/40">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary group-hover:gap-2.5 transition-all duration-300 cursor-pointer">
+                        Learn more
+                        <ArrowRight size={12} strokeWidth={1.5} />
+                      </span>
+                    </div>
                   </GlassCard>
                 </motion.div>
               )
