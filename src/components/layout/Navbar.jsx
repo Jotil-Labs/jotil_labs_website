@@ -1,46 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-// eslint-disable-next-line no-unused-vars -- motion is used as motion.span/div/a in JSX
 import { AnimatePresence, motion } from 'framer-motion'
-import { Zap, Menu, X } from 'lucide-react'
+import { Mic, Menu, X } from 'lucide-react'
+import { cn } from '../../lib/utils'
 
 const NAV_LINKS = [
+  { label: 'Home', to: '/' },
   { label: 'Products', to: '/products' },
-  { label: 'Solutions', to: '/solutions' },
-  { label: 'Consultancy', to: '/consultancy' },
   { label: 'About', to: '/about' },
   { label: 'Contact', to: '/contact' },
 ]
-
-const glassVisible = {
-  background: 'rgba(255, 255, 255, 0.72)',
-  backdropFilter: 'blur(24px) saturate(200%)',
-  WebkitBackdropFilter: 'blur(24px) saturate(200%)',
-  borderBottom: '1px solid rgba(209, 213, 255, 0.3)',
-  boxShadow: '0 1px 8px rgba(79, 70, 229, 0.06)',
-}
-
-const glassHidden = {
-  background: 'rgba(255, 255, 255, 0)',
-  backdropFilter: 'blur(0px) saturate(100%)',
-  WebkitBackdropFilter: 'blur(0px) saturate(100%)',
-  borderBottom: '1px solid rgba(209, 213, 255, 0)',
-  boxShadow: '0 0px 0px rgba(79, 70, 229, 0)',
-}
-
-const mobileMenuGlass = {
-  background: 'rgba(255, 255, 255, 0.72)',
-  backdropFilter: 'blur(24px) saturate(200%)',
-  WebkitBackdropFilter: 'blur(24px) saturate(200%)',
-  borderBottom: '1px solid rgba(209, 213, 255, 0.3)',
-}
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
 
-  const closeMobile = () => setMobileOpen(false)
+  const closeMobile = useCallback(() => setMobileOpen(false), [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -48,31 +24,33 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    closeMobile()
+  }, [location.pathname, closeMobile])
+
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out"
-      style={scrolled ? glassVisible : glassHidden}
+      className={cn(
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out',
+        scrolled
+          ? 'bg-bg/75 backdrop-blur-[24px] border-b border-border shadow-[0_1px_8px_rgba(0,0,0,0.04)]'
+          : 'bg-transparent border-b border-transparent'
+      )}
     >
       <div
-        className="mx-auto flex items-center justify-between"
-        style={{ maxWidth: 1280, padding: '0 24px', height: 64 }}
+        className={cn(
+          'mx-auto flex items-center justify-between max-w-7xl px-6 transition-all duration-300',
+          scrolled ? 'h-16' : 'h-20'
+        )}
       >
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 no-underline">
-          <div
-            className="flex items-center justify-center"
-            style={{
-              width: 32,
-              height: 32,
-              borderRadius: 10,
-              background: 'linear-gradient(135deg, #4F46E5, #7C3AED)',
-            }}
-          >
-            <Zap size={18} color="#fff" strokeWidth={2.5} fill="rgba(255,255,255,0.2)" />
+        <Link to="/" className="flex items-center gap-2.5 no-underline">
+          <div className="w-8 h-8 rounded-[10px] btn-gradient flex items-center justify-center">
+            <Mic size={16} color="#fff" strokeWidth={1.5} />
           </div>
-          <span style={{ letterSpacing: '-0.02em', fontSize: 18 }}>
-            <span className="font-bold" style={{ color: '#1E293B' }}>Jotil</span>
-            <span className="font-bold" style={{ color: '#4F46E5' }}>Labs</span>
+          <span className="text-lg tracking-[-0.02em]">
+            <span className="font-bold text-text">Jotil</span>
+            <span className="font-bold text-primary">Labs</span>
           </span>
         </Link>
 
@@ -84,48 +62,21 @@ export function Navbar() {
               <Link
                 key={to}
                 to={to}
-                className="relative no-underline px-3.5 py-2 transition-colors duration-200 ease-out"
-                style={{
-                  fontFamily: '"Inter", system-ui, sans-serif',
-                  fontSize: 14,
-                  fontWeight: 500,
-                  color: isActive ? '#4F46E5' : '#6B7280',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) e.currentTarget.style.color = '#4F46E5'
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) e.currentTarget.style.color = '#6B7280'
-                }}
+                className={cn(
+                  'relative no-underline px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-[10px]',
+                  isActive
+                    ? 'text-primary'
+                    : 'text-text-secondary hover:text-text hover:bg-surface'
+                )}
               >
                 {label}
-                {/* Active dot */}
                 {isActive && (
                   <motion.span
-                    layoutId="nav-dot"
-                    className="absolute left-1/2 -translate-x-1/2"
-                    style={{
-                      bottom: 2,
-                      width: 4,
-                      height: 4,
-                      borderRadius: '50%',
-                      background: '#4F46E5',
-                    }}
+                    layoutId="nav-indicator"
+                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
-                {/* Hover underline */}
-                <span
-                  className="absolute left-1/2 -translate-x-1/2 transition-transform duration-200 ease-out origin-center scale-x-0 hover-line"
-                  style={{
-                    bottom: 2,
-                    width: '60%',
-                    height: 2,
-                    borderRadius: 1,
-                    background: '#4F46E5',
-                    opacity: isActive ? 0 : 0.6,
-                  }}
-                />
               </Link>
             )
           })}
@@ -133,43 +84,18 @@ export function Navbar() {
 
         {/* Right side */}
         <div className="flex items-center gap-3">
-          {/* Book a Demo — desktop */}
-          <motion.a
-            href="/contact"
-            className="hidden md:inline-flex items-center no-underline"
-            style={{
-              fontFamily: '"Inter", system-ui, sans-serif',
-              fontSize: 14,
-              fontWeight: 500,
-              color: '#fff',
-              background: 'linear-gradient(135deg, #4F46E5, #7C3AED)',
-              padding: '8px 20px',
-              borderRadius: 9999,
-              boxShadow: '0 2px 12px rgba(79, 70, 229, 0.25)',
-              cursor: 'pointer',
-              transition: 'box-shadow 0.3s ease',
-            }}
-            whileHover={{
-              scale: 1.02,
-              boxShadow: '0 0 20px rgba(79, 70, 229, 0.4)',
-            }}
-            whileTap={{ scale: 0.98 }}
+          <Link
+            to="/contact"
+            className="hidden md:inline-flex items-center no-underline text-sm font-semibold text-white btn-gradient px-5 py-2.5 rounded-[10px] shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300"
           >
             Book a Demo
-          </motion.a>
+          </Link>
 
-          {/* Hamburger — mobile */}
           <button
-            className="md:hidden flex items-center justify-center cursor-pointer"
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: 12,
-              border: 'none',
-              background: mobileOpen ? 'rgba(79, 70, 229, 0.08)' : 'transparent',
-              color: '#1E293B',
-              transition: 'background 0.2s ease',
-            }}
+            className={cn(
+              'md:hidden flex items-center justify-center w-10 h-10 rounded-[12px] border-none cursor-pointer transition-colors duration-200',
+              mobileOpen ? 'bg-primary/5 text-primary' : 'bg-transparent text-text'
+            )}
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -183,7 +109,7 @@ export function Navbar() {
                   transition={{ duration: 0.15 }}
                   className="flex"
                 >
-                  <X size={20} strokeWidth={2} />
+                  <X size={20} strokeWidth={1.5} />
                 </motion.span>
               ) : (
                 <motion.span
@@ -194,7 +120,7 @@ export function Navbar() {
                   transition={{ duration: 0.15 }}
                   className="flex"
                 >
-                  <Menu size={20} strokeWidth={2} />
+                  <Menu size={20} strokeWidth={1.5} />
                 </motion.span>
               )}
             </AnimatePresence>
@@ -210,8 +136,7 @@ export function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-            className="md:hidden overflow-hidden"
-            style={mobileMenuGlass}
+            className="md:hidden overflow-hidden bg-bg/90 backdrop-blur-[24px] border-b border-border"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
               {NAV_LINKS.map(({ label, to }, i) => {
@@ -226,14 +151,12 @@ export function Navbar() {
                     <Link
                       to={to}
                       onClick={closeMobile}
-                      className="block no-underline rounded-xl px-4 py-2.5 transition-colors duration-200"
-                      style={{
-                        fontFamily: '"Inter", system-ui, sans-serif',
-                        fontSize: 15,
-                        fontWeight: 500,
-                        color: isActive ? '#4F46E5' : '#6B7280',
-                        background: isActive ? 'rgba(79, 70, 229, 0.06)' : 'transparent',
-                      }}
+                      className={cn(
+                        'block no-underline rounded-[12px] px-4 py-3 text-[15px] font-medium transition-colors duration-200',
+                        isActive
+                          ? 'text-primary bg-primary/5'
+                          : 'text-text-secondary hover:text-text hover:bg-surface'
+                      )}
                     >
                       {label}
                     </Link>
@@ -246,21 +169,13 @@ export function Navbar() {
                 transition={{ delay: NAV_LINKS.length * 0.05, duration: 0.2 }}
                 className="pt-2"
               >
-                <a
-                  href="/contact"
+                <Link
+                  to="/contact"
                   onClick={closeMobile}
-                  className="block no-underline text-center rounded-full py-2.5"
-                  style={{
-                    fontFamily: '"Inter", system-ui, sans-serif',
-                    fontSize: 15,
-                    fontWeight: 500,
-                    color: '#fff',
-                    background: 'linear-gradient(135deg, #4F46E5, #7C3AED)',
-                    boxShadow: '0 2px 12px rgba(79, 70, 229, 0.25)',
-                  }}
+                  className="block no-underline text-center text-[15px] font-semibold text-white btn-gradient rounded-[10px] py-3 shadow-lg shadow-primary/20"
                 >
                   Book a Demo
-                </a>
+                </Link>
               </motion.div>
             </div>
           </motion.div>
