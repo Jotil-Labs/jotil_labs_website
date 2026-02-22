@@ -86,7 +86,7 @@ export function About() {
         </div>
       </section>
 
-      {/* Story */}
+      {/* Story + Mission/Vision */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -170,7 +170,7 @@ export function About() {
         </div>
       </section>
 
-      {/* Timeline / Milestones */}
+      {/* Timeline */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <AnimatedSection blur className="text-center mb-14">
