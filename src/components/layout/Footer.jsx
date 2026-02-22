@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Logo } from '../ui/Logo'
 
@@ -44,8 +43,6 @@ function FooterColumn({ title, links }) {
 }
 
 export function Footer() {
-  const [email, setEmail] = useState('')
-
   return (
     <footer className="bg-dark text-white relative">
       {/* Gradient line at top */}
@@ -58,33 +55,10 @@ export function Footer() {
             <div className="mb-5">
               <Logo size="md" dark />
             </div>
-            <p className="text-sm text-slate-400 leading-relaxed max-w-xs mb-6">
+            <p className="text-sm text-slate-400 leading-relaxed max-w-xs mb-8">
               AI-powered automation for customer communications. We help businesses
               scale with intelligent voice agents, chatbots, SMS, and CRM tools.
             </p>
-
-            {/* Newsletter */}
-            <div className="mb-6">
-              <p className="text-xs font-semibold text-slate-300 mb-2.5">Stay updated</p>
-              <form
-                onSubmit={(e) => { e.preventDefault(); setEmail('') }}
-                className="flex gap-2"
-              >
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@company.com"
-                  className="flex-1 bg-white/5 border border-white/10 rounded-[10px] px-3.5 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none focus:border-primary/40 transition-colors"
-                />
-                <button
-                  type="submit"
-                  className="px-4 py-2.5 text-sm font-semibold text-white btn-gradient rounded-[10px] border-none cursor-pointer hover:shadow-lg hover:shadow-primary/25 transition-all duration-300"
-                >
-                  Subscribe
-                </button>
-              </form>
-            </div>
 
             {/* Social icons */}
             <div className="flex items-center gap-3">

@@ -29,12 +29,18 @@ export function Navbar() {
     closeMobile()
   }, [location.pathname, closeMobile])
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
+
   return (
     <nav
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out',
         scrolled
-          ? 'bg-white/70 backdrop-blur-[24px] border-b border-border shadow-[0_1px_12px_rgba(0,0,0,0.04)]'
+          ? 'bg-white/75 backdrop-blur-[24px] saturate-[180%] border-b border-border shadow-[0_1px_12px_rgba(0,0,0,0.04)]'
           : 'bg-transparent border-b border-transparent'
       )}
     >
@@ -55,7 +61,7 @@ export function Navbar() {
                 key={to}
                 to={to}
                 className={cn(
-                  'relative no-underline px-4 py-2 text-sm font-medium rounded-[10px] nav-link-hover',
+                  'relative no-underline px-4 py-2 text-sm font-medium rounded-[10px] nav-link-hover transition-colors duration-200',
                   isActive
                     ? 'text-primary'
                     : 'text-text-secondary hover:text-text'
@@ -121,57 +127,69 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile slide-in menu */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-            className="md:hidden overflow-hidden bg-white/80 backdrop-blur-[24px] border-b border-border"
-          >
-            <div className="px-6 py-4 flex flex-col gap-1">
-              {NAV_LINKS.map(({ label, to }, i) => {
-                const isActive = location.pathname === to
-                return (
-                  <motion.div
-                    key={to}
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05, duration: 0.2 }}
-                  >
-                    <Link
-                      to={to}
-                      onClick={closeMobile}
-                      className={cn(
-                        'block no-underline rounded-[12px] px-4 py-3 text-[15px] font-medium transition-colors duration-200',
-                        isActive
-                          ? 'text-primary bg-primary/5'
-                          : 'text-text-secondary hover:text-text hover:bg-surface'
-                      )}
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden fixed inset-0 top-[64px] bg-black/20 backdrop-blur-sm z-40"
+              onClick={closeMobile}
+            />
+            {/* Menu panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="md:hidden fixed right-0 top-[64px] bottom-0 w-[280px] bg-white/90 backdrop-blur-[24px] border-l border-border z-50 overflow-y-auto"
+            >
+              <div className="px-6 py-6 flex flex-col gap-1">
+                {NAV_LINKS.map(({ label, to }, i) => {
+                  const isActive = location.pathname === to
+                  return (
+                    <motion.div
+                      key={to}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05, duration: 0.2 }}
                     >
-                      {label}
-                    </Link>
-                  </motion.div>
-                )
-              })}
-              <motion.div
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: NAV_LINKS.length * 0.05, duration: 0.2 }}
-                className="pt-2"
-              >
-                <Link
-                  to="/contact"
-                  onClick={closeMobile}
-                  className="block no-underline text-center text-[15px] font-semibold text-white btn-gradient rounded-[10px] py-3 shadow-lg shadow-primary/20"
+                      <Link
+                        to={to}
+                        onClick={closeMobile}
+                        className={cn(
+                          'block no-underline rounded-[12px] px-4 py-3 text-[15px] font-medium transition-colors duration-200',
+                          isActive
+                            ? 'text-primary bg-primary/5'
+                            : 'text-text-secondary hover:text-text hover:bg-surface'
+                        )}
+                      >
+                        {label}
+                      </Link>
+                    </motion.div>
+                  )
+                })}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: NAV_LINKS.length * 0.05, duration: 0.2 }}
+                  className="pt-4 mt-2 border-t border-border"
                 >
-                  Book a Demo
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
+                  <Link
+                    to="/contact"
+                    onClick={closeMobile}
+                    className="block no-underline text-center text-[15px] font-semibold text-white btn-gradient rounded-[10px] py-3 shadow-lg shadow-primary/20"
+                  >
+                    Book a Demo
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>
