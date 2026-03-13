@@ -29,10 +29,9 @@ const VALUES = [
 ]
 
 const TEAM = [
-  { name: 'Qratul Ain', role: 'Founder & CEO', initials: 'QA' },
-  { name: 'Alex Rivera', role: 'CTO', initials: 'AR' },
-  { name: 'Nadia Patel', role: 'Head of AI', initials: 'NP' },
-  { name: 'Marcus Chen', role: 'Head of Product', initials: 'MC' },
+  { name: 'Sayeed Sajal', role: 'CEO, Co-Founder', initials: 'SS' },
+  { name: 'Saikat Das', role: 'COO, Co-Founder', initials: 'SD' },
+  { name: 'Qudrat E Alahy Ratul', role: 'CTO, Co-Founder', initials: 'QR' },
 ]
 
 const MILESTONES = [

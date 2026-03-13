@@ -213,7 +213,7 @@ export function OptIn() {
                   </p>
                   <ul className="list-disc list-inside mt-2 text-sm text-text-secondary space-y-1">
                     <li>Reply <strong className="text-text">STOP</strong> to any SMS message to stop text communications</li>
-                    <li>Email <a href="mailto:support@jotillabs.com" className="text-primary hover:underline">support@jotillabs.com</a> with the subject &ldquo;Opt Out&rdquo;</li>
+                    <li>Email <a href="mailto:contact@jotillabs.com" className="text-primary hover:underline">contact@jotillabs.com</a> with the subject &ldquo;Opt Out&rdquo;</li>
                     <li>Request opt-out during any phone call</li>
                   </ul>
                 </div>

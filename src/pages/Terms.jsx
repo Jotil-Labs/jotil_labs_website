@@ -141,7 +141,7 @@ export function Terms() {
                   <p className="mt-3">
                     Message and data rates may apply. Message frequency varies. You may
                     opt out at any time by replying STOP to any SMS message or by
-                    contacting us at support@jotillabs.com.
+                    contacting us at contact@jotillabs.com.
                   </p>
                 </div>
 
@@ -177,7 +177,7 @@ export function Terms() {
                   <p>You may opt out of communications at any time through the following methods:</p>
                   <ul className="list-disc list-inside mt-3 space-y-1.5">
                     <li><strong className="text-text">SMS:</strong> Reply STOP to any text message</li>
-                    <li><strong className="text-text">Email:</strong> Contact support@jotillabs.com with the subject line &ldquo;Opt Out&rdquo;</li>
+                    <li><strong className="text-text">Email:</strong> Contact contact@jotillabs.com with the subject line &ldquo;Opt Out&rdquo;</li>
                     <li><strong className="text-text">Phone:</strong> Request removal during any call with our team or AI agent</li>
                   </ul>
                   <p className="mt-3">
@@ -258,8 +258,8 @@ export function Terms() {
                   <p className="mt-3">
                     <strong className="text-text">Jotil Labs</strong><br />
                     Email:{' '}
-                    <a href="mailto:support@jotillabs.com" className="text-primary hover:underline">
-                      support@jotillabs.com
+                    <a href="mailto:contact@jotillabs.com" className="text-primary hover:underline">
+                      contact@jotillabs.com
                     </a>
                   </p>
                 </div>

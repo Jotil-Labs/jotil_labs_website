@@ -16,9 +16,9 @@ const INQUIRY_TYPES = [
 ]
 
 const CONTACT_INFO = [
-  { icon: Mail, label: 'Email', value: 'hello@jotillabs.com', href: 'mailto:hello@jotillabs.com' },
-  { icon: Phone, label: 'Phone', value: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-  { icon: MapPin, label: 'Location', value: 'Lehi, Utah', href: null },
+  { icon: Mail, label: 'Email', value: 'contact@jotillabs.com', href: 'mailto:contact@jotillabs.com' },
+  { icon: Phone, label: 'Phone', value: '+13589000040', href: 'tel:+13589000040' },
+  { icon: MapPin, label: 'Location', value: 'Draper, Utah', href: null },
   { icon: Clock, label: 'Response Time', value: 'Within 24 hours', href: null },
 ]
 
@@ -86,14 +86,42 @@ export function Contact() {
   })
 
   const [openFAQ, setOpenFAQ] = useState(null)
+  const [submitState, setSubmitState] = useState({ loading: false, message: '', error: false })
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // TODO: Connect to backend API
+
+    setSubmitState({ loading: true, message: '', error: false })
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data?.error || 'Failed to send message')
+      }
+
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        inquiryType: '',
+        message: '',
+      })
+      setSubmitState({ loading: false, message: 'Message sent successfully. We will reply soon.', error: false })
+    } catch (error) {
+      setSubmitState({ loading: false, message: error.message || 'Could not send your message right now.', error: true })
+    }
   }
 
   return (
@@ -238,10 +266,16 @@ export function Contact() {
                     />
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full sm:w-auto">
+                  <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={submitState.loading}>
                     Send Message
                     <ArrowRight size={16} strokeWidth={1.5} />
                   </Button>
+
+                  {submitState.message && (
+                    <p className={`text-sm ${submitState.error ? 'text-red-600' : 'text-green-600'}`}>
+                      {submitState.message}
+                    </p>
+                  )}
                 </form>
               </GlassCard>
             </AnimatedSection>

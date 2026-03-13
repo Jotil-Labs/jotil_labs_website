@@ -92,7 +92,7 @@ export function Privacy() {
                   </p>
                   <ul className="list-disc list-inside mt-3 space-y-1.5">
                     <li>To opt out of SMS, reply <strong className="text-text">STOP</strong> to any message</li>
-                    <li>For help, reply <strong className="text-text">HELP</strong> or email support@jotillabs.com</li>
+                    <li>For help, reply <strong className="text-text">HELP</strong> or email contact@jotillabs.com</li>
                   </ul>
                   <p className="mt-3">
                     For additional consent details, review our{' '}
@@ -135,7 +135,7 @@ export function Privacy() {
                   <p>
                     Depending on your location, you may have rights to request access, correction,
                     deletion, or restriction of certain personal information. To submit a request,
-                    contact us at support@jotillabs.com.
+                    contact us at contact@jotillabs.com.
                   </p>
                 </div>
 
@@ -153,7 +153,7 @@ export function Privacy() {
                   <p>If you have privacy questions, contact us at:</p>
                   <p className="mt-3">
                     <strong className="text-text">Jotil Labs</strong><br />
-                    Email: support@jotillabs.com
+                    Email: contact@jotillabs.com
                   </p>
                   <p className="mt-4 text-xs text-text-secondary">
                     Related legal pages:{' '}

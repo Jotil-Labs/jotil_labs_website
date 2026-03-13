@@ -28,7 +28,7 @@ export function CTASection() {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-[-0.03em] mb-5 leading-tight">
                 Ready to Transform<br className="hidden sm:block" /> Your Business?
               </h2>
-              <p className="text-lg text-white/60 max-w-xl mx-auto mb-10 leading-[1.8]">
+              <p className="text-lg text-white/90 max-w-xl mx-auto mb-10 leading-[1.8]">
                 Join hundreds of businesses already using Jotil Labs to automate
                 customer communications and drive growth.
               </p>
