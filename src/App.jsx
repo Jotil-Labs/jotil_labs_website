@@ -10,6 +10,7 @@ import { Products } from './pages/Products'
 import { About } from './pages/About'
 import { Contact } from './pages/Contact'
 import { Terms } from './pages/Terms'
+import { Privacy } from './pages/Privacy'
 import { OptIn } from './pages/OptIn'
 import { NotFound } from './pages/NotFound'
 
@@ -24,6 +25,7 @@ function AnimatedRoutes() {
         <Route path="/about" element={<PageTransition><About /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
+        <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
         <Route path="/opt-in" element={<PageTransition><OptIn /></PageTransition>} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>

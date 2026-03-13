@@ -19,7 +19,7 @@ const COMPANY_LINKS = [
 const LEGAL_LINKS = [
   { label: 'Terms & Conditions', to: '/terms' },
   { label: 'Opt-In Consent', to: '/opt-in' },
-  { label: 'Privacy Policy', to: '#' },
+  { label: 'Privacy Policy', to: '/privacy' },
 ]
 
 function FooterColumn({ title, links }) {
