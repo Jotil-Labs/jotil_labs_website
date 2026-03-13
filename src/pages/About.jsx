@@ -168,7 +168,7 @@ export function About() {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Timeline — hidden for now
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <AnimatedSection className="text-center mb-14">
@@ -192,6 +192,7 @@ export function About() {
           </div>
         </div>
       </section>
+      */}
 
       {/* Why Jotil Labs */}
       <section className="py-20">
@@ -243,9 +244,9 @@ export function About() {
             </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             {TEAM.map((member, i) => (
-              <AnimatedSection key={member.name} delay={i * 0.1}>
+              <AnimatedSection key={member.name} delay={i * 0.1} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]">
                 <GlassCard premium className="text-center py-8">
                   <div className="rounded-full mx-auto mb-5 flex items-center justify-center text-xl font-bold text-white relative"
                     style={{
