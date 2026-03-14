@@ -17,8 +17,8 @@ const INQUIRY_TYPES = [
 
 const CONTACT_INFO = [
   { icon: Mail, label: 'Email', value: 'contact@jotillabs.com', href: 'mailto:contact@jotillabs.com' },
-  { icon: Phone, label: 'Phone', value: '+13589000040', href: 'tel:+13589000040' },
-  { icon: MapPin, label: 'Location', value: 'Draper, Utah', href: null },
+  { icon: Phone, label: 'Phone', value: '+1 (358) 900-0040', href: 'tel:+13589000040' },
+  { icon: MapPin, label: 'Location', value: 'Lehi, Utah', href: null },
   { icon: Clock, label: 'Response Time', value: 'Within 24 hours', href: null },
 ]
 
