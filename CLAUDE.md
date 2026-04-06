@@ -1,110 +1,127 @@
 # Jotil Labs Website
 
 ## Company
-Jotil Labs — AI Automation Company (Founded 2024, Lehi, Utah). We help businesses automate customer communications through AI voice agents, chatbots, SMS, and CRM tools. Voice AI is our core product. 11 products across 4 categories.
+Jotil Labs — AI Automation Company (Founded 2024, Lehi, Utah). We help SMBs automate customer communications through AI voice agents, chatbots, SMS, CRM tools, and AI avatars. Voice AI is our core product. 6 products: Receptionist, Messenger, Outreach, Space, Flow, Avatar.
 
 ## Stack
-- React 19 + Vite 7 + JSX (NOT TypeScript) + Tailwind CSS v4 + Framer Motion
-- Tailwind v4 uses `@theme` directive in `src/index.css` (no separate tailwind.config)
-- `clsx` + `tailwind-merge` via `cn()` helper in `src/lib/utils.js`
-- Routing: `react-router-dom` v7 with BrowserRouter
-- Deployment: Vercel (see `vercel.json` for SPA rewrites)
+- Next.js 15 App Router + React 19 + JSX (NOT TypeScript) + Tailwind CSS v4 + Framer Motion
+- Tailwind v4 uses `@theme` directive in `app/globals.css` (no separate tailwind.config)
+- `clsx` + `tailwind-merge` via `cn()` helper in `lib/utils.js`
+- Fonts: `next/font/google` — Outfit (headings), Inter (body), JetBrains Mono (mono)
+- MDX blog: `next-mdx-remote/rsc` + `gray-matter` + `reading-time`
+- Path alias: `@/*` → `./` via jsconfig.json
+- Deployment: Vercel at jotillabs.com
 
 ## File Structure
 ```
-src/
-  main.jsx              — BrowserRouter entry
-  App.jsx               — AnimatedRoutes with AnimatePresence mode="wait"
-  index.css             — @theme, keyframes, glass system, utilities
-  lib/utils.js          — cn() helper
-  data/products.js      — 11 products in 4 categories
-  components/
-    ui/                 — Button, GlassCard, Logo, SplitText, CountUp,
-                          AnimatedSection, IconBox, SpotlightCard
-    sections/           — Hero, LogoCloud, ProductShowcase, FeatureHighlight,
-                          HowItWorks, Stats, Testimonials, IntegrationStrip, CTASection
-    layout/             — Navbar, Footer, ScrollToTop, PageTransition
-    widgets/            — ChatWidget
-  pages/                — Home, Products, About, Contact, Terms, OptIn, NotFound
+app/
+  layout.jsx            — Root layout (fonts, metadata, Navbar, Footer)
+  page.jsx              — Homepage (Hero + 7 sections)
+  globals.css           — @theme, keyframes, glass/card system, utilities
+  not-found.jsx         — 404 page
+  sitemap.js            — Dynamic sitemap
+  robots.js             — Robots config
+  about/page.jsx        — About page
+  blog/page.jsx         — Blog listing
+  blog/[slug]/page.jsx  — Blog post (MDX)
+  contact/page.jsx      — Contact form + FAQ
+  products/page.jsx     — Products overview + comparison table
+  products/[slug]/page.jsx — Individual product pages (SSG)
+  use-cases/page.jsx    — Industry use cases
+  terms/page.jsx        — Terms & Conditions (LIVE — DO NOT MODIFY CONTENT)
+  privacy/page.jsx      — Privacy Policy (LIVE — DO NOT MODIFY CONTENT)
+  opt-in/page.jsx       — Opt-In Consent (LIVE — DO NOT MODIFY CONTENT)
+  api/contact/route.js  — Contact form API endpoint
+
+components/
+  ui/                   — Button, Badge, AnimatedSection, CountUp, SplitText,
+                          IconBox, Logo, ProductLogos
+  sections/             — Hero, LogoCloud, ProductShowcase, HowItWorks,
+                          Stats, Testimonials, IntegrationStrip, CTASection,
+                          ContactForm
+  layout/               — Navbar, Footer
+  product/              — DemoVisualization, FAQAccordion
+
+lib/utils.js            — cn() helper
+lib/mdx.js              — MDX blog utilities
+data/products.js        — 6 products with full data
+content/blog/           — MDX blog posts
 ```
 
 ## Design System
 
-### Font
-- Primary: Space Grotesk (Google Fonts) — weights 400-700
-- Monospace accent: JetBrains Mono
+### Fonts
+- Headings: Outfit (via --font-outfit CSS variable)
+- Body: Inter (via --font-inter)
+- Mono: JetBrains Mono (via --font-jetbrains)
 
 ### Color Palette
-- Primary: #2563EB (Royal Blue)
-- Secondary: #6366F1 (Blue Violet)
-- Accent: #0EA5E9 (Sky Cyan)
-- Glow: #3B82F6
-- Background: #F1F5F9
-- Text: #020617 / Secondary: #64748B
-- Footer: #020617
+- Primary: #3B7BF2
+- Primary Dark: #1B4FBA
+- Primary Accent: #2D6AE0
+- Secondary: #6366F1
+- Accent: #0EA5E9
+- Background: #FAFBFD
+- Background Alt: #F0F4FF
+- Text: #111111 / Secondary: #999999
+- Dark (footer): #0A0F1C
 
-### Glass System (defined in index.css)
-- `.glass` — basic glass card
-- `.glass-premium` — gradient border on hover, translateY(-6px) lift
-- `.glass-hover` — hover lift for non-premium glass
-- `.text-gradient` — 3-color gradient text
-- `.btn-gradient` — primary CTA gradient
-- `.gradient-divider` — horizontal gradient separator
+### CSS Utility Classes (defined in globals.css)
+- `.glass` — frosted glass card
+- `.glass-hover` — glass with hover lift
+- `.glass-dark` — subtle dark surface
+- `.card` — white card with hover shadow
+- `.card-premium` — card with gradient border on hover
+- `.text-gradient` — blue→indigo→cyan gradient text
+- `.btn-gradient` — primary CTA background gradient
+- `.gradient-divider` — 1px horizontal gradient separator
+- `.badge` — small pill badge
+- `.nav-link-hover` — underline on hover
 
 ### Design Rules
 - Light theme ONLY
-- NO emojis anywhere in the UI
-- Icons: lucide-react, strokeWidth 1.5, outline only
-- Border radius: 10-12px buttons, 14-16px icon containers, 20px cards
-- Letter spacing: -0.03em headings, normal body
+- NO emojis in UI
+- Icons: lucide-react, strokeWidth 1.5
+- Border radius: 10-12px buttons, 14-16px icons, 20px cards
 - Quality benchmark: Linear.app, Vercel.com, Stripe.com
+- Target audience: SMB (no self-signup, contact-based sales)
 
 ## Animation Rules (STRICT)
-Only these animations are allowed:
-1. **Scroll reveal**: fade from 20px below, 500ms duration, easeOut, stagger 80ms (via AnimatedSection)
-2. **Hover lift**: translateY(-6px) + shadow increase (via glass-premium CSS)
-3. **Button**: scale(1.02) on hover, scale(0.98) on tap
-4. **Word-by-word headline**: SplitText component
-5. **CSS keyframe orb rings**: ring-pulse, ring-pulse-reverse, ring-rotate, orbit (Hero only)
-6. **CSS gradient orb drifts**: orb-drift-1 through orb-drift-4 (Hero only)
-7. **CountUp**: number animation on scroll into view
-8. **Page transitions**: 200ms opacity fade (via PageTransition)
-9. **NO** canvas backgrounds, continuous floating particles, traveling dots, blur reveals, or any other animations
-
-## Background Strategy
-- Hero: 4 CSS-only gradient orb divs with blur(80px) and slow 30s keyframe drifts
-- Other pages: 1-2 static blurred gradient divs per hero section
-- Section separators: `.gradient-divider` CSS class
-- NO canvas elements, NO Particles, NO Aurora, NO LightWaves
+1. Scroll reveal: AnimatedSection (whileInView, 20px, easeOut)
+2. Hover lift: translateY(-2px) + shadow (card/card-premium CSS)
+3. Button: hover scale(1.02), tap scale(0.98)
+4. Hero: CSS keyframe orbs, rings, orbit dots, waveform bars
+5. CountUp: number animation on scroll
+6. NO canvas backgrounds, particles, blur reveals
 
 ## Homepage Section Order
-Hero > LogoCloud > ProductShowcase > HowItWorks > FeatureHighlight > Stats > Testimonials > IntegrationStrip > CTASection
+Hero > LogoCloud > ProductShowcase > HowItWorks > Stats > Testimonials > IntegrationStrip > CTASection
 
 ## Contact Info
-- Email: hello@jotillabs.com
+- Email: contact@jotillabs.com
+- Phone: +1 (358) 900-0040
 - Location: Lehi, Utah
-- Git remote: https://github.com/Jotil-Labs/jotil_labs_website.git (main branch)
 
-## Conventions
-- JSX (not TypeScript)
-- Components in PascalCase
-- Tailwind utility classes preferred; inline styles only for dynamic values
-- Git commit after each major section with descriptive messages
-- Responsive: mobile-first approach
-- No Lorem ipsum — real copy for an AI automation company
+## Critical Legal Pages — DO NOT MODIFY CONTENT
+- /terms — Terms & Conditions (Twilio/TCPA compliance, LIVE with customers)
+- /opt-in — Opt-In Consent (Twilio A2P 10DLC compliance, LIVE with customers)
+- /privacy — Privacy Policy (LIVE with customers)
+- All linked in footer
 
-## Critical Legal Pages
-- /terms — Terms & Conditions (Twilio/TCPA compliance)
-- /opt-in — Opt-In Consent (Twilio A2P 10DLC compliance)
-- Both linked in footer
-
-## Integration Placeholders
-- AI Chat Widget: UI only, `// TODO: Connect to OpenAI API`
-- Voice Bot Widget: UI only, `// TODO: Connect to Retell API`
-- Contact form: UI only, `// TODO: Connect to backend API`
+## Git Info
+- Remote: https://github.com/Jotil-Labs/jotil_labs_website.git
+- Branch: redesign/nextjs-migration (current work)
+- Production: main branch → Vercel auto-deploy
 
 ## Build Commands
-- `npm run dev` — start dev server
-- `npm run build` — production build to dist/
-- `npm run preview` — preview production build
+- `npm run dev` — dev server (localhost:3000)
+- `npm run build` — production build
 - `npm run lint` — ESLint
+
+## Conventions
+- JSX only (NOT TypeScript)
+- PascalCase components
+- Tailwind utility classes preferred
+- No Co-Authored-By in commits
+- No Lorem ipsum — real copy only
+- Responsive mobile-first
