@@ -293,3 +293,58 @@ export function FlowLogo({ size = 'md', className }) {
     </ProductLogoBase>
   )
 }
+
+/**
+ * Avatar logo — hex + stylized face silhouette with animated glow.
+ */
+export function AvatarLogo({ size = 'md', className }) {
+  return (
+    <ProductLogoBase size={size} className={className} label="Jotil Avatar logo">
+      {/* Face circle */}
+      <circle
+        cx="455" cy="170" r="12"
+        fill="none"
+        stroke="#6B9AEA"
+        strokeWidth="2.5"
+        style={{
+          animation: 'hbDot 10s ease-in-out infinite 0s',
+          transformBox: 'fill-box',
+          transformOrigin: 'center',
+        }}
+      />
+      {/* Eyes */}
+      <circle cx="450" cy="167" r="2" fill="#3B7BF2"
+        style={{ animation: 'flDot 10s ease-in-out infinite 0.1s', transformBox: 'fill-box', transformOrigin: 'center' }}
+      />
+      <circle cx="460" cy="167" r="2" fill="#3B7BF2"
+        style={{ animation: 'flDot 10s ease-in-out infinite 0.2s', transformBox: 'fill-box', transformOrigin: 'center' }}
+      />
+      {/* Smile */}
+      <path
+        d="M449 174 Q455 179 461 174"
+        fill="none"
+        stroke="#3B7BF2"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        style={{
+          animation: 'flPulse 10s ease-in-out infinite 0.15s',
+          transformBox: 'fill-box',
+          transformOrigin: 'center',
+        }}
+      />
+      {/* Body silhouette */}
+      <path
+        d="M440 190 Q455 183 470 190"
+        fill="none"
+        stroke="#6B9AEA"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        style={{
+          animation: 'flPulse 10s ease-in-out infinite 0.3s',
+          transformBox: 'fill-box',
+          transformOrigin: 'center',
+        }}
+      />
+    </ProductLogoBase>
+  )
+}
