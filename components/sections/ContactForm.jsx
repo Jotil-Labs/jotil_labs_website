@@ -335,26 +335,31 @@ export function ContactForm() {
             </div>
           </div>
 
-          {/* Book a Demo card */}
+          {/* Book a Demo card with inline Calendly */}
           <div
-            className="rounded-[20px] p-7"
+            className="rounded-[20px] overflow-hidden"
             style={{
               background: 'linear-gradient(135deg, #3B7BF2, #2D6AE0)',
               boxShadow: '0 12px 40px rgba(59,123,242,0.35)',
             }}
           >
-            <h3 className="font-bold text-white text-base mb-2">Book a Live Demo</h3>
-            <p className="text-sm text-white/80 leading-relaxed mb-6">
-              See our AI voice agent handle a real call in 15 minutes. No slides, no fluff.
-            </p>
-            <a
-              href="https://calendly.com/jotillabs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center no-underline text-sm font-semibold text-primary bg-white px-5 py-2.5 rounded-[10px] hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300"
-            >
-              Schedule Now
-            </a>
+            <div className="p-7 pb-4">
+              <h3 className="font-bold text-white text-base mb-2">Book a Live Demo</h3>
+              <p className="text-sm text-white/80 leading-relaxed">
+                See our AI handle a real call in 15 minutes. No slides, no fluff.
+              </p>
+            </div>
+            <div className="bg-white rounded-t-2xl p-1">
+              <iframe
+                src="https://calendly.com/jotillabs/15min?hide_gdpr_banner=1&hide_landing_page_details=1"
+                width="100%"
+                height="380"
+                frameBorder="0"
+                title="Book a demo with Jotil Labs"
+                className="rounded-xl"
+                loading="lazy"
+              />
+            </div>
           </div>
 
           {/* Response time note */}
