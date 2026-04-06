@@ -6,6 +6,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { OrganizationJsonLd, WebsiteJsonLd } from '@/components/layout/JsonLd'
 import { AIWidget } from '@/components/widgets/AIWidget'
+import { ScrollToTop } from '@/components/layout/ScrollToTop'
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -108,6 +109,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <ScrollToTop />
         <AIWidget />
         <Analytics />
       </body>
