@@ -78,7 +78,7 @@ function VoiceOrb() {
         </div>
 
         {/* Status */}
-        <p className="text-[12px] mt-3 font-medium transition-colors duration-300" style={{ color: active ? '#3B7BF2' : '#999', fontFamily: 'var(--font-inter), Inter, sans-serif' }}>
+        <p className="text-[12px] mt-3 font-medium transition-colors duration-300" style={{ color: active ? '#3B7BF2' : '#6B7280', fontFamily: 'var(--font-inter), Inter, sans-serif' }}>
           {active ? 'Listening...' : 'Tap to experience AI voice'}
         </p>
       </div>

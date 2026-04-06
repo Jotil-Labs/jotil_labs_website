@@ -177,7 +177,7 @@ function Connector() {
         />
       ))}
       {/* Arrow tip */}
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
         <path
           d="M2 2L8 5L2 8"
           stroke="rgba(59,123,242,0.35)"
