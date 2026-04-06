@@ -23,9 +23,9 @@ const INDUSTRIES = [
     name: 'Healthcare',
     color: '#0EA5E9',
     painPoints: [
-      'Appointment scheduling and rescheduling without staff overhead',
-      'Patient follow-ups and reminder calls at scale',
-      'After-hours call handling so no patient is left waiting',
+      'Book and reschedule appointments without adding front desk staff',
+      'Send patient follow-ups and reminders automatically',
+      'Answer after-hours calls so no patient is left waiting',
     ],
     products: ['JotilReceptionist', 'JotilMessenger'],
     stat: 'Up to 80% reduction in missed calls',
@@ -35,9 +35,9 @@ const INDUSTRIES = [
     name: 'Real Estate',
     color: '#3B7BF2',
     painPoints: [
-      'Lead qualification calls that pre-screen buyers and sellers',
-      'Property inquiry bots that answer listing questions 24/7',
-      'Automated scheduling for property tours',
+      'Qualify leads automatically before your agents spend time on them',
+      'Answer property listing questions 24/7, even on weekends',
+      'Let buyers book property tours without back-and-forth calls',
     ],
     products: ['JotilReceptionist', 'JotilOutreach', 'JotilMessenger'],
     stat: '3x more qualified leads per agent',
@@ -47,9 +47,9 @@ const INDUSTRIES = [
     name: 'Legal',
     color: '#6366F1',
     painPoints: [
-      'Client intake calls that capture case details before the first consult',
-      'Appointment booking without tying up paralegal time',
-      'FAQ chatbot for common legal process questions',
+      'Capture case details on the first call, before the consult even starts',
+      'Let potential clients book consultations without tying up staff time',
+      'Answer common process questions so your team focuses on billable work',
     ],
     products: ['JotilReceptionist', 'JotilMessenger', 'JotilSpace'],
     stat: '60% of intakes handled without staff',
@@ -59,9 +59,9 @@ const INDUSTRIES = [
     name: 'Hospitality',
     color: '#F59E0B',
     painPoints: [
-      'Reservation management and availability queries via voice or chat',
-      'Guest inquiry handling during peak and off-peak hours',
-      'Automated post-stay review follow-up sequences',
+      'Handle reservations and availability questions by phone or text',
+      'Answer guest inquiries during peak hours without extra staff',
+      'Automatically follow up after each stay to collect reviews',
     ],
     products: ['JotilReceptionist', 'JotilMessenger', 'JotilOutreach'],
     stat: '40% fewer front-desk interruptions',
@@ -71,9 +71,9 @@ const INDUSTRIES = [
     name: 'Finance',
     color: '#10B981',
     painPoints: [
-      'Lead qualification calls for financial advisors and mortgage brokers',
-      'Appointment booking integrated with advisor calendars',
-      'Compliance-safe SMS follow-ups with opt-in management',
+      'Qualify prospects before they reach your advisors or brokers',
+      'Let clients book meetings that sync directly with advisor calendars',
+      'Send compliant text follow-ups with built-in opt-in management',
     ],
     products: ['JotilReceptionist', 'JotilOutreach', 'JotilSpace'],
     stat: 'Up to 70% reduction in no-show appointments',
@@ -83,9 +83,9 @@ const INDUSTRIES = [
     name: 'E-commerce',
     color: '#EC4899',
     painPoints: [
-      'Automated order status updates via SMS',
-      'Cart abandonment recovery sequences with proven timing',
-      'Customer support chatbot for returns, tracking, and FAQs',
+      'Keep customers updated on order status automatically by text',
+      'Recover abandoned carts with well-timed follow-up messages',
+      'Handle returns, tracking, and common questions without staff',
     ],
     products: ['JotilMessenger', 'JotilOutreach', 'JotilFlow'],
     stat: '25% cart recovery rate with AI follow-up',
@@ -151,10 +151,10 @@ export default function UseCasesPage() {
               className="font-bold tracking-[-0.03em] text-text mb-3"
               style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)' }}
             >
-              Built for your vertical
+              Built for your industry
             </h2>
             <p className="text-text-secondary max-w-lg mx-auto">
-              We did not build generic software. Every configuration targets the exact pain points your industry faces.
+              We did not build generic software. Every setup targets the specific challenges your business faces.
             </p>
           </AnimatedSection>
 
