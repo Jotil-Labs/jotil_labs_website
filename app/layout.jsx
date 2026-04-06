@@ -56,14 +56,14 @@ export const metadata = {
     title: 'Jotil Labs — AI Voice, Chat & Automation Platform',
     description:
       'AI systems that handle your calls, chats, leads, and workflows. Built for modern businesses.',
-    images: [{ url: '/og/default.png', width: 1200, height: 630 }],
+    images: [{ url: '/og', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Jotil Labs — AI Voice, Chat & Automation Platform',
     description:
       'AI systems that handle your calls, chats, leads, and workflows.',
-    images: ['/og/default.png'],
+    images: ['/og'],
   },
   robots: {
     index: true,
