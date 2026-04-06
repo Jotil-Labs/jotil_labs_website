@@ -1,18 +1,23 @@
+import { Hero } from '@/components/sections/Hero'
+import { LogoCloud } from '@/components/sections/LogoCloud'
+import { ProductShowcase } from '@/components/sections/ProductShowcase'
+import { HowItWorks } from '@/components/sections/HowItWorks'
+import { Stats } from '@/components/sections/Stats'
+import { Testimonials } from '@/components/sections/Testimonials'
+import { IntegrationStrip } from '@/components/sections/IntegrationStrip'
+import { CTASection } from '@/components/sections/CTASection'
+
 export default function Home() {
   return (
-    <section className="min-h-screen flex items-center justify-center pt-20">
-      <div className="text-center">
-        <h1
-          className="text-5xl font-extrabold tracking-tight"
-          style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
-        >
-          <span className="text-text">Jotil</span>
-          <span className="text-primary">Labs</span>
-        </h1>
-        <p className="text-text-secondary mt-4 text-lg">
-          Building...
-        </p>
-      </div>
-    </section>
+    <>
+      <Hero />
+      <LogoCloud />
+      <ProductShowcase />
+      <HowItWorks />
+      <Stats />
+      <Testimonials />
+      <IntegrationStrip />
+      <CTASection />
+    </>
   )
 }
