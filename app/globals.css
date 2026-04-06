@@ -19,8 +19,8 @@
   --color-surface-hover: rgba(15, 23, 42, 0.07);
 
   --color-text: #111111;
-  --color-text-secondary: #999999;
-  --color-text-muted: #BBBBBB;
+  --color-text-secondary: #6B7280;
+  --color-text-muted: #9CA3AF;
   --color-dark: #0A0F1C;
   --color-white: #FFFFFF;
 
@@ -358,6 +358,37 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(15, 23, 42, 0.12); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(15, 23, 42, 0.2); }
+
+/* ── Focus ── */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(59, 123, 242, 0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip to main content — sr-only until focused */
+.skip-to-main {
+  position: absolute;
+  left: -9999px;
+  z-index: 100;
+  padding: 8px 16px;
+  background: #3B7BF2;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.skip-to-main:focus {
+  left: 16px;
+  top: 16px;
+}
 
 /* ── Selection ── */
 

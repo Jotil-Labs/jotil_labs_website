@@ -132,10 +132,12 @@ export default async function ProductPage({ params }) {
         {/* Background orbs */}
         <div
           className="absolute top-0 right-0 w-[600px] h-[500px] rounded-full opacity-40 pointer-events-none"
+          aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse, #3B7BF215 0%, transparent 65%)', filter: 'blur(80px)' }}
         />
         <div
           className="absolute bottom-0 left-0 w-[400px] h-[300px] rounded-full opacity-25 pointer-events-none"
+          aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse, #6366F110 0%, transparent 70%)', filter: 'blur(60px)' }}
         />
 

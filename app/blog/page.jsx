@@ -160,8 +160,8 @@ export default function BlogPage() {
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-black/[0.05] bg-white px-6 pb-16 pt-32 sm:px-8 sm:pt-36">
         {/* Subtle orb */}
-        <div className="pointer-events-none absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-primary/[0.06] to-secondary/[0.06] blur-[80px]" />
-        <div className="pointer-events-none absolute -bottom-20 -left-20 h-[300px] w-[300px] rounded-full bg-gradient-to-br from-accent/[0.06] to-primary/[0.06] blur-[60px]" />
+        <div className="pointer-events-none absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-primary/[0.06] to-secondary/[0.06] blur-[80px]" aria-hidden="true" />
+        <div className="pointer-events-none absolute -bottom-20 -left-20 h-[300px] w-[300px] rounded-full bg-gradient-to-br from-accent/[0.06] to-primary/[0.06] blur-[60px]" aria-hidden="true" />
 
         <div className="relative mx-auto max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">

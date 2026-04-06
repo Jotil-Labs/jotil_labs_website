@@ -124,23 +124,20 @@ export function Hero() {
             </motion.div>
 
             {/* Headline */}
-            <div className="overflow-hidden mb-6">
+            <h1 className="overflow-hidden mb-6">
               {['Never Miss a', 'Customer', 'Again.'].map((line, i) => (
-                <motion.div
+                <motion.span
                   key={line}
                   initial={{ y: '100%', opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.65, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  className={`block leading-[1.05] tracking-[-0.04em] font-extrabold ${i === 2 ? 'text-gradient' : 'text-text'}`}
+                  style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif', fontSize: 'clamp(2.75rem, 5.5vw, 4.25rem)' }}
                 >
-                  <h1
-                    className={`leading-[1.05] tracking-[-0.04em] font-extrabold ${i === 2 ? 'text-gradient' : 'text-text'}`}
-                    style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif', fontSize: 'clamp(2.75rem, 5.5vw, 4.25rem)' }}
-                  >
-                    {line}
-                  </h1>
-                </motion.div>
+                  {line}
+                </motion.span>
               ))}
-            </div>
+            </h1>
 
             {/* Subtext */}
             <motion.p
@@ -164,7 +161,7 @@ export function Hero() {
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 no-underline text-sm font-semibold text-white btn-gradient px-6 py-3.5 rounded-[11px] shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300"
+                className="inline-flex items-center gap-2 no-underline text-sm font-semibold text-white btn-gradient px-6 py-3.5 rounded-[11px] shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
                 style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
               >
                 Book a Demo
@@ -172,7 +169,7 @@ export function Hero() {
               </Link>
               <Link
                 href="/products"
-                className="inline-flex items-center gap-2 no-underline text-sm font-semibold text-text px-6 py-3.5 rounded-[11px] transition-all duration-300 hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 no-underline text-sm font-semibold text-text px-6 py-3.5 rounded-[11px] transition-all duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
                 style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.07)', fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
               >
                 See How It Works

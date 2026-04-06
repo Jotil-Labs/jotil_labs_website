@@ -158,8 +158,8 @@ export default async function BlogPost({ params }) {
       {/* Article header */}
       <header className="relative overflow-hidden border-b border-black/[0.05] bg-white px-6 pb-12 pt-32 sm:px-8 sm:pt-36">
         {/* Ambient orbs */}
-        <div className="pointer-events-none absolute -right-40 -top-40 h-[400px] w-[400px] rounded-full bg-gradient-to-br from-primary/[0.06] to-secondary/[0.05] blur-[80px]" />
-        <div className="pointer-events-none absolute -bottom-10 left-1/3 h-[200px] w-[400px] rounded-full bg-gradient-to-r from-accent/[0.04] to-primary/[0.04] blur-[60px]" />
+        <div className="pointer-events-none absolute -right-40 -top-40 h-[400px] w-[400px] rounded-full bg-gradient-to-br from-primary/[0.06] to-secondary/[0.05] blur-[80px]" aria-hidden="true" />
+        <div className="pointer-events-none absolute -bottom-10 left-1/3 h-[200px] w-[400px] rounded-full bg-gradient-to-r from-accent/[0.04] to-primary/[0.04] blur-[60px]" aria-hidden="true" />
 
         <div className="relative mx-auto max-w-3xl">
           {/* Back link */}
@@ -226,18 +226,20 @@ export default async function BlogPost({ params }) {
               href={tweetUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Share this article on X (Twitter)"
               className="inline-flex items-center gap-2 rounded-xl border border-black/[0.08] bg-white px-4 py-2.5 text-sm font-600 text-text transition-all hover:-translate-y-0.5 hover:border-[#1DA1F2]/30 hover:bg-[#1DA1F2]/5 hover:text-[#1DA1F2] hover:shadow-sm"
             >
-              <Twitter className="h-4 w-4" strokeWidth={1.5} />
+              <Twitter className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
               Share on X
             </a>
             <a
               href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Share this article on LinkedIn"
               className="inline-flex items-center gap-2 rounded-xl border border-black/[0.08] bg-white px-4 py-2.5 text-sm font-600 text-text transition-all hover:-translate-y-0.5 hover:border-[#0A66C2]/30 hover:bg-[#0A66C2]/5 hover:text-[#0A66C2] hover:shadow-sm"
             >
-              <Linkedin className="h-4 w-4" strokeWidth={1.5} />
+              <Linkedin className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
               Share on LinkedIn
             </a>
             {/* Copy link — client interaction handled via JS in a client wrapper would be ideal,

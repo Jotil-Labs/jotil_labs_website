@@ -64,6 +64,7 @@ export default function ProductsPage() {
         {/* Subtle orb */}
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full opacity-30 pointer-events-none"
+          aria-hidden="true"
           style={{ background: 'radial-gradient(ellipse, #3B7BF220 0%, transparent 70%)', filter: 'blur(60px)' }}
         />
 
@@ -215,13 +216,13 @@ export default function ProductsPage() {
                 <table className="w-full min-w-[600px]">
                   <thead>
                     <tr className="border-b border-black/5 bg-[#F8FAFF]">
-                      <th className="text-left px-6 py-4 text-xs font-semibold text-text-secondary uppercase tracking-wider w-40">
+                      <th scope="col" className="text-left px-6 py-4 text-xs font-semibold text-text-secondary uppercase tracking-wider w-40">
                         Feature
                       </th>
                       {products.map((p) => {
                         const Logo = LOGO_MAP[p.slug]
                         return (
-                          <th key={p.slug} className="px-4 py-4 text-center">
+                          <th key={p.slug} scope="col" className="px-4 py-4 text-center">
                             <div className="flex flex-col items-center gap-1.5">
                               <Logo size={28} />
                               <span
@@ -239,15 +240,21 @@ export default function ProductsPage() {
                   <tbody className="divide-y divide-black/4">
                     {TABLE_FEATURES.map((feature, ri) => (
                       <tr key={feature.key} className={ri % 2 === 0 ? '' : 'bg-[#FAFBFD]'}>
-                        <td className="px-6 py-4 text-sm font-medium text-text">{feature.label}</td>
+                        <th scope="row" className="px-6 py-4 text-sm font-medium text-text text-left">{feature.label}</th>
                         {products.map((p) => {
                           const has = PRODUCT_FEATURES[p.slug]?.[feature.key]
                           return (
                             <td key={p.slug} className="px-4 py-4 text-center">
                               {has ? (
-                                <Check size={16} className="text-primary mx-auto" strokeWidth={2.5} />
+                                <>
+                                  <Check size={16} className="text-primary mx-auto" strokeWidth={2.5} aria-hidden="true" />
+                                  <span className="sr-only">Yes</span>
+                                </>
                               ) : (
-                                <Minus size={16} className="text-text-muted mx-auto" strokeWidth={1.5} />
+                                <>
+                                  <Minus size={16} className="text-text-muted mx-auto" strokeWidth={1.5} aria-hidden="true" />
+                                  <span className="sr-only">No</span>
+                                </>
                               )}
                             </td>
                           )

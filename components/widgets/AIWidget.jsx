@@ -43,7 +43,9 @@ function ChatPanel() {
           }}
           className="flex items-center gap-2"
         >
+          <label htmlFor="ai-chat-input" className="sr-only">Type a message</label>
           <input
+            id="ai-chat-input"
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -53,7 +55,8 @@ function ChatPanel() {
           <button
             type="submit"
             disabled={!input.trim()}
-            className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 border-none cursor-pointer disabled:opacity-40"
+            aria-label="Send message"
+            className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 border-none cursor-pointer disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             style={{ background: 'linear-gradient(135deg, #3B7BF2, #2D6AE0)' }}
           >
             <Send size={14} color="#fff" strokeWidth={2} />
@@ -75,7 +78,8 @@ function VoicePanel() {
       {/* Mic button */}
       <button
         onClick={() => setListening((v) => !v)}
-        className="relative w-20 h-20 rounded-full border-none cursor-pointer flex items-center justify-center transition-all duration-300"
+        aria-label={listening ? 'Stop listening' : 'Start voice input'}
+        className="relative w-20 h-20 rounded-full border-none cursor-pointer flex items-center justify-center transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2"
         style={{
           background: listening
             ? 'linear-gradient(135deg, #1B4FBA, #3B7BF2)'
@@ -174,21 +178,25 @@ export function AIWidget() {
               </div>
               <button
                 onClick={() => setOpen(false)}
-                className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center border-none cursor-pointer hover:bg-white/20 transition-colors"
+                aria-label="Close AI assistant"
+                className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center border-none cursor-pointer hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
               >
                 <X size={14} color="#fff" strokeWidth={2} />
               </button>
             </div>
 
             {/* Tab bar */}
-            <div className="flex border-b border-black/5">
+            <div className="flex border-b border-black/5" role="tablist" aria-label="AI assistant mode">
               {TABS.map(({ key, label, icon: Icon }) => (
                 <button
                   key={key}
                   onClick={() => setTab(key)}
-                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold border-none bg-transparent cursor-pointer transition-colors duration-150"
+                  role="tab"
+                  aria-selected={tab === key}
+                  aria-label={`${label} tab`}
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold border-none bg-transparent cursor-pointer transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-inset"
                   style={{
-                    color: tab === key ? '#3B7BF2' : '#999',
+                    color: tab === key ? '#3B7BF2' : '#6B7280',
                     borderBottom: tab === key ? '2px solid #3B7BF2' : '2px solid transparent',
                   }}
                 >

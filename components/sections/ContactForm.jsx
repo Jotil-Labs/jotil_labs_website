@@ -45,7 +45,7 @@ function FAQItem({ question, answer }) {
     >
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between py-5 text-left bg-transparent border-none cursor-pointer gap-4"
+        className="w-full flex items-center justify-between py-5 text-left bg-transparent border-none cursor-pointer gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 rounded-lg"
         aria-expanded={open}
       >
         <span className="text-sm font-semibold text-text leading-snug pr-2">{question}</span>
@@ -159,8 +159,9 @@ export function ContactForm() {
               <form onSubmit={handleSubmit} className="space-y-5" noValidate>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label className={labelClass}>Full Name *</label>
+                    <label htmlFor="contact-name" className={labelClass}>Full Name *</label>
                     <input
+                      id="contact-name"
                       type="text"
                       required
                       placeholder="Jane Smith"
@@ -172,8 +173,9 @@ export function ContactForm() {
                     />
                   </div>
                   <div>
-                    <label className={labelClass}>Email *</label>
+                    <label htmlFor="contact-email" className={labelClass}>Email *</label>
                     <input
+                      id="contact-email"
                       type="email"
                       required
                       placeholder="jane@company.com"
@@ -188,8 +190,9 @@ export function ContactForm() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label className={labelClass}>Company</label>
+                    <label htmlFor="contact-company" className={labelClass}>Company</label>
                     <input
+                      id="contact-company"
                       type="text"
                       placeholder="Acme Corp"
                       value={form.company}
@@ -200,8 +203,9 @@ export function ContactForm() {
                     />
                   </div>
                   <div>
-                    <label className={labelClass}>Phone</label>
+                    <label htmlFor="contact-phone" className={labelClass}>Phone</label>
                     <input
+                      id="contact-phone"
                       type="tel"
                       placeholder="+1 (555) 000-0000"
                       value={form.phone}
@@ -214,9 +218,10 @@ export function ContactForm() {
                 </div>
 
                 <div>
-                  <label className={labelClass}>Inquiry Type</label>
+                  <label htmlFor="contact-inquiry" className={labelClass}>Inquiry Type</label>
                   <div className="relative">
                     <select
+                      id="contact-inquiry"
                       value={form.inquiryType}
                       onChange={set('inquiryType')}
                       className={`${inputClass} appearance-none pr-10 cursor-pointer`}
@@ -236,8 +241,9 @@ export function ContactForm() {
                 </div>
 
                 <div>
-                  <label className={labelClass}>Message *</label>
+                  <label htmlFor="contact-message" className={labelClass}>Message *</label>
                   <textarea
+                    id="contact-message"
                     required
                     rows={5}
                     placeholder="Tell us about your business and what you are hoping to automate..."

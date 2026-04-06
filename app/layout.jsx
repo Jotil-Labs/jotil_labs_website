@@ -106,8 +106,11 @@ export default function RootLayout({ children }) {
         )}
       </head>
       <body className="min-h-screen bg-bg text-text antialiased">
+        <a href="#main-content" className="skip-to-main">
+          Skip to main content
+        </a>
         <Navbar />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
         <ScrollToTop />
         <AIWidget />
