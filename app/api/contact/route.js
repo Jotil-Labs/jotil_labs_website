@@ -1,8 +1,28 @@
 import { Resend } from 'resend'
 import { NextResponse } from 'next/server'
 
+/** Escape HTML special characters to prevent injection in email body */
+function escapeHtml(str) {
+  if (!str) return ''
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 export async function POST(request) {
   try {
+    // Ensure Resend is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.error('[contact/route] RESEND_API_KEY is not set')
+      return NextResponse.json(
+        { ok: false, error: 'Email service is not configured.' },
+        { status: 503 }
+      )
+    }
+
     const body = await request.json()
     const { name, email, company, phone, inquiryType, message } = body
 
@@ -18,12 +38,21 @@ export async function POST(request) {
     }
 
     const resend = new Resend(process.env.RESEND_API_KEY)
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'noreply@meet.jotillabs.com'
 
-    await resend.emails.send({
-      from: 'Jotil Labs Website <onboarding@resend.dev>',
+    // Sanitize all user inputs before inserting into HTML
+    const safeName = escapeHtml(name.trim())
+    const safeEmail = escapeHtml(email.trim())
+    const safeCompany = company ? escapeHtml(company.trim()) : ''
+    const safePhone = phone ? escapeHtml(phone.trim()) : ''
+    const safeInquiry = escapeHtml(inquiryType) || 'General Inquiry'
+    const safeMessage = escapeHtml(message.trim())
+
+    const { error } = await resend.emails.send({
+      from: `Jotil Labs Website <${fromEmail}>`,
       to: 'contact@jotillabs.com',
       replyTo: email.trim(),
-      subject: `New Contact Form Submission — ${inquiryType || 'General Inquiry'}`,
+      subject: `New Contact Form Submission — ${safeInquiry}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 24px; background: #FAFBFD; border-radius: 12px;">
           <div style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #E5E7EB;">
@@ -34,29 +63,29 @@ export async function POST(request) {
           <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
             <tr>
               <td style="padding: 10px 0; color: #999; font-weight: 600; width: 140px; vertical-align: top;">Name</td>
-              <td style="padding: 10px 0; color: #111;">${name.trim()}</td>
+              <td style="padding: 10px 0; color: #111;">${safeName}</td>
             </tr>
             <tr>
               <td style="padding: 10px 0; color: #999; font-weight: 600; vertical-align: top;">Email</td>
-              <td style="padding: 10px 0; color: #111;"><a href="mailto:${email.trim()}" style="color: #3B7BF2;">${email.trim()}</a></td>
+              <td style="padding: 10px 0; color: #111;"><a href="mailto:${safeEmail}" style="color: #3B7BF2;">${safeEmail}</a></td>
             </tr>
-            ${company ? `
+            ${safeCompany ? `
             <tr>
               <td style="padding: 10px 0; color: #999; font-weight: 600; vertical-align: top;">Company</td>
-              <td style="padding: 10px 0; color: #111;">${company.trim()}</td>
+              <td style="padding: 10px 0; color: #111;">${safeCompany}</td>
             </tr>` : ''}
-            ${phone ? `
+            ${safePhone ? `
             <tr>
               <td style="padding: 10px 0; color: #999; font-weight: 600; vertical-align: top;">Phone</td>
-              <td style="padding: 10px 0; color: #111;">${phone.trim()}</td>
+              <td style="padding: 10px 0; color: #111;">${safePhone}</td>
             </tr>` : ''}
             <tr>
               <td style="padding: 10px 0; color: #999; font-weight: 600; vertical-align: top;">Inquiry Type</td>
-              <td style="padding: 10px 0; color: #111;">${inquiryType || 'General Inquiry'}</td>
+              <td style="padding: 10px 0; color: #111;">${safeInquiry}</td>
             </tr>
             <tr>
               <td style="padding: 10px 0; color: #999; font-weight: 600; vertical-align: top;">Message</td>
-              <td style="padding: 10px 0; color: #111; white-space: pre-wrap;">${message.trim()}</td>
+              <td style="padding: 10px 0; color: #111; white-space: pre-wrap;">${safeMessage}</td>
             </tr>
           </table>
 
@@ -66,6 +95,14 @@ export async function POST(request) {
         </div>
       `,
     })
+
+    if (error) {
+      console.error('[contact/route] Resend API error:', error)
+      return NextResponse.json(
+        { ok: false, error: 'Failed to send message. Please try again.' },
+        { status: 502 }
+      )
+    }
 
     return NextResponse.json({ ok: true })
   } catch (err) {
