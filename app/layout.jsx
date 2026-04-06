@@ -1,8 +1,11 @@
 import './globals.css'
 import { Outfit, Inter, JetBrains_Mono } from 'next/font/google'
+import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
+import { OrganizationJsonLd, WebsiteJsonLd } from '@/components/layout/JsonLd'
+import { AIWidget } from '@/components/widgets/AIWidget'
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -85,10 +88,27 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`scroll-smooth ${outfit.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        <OrganizationJsonLd />
+        <WebsiteJsonLd />
+        {/* Google Analytics 4 — replace GA_MEASUREMENT_ID with your actual ID */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID}');`}
+            </Script>
+          </>
+        )}
+      </head>
       <body className="min-h-screen bg-bg text-text antialiased">
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <AIWidget />
         <Analytics />
       </body>
     </html>
