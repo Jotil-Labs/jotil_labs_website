@@ -4,23 +4,25 @@ import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, Layers, Briefcase, Users, BookOpen, Mail } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import Logo, { LogoText } from '@/components/ui/Logo'
 
 const NAV_LINKS = [
-  { label: 'Products', to: '/products', hasDropdown: true },
-  { label: 'Use Cases', to: '/use-cases' },
-  { label: 'About', to: '/about' },
-  { label: 'Blog', to: '/blog' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Solutions', to: '/products', hasDropdown: true, icon: Layers },
+  { label: 'Use Cases', to: '/use-cases', icon: Briefcase },
+  { label: 'About', to: '/about', icon: Users },
+  { label: 'Blog', to: '/blog', icon: BookOpen },
+  { label: 'Contact', to: '/contact', icon: Mail },
 ]
 
 const PRODUCT_ITEMS = [
-  { name: 'JotilReceptionist', slug: 'receptionist', badge: 'Inbound Voice', description: 'AI phone agent & web voicebot' },
-  { name: 'JotilMessenger', slug: 'messenger', badge: 'Inbound Text', description: 'Chatbot & SMS agent' },
-  { name: 'JotilOutreach', slug: 'outreach', badge: 'Outbound', description: 'AI calls & SMS campaigns' },
-  { name: 'JotilSpace', slug: 'space', badge: 'Platform', description: 'CRM, tickets & calendar' },
-  { name: 'JotilFlow', slug: 'flow', badge: 'Automation', description: 'Workflow automation engine' },
+  { name: 'Receptionist', slug: 'receptionist', description: 'Answer every call, 24/7' },
+  { name: 'Messenger', slug: 'messenger', description: 'Handle chats, SMS, and WhatsApp' },
+  { name: 'Outreach', slug: 'outreach', description: 'Grow your pipeline on autopilot' },
+  { name: 'Space', slug: 'space', description: 'CRM, tickets, and scheduling in one place' },
+  { name: 'Flow', slug: 'flow', description: 'Automate any workflow visually' },
+  { name: 'Avatar', slug: 'avatar', description: 'Meet customers face to face with AI' },
 ]
 
 export function Navbar() {
@@ -65,16 +67,14 @@ export function Navbar() {
         )}
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 no-underline group">
-          <span className="text-xl font-extrabold tracking-tight" style={{ fontFamily: 'Outfit, sans-serif' }}>
-            <span className="text-text group-hover:text-text transition-colors">Jotil</span>
-            <span className="text-primary">Labs</span>
-          </span>
+        <Link href="/" className="flex items-center gap-2 no-underline group">
+          <Logo size={32} />
+          <LogoText className="text-xl" />
         </Link>
 
         {/* Desktop nav links */}
         <div className="hidden lg:flex items-center gap-1">
-          {NAV_LINKS.map(({ label, to, hasDropdown }) => {
+          {NAV_LINKS.map(({ label, to, hasDropdown, icon: NavIcon }) => {
             const isActive = pathname === to || (hasDropdown && pathname.startsWith('/products'))
 
             if (hasDropdown) {
@@ -88,10 +88,11 @@ export function Navbar() {
                   <Link
                     href={to}
                     className={cn(
-                      'relative no-underline px-4 py-2 text-sm font-medium rounded-[10px] nav-link-hover transition-colors duration-200 inline-flex items-center gap-1',
+                      'relative no-underline px-4 py-2 text-sm font-medium rounded-[10px] nav-link-hover transition-colors duration-200 inline-flex items-center gap-1.5',
                       isActive ? 'text-primary' : 'text-text-secondary hover:text-text'
                     )}
                   >
+                    <NavIcon size={14} strokeWidth={1.5} />
                     {label}
                     <ChevronDown
                       size={14}
@@ -120,10 +121,7 @@ export function Navbar() {
                               )}
                             >
                               <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2">
-                                  <span className="text-sm font-semibold text-text">{item.name}</span>
-                                  <span className="badge text-[8px]">{item.badge}</span>
-                                </div>
+                                <span className="text-sm font-semibold text-text">{item.name}</span>
                                 <p className="text-xs text-text-secondary mt-0.5">{item.description}</p>
                               </div>
                             </Link>
@@ -149,10 +147,11 @@ export function Navbar() {
                 key={to}
                 href={to}
                 className={cn(
-                  'relative no-underline px-4 py-2 text-sm font-medium rounded-[10px] nav-link-hover transition-colors duration-200',
+                  'relative no-underline px-4 py-2 text-sm font-medium rounded-[10px] nav-link-hover transition-colors duration-200 inline-flex items-center gap-1.5',
                   isActive ? 'text-primary' : 'text-text-secondary hover:text-text'
                 )}
               >
+                <NavIcon size={14} strokeWidth={1.5} />
                 {label}
               </Link>
             )

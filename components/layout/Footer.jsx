@@ -1,11 +1,13 @@
 import Link from 'next/link'
+import Logo, { LogoText } from '@/components/ui/Logo'
 
 const PRODUCT_LINKS = [
-  { label: 'JotilReceptionist', to: '/products/receptionist' },
-  { label: 'JotilMessenger', to: '/products/messenger' },
-  { label: 'JotilOutreach', to: '/products/outreach' },
-  { label: 'JotilSpace', to: '/products/space' },
-  { label: 'JotilFlow', to: '/products/flow' },
+  { label: 'Receptionist', to: '/products/receptionist' },
+  { label: 'Messenger', to: '/products/messenger' },
+  { label: 'Outreach', to: '/products/outreach' },
+  { label: 'Space', to: '/products/space' },
+  { label: 'Flow', to: '/products/flow' },
+  { label: 'Avatar', to: '/products/avatar' },
 ]
 
 const COMPANY_LINKS = [
@@ -59,7 +61,8 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           {/* Brand column */}
           <div className="lg:col-span-4">
-            <div className="mb-5">
+            <div className="mb-5 flex items-center gap-2">
+              <Logo size={32} />
               <span
                 className="text-xl font-extrabold tracking-tight"
                 style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
@@ -69,9 +72,9 @@ export function Footer() {
               </span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-xs mb-8">
-              AI-powered automation for customer communications. We help
-              businesses scale with intelligent voice agents, chatbots, SMS, and
-              workflow tools.
+              The AI-first customer platform. We help businesses answer every
+              call, handle every conversation, and grow without adding
+              headcount.
             </p>
 
             {/* Contact info */}
@@ -161,7 +164,7 @@ export function Footer() {
 
           {/* Link columns */}
           <div className="lg:col-span-2 lg:col-start-6">
-            <FooterColumn title="Products" links={PRODUCT_LINKS} />
+            <FooterColumn title="Solutions" links={PRODUCT_LINKS} />
           </div>
           <div className="lg:col-span-2">
             <FooterColumn title="Company" links={COMPANY_LINKS} />
