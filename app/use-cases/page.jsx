@@ -10,7 +10,6 @@ import {
 } from 'lucide-react'
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
 import { Badge } from '@/components/ui/Badge'
-import { ROICalculator } from '@/components/sections/ROICalculator'
 
 export const metadata = {
   title: 'Use Cases & Industry Solutions',
@@ -236,23 +235,35 @@ export default function UseCasesPage() {
 
       <div className="gradient-divider max-w-6xl mx-auto" />
 
-      {/* ── ROI Calculator ── */}
+      {/* ROI section */}
       <section className="py-24 bg-bg-alt/40">
         <div className="max-w-4xl mx-auto px-6">
-          <AnimatedSection className="text-center mb-12">
-            <Badge variant="blue" className="mb-5">ROI Calculator</Badge>
+          <AnimatedSection className="text-center">
+            <Badge variant="blue" className="mb-5">Save Time and Money</Badge>
             <h2
               className="font-bold tracking-[-0.03em] text-text mb-3"
               style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)' }}
             >
-              Estimate your savings
+              See what changes for your business
             </h2>
-            <p className="text-text-secondary max-w-lg mx-auto">
-              See how much time and money AI automation could save your team every month.
+            <p className="text-text-secondary max-w-lg mx-auto mb-10">
+              Most businesses see measurable results within the first week.
             </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
+              <div className="card text-center py-8">
+                <p className="text-3xl font-extrabold text-gradient mb-1">80%</p>
+                <p className="text-sm text-text-secondary">Fewer missed calls</p>
+              </div>
+              <div className="card text-center py-8">
+                <p className="text-3xl font-extrabold text-gradient mb-1">12+ hrs</p>
+                <p className="text-sm text-text-secondary">Saved per week</p>
+              </div>
+              <div className="card text-center py-8">
+                <p className="text-3xl font-extrabold text-gradient mb-1">3x</p>
+                <p className="text-sm text-text-secondary">More leads contacted</p>
+              </div>
+            </div>
           </AnimatedSection>
-
-          <ROICalculator />
         </div>
       </section>
 
