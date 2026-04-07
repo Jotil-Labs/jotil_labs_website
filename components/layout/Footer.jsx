@@ -1,14 +1,11 @@
 import Link from 'next/link'
 import Logo, { LogoText } from '@/components/ui/Logo'
+import { products } from '@/data/products'
 
-const PRODUCT_LINKS = [
-  { label: 'Receptionist', to: '/products/receptionist' },
-  { label: 'Messenger', to: '/products/messenger' },
-  { label: 'Outreach', to: '/products/outreach' },
-  { label: 'Space', to: '/products/space' },
-  { label: 'Flow', to: '/products/flow' },
-  { label: 'Avatar', to: '/products/avatar' },
-]
+const PRODUCT_LINKS = products.map((p) => ({
+  label: p.shortName,
+  to: `/products/${p.slug}`,
+}))
 
 const COMPANY_LINKS = [
   { label: 'About', to: '/about' },
