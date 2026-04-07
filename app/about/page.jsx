@@ -226,10 +226,10 @@ export default function AboutPage() {
             </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
             {STATS.map((stat, i) => (
               <AnimatedSection key={stat.label} delay={i * 0.08}>
-                <div className="card text-center py-8">
+                <div className="card text-center py-5 sm:py-8 px-3 sm:px-6">
                   <p
                     className="font-extrabold tracking-tight text-text mb-1 text-gradient"
                     style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)' }}

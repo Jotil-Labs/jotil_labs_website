@@ -80,7 +80,7 @@ function StatCard({ stat }) {
 
   return (
     <div
-      className="rounded-[20px] p-7 flex flex-col gap-4 transition-all duration-300"
+      className="rounded-[20px] p-5 sm:p-7 flex flex-col gap-3 sm:gap-4 transition-all duration-300"
       style={{
         background: '#FFFFFF',
         border: '1px solid rgba(0,0,0,0.05)',

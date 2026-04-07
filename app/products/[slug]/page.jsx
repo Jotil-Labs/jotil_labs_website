@@ -164,7 +164,7 @@ export default async function ProductPage({ params }) {
             <AnimatedSection>
               <Badge variant="blue" className="mb-5">{product.badge}</Badge>
               <h1
-                className="text-5xl sm:text-6xl font-extrabold text-text tracking-tight leading-[1.07] mb-5"
+                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text tracking-tight leading-[1.07] mb-5"
                 style={{ fontFamily: 'var(--font-outfit)', fontWeight: 800 }}
               >
                 {product.displayName[0]}
@@ -353,7 +353,7 @@ export default async function ProductPage({ params }) {
           <AnimatedSection>
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">Get Started</p>
             <h2
-              className="text-4xl font-extrabold text-text tracking-tight mb-4"
+              className="text-3xl sm:text-4xl font-extrabold text-text tracking-tight mb-4"
               style={{ fontFamily: 'var(--font-outfit)' }}
             >
               Ready to try{' '}
