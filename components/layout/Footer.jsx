@@ -9,8 +9,10 @@ const PRODUCT_LINKS = products.map((p) => ({
 
 const COMPANY_LINKS = [
   { label: 'About', to: '/about' },
-  { label: 'Use Cases', to: '/use-cases' },
+  { label: 'Industries', to: '/use-cases' },
   { label: 'Blog', to: '/blog' },
+  { label: 'Consultancy', to: '/consultancy' },
+  { label: 'Custom Development', to: '/custom-development' },
   { label: 'Contact', to: '/contact' },
 ]
 
