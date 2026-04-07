@@ -1,84 +1,95 @@
 'use client'
 
-import { MessageSquare, Zap, Calendar, Webhook, CreditCard, Database } from 'lucide-react'
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
-/**
- * For integrations without a clean single Lucide match we use a compact
- * text abbreviation rendered inside the same square container.
- */
 const INTEGRATIONS = [
-  {
-    label: 'Twilio',
-    icon: null,
-    abbrev: 'TW',
-    color: '#F22F46',
-  },
-  {
-    label: 'OpenAI',
-    icon: null,
-    abbrev: 'AI',
-    color: '#10A37F',
-  },
-  {
-    label: 'Slack',
-    icon: null,
-    abbrev: 'SL',
-    color: '#4A154B',
-  },
-  {
-    label: 'HubSpot',
-    icon: null,
-    abbrev: 'HS',
-    color: '#FF7A59',
-  },
-  {
-    label: 'Salesforce',
-    icon: null,
-    abbrev: 'SF',
-    color: '#00A1E0',
-  },
-  {
-    label: 'Google Calendar',
-    icon: Calendar,
-    color: '#4285F4',
-  },
-  {
-    label: 'Teams',
-    icon: null,
-    abbrev: 'MT',
-    color: '#6264A7',
-  },
-  {
-    label: 'Zapier',
-    icon: Zap,
-    color: '#FF4A00',
-  },
-  {
-    label: 'WhatsApp',
-    icon: MessageSquare,
-    color: '#25D366',
-  },
-  {
-    label: 'Stripe',
-    icon: CreditCard,
-    color: '#635BFF',
-  },
-  {
-    label: 'Airtable',
-    icon: Database,
-    color: '#18BFFF',
-  },
-  {
-    label: 'Webhooks',
-    icon: Webhook,
-    color: '#3B7BF2',
-  },
+  { label: 'Twilio', color: '#F22F46' },
+  { label: 'OpenAI', color: '#10A37F' },
+  { label: 'Slack', color: '#4A154B' },
+  { label: 'HubSpot', color: '#FF7A59' },
+  { label: 'Salesforce', color: '#00A1E0' },
+  { label: 'Google Calendar', color: '#4285F4' },
+  { label: 'Microsoft Teams', color: '#6264A7' },
+  { label: 'Zapier', color: '#FF4A00' },
+  { label: 'WhatsApp', color: '#25D366' },
+  { label: 'Stripe', color: '#635BFF' },
+  { label: 'Airtable', color: '#18BFFF' },
+  { label: 'Retell AI', color: '#3B7BF2' },
+  { label: 'Google Sheets', color: '#34A853' },
+  { label: 'Calendly', color: '#006BFF' },
+  { label: 'Zoho CRM', color: '#D32011' },
+  { label: 'Mailchimp', color: '#FFE01B' },
+  { label: 'QuickBooks', color: '#2CA01C' },
+  { label: 'Notion', color: '#111111' },
+  { label: 'Monday.com', color: '#FF3D57' },
+  { label: 'Freshdesk', color: '#22C55E' },
 ]
 
-export function IntegrationStrip() {
+function IntegrationPill({ label, color }) {
   return (
-    <section className="py-24" style={{ background: '#FFFFFF' }}>
+    <div
+      className="flex items-center gap-2.5 px-4 py-2.5 rounded-full shrink-0 transition-all duration-200 hover:-translate-y-0.5"
+      style={{
+        background: 'rgba(255,255,255,0.9)',
+        border: '1px solid rgba(0,0,0,0.06)',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+      }}
+    >
+      <span
+        className="w-2.5 h-2.5 rounded-full shrink-0"
+        style={{ background: color }}
+      />
+      <span
+        className="text-[13px] font-medium text-text whitespace-nowrap"
+        style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}
+      >
+        {label}
+      </span>
+    </div>
+  )
+}
+
+function MarqueeRow({ items, reverse = false, speed = 30 }) {
+  const duration = items.length * speed
+
+  return (
+    <div className="relative overflow-hidden">
+      {/* Fade edges */}
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 z-10" style={{ background: 'linear-gradient(to right, #FAFBFD, transparent)' }} />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 z-10" style={{ background: 'linear-gradient(to left, #FAFBFD, transparent)' }} />
+
+      <div
+        className="flex gap-3 w-max"
+        style={{
+          animation: `${reverse ? 'marquee-reverse' : 'marquee'} ${duration}s linear infinite`,
+        }}
+      >
+        {/* Double the items for seamless loop */}
+        {[...items, ...items].map((item, i) => (
+          <IntegrationPill key={`${item.label}-${i}`} {...item} />
+        ))}
+      </div>
+
+      <style jsx>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-reverse {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+      `}</style>
+    </div>
+  )
+}
+
+export function IntegrationStrip() {
+  const row1 = INTEGRATIONS.slice(0, 10)
+  const row2 = INTEGRATIONS.slice(10, 20)
+
+  return (
+    <section className="py-24" style={{ background: 'var(--color-bg)' }}>
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
@@ -88,11 +99,12 @@ export function IntegrationStrip() {
             className="text-[clamp(1.9rem,3.5vw,2.75rem)] font-extrabold tracking-[-0.04em] text-text mb-4"
             style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
           >
-            Connects with the tools{' '}
-            <span className="text-gradient">you already use</span>
+            Works with{' '}
+            <span className="text-gradient">150+ tools</span>{' '}
+            you already use
           </h2>
           <p
-            className="text-base text-text-secondary leading-relaxed max-w-md mx-auto"
+            className="text-base text-text-secondary leading-relaxed max-w-lg mx-auto"
             style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}
           >
             Plug Jotil into your existing stack in minutes. No ripping and
@@ -100,79 +112,25 @@ export function IntegrationStrip() {
           </p>
         </AnimatedSection>
 
-        {/* Grid */}
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 max-w-3xl mx-auto">
-          {INTEGRATIONS.map((item, i) => (
-            <AnimatedSection key={item.label} delay={i * 0.04}>
-              <IntegrationItem item={item} />
-            </AnimatedSection>
-          ))}
-        </div>
+        {/* Marquee rows */}
+        <AnimatedSection delay={0.15}>
+          <div className="space-y-3">
+            <MarqueeRow items={row1} speed={25} />
+            <MarqueeRow items={row2} speed={30} reverse />
+          </div>
+        </AnimatedSection>
 
         {/* Bottom note */}
-        <AnimatedSection delay={0.5} className="text-center mt-10">
+        <AnimatedSection delay={0.3} className="text-center mt-10">
           <p
             className="text-sm text-text-secondary"
             style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}
           >
-            Plus any REST API via native webhook support
+            Plus any REST API, webhook, or custom integration your business needs.
           </p>
         </AnimatedSection>
 
       </div>
     </section>
-  )
-}
-
-function IntegrationItem({ item }) {
-  const { label, icon: Icon, abbrev, color } = item
-
-  return (
-    <div className="flex flex-col items-center gap-2.5 group cursor-default">
-      {/* Icon container */}
-      <div
-        className="w-full aspect-square rounded-[14px] flex items-center justify-center transition-all duration-200"
-        style={{
-          background: 'var(--color-bg-alt)',
-          border: '1px solid rgba(0,0,0,0.05)',
-          minHeight: 56,
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.background = `${color}10`
-          e.currentTarget.style.borderColor = `${color}28`
-          e.currentTarget.style.transform = 'translateY(-2px)'
-          e.currentTarget.style.boxShadow = `0 6px 20px ${color}18`
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.background = 'var(--color-bg-alt)'
-          e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'
-          e.currentTarget.style.transform = 'translateY(0)'
-          e.currentTarget.style.boxShadow = 'none'
-        }}
-      >
-        {Icon ? (
-          <Icon size={22} strokeWidth={1.6} style={{ color }} />
-        ) : (
-          <span
-            className="text-[11px] font-bold"
-            style={{
-              color,
-              fontFamily: 'var(--font-outfit), Outfit, sans-serif',
-              letterSpacing: '0.03em',
-            }}
-          >
-            {abbrev}
-          </span>
-        )}
-      </div>
-
-      {/* Label */}
-      <span
-        className="text-[11px] text-center leading-tight text-text-secondary"
-        style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}
-      >
-        {label}
-      </span>
-    </div>
   )
 }
