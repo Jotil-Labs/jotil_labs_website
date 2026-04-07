@@ -5,7 +5,7 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 const TESTIMONIALS = [
   {
     quote:
-      'JotilReceptionist cut our missed calls by 80%. Patients are scheduled instantly, even at 2am.',
+      'We cut missed calls by 80% in the first month. Patients get scheduled instantly now, even at 2am.',
     name: 'Sarah M.',
     role: 'Practice Manager',
     company: 'Meridian Health',
@@ -23,7 +23,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      'The ROI was clear in week one. JotilOutreach is now our highest-performing lead channel.',
+      'The ROI was clear in week one. AI-powered outreach is now our highest-performing lead channel.',
     name: 'Rachel K.',
     role: 'VP Sales',
     company: 'Summit Finance',
