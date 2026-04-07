@@ -4,9 +4,11 @@ import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X, ChevronDown, Layers, Briefcase, Users, BookOpen, Mail, Phone, MessageCircle, TrendingUp, LayoutGrid, GitBranch, UserCircle, ArrowRight, Sparkles } from 'lucide-react'
+import * as LucideIcons from 'lucide-react'
+import { Menu, X, ChevronDown, Layers, Briefcase, Users, BookOpen, Mail, ArrowRight, Sparkles } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Logo, { LogoText } from '@/components/ui/Logo'
+import { products } from '@/data/products'
 
 const NAV_LINKS = [
   { label: 'Solutions', to: '/products', hasDropdown: true, icon: Layers },
@@ -16,14 +18,14 @@ const NAV_LINKS = [
   { label: 'Contact', to: '/contact', icon: Mail },
 ]
 
-const PRODUCT_ITEMS = [
-  { name: 'Receptionist', slug: 'receptionist', description: 'Answer every call, 24/7', icon: Phone, color: '#3B7BF2' },
-  { name: 'Messenger', slug: 'messenger', description: 'Handle chats, SMS, and WhatsApp', icon: MessageCircle, color: '#6366F1' },
-  { name: 'Outreach', slug: 'outreach', description: 'Grow your pipeline on autopilot', icon: TrendingUp, color: '#0EA5E9' },
-  { name: 'Space', slug: 'space', description: 'CRM, tickets, and scheduling', icon: LayoutGrid, color: '#3B7BF2' },
-  { name: 'Flow', slug: 'flow', description: 'Automate any workflow visually', icon: GitBranch, color: '#6366F1' },
-  { name: 'Avatar', slug: 'avatar', description: 'Meet customers face to face', icon: UserCircle, color: '#0EA5E9' },
-]
+// Derive nav items from centralized product data
+const PRODUCT_ITEMS = products.map((p) => ({
+  name: p.shortName,
+  slug: p.slug,
+  description: p.oneLiner,
+  icon: LucideIcons[p.icon] || LucideIcons.Sparkles,
+  color: p.iconColor,
+}))
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
