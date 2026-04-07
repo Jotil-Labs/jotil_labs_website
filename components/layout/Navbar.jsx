@@ -110,7 +110,7 @@ export function Navbar() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 8, scale: 0.98 }}
                         transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                        className="absolute top-full -left-4 pt-3 w-[580px]"
+                        className="absolute top-full -left-4 pt-3 w-[580px] max-w-[calc(100vw-2rem)]"
                       >
                         <div className="bg-white rounded-2xl border border-black/[0.06] shadow-2xl shadow-black/[0.08] overflow-hidden">
                           {/* Solutions grid */}
@@ -196,7 +196,7 @@ export function Navbar() {
 
           <button
             className={cn(
-              'lg:hidden flex items-center justify-center w-10 h-10 rounded-[12px] border-none cursor-pointer transition-colors duration-200',
+              'lg:hidden flex items-center justify-center w-11 h-11 rounded-[12px] border-none cursor-pointer transition-colors duration-200',
               mobileOpen ? 'bg-primary/5 text-primary' : 'bg-transparent text-text'
             )}
             onClick={() => setMobileOpen((v) => !v)}

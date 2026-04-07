@@ -30,7 +30,7 @@ function VoiceOrb() {
   const [active, setActive] = useState(false)
 
   return (
-    <div className="relative flex items-center justify-center select-none" style={{ width: 380, height: 380 }}>
+    <div className="relative flex items-center justify-center select-none scale-[0.72] sm:scale-[0.85] lg:scale-100 origin-center" style={{ width: 380, height: 380 }}>
       {/* Glow */}
       <div className="absolute rounded-full pointer-events-none" style={{ width: 460, height: 460, top: '50%', left: '50%', transform: 'translate(-50%,-50%)', background: 'radial-gradient(circle, rgba(59,123,242,0.08) 0%, transparent 70%)', filter: 'blur(40px)' }} />
 

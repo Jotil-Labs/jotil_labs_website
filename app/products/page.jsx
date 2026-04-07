@@ -72,7 +72,7 @@ export default function ProductsPage() {
           <AnimatedSection>
             <Badge variant="blue" className="mb-5">Our Solutions</Badge>
             <h1
-              className="text-5xl sm:text-6xl font-extrabold text-text tracking-tight leading-[1.08]"
+              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text tracking-tight leading-[1.08]"
               style={{ fontFamily: 'var(--font-outfit)' }}
             >
               Everything your business needs.{' '}
