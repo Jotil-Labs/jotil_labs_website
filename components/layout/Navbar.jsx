@@ -8,7 +8,7 @@ import * as LucideIcons from 'lucide-react'
 import {
   Menu, X, ChevronDown, Layers, ArrowRight, Sparkles,
   Building2, BookOpen, FileText, Code2, Users, Mail,
-  HeartPulse, Stethoscope, Home, Scale, UtensilsCrossed,
+  Stethoscope, Home, Scale, UtensilsCrossed, Hotel,
   TrendingUp, ShoppingCart, Wrench
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -25,11 +25,11 @@ const PRODUCT_ITEMS = products.map((p) => ({
 }))
 
 const INDUSTRY_ITEMS = [
-  { name: 'Healthcare', slug: 'healthcare', description: 'Clinics, hospitals, and health systems', icon: HeartPulse, color: '#EF4444' },
+  { name: 'Restaurant', slug: 'restaurant', description: 'Reservations, orders, and guest experience', icon: UtensilsCrossed, color: '#EF4444' },
   { name: 'Dental & Medical', slug: 'dental-medical', description: 'Dental offices and medical practices', icon: Stethoscope, color: '#3B82F6' },
   { name: 'Real Estate', slug: 'real-estate', description: 'Agents, brokerages, and property managers', icon: Home, color: '#F59E0B' },
   { name: 'Legal', slug: 'legal', description: 'Law firms and legal practices', icon: Scale, color: '#6366F1' },
-  { name: 'Hospitality', slug: 'hospitality', description: 'Hotels, restaurants, and event venues', icon: UtensilsCrossed, color: '#EC4899' },
+  { name: 'Hospitality', slug: 'hospitality', description: 'Hotels, venues, and event spaces', icon: Hotel, color: '#EC4899' },
   { name: 'Finance & Insurance', slug: 'finance-insurance', description: 'Financial advisors and insurance agencies', icon: TrendingUp, color: '#10B981' },
   { name: 'E-commerce', slug: 'ecommerce', description: 'Online stores and retail businesses', icon: ShoppingCart, color: '#8B5CF6' },
   { name: 'Home Services', slug: 'home-services', description: 'HVAC, plumbing, and field service teams', icon: Wrench, color: '#F97316' },
