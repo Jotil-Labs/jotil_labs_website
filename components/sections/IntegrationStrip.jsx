@@ -1,6 +1,7 @@
 'use client'
 
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
+import { getBrandLogo } from '@/components/ui/BrandLogos'
 
 const INTEGRATIONS = [
   { label: 'Twilio', color: '#F22F46' },
@@ -25,20 +26,23 @@ const INTEGRATIONS = [
   { label: 'Freshdesk', color: '#22C55E' },
 ]
 
-function IntegrationPill({ label, color }) {
+function IntegrationPill({ label }) {
+  const LogoComponent = getBrandLogo(label)
+
   return (
     <div
-      className="flex items-center gap-2.5 px-4 py-2.5 rounded-full shrink-0 transition-all duration-200 hover:-translate-y-0.5"
+      className="flex items-center gap-2.5 px-4 py-2.5 rounded-full shrink-0 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
       style={{
-        background: 'rgba(255,255,255,0.9)',
+        background: 'rgba(255,255,255,0.95)',
         border: '1px solid rgba(0,0,0,0.06)',
         boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
       }}
     >
-      <span
-        className="w-2.5 h-2.5 rounded-full shrink-0"
-        style={{ background: color }}
-      />
+      {LogoComponent && (
+        <span className="shrink-0 flex items-center justify-center">
+          <LogoComponent />
+        </span>
+      )}
       <span
         className="text-[13px] font-medium text-text whitespace-nowrap"
         style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}
