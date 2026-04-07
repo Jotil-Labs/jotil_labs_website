@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X, ChevronDown, Layers, Briefcase, Users, BookOpen, Mail } from 'lucide-react'
+import { Menu, X, ChevronDown, Layers, Briefcase, Users, BookOpen, Mail, Phone, MessageCircle, TrendingUp, LayoutGrid, GitBranch, UserCircle, ArrowRight, Sparkles } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Logo, { LogoText } from '@/components/ui/Logo'
 
@@ -17,12 +17,12 @@ const NAV_LINKS = [
 ]
 
 const PRODUCT_ITEMS = [
-  { name: 'Receptionist', slug: 'receptionist', description: 'Answer every call, 24/7' },
-  { name: 'Messenger', slug: 'messenger', description: 'Handle chats, SMS, and WhatsApp' },
-  { name: 'Outreach', slug: 'outreach', description: 'Grow your pipeline on autopilot' },
-  { name: 'Space', slug: 'space', description: 'CRM, tickets, and scheduling in one place' },
-  { name: 'Flow', slug: 'flow', description: 'Automate any workflow visually' },
-  { name: 'Avatar', slug: 'avatar', description: 'Meet customers face to face with AI' },
+  { name: 'Receptionist', slug: 'receptionist', description: 'Answer every call, 24/7', icon: Phone, color: '#3B7BF2' },
+  { name: 'Messenger', slug: 'messenger', description: 'Handle chats, SMS, and WhatsApp', icon: MessageCircle, color: '#6366F1' },
+  { name: 'Outreach', slug: 'outreach', description: 'Grow your pipeline on autopilot', icon: TrendingUp, color: '#0EA5E9' },
+  { name: 'Space', slug: 'space', description: 'CRM, tickets, and scheduling', icon: LayoutGrid, color: '#3B7BF2' },
+  { name: 'Flow', slug: 'flow', description: 'Automate any workflow visually', icon: GitBranch, color: '#6366F1' },
+  { name: 'Avatar', slug: 'avatar', description: 'Meet customers face to face', icon: UserCircle, color: '#0EA5E9' },
 ]
 
 export function Navbar() {
@@ -104,34 +104,59 @@ export function Navbar() {
                   <AnimatePresence>
                     {productsOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 pt-2 w-[320px]"
+                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                        transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                        className="absolute top-full -left-4 pt-3 w-[580px]"
                       >
-                        <div className="bg-white rounded-2xl border border-border shadow-xl shadow-black/5 p-2 overflow-hidden">
-                          {PRODUCT_ITEMS.map((item) => (
-                            <Link
-                              key={item.slug}
-                              href={`/products/${item.slug}`}
-                              className={cn(
-                                'flex items-start gap-3 px-3 py-2.5 rounded-xl no-underline transition-colors duration-150',
-                                pathname === `/products/${item.slug}` ? 'bg-bg-alt' : 'hover:bg-bg-alt/60'
-                              )}
-                            >
-                              <div className="flex-1 min-w-0">
-                                <span className="text-sm font-semibold text-text">{item.name}</span>
-                                <p className="text-xs text-text-secondary mt-0.5">{item.description}</p>
-                              </div>
-                            </Link>
-                          ))}
-                          <div className="border-t border-border mt-1 pt-1">
+                        <div className="bg-white rounded-2xl border border-black/[0.06] shadow-2xl shadow-black/[0.08] overflow-hidden">
+                          {/* Solutions grid */}
+                          <div className="p-4">
+                            <p className="text-[10px] font-semibold text-text-secondary uppercase tracking-widest px-2 mb-3">Solutions</p>
+                            <div className="grid grid-cols-2 gap-1">
+                              {PRODUCT_ITEMS.map((item) => {
+                                const ItemIcon = item.icon
+                                return (
+                                  <Link
+                                    key={item.slug}
+                                    href={`/products/${item.slug}`}
+                                    className={cn(
+                                      'flex items-start gap-3 px-3 py-3 rounded-xl no-underline transition-all duration-150 group',
+                                      pathname === `/products/${item.slug}` ? 'bg-bg-alt' : 'hover:bg-[#F8FAFF]'
+                                    )}
+                                  >
+                                    <div
+                                      className="w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0 transition-colors duration-150"
+                                      style={{ background: `${item.color}10`, border: `1px solid ${item.color}18` }}
+                                    >
+                                      <ItemIcon size={16} strokeWidth={1.5} style={{ color: item.color }} />
+                                    </div>
+                                    <div className="flex-1 min-w-0 pt-0.5">
+                                      <span className="text-[13px] font-semibold text-text group-hover:text-primary transition-colors">{item.name}</span>
+                                      <p className="text-[11px] text-text-secondary mt-0.5 leading-snug">{item.description}</p>
+                                    </div>
+                                  </Link>
+                                )
+                              })}
+                            </div>
+                          </div>
+
+                          {/* Bottom bar */}
+                          <div className="border-t border-black/[0.05] bg-[#FAFBFD] px-5 py-3 flex items-center justify-between">
                             <Link
                               href="/products"
-                              className="flex items-center px-3 py-2 rounded-xl text-xs font-medium text-primary no-underline hover:bg-bg-alt/60 transition-colors"
+                              className="text-xs font-semibold text-primary no-underline inline-flex items-center gap-1 hover:gap-2 transition-all"
                             >
-                              View all products
+                              See all solutions
+                              <ArrowRight size={12} strokeWidth={2} />
+                            </Link>
+                            <Link
+                              href="/contact"
+                              className="text-xs font-semibold text-white no-underline inline-flex items-center gap-1.5 bg-primary hover:bg-primary-dark px-3.5 py-1.5 rounded-lg transition-colors"
+                            >
+                              <Sparkles size={11} strokeWidth={2} />
+                              Book a Demo
                             </Link>
                           </div>
                         </div>
