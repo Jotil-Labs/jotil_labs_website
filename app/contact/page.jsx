@@ -8,9 +8,27 @@ export const metadata = {
     'Get in touch with the Jotil Labs team. Book a demo, ask about enterprise pricing, or reach out with any questions about our AI voice, chat, and automation products.',
 }
 
+const localBusinessJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Jotil Labs',
+  telephone: '+1-358-900-0040',
+  email: 'contact@jotillabs.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Lehi',
+    addressRegion: 'Utah',
+    addressCountry: 'US',
+  },
+}
+
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-bg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden pt-32 pb-16">
         <div

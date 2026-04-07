@@ -153,8 +153,23 @@ export default async function BlogPost({ params }) {
   const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(postUrl)}`
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    datePublished: post.date,
+    author: { '@type': 'Person', name: post.author },
+    publisher: { '@type': 'Organization', name: 'Jotil Labs' },
+    description: post.excerpt,
+    url: postUrl,
+  }
+
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Article header */}
       <header className="relative overflow-hidden border-b border-black/[0.05] bg-white px-6 pb-12 pt-32 sm:px-8 sm:pt-36">
         {/* Ambient orbs */}
