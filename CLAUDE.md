@@ -1,7 +1,7 @@
 # Jotil Labs Website
 
 ## Company
-Jotil Labs — AI Automation Company (Founded 2024, Lehi, Utah). We help SMBs automate customer communications through AI voice agents, chatbots, SMS, CRM tools, and AI avatars. Voice AI is our core product. 6 products: Receptionist, Messenger, Outreach, Space, Flow, Avatar.
+Jotil Labs — The AI-First Customer Platform (Founded 2024, Lehi, Utah). We help SMBs never miss a customer through AI-powered communication automation. 6 solutions: Receptionist, Messenger, Outreach, Space, Flow, Avatar. Target market: SMB, contact-based sales (no self-signup).
 
 ## Stack
 - Next.js 15 App Router + React 19 + JSX (NOT TypeScript) + Tailwind CSS v4 + Framer Motion
@@ -17,6 +17,8 @@ Jotil Labs — AI Automation Company (Founded 2024, Lehi, Utah). We help SMBs au
 app/
   layout.jsx            — Root layout (fonts, metadata, Navbar, Footer)
   page.jsx              — Homepage (Hero + 7 sections)
+  loading.jsx           — Global loading spinner
+  og/route.jsx          — Dynamic OG image generation
   globals.css           — @theme, keyframes, glass/card system, utilities
   not-found.jsx         — 404 page
   sitemap.js            — Dynamic sitemap
@@ -39,13 +41,15 @@ components/
   sections/             — Hero, LogoCloud, ProductShowcase, HowItWorks,
                           Stats, Testimonials, IntegrationStrip, CTASection,
                           ContactForm
-  layout/               — Navbar, Footer
-  product/              — DemoVisualization, FAQAccordion
+  layout/               — Navbar, Footer, ScrollToTop, JsonLd
+  product/              — DemoVisualization (interactive per-product), FAQAccordion
+  widgets/              — AIWidget (Chat/Voice/Avatar floating panel)
 
 lib/utils.js            — cn() helper
 lib/mdx.js              — MDX blog utilities
-data/products.js        — 6 products with full data
-content/blog/           — MDX blog posts
+data/products.js        — 6 solutions with full data
+content/blog/           — 5 MDX blog posts
+.github/workflows/      — CI pipeline (lint + build)
 ```
 
 ## Design System
@@ -63,7 +67,7 @@ content/blog/           — MDX blog posts
 - Accent: #0EA5E9
 - Background: #FAFBFD
 - Background Alt: #F0F4FF
-- Text: #111111 / Secondary: #999999
+- Text: #111111 / Secondary: #6B7280 (WCAG AA compliant)
 - Dark (footer): #0A0F1C
 
 ### CSS Utility Classes (defined in globals.css)
@@ -118,10 +122,22 @@ Hero > LogoCloud > ProductShowcase > HowItWorks > Stats > Testimonials > Integra
 - `npm run build` — production build
 - `npm run lint` — ESLint
 
+## Messaging Rules (STRICT)
+- Present from the CUSTOMER's perspective, not the company's
+- Frame everything as outcomes: what the customer GETS, not what we built
+- No product catalog language ("Six AI Products", "Inbound Voice", "Outbound")
+- Use "Solutions" not "Products" in navigation
+- No em-dashes in customer-facing copy (use periods or commas)
+- No emojis anywhere
+- No technical jargon (API, SDK, LLM, pipeline, etc.) in customer-facing copy
+- Benchmark: Intercom, HubSpot, Dialpad messaging style
+
 ## Conventions
 - JSX only (NOT TypeScript)
 - PascalCase components
 - Tailwind utility classes preferred
 - No Co-Authored-By in commits
-- No Lorem ipsum — real copy only
+- No Lorem ipsum, real copy only
 - Responsive mobile-first
+- GitHub Issues for tracking, feature branches, PRs with test plans
+- CI must pass (lint + build) before merge
