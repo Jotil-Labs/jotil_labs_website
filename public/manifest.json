@@ -1,0 +1,16 @@
+{
+  "name": "Jotil Labs",
+  "short_name": "Jotil",
+  "description": "The AI-First Customer Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFBFD",
+  "theme_color": "#3B7BF2",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ]
+}
