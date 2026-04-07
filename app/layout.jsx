@@ -2,6 +2,7 @@ import './globals.css'
 import { Outfit, Inter, JetBrains_Mono } from 'next/font/google'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { OrganizationJsonLd, WebsiteJsonLd } from '@/components/layout/JsonLd'
@@ -36,7 +37,7 @@ export const metadata = {
   },
   description:
     'Jotil Labs builds AI systems that handle your calls, chats, leads, and workflows. Voice agents, chatbots, SMS automation, and CRM tools for modern businesses.',
-  metadataBase: new URL('https://jotillabs.com'),
+  metadataBase: new URL('https://www.jotillabs.com'),
   keywords: [
     'AI voice agent',
     'AI chatbot',
@@ -52,7 +53,7 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://jotillabs.com',
+    url: 'https://www.jotillabs.com',
     siteName: 'Jotil Labs',
     title: 'Jotil Labs — AI Voice, Chat & Automation Platform',
     description:
@@ -79,8 +80,9 @@ export const metadata = {
   },
   icons: {
     icon: '/favicon.svg',
-    apple: '/apple-touch-icon.png',
+    apple: '/apple-touch-icon.svg',
   },
+  manifest: '/manifest.json',
 }
 
 export default function RootLayout({ children }) {
@@ -115,6 +117,7 @@ export default function RootLayout({ children }) {
         <ScrollToTop />
         <AIWidget />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

@@ -89,9 +89,9 @@ export function CTASection() {
               lineHeight: 1.1,
             }}
           >
-            Ready to automate your{'\u00A0'}
+            Stop losing customers{'\u00A0'}
             <br className="hidden sm:block" />
-            business communication?
+            to missed conversations.
           </h2>
         </AnimatedSection>
 
