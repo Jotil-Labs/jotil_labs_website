@@ -247,9 +247,10 @@ export function Navbar() {
                                     key={item.slug}
                                     href={`/products/${item.slug}`}
                                     onClick={closeMobile}
-                                    className="block no-underline rounded-lg px-3 py-2 text-sm text-text-secondary hover:text-text hover:bg-surface transition-colors"
+                                    className="block no-underline rounded-lg px-3 py-2.5 hover:bg-surface transition-colors"
                                   >
-                                    {item.name}
+                                    <span className="text-sm font-medium text-text">{item.name}</span>
+                                    <span className="block text-[11px] text-text-secondary mt-0.5">{item.description}</span>
                                   </Link>
                                 ))}
                                 <Link
