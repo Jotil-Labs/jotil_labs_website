@@ -4,21 +4,22 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 import { Badge } from '@/components/ui/Badge'
 import { HexContainer } from '@/components/ui/Logo'
 
-/* ─────────────────────────────────────────────────
-   UNIFIED COLOR: All icons use brand blue family
-   Primary: #3B7BF2  Light: #6B9AEA  Dark: #2D6AE0
-───────────────────────────────────────────────────── */
-const C = { primary: '#3B7BF2', light: '#6B9AEA', dark: '#2D6AE0' }
+/* ═══════════════════════════════════════════════════
+   PRODUCT ICON EXPLORATION v3
+   - Unified brand blue (#3B7BF2 / #6B9AEA / #2D6AE0)
+   - 10s heartbeat cycle (burst first 10%, rest 90%)
+   - Animations match original hex accent quality
+═══════════════════════════════════════════════════ */
 
-/* ═══ RECEPTIONIST: Waveform bars ═══ */
+/* ── RECEPTIONIST: Waveform bars ── */
 function ReceptionistV1({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <rect x="4" y="16" width="5" height="8" rx="2.5" fill={C.light} className="rc-bar1" />
-      <rect x="11" y="10" width="5" height="20" rx="2.5" fill={C.primary} className="rc-bar2" />
-      <rect x="18" y="6" width="5" height="28" rx="2.5" fill={C.dark} className="rc-bar3" />
-      <rect x="25" y="12" width="5" height="16" rx="2.5" fill={C.primary} className="rc-bar4" />
-      <rect x="32" y="14" width="5" height="12" rx="2.5" fill={C.light} className="rc-bar5" />
+      <rect x="4" y="16" width="5" height="8" rx="2.5" fill="#6B9AEA" className="vb vb1" />
+      <rect x="11" y="10" width="5" height="20" rx="2.5" fill="#6B9AEA" className="vb vb2" />
+      <rect x="18" y="6" width="5" height="28" rx="2.5" fill="#6B9AEA" className="vb vb3" />
+      <rect x="25" y="12" width="5" height="16" rx="2.5" fill="#6B9AEA" className="vb vb4" />
+      <rect x="32" y="14" width="5" height="12" rx="2.5" fill="#6B9AEA" className="vb vb5" />
     </svg>
   )
 }
@@ -26,11 +27,11 @@ function ReceptionistV1({ size = 40 }) {
 function ReceptionistV2({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <rect x="6" y="18" width="4" height="4" rx="2" fill={C.light} className="rc-bar1" />
-      <rect x="13" y="12" width="4" height="16" rx="2" fill={C.light} className="rc-bar2" />
-      <rect x="20" y="6" width="4" height="28" rx="2" fill={C.primary} className="rc-bar3" />
-      <rect x="27" y="10" width="4" height="20" rx="2" fill={C.light} className="rc-bar4" />
-      <rect x="34" y="16" width="4" height="8" rx="2" fill={C.light} className="rc-bar5" />
+      <rect x="6" y="18" width="4" height="4" rx="2" fill="#6B9AEA" className="vb vb1" />
+      <rect x="13" y="12" width="4" height="16" rx="2" fill="#6B9AEA" className="vb vb2" />
+      <rect x="20" y="6" width="4" height="28" rx="2" fill="#6B9AEA" className="vb vb3" />
+      <rect x="27" y="10" width="4" height="20" rx="2" fill="#6B9AEA" className="vb vb4" />
+      <rect x="34" y="16" width="4" height="8" rx="2" fill="#6B9AEA" className="vb vb5" />
     </svg>
   )
 }
@@ -38,136 +39,158 @@ function ReceptionistV2({ size = 40 }) {
 function ReceptionistV3({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <rect x="5" y="17" width="3.5" height="6" rx="1.75" fill={C.light} className="rc-bar1" />
-      <rect x="11" y="12" width="3.5" height="16" rx="1.75" fill={C.light} className="rc-bar2" />
-      <rect x="17" y="7" width="4" height="26" rx="2" fill={C.primary} className="rc-bar3" />
-      <rect x="23.5" y="9" width="3.5" height="22" rx="1.75" fill={C.primary} className="rc-bar4" />
-      <rect x="29.5" y="13" width="3.5" height="14" rx="1.75" fill={C.light} className="rc-bar5" />
-      <rect x="35.5" y="17" width="3.5" height="6" rx="1.75" fill={C.light} className="rc-bar6" />
+      <rect x="3" y="17" width="3.5" height="6" rx="1.75" fill="#6B9AEA" className="vb vb1" />
+      <rect x="9" y="12" width="3.5" height="16" rx="1.75" fill="#6B9AEA" className="vb vb2" />
+      <rect x="15" y="7" width="4" height="26" rx="2" fill="#6B9AEA" className="vb vb3" />
+      <rect x="21.5" y="9" width="3.5" height="22" rx="1.75" fill="#6B9AEA" className="vb vb4" />
+      <rect x="27.5" y="13" width="3.5" height="14" rx="1.75" fill="#6B9AEA" className="vb vb5" />
+      <rect x="33.5" y="17" width="3.5" height="6" rx="1.75" fill="#6B9AEA" className="vb vb6" />
     </svg>
   )
 }
 
-/* ═══ MESSENGER: Typing dots (V2 picked) ═══ */
+/* ── MESSENGER: Three dots scale pulse (PICKED) ── */
 function MessengerV2({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="10" cy="20" r="3" fill={C.primary} className="msg-dot1" />
-      <circle cx="20" cy="20" r="3" fill={C.primary} className="msg-dot2" />
-      <circle cx="30" cy="20" r="3" fill={C.primary} className="msg-dot3" />
+      <circle cx="10" cy="20" r="3.5" fill="#3B7BF2" className="md md1" />
+      <circle cx="20" cy="20" r="3.5" fill="#3B7BF2" className="md md2" />
+      <circle cx="30" cy="20" r="3.5" fill="#3B7BF2" className="md md3" />
     </svg>
   )
 }
 
-/* ═══ OUTREACH: Paper plane (V1 picked) ═══ */
+/* ── OUTREACH: Paper plane with flight trajectory (PICKED) ── */
 function OutreachV1({ size = 40 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" className="outreach-plane">
-      <path d="M6 20l28-14-8 16-6-4-14 2z" fill={C.primary} opacity="0.12" />
-      <path d="M6 20l28-14-8 16-6-4-14 2z" stroke={C.primary} strokeWidth="1.8" strokeLinejoin="round" fill="none" />
-      <path d="M20 18l6 14" stroke={C.primary} strokeWidth="1.5" strokeLinecap="round" />
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
+      <g className="pp pp1">
+        <path d="M26 16L8 14l8 10-2 10z" fill="#3B7BF2" />
+      </g>
+      <g className="pp pp2">
+        <path d="M26 16L8 14l8 10-2 10z" fill="#3B7BF2" />
+      </g>
+      <g className="pp pp3">
+        <path d="M26 16L8 14l8 10-2 10z" fill="#3B7BF2" />
+      </g>
     </svg>
   )
 }
 
-/* ═══ SPACE: Mixed shapes (V1 picked) ═══ */
+/* ── SPACE: Shape carousel, one at a time (PICKED) ── */
 function SpaceV1({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="12" cy="12" r="6" fill={C.primary} className="sp-shape1" />
-      <rect x="22" y="6" width="12" height="12" rx="2" fill={C.primary} className="sp-shape2" />
-      <polygon points="12,28 18,40 6,40" fill={C.primary} className="sp-shape3" />
-      <polygon points="28,26 34,32 28,38 22,32" fill={C.primary} className="sp-shape4" />
+      <circle cx="20" cy="20" r="8" fill="#3B7BF2" className="cs cs-circle" />
+      <polygon points="20,12 28,20 20,28 12,20" fill="#3B7BF2" className="cs cs-diamond" />
+      <polygon points="20,12 28,28 12,28" fill="#3B7BF2" className="cs cs-triangle" />
+      <rect x="12" y="12" width="16" height="16" rx="2" fill="#3B7BF2" className="cs cs-square" />
     </svg>
   )
 }
 
-/* ═══ FLOW: Branching (V3 picked) ═══ */
+/* ── FLOW: Branching with data flowing from input to outputs (PICKED) ──
+   Aligned diagonally (parallel to hex gap), dot travels from source to targets */
 function FlowV3({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="6" cy="20" r="4" fill={C.primary} className="fl-dot-in" />
-      <path d="M10 20H18" stroke={C.primary} strokeWidth="2" strokeLinecap="round" className="fl-line" />
-      <path d="M18 20Q22 20 26 12" stroke={C.primary} strokeWidth="2" strokeLinecap="round" fill="none" className="fl-branch1" />
-      <path d="M18 20Q22 20 26 20" stroke={C.primary} strokeWidth="2" strokeLinecap="round" fill="none" className="fl-branch2" />
-      <path d="M18 20Q22 20 26 28" stroke={C.primary} strokeWidth="2" strokeLinecap="round" fill="none" className="fl-branch3" />
-      <circle cx="30" cy="12" r="3" fill={C.light} className="fl-dot1" />
-      <circle cx="30" cy="20" r="3" fill={C.primary} className="fl-dot2" />
-      <circle cx="30" cy="28" r="3" fill={C.light} className="fl-dot3" />
+      {/* Static structure: branches */}
+      <path d="M8 28L18 20" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl1" />
+      <path d="M18 20L32 10" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl2" />
+      <path d="M18 20L32 20" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl2" />
+      <path d="M18 20L32 30" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl3" />
+      {/* Source dot */}
+      <circle cx="8" cy="28" r="4" fill="#3B7BF2" className="fl-src" />
+      {/* Junction dot */}
+      <circle cx="18" cy="20" r="3" fill="#6B9AEA" className="fl-junc" />
+      {/* Target dots */}
+      <circle cx="32" cy="10" r="3" fill="#6B9AEA" className="fl-out fl-out1" />
+      <circle cx="32" cy="20" r="3" fill="#6B9AEA" className="fl-out fl-out2" />
+      <circle cx="32" cy="30" r="3" fill="#6B9AEA" className="fl-out fl-out3" />
+      {/* Traveling data packet */}
+      <circle cx="8" cy="28" r="2" fill="#2D6AE0" className="fl-packet" />
     </svg>
   )
 }
 
-/* ═══ AVATAR: New variations ═══ */
+/* ── AVATAR: New variations ── */
 function AvatarV1({ size = 40 }) {
-  // Pulsing rings + face
+  // Pulsing concentric rings + face (incoming video call)
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="20" cy="20" r="16" stroke={C.light} strokeWidth="1.2" fill="none" className="av-ring1" />
-      <circle cx="20" cy="20" r="11" stroke={C.primary} strokeWidth="1.2" fill="none" className="av-ring2" />
-      <circle cx="20" cy="18" r="6" fill={C.primary} opacity="0.08" />
-      <circle cx="18" cy="16.5" r="1.2" fill={C.primary} />
-      <circle cx="22" cy="16.5" r="1.2" fill={C.primary} />
-      <path d="M17 20.5Q20 23 23 20.5" stroke={C.primary} strokeWidth="1.2" strokeLinecap="round" fill="none" />
-      <path d="M12 32Q20 27 28 32" stroke={C.light} strokeWidth="2" strokeLinecap="round" fill="none" />
+      <circle cx="20" cy="18" r="17" stroke="#6B9AEA" strokeWidth="1" fill="none" className="av-ring av-ring1" />
+      <circle cx="20" cy="18" r="12" stroke="#6B9AEA" strokeWidth="1.2" fill="none" className="av-ring av-ring2" />
+      <circle cx="20" cy="16" r="6" fill="#3B7BF2" opacity="0.08" />
+      <circle cx="18" cy="14.5" r="1.3" fill="#3B7BF2" />
+      <circle cx="22" cy="14.5" r="1.3" fill="#3B7BF2" />
+      <path d="M17 18.5Q20 21 23 18.5" stroke="#3B7BF2" strokeWidth="1.3" strokeLinecap="round" fill="none" />
+      <path d="M11 32Q20 26 29 32" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" />
     </svg>
   )
 }
 
 function AvatarV2({ size = 40 }) {
-  // Face + speaking waveform
+  // Face with speaking waveform below (AI that talks face to face)
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="20" cy="16" r="8" fill={C.primary} opacity="0.06" stroke={C.primary} strokeWidth="1.5" />
-      <circle cx="17.5" cy="14.5" r="1.3" fill={C.primary} />
-      <circle cx="22.5" cy="14.5" r="1.3" fill={C.primary} />
-      <path d="M17 19Q20 22 23 19" stroke={C.primary} strokeWidth="1.3" strokeLinecap="round" fill="none" />
-      <rect x="11" y="30" width="2.5" height="5" rx="1.25" fill={C.light} className="rc-bar1" />
-      <rect x="15.5" y="28" width="2.5" height="9" rx="1.25" fill={C.primary} className="rc-bar2" />
-      <rect x="20" y="27" width="2.5" height="11" rx="1.25" fill={C.dark} className="rc-bar3" />
-      <rect x="24.5" y="29" width="2.5" height="7" rx="1.25" fill={C.primary} className="rc-bar4" />
-      <rect x="29" y="31" width="2.5" height="3" rx="1.25" fill={C.light} className="rc-bar5" />
+      <circle cx="20" cy="14" r="8" fill="#3B7BF2" opacity="0.06" stroke="#3B7BF2" strokeWidth="1.2" />
+      <circle cx="17.5" cy="12.5" r="1.3" fill="#3B7BF2" />
+      <circle cx="22.5" cy="12.5" r="1.3" fill="#3B7BF2" />
+      <path d="M17 17Q20 20 23 17" stroke="#3B7BF2" strokeWidth="1.3" strokeLinecap="round" fill="none" />
+      {/* Speaking waveform */}
+      <rect x="10" y="28" width="2.5" height="6" rx="1.25" fill="#6B9AEA" className="vb vb1" />
+      <rect x="15" y="26" width="2.5" height="10" rx="1.25" fill="#6B9AEA" className="vb vb2" />
+      <rect x="20" y="25" width="2.5" height="12" rx="1.25" fill="#6B9AEA" className="vb vb3" />
+      <rect x="25" y="27" width="2.5" height="8" rx="1.25" fill="#6B9AEA" className="vb vb4" />
+      <rect x="30" y="29" width="2.5" height="4" rx="1.25" fill="#6B9AEA" className="vb vb5" />
     </svg>
   )
 }
 
 function AvatarV3({ size = 40 }) {
-  // Glowing orb with face
+  // Ascending dots (like parent brand) but with a face formed by the top dot
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="20" cy="20" r="16" fill={C.primary} opacity="0.04" className="av-ring1" />
-      <circle cx="20" cy="20" r="12" fill={C.primary} opacity="0.06" />
-      <circle cx="20" cy="18" r="7" fill={C.primary} opacity="0.04" stroke={C.primary} strokeWidth="1.2" />
-      <circle cx="17.5" cy="16" r="1.5" fill={C.primary} opacity="0.8" />
-      <circle cx="22.5" cy="16" r="1.5" fill={C.primary} opacity="0.8" />
-      <path d="M17 21Q20 24 23 21" stroke={C.primary} strokeWidth="1.4" strokeLinecap="round" fill="none" />
+      {/* Body circle (largest, bottom) */}
+      <circle cx="20" cy="30" r="8" fill="#3B7BF2" opacity="0.08" stroke="#6B9AEA" strokeWidth="1.5" className="hb hb1" />
+      {/* Torso (medium) */}
+      <circle cx="20" cy="19" r="5" fill="#3B7BF2" opacity="0.1" stroke="#6B9AEA" strokeWidth="1.5" className="hb hb2" />
+      {/* Head (smallest, top) with face */}
+      <circle cx="20" cy="10" r="6" fill="#3B7BF2" opacity="0.06" stroke="#3B7BF2" strokeWidth="1.5" className="hb hb3" />
+      <circle cx="18" cy="9" r="1" fill="#3B7BF2" />
+      <circle cx="22" cy="9" r="1" fill="#3B7BF2" />
+      <path d="M18 12Q20 14 22 12" stroke="#3B7BF2" strokeWidth="1" strokeLinecap="round" fill="none" />
     </svg>
   )
 }
 
 function AvatarV4({ size = 40 }) {
-  // Two merging circles (human meets AI)
+  // Video screen frame with face + live indicator
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="15" cy="20" r="10" stroke={C.light} strokeWidth="1.5" fill={C.primary} opacity="0.04" className="av-merge1" />
-      <circle cx="25" cy="20" r="10" stroke={C.light} strokeWidth="1.5" fill={C.primary} opacity="0.04" className="av-merge2" />
-      <circle cx="18.5" cy="18" r="1.2" fill={C.primary} />
-      <circle cx="21.5" cy="18" r="1.2" fill={C.primary} />
-      <path d="M18 22Q20 24.5 22 22" stroke={C.primary} strokeWidth="1.2" strokeLinecap="round" fill="none" />
+      <rect x="4" y="6" width="32" height="22" rx="4" stroke="#6B9AEA" strokeWidth="1.5" fill="#3B7BF2" opacity="0.04" />
+      <circle cx="20" cy="14" r="5" fill="#3B7BF2" opacity="0.08" stroke="#3B7BF2" strokeWidth="1" />
+      <circle cx="18.5" cy="13" r="1" fill="#3B7BF2" />
+      <circle cx="21.5" cy="13" r="1" fill="#3B7BF2" />
+      <path d="M18 16.5Q20 18.5 22 16.5" stroke="#3B7BF2" strokeWidth="1" strokeLinecap="round" fill="none" />
+      {/* Live dot */}
+      <circle cx="32" cy="10" r="2" fill="#2D6AE0" className="av-live" />
+      {/* Bottom bar (call controls hint) */}
+      <rect x="12" y="32" width="16" height="3" rx="1.5" fill="#6B9AEA" opacity="0.3" />
     </svg>
   )
 }
 
-/* ═══ HEX VERSIONS: Show accent inside subtle hex outline ═══ */
+/* ── HEX VERSIONS ── */
 function HexReceptionist({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      <rect x="424.5" y="188" width="5" height="14" rx="2.5" fill={C.light} className="rc-bar1" />
-      <rect x="435.5" y="178" width="5" height="24" rx="2.5" fill={C.primary} className="rc-bar2" />
-      <rect x="446.5" y="170" width="5" height="30" rx="2.5" fill={C.dark} className="rc-bar3" />
-      <rect x="457.5" y="170" width="5" height="20" rx="2.5" fill={C.primary} className="rc-bar4" />
-      <rect x="468.5" y="167" width="5" height="16" rx="2.5" fill={C.light} className="rc-bar5" />
+      <rect x="424.5" y="188" width="5" height="14" rx="2.5" fill="#6B9AEA" className="vb vb1" />
+      <rect x="435.5" y="178" width="5" height="24" rx="2.5" fill="#6B9AEA" className="vb vb2" />
+      <rect x="446.5" y="170" width="5" height="30" rx="2.5" fill="#6B9AEA" className="vb vb3" />
+      <rect x="457.5" y="170" width="5" height="20" rx="2.5" fill="#6B9AEA" className="vb vb4" />
+      <rect x="468.5" y="167" width="5" height="16" rx="2.5" fill="#6B9AEA" className="vb vb5" />
     </svg>
   )
 }
@@ -176,9 +199,15 @@ function HexMessenger({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      <circle cx="430" cy="197" r="5" fill={C.primary} className="msg-dot1" />
-      <circle cx="455" cy="187" r="7" fill={C.primary} className="msg-dot2" />
-      <circle cx="485" cy="177" r="9" fill={C.primary} className="msg-dot3" />
+      <g className="hb hb1" fill="none" stroke="#6B9AEA" strokeWidth="2" opacity="0.45">
+        <path d="M424.23 202.37 c-2.05 -1.83 -2.42 -2.64 -2.42 -5.42 0 -4.18 2.05 -7.11 5.94 -8.50 2.57 -0.88 3.22 -0.88 5.57 0.22 3.37 1.61 5.35 5.42 4.62 9.02 -1.25 6.60 -8.80 9.09 -13.71 4.69z" />
+      </g>
+      <g className="hb hb2" fill="none" stroke="#6B9AEA" strokeWidth="2" opacity="0.45">
+        <path d="M453.70 193.35 c-4.54 -2.35 -6.60 -5.64 -6.60 -10.63 0 -7.48 3.52 -11.29 11.73 -12.75 10.70 -1.83 17.22 11.80 9.82 20.60 -3.81 4.47 -9.53 5.50 -14.95 2.79z" />
+      </g>
+      <g className="hb hb3" fill="none" stroke="#6B9AEA" strokeWidth="2" opacity="0.45">
+        <path d="M491.08 180.60 c-6.16 -2.64 -9.53 -8.06 -9.53 -15.32 0 -10.41 7.33 -17.88 17.44 -17.96 9.68 0 16.27 6.67 16.27 16.49 0 7.18 -3.81 13.12 -10.41 16.56 -3.30 1.69 -10.11 1.83 -13.78 0.22z" />
+      </g>
     </svg>
   )
 }
@@ -187,10 +216,14 @@ function HexOutreach({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      <g className="outreach-plane">
-        <path d="M430 190l35-16-10 18-7-4-18 2z" fill={C.primary} opacity="0.12" />
-        <path d="M430 190l35-16-10 18-7-4-18 2z" stroke={C.primary} strokeWidth="2" strokeLinejoin="round" fill="none" />
-        <path d="M448 188l6 14" stroke={C.primary} strokeWidth="1.8" strokeLinecap="round" />
+      <g className="pp pp1" fill="#3B7BF2" opacity="0">
+        <path d="M474 174 L450 171 L457 183 L450 195 Z" />
+      </g>
+      <g className="pp pp2" fill="#3B7BF2" opacity="0">
+        <path d="M474 174 L450 171 L457 183 L450 195 Z" />
+      </g>
+      <g className="pp pp3" fill="#3B7BF2" opacity="0">
+        <path d="M474 174 L450 171 L457 183 L450 195 Z" />
       </g>
     </svg>
   )
@@ -200,10 +233,10 @@ function HexSpace({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      <circle cx="440" cy="175" r="7" fill={C.primary} className="sp-shape1" />
-      <rect x="455" y="168" width="14" height="14" rx="2" fill={C.primary} className="sp-shape2" />
-      <polygon points="440,190 447,203 433,203" fill={C.primary} className="sp-shape3" />
-      <polygon points="462,190 469,197 462,204 455,197" fill={C.primary} className="sp-shape4" />
+      <g className="cs cs-circle" opacity="0"><circle cx="458" cy="183" r="10" fill="#3B7BF2" /></g>
+      <g className="cs cs-diamond" opacity="0"><polygon points="458,172 468,183 458,194 448,183" fill="#3B7BF2" /></g>
+      <g className="cs cs-triangle" opacity="0"><polygon points="458,172 470,194 446,194" fill="#3B7BF2" /></g>
+      <g className="cs cs-square" opacity="0"><rect x="448" y="173" width="20" height="20" rx="2" fill="#3B7BF2" /></g>
     </svg>
   )
 }
@@ -212,62 +245,50 @@ function HexFlow({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      <circle cx="425" cy="185" r="5" fill={C.primary} className="fl-dot-in" />
-      <path d="M430 185H445" stroke={C.primary} strokeWidth="2.5" strokeLinecap="round" className="fl-line" />
-      <path d="M445 185Q452 185 460 172" stroke={C.primary} strokeWidth="2" strokeLinecap="round" fill="none" className="fl-branch1" />
-      <path d="M445 185Q452 185 460 185" stroke={C.primary} strokeWidth="2" strokeLinecap="round" fill="none" className="fl-branch2" />
-      <path d="M445 185Q452 185 460 198" stroke={C.primary} strokeWidth="2" strokeLinecap="round" fill="none" className="fl-branch3" />
-      <circle cx="464" cy="172" r="4" fill={C.light} className="fl-dot1" />
-      <circle cx="464" cy="185" r="4" fill={C.primary} className="fl-dot2" />
-      <circle cx="464" cy="198" r="4" fill={C.light} className="fl-dot3" />
+      <path d="M422 195 Q440 175 460 185" fill="none" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" className="fl-line fl1" />
+      <path d="M432 185 Q450 165 470 175" fill="none" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl2" />
+      <path d="M442 195 Q460 178 480 185" fill="none" stroke="#6B9AEA" strokeWidth="1.5" strokeLinecap="round" className="fl-line fl3" />
+      <circle cx="422" cy="195" r="3.5" fill="#6B9AEA" className="fl-dot fl-dot1" />
+      <circle cx="450" cy="173" r="3" fill="#6B9AEA" className="fl-dot fl-dot2" />
+      <circle cx="480" cy="185" r="3.5" fill="#6B9AEA" className="fl-dot fl-dot3" />
     </svg>
   )
 }
 
-function HexAvatar({ size = 80, variant = 1 }) {
+function HexAvatar({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      <circle cx="455" cy="175" r="12" stroke={C.light} strokeWidth="2" fill={C.primary} opacity="0.06" className="av-ring2" />
-      <circle cx="452" cy="173" r="2" fill={C.primary} />
-      <circle cx="458" cy="173" r="2" fill={C.primary} />
-      <path d="M451 178Q455 182 459 178" stroke={C.primary} strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      <path d="M442 195Q455 188 468 195" stroke={C.light} strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <circle cx="455" cy="175" r="12" stroke="#6B9AEA" strokeWidth="2" fill="#3B7BF2" opacity="0.06" className="av-ring av-ring2" />
+      <circle cx="452" cy="173" r="2" fill="#3B7BF2" />
+      <circle cx="458" cy="173" r="2" fill="#3B7BF2" />
+      <path d="M451 178Q455 182 459 178" stroke="#3B7BF2" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+      <path d="M442 195Q455 188 468 195" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" fill="none" />
     </svg>
   )
 }
 
-/* ═══ DISPLAY COMPONENTS ═══ */
+/* ── DISPLAY ── */
 function IconRow({ label, description, variants, hexComponent: HexComp, sizes = [16, 24, 32, 40, 64] }) {
   return (
     <div className="mb-16">
-      <h3 className="text-xl font-bold text-text mb-1 tracking-tight" style={{ fontFamily: 'var(--font-outfit)' }}>
-        {label}
-      </h3>
+      <h3 className="text-xl font-bold text-text mb-1 tracking-tight" style={{ fontFamily: 'var(--font-outfit)' }}>{label}</h3>
       {description && <p className="text-sm text-text-secondary mb-6">{description}</p>}
-
-      {/* Hex version */}
       {HexComp && (
         <div className="mb-8">
           <p className="text-[10px] font-semibold text-text-secondary uppercase tracking-wider mb-3">Hex Logo Version</p>
           <div className="flex items-end gap-6">
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex items-center justify-center rounded-xl p-3" style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.04)' }}>
-                <HexComp size={100} />
+            {[100, 48].map(s => (
+              <div key={s} className="flex flex-col items-center gap-2">
+                <div className="flex items-center justify-center rounded-xl p-3" style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.04)' }}>
+                  <HexComp size={s} />
+                </div>
+                <span className="text-[10px] text-text-secondary font-mono">{s}px</span>
               </div>
-              <span className="text-[10px] text-text-secondary font-mono">100px hex</span>
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex items-center justify-center rounded-xl p-2" style={{ background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.04)' }}>
-                <HexComp size={48} />
-              </div>
-              <span className="text-[10px] text-text-secondary font-mono">48px hex</span>
-            </div>
+            ))}
           </div>
         </div>
       )}
-
-      {/* Accent-only variants */}
       <div className="space-y-8">
         {variants.map(({ name, Component, picked }, vi) => (
           <div key={vi} className={picked ? 'rounded-2xl p-5 -mx-5' : ''} style={picked ? { background: 'rgba(59,123,242,0.04)', border: '1px solid rgba(59,123,242,0.1)' } : {}}>
@@ -276,7 +297,7 @@ function IconRow({ label, description, variants, hexComponent: HexComp, sizes = 
               {picked && <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">PICKED</span>}
             </div>
             <div className="flex items-end gap-6 flex-wrap">
-              {sizes.map((s) => (
+              {sizes.map(s => (
                 <div key={s} className="flex flex-col items-center gap-2">
                   <div className="flex items-center justify-center rounded-xl"
                     style={{ width: Math.max(s + 16, 40), height: Math.max(s + 16, 40), background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.04)' }}>
@@ -293,162 +314,230 @@ function IconRow({ label, description, variants, hexComponent: HexComp, sizes = 
   )
 }
 
-/* ═══ PAGE ═══ */
+/* ── PAGE ── */
 export default function IconExplorationPage() {
   return (
     <div className="min-h-screen bg-bg pt-28 pb-20">
-      {/* All animations using brand blue only */}
       <style jsx global>{`
-        /* Receptionist: waveform bars - heartbeat style from original */
-        .rc-bar1 { animation: rcPulse 10s ease-in-out infinite 0s; transform-box: fill-box; transform-origin: center bottom; }
-        .rc-bar2 { animation: rcPulse 10s ease-in-out infinite 0.1s; transform-box: fill-box; transform-origin: center bottom; }
-        .rc-bar3 { animation: rcPulse 10s ease-in-out infinite 0.2s; transform-box: fill-box; transform-origin: center bottom; }
-        .rc-bar4 { animation: rcPulse 10s ease-in-out infinite 0.3s; transform-box: fill-box; transform-origin: center bottom; }
-        .rc-bar5 { animation: rcPulse 10s ease-in-out infinite 0.4s; transform-box: fill-box; transform-origin: center bottom; }
-        .rc-bar6 { animation: rcPulse 10s ease-in-out infinite 0.5s; transform-box: fill-box; transform-origin: center bottom; }
-        @keyframes rcPulse {
-          0%   { opacity: 0.45; transform: scaleY(0.7); }
-          3%   { opacity: 1;    transform: scaleY(1.15); }
-          5%   { opacity: 0.6;  transform: scaleY(0.85); }
-          7%   { opacity: 1;    transform: scaleY(1.05); }
-          10%  { opacity: 0.45; transform: scaleY(0.7); }
-          100% { opacity: 0.45; transform: scaleY(0.7); }
+        /* ═══ Waveform bars (Receptionist) ═══
+           10s heartbeat: color shifts #6B9AEA -> #2D6AE0 */
+        .vb1 { animation: vbPulse 10s ease-in-out infinite 0s; }
+        .vb2 { animation: vbPulse 10s ease-in-out infinite 0.1s; }
+        .vb3 { animation: vbPulse 10s ease-in-out infinite 0.2s; }
+        .vb4 { animation: vbPulse 10s ease-in-out infinite 0.3s; }
+        .vb5 { animation: vbPulse 10s ease-in-out infinite 0.4s; }
+        .vb6 { animation: vbPulse 10s ease-in-out infinite 0.5s; }
+        @keyframes vbPulse {
+          0%   { opacity: 0.55; fill: #6B9AEA; }
+          3%   { opacity: 1;    fill: #2D6AE0; }
+          5%   { opacity: 0.65; fill: #6B9AEA; }
+          7%   { opacity: 1;    fill: #2D6AE0; }
+          10%  { opacity: 0.55; fill: #6B9AEA; }
+          100% { opacity: 0.55; fill: #6B9AEA; }
         }
 
-        /* Messenger: typing dots - scale pulse from original */
-        .msg-dot1 { animation: msgDot 1.4s ease-in-out infinite 0s; transform-box: fill-box; transform-origin: center; }
-        .msg-dot2 { animation: msgDot 1.4s ease-in-out infinite 0.2s; transform-box: fill-box; transform-origin: center; }
-        .msg-dot3 { animation: msgDot 1.4s ease-in-out infinite 0.4s; transform-box: fill-box; transform-origin: center; }
-        @keyframes msgDot {
-          0%, 60%, 100% { transform: scale(1); opacity: 0.35; }
-          30% { transform: scale(1.4); opacity: 1; }
+        /* ═══ Messenger dots (scale pulse) ═══
+           Heartbeat: scale 1 -> 1.3 -> 1 -> 1.2 -> 1 */
+        .md1 { animation: mdDot 10s ease-in-out infinite 0s; transform-box: fill-box; transform-origin: center; }
+        .md2 { animation: mdDot 10s ease-in-out infinite 0.15s; transform-box: fill-box; transform-origin: center; }
+        .md3 { animation: mdDot 10s ease-in-out infinite 0.3s; transform-box: fill-box; transform-origin: center; }
+        @keyframes mdDot {
+          0%   { transform: scale(1); opacity: 0.45; }
+          3%   { transform: scale(1.3); opacity: 1; }
+          5%   { transform: scale(1); opacity: 0.55; }
+          7%   { transform: scale(1.2); opacity: 1; }
+          10%  { transform: scale(1); opacity: 0.45; }
+          100% { transform: scale(1); opacity: 0.45; }
         }
 
-        /* Outreach: paper plane gentle float */
-        .outreach-plane {
-          animation: planeDrift 3s ease-in-out infinite;
-          transform-box: fill-box;
-          transform-origin: center;
-        }
-        @keyframes planeDrift {
-          0%, 100% { transform: translate(0, 0); }
-          50% { transform: translate(3px, -2px); }
-        }
-
-        /* Space: shapes carousel - each pulses in sequence */
-        .sp-shape1 { animation: spCarousel 16s ease-in-out infinite 0s; transform-box: fill-box; transform-origin: center; }
-        .sp-shape2 { animation: spCarousel 16s ease-in-out infinite 4s; transform-box: fill-box; transform-origin: center; }
-        .sp-shape3 { animation: spCarousel 16s ease-in-out infinite 8s; transform-box: fill-box; transform-origin: center; }
-        .sp-shape4 { animation: spCarousel 16s ease-in-out infinite 12s; transform-box: fill-box; transform-origin: center; }
-        @keyframes spCarousel {
-          0%   { opacity: 0.3; transform: scale(0.85); }
-          6%   { opacity: 1;   transform: scale(1.1); }
-          20%  { opacity: 1;   transform: scale(1); }
-          25%  { opacity: 0.3; transform: scale(0.85); }
-          100% { opacity: 0.3; transform: scale(0.85); }
+        /* ═══ Paper planes (Outreach) ═══
+           Fly from lower-left outward upper-right, staggered */
+        .pp1 { animation: ppFly 10s ease-in-out infinite 0s; transform-box: fill-box; transform-origin: center; }
+        .pp2 { animation: ppFly 10s ease-in-out infinite 0.8s; transform-box: fill-box; transform-origin: center; }
+        .pp3 { animation: ppFly 10s ease-in-out infinite 1.6s; transform-box: fill-box; transform-origin: center; }
+        @keyframes ppFly {
+          0%   { opacity: 0; transform: translate(-8px, 6px) scale(0.6); }
+          2%   { opacity: 1; transform: translate(0, 0) scale(1); }
+          5%   { opacity: 1; transform: translate(5px, -4px) scale(1.05); }
+          8%   { opacity: 0; transform: translate(12px, -8px) scale(0.7); }
+          10%  { opacity: 0; transform: translate(-8px, 6px) scale(0.6); }
+          100% { opacity: 0; transform: translate(-8px, 6px) scale(0.6); }
         }
 
-        /* Flow: branching lines + dots pulse */
-        .fl-dot-in { animation: flDotPulse 10s ease-in-out infinite 0s; transform-box: fill-box; transform-origin: center; }
-        .fl-dot1 { animation: flDotPulse 10s ease-in-out infinite 0.2s; transform-box: fill-box; transform-origin: center; }
-        .fl-dot2 { animation: flDotPulse 10s ease-in-out infinite 0.4s; transform-box: fill-box; transform-origin: center; }
-        .fl-dot3 { animation: flDotPulse 10s ease-in-out infinite 0.6s; transform-box: fill-box; transform-origin: center; }
-        .fl-line, .fl-branch1, .fl-branch2, .fl-branch3 { animation: flLinePulse 10s ease-in-out infinite; }
-        @keyframes flDotPulse {
-          0%   { opacity: 0.35; transform: scale(1); }
-          3%   { opacity: 1;    transform: scale(1.3); }
-          5%   { opacity: 0.5;  transform: scale(1); }
-          7%   { opacity: 1;    transform: scale(1.2); }
-          10%  { opacity: 0.35; transform: scale(1); }
-          100% { opacity: 0.35; transform: scale(1); }
+        /* ═══ Shape carousel (Space) ═══
+           16s cycle, 4 shapes, one visible at a time */
+        .cs-circle   { animation: csSlot1 16s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+        .cs-diamond  { animation: csSlot2 16s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+        .cs-triangle { animation: csSlot3 16s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+        .cs-square   { animation: csSlot4 16s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+        @keyframes csSlot1 {
+          0%   { opacity: 0; transform: translate(-10px, 6px) scale(0.8); }
+          3%   { opacity: 1; transform: translate(0, 0) scale(1); }
+          20%  { opacity: 1; transform: translate(0, 0) scale(1); }
+          25%  { opacity: 0; transform: translate(10px, -6px) scale(0.8); }
+          100% { opacity: 0; }
         }
+        @keyframes csSlot2 {
+          0%   { opacity: 0; }
+          25%  { opacity: 0; transform: translate(-10px, 6px) scale(0.8); }
+          28%  { opacity: 1; transform: translate(0, 0) scale(1); }
+          45%  { opacity: 1; transform: translate(0, 0) scale(1); }
+          50%  { opacity: 0; transform: translate(10px, -6px) scale(0.8); }
+          100% { opacity: 0; }
+        }
+        @keyframes csSlot3 {
+          0%   { opacity: 0; }
+          50%  { opacity: 0; transform: translate(-10px, 6px) scale(0.8); }
+          53%  { opacity: 1; transform: translate(0, 0) scale(1); }
+          70%  { opacity: 1; transform: translate(0, 0) scale(1); }
+          75%  { opacity: 0; transform: translate(10px, -6px) scale(0.8); }
+          100% { opacity: 0; }
+        }
+        @keyframes csSlot4 {
+          0%   { opacity: 0; }
+          75%  { opacity: 0; transform: translate(-10px, 6px) scale(0.8); }
+          78%  { opacity: 1; transform: translate(0, 0) scale(1); }
+          95%  { opacity: 1; transform: translate(0, 0) scale(1); }
+          100% { opacity: 0; transform: translate(10px, -6px) scale(0.8); }
+        }
+
+        /* ═══ Flow lines + dots (data flowing) ═══
+           Lines pulse color, dots pulse + data packet travels */
+        .fl-line { animation: flLinePulse 10s ease-in-out infinite; }
+        .fl1 { animation-delay: 0s; }
+        .fl2 { animation-delay: 0.15s; }
+        .fl3 { animation-delay: 0.3s; }
         @keyframes flLinePulse {
-          0%   { opacity: 0.3; stroke: ${C.light}; }
-          3%   { opacity: 1;   stroke: ${C.dark}; }
-          5%   { opacity: 0.4; stroke: ${C.light}; }
-          7%   { opacity: 0.9; stroke: ${C.dark}; }
-          10%  { opacity: 0.3; stroke: ${C.light}; }
-          100% { opacity: 0.3; stroke: ${C.light}; }
+          0%   { opacity: 0.25; stroke: #6B9AEA; }
+          3%   { opacity: 1;    stroke: #2D6AE0; }
+          5%   { opacity: 0.35; stroke: #6B9AEA; }
+          7%   { opacity: 0.9;  stroke: #2D6AE0; }
+          10%  { opacity: 0.25; stroke: #6B9AEA; }
+          100% { opacity: 0.25; stroke: #6B9AEA; }
+        }
+        .fl-dot { animation: flDotPulse 10s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+        .fl-dot1 { animation-delay: 0s; }
+        .fl-dot2 { animation-delay: 0.15s; }
+        .fl-dot3 { animation-delay: 0.3s; }
+        @keyframes flDotPulse {
+          0%   { opacity: 0.4; fill: #6B9AEA; }
+          3%   { opacity: 1;   fill: #2D6AE0; }
+          5%   { opacity: 0.5; fill: #6B9AEA; }
+          7%   { opacity: 1;   fill: #2D6AE0; }
+          10%  { opacity: 0.4; fill: #6B9AEA; }
+          100% { opacity: 0.4; fill: #6B9AEA; }
+        }
+        /* Source dot: constant pulse */
+        .fl-src { animation: flSrcPulse 10s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+        @keyframes flSrcPulse {
+          0%   { transform: scale(1); opacity: 0.6; }
+          3%   { transform: scale(1.2); opacity: 1; }
+          7%   { transform: scale(1); opacity: 0.6; }
+          100% { transform: scale(1); opacity: 0.6; }
+        }
+        .fl-junc { animation: flDotPulse 10s ease-in-out infinite 0.1s; transform-box: fill-box; transform-origin: center; }
+        .fl-out { animation: flOutPulse 10s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+        .fl-out1 { animation-delay: 0.3s; }
+        .fl-out2 { animation-delay: 0.45s; }
+        .fl-out3 { animation-delay: 0.6s; }
+        @keyframes flOutPulse {
+          0%   { transform: scale(0.7); opacity: 0.2; fill: #6B9AEA; }
+          4%   { transform: scale(1.2); opacity: 1; fill: #2D6AE0; }
+          7%   { transform: scale(1); opacity: 0.8; fill: #3B7BF2; }
+          10%  { transform: scale(0.7); opacity: 0.2; fill: #6B9AEA; }
+          100% { transform: scale(0.7); opacity: 0.2; fill: #6B9AEA; }
+        }
+        /* Data packet travels from source through junction to outputs */
+        .fl-packet { animation: flPacket 10s ease-in-out infinite; }
+        @keyframes flPacket {
+          0%   { cx: 8;  cy: 28; opacity: 0; r: 2; }
+          1%   { cx: 8;  cy: 28; opacity: 1; r: 2.5; }
+          3%   { cx: 18; cy: 20; opacity: 1; r: 2; }
+          4%   { cx: 18; cy: 20; opacity: 0.8; r: 1.5; }
+          6%   { cx: 32; cy: 20; opacity: 0.6; r: 1; }
+          8%   { opacity: 0; }
+          100% { opacity: 0; }
         }
 
-        /* Avatar: rings pulse */
-        .av-ring1 { animation: avRing 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-        .av-ring2 { animation: avRing 3s ease-in-out 0.5s infinite; transform-box: fill-box; transform-origin: center; }
-        @keyframes avRing {
-          0%, 100% { opacity: 0.15; transform: scale(0.97); }
-          50% { opacity: 0.4; transform: scale(1.03); }
+        /* ═══ Heartbeat dots (Parent brand / Messenger hex / Avatar V3) ═══ */
+        .hb1 { animation: hbDot 10s ease-in-out infinite 0s; transform-box: fill-box; transform-origin: center; }
+        .hb2 { animation: hbDot 10s ease-in-out infinite 0.15s; transform-box: fill-box; transform-origin: center; }
+        .hb3 { animation: hbDot 10s ease-in-out infinite 0.3s; transform-box: fill-box; transform-origin: center; }
+        @keyframes hbDot {
+          0%   { transform: scale(1); opacity: 0.55; }
+          3%   { transform: scale(1.3); opacity: 1; }
+          5%   { transform: scale(1); opacity: 0.7; }
+          7%   { transform: scale(1.2); opacity: 1; }
+          10%  { transform: scale(1); opacity: 0.55; }
+          100% { transform: scale(1); opacity: 0.55; }
         }
-        .av-merge1 { animation: avMerge 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-        .av-merge2 { animation: avMerge 4s ease-in-out 2s infinite; transform-box: fill-box; transform-origin: center; }
-        @keyframes avMerge {
-          0%, 100% { opacity: 0.04; transform: scale(1); }
-          50% { opacity: 0.12; transform: scale(1.05); }
+
+        /* ═══ Avatar rings ═══ */
+        .av-ring1 { animation: avRingPulse 10s ease-in-out infinite 0s; transform-box: fill-box; transform-origin: center; }
+        .av-ring2 { animation: avRingPulse 10s ease-in-out infinite 0.2s; transform-box: fill-box; transform-origin: center; }
+        @keyframes avRingPulse {
+          0%   { transform: scale(0.95); opacity: 0.15; }
+          3%   { transform: scale(1.05); opacity: 0.5; }
+          5%   { transform: scale(0.98); opacity: 0.25; }
+          7%   { transform: scale(1.03); opacity: 0.4; }
+          10%  { transform: scale(0.95); opacity: 0.15; }
+          100% { transform: scale(0.95); opacity: 0.15; }
+        }
+        .av-live { animation: avLive 2s ease-in-out infinite; }
+        @keyframes avLive {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 1; }
         }
       `}</style>
 
       <div className="max-w-6xl mx-auto px-6">
         <AnimatedSection>
-          <Badge variant="blue" className="mb-4">Design Exploration v2</Badge>
+          <Badge variant="blue" className="mb-4">Design Exploration v3</Badge>
           <h1 className="text-4xl font-extrabold text-text tracking-tight mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>
-            Product Icon Family (Animated + Hex)
+            Product Icon Family
           </h1>
           <p className="text-text-secondary max-w-2xl mb-2">
-            All icons use unified brand blue (#3B7BF2 / #6B9AEA / #2D6AE0).
-            Animations match the original hex accent patterns (10s cycle, brief burst then rest).
-            Each product shows: hex logo version + accent-only variants at multiple sizes.
+            All icons use brand blue (#3B7BF2 / #6B9AEA / #2D6AE0). All animations use 10s heartbeat cycle (brief burst, long rest) matching the original hex accent patterns. Each product shows hex logo + accent-only variants.
           </p>
         </AnimatedSection>
 
         <div className="gradient-divider my-10" />
 
-        <IconRow label="Receptionist" description="Voice waveform bars. Undecided. All three use the same heartbeat animation pattern." hexComponent={HexReceptionist}
+        <IconRow label="Receptionist" description="Voice waveform. Undecided. All use the same vbPulse animation from the original hex." hexComponent={HexReceptionist}
           variants={[
-            { name: 'Symmetric 5-bar', Component: ReceptionistV1 },
+            { name: 'Symmetric 5-bar' , Component: ReceptionistV1 },
             { name: 'Thin 5-bar', Component: ReceptionistV2 },
             { name: 'Asymmetric 6-bar', Component: ReceptionistV3 },
           ]}
         />
-
         <div className="gradient-divider my-10" />
 
-        <IconRow label="Messenger" description="Typing indicator dots. V2 picked." hexComponent={HexMessenger}
-          variants={[
-            { name: 'Three inline dots (scale pulse)', Component: MessengerV2, picked: true },
-          ]}
+        <IconRow label="Messenger" description="Typing dots. V2 picked. Uses heartbeat scale pulse." hexComponent={HexMessenger}
+          variants={[{ name: 'Three dots (heartbeat pulse)', Component: MessengerV2, picked: true }]}
         />
-
         <div className="gradient-divider my-10" />
 
-        <IconRow label="Outreach" description="Paper plane. V1 picked." hexComponent={HexOutreach}
-          variants={[
-            { name: 'Single paper plane (gentle drift)', Component: OutreachV1, picked: true },
-          ]}
+        <IconRow label="Outreach" description="Paper planes fly outward. Uses the original ppFly trajectory (translate + scale + fade, staggered 0.8s)." hexComponent={HexOutreach}
+          variants={[{ name: 'Paper planes (flight trajectory)', Component: OutreachV1, picked: true }]}
         />
-
         <div className="gradient-divider my-10" />
 
-        <IconRow label="Space" description="Multi-tool shapes carousel. V1 picked." hexComponent={HexSpace}
-          variants={[
-            { name: 'Mixed shapes (circle, square, triangle, diamond)', Component: SpaceV1, picked: true },
-          ]}
+        <IconRow label="Space" description="Shape carousel. One shape visible at a time, 16s cycle. Slide in, hold, slide out." hexComponent={HexSpace}
+          variants={[{ name: 'Shape carousel (circle > diamond > triangle > square)', Component: SpaceV1, picked: true }]}
         />
-
         <div className="gradient-divider my-10" />
 
-        <IconRow label="Flow" description="Branching data flow. V3 picked." hexComponent={HexFlow}
-          variants={[
-            { name: 'Branching flow (1 to 3) with pulsing dots', Component: FlowV3, picked: true },
-          ]}
+        <IconRow label="Flow" description="Branching flow. Diagonal alignment. Source dot sends data through junction to 3 output dots. Outputs 'light up' sequentially as data arrives." hexComponent={HexFlow}
+          variants={[{ name: 'Diagonal branch, data packet flows from source to outputs', Component: FlowV3, picked: true }]}
         />
-
         <div className="gradient-divider my-10" />
 
-        <IconRow label="Avatar" description="Human-like AI presence. 4 variations. None picked yet." hexComponent={HexAvatar}
+        <IconRow label="Avatar" description="Human-like AI presence. 4 options. None picked yet." hexComponent={HexAvatar}
           variants={[
-            { name: 'Pulsing rings + face (video call)' , Component: AvatarV1 },
-            { name: 'Face + speaking waveform bars', Component: AvatarV2 },
-            { name: 'Glowing orb with face', Component: AvatarV3 },
-            { name: 'Two merging circles (human meets AI)', Component: AvatarV4 },
+            { name: 'Pulsing rings + face (video call incoming)', Component: AvatarV1 },
+            { name: 'Face + speaking waveform (AI that talks)', Component: AvatarV2 },
+            { name: 'Ascending circles with face (brand-style)', Component: AvatarV3 },
+            { name: 'Video frame + face + live dot', Component: AvatarV4 },
           ]}
         />
       </div>
