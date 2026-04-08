@@ -97,20 +97,20 @@ function SpaceV1({ size = 40 }) {
   )
 }
 
-/* ── FLOW: Three parallel curved lines with dots (matches hex accent exactly) ──
-   Same curves as ProductLogos.jsx FlowLogo, scaled to 40x40, rotated 45deg.
-   Data travels along the curves from start dots to end dots. */
+/* ── FLOW: Three parallel curves flowing lower-left to upper-right ──
+   No CSS rotation. Curves positioned naturally diagonal in the viewBox.
+   Matches the hex accent direction. Each line has a dot at the end. */
 function FlowV3({ size = 40 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" style={{ transform: 'rotate(-45deg)' }}>
-      {/* Three parallel Q-curves flowing upper-right (same shape as hex accent) */}
-      <path d="M4 28 Q14 14 26 20" fill="none" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" className="fl-line fl-b1" />
-      <path d="M10 24 Q20 10 32 16" fill="none" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b2" />
-      <path d="M16 28 Q26 16 38 20" fill="none" stroke="#6B9AEA" strokeWidth="1.5" strokeLinecap="round" className="fl-line fl-b3" />
-      {/* Endpoint dots */}
-      <circle cx="26" cy="20" r="3.5" fill="#6B9AEA" className="fl-out fl-out1" />
-      <circle cx="32" cy="16" r="3" fill="#6B9AEA" className="fl-out fl-out2" />
-      <circle cx="38" cy="20" r="3.5" fill="#6B9AEA" className="fl-out fl-out3" />
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
+      {/* Three parallel Q-curves, lower-left to upper-right */}
+      <path d="M2 32 Q16 18 30 24" fill="none" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" className="fl-line fl-b1" />
+      <path d="M8 28 Q22 10 36 16" fill="none" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b2" />
+      <path d="M14 36 Q28 22 38 26" fill="none" stroke="#6B9AEA" strokeWidth="1.5" strokeLinecap="round" className="fl-line fl-b3" />
+      {/* Endpoint dots at the end of each curve */}
+      <circle cx="30" cy="24" r="3.5" fill="#6B9AEA" className="fl-out fl-out1" />
+      <circle cx="36" cy="16" r="3" fill="#6B9AEA" className="fl-out fl-out2" />
+      <circle cx="38" cy="26" r="3.5" fill="#6B9AEA" className="fl-out fl-out3" />
     </svg>
   )
 }
