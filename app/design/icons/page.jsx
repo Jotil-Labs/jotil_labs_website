@@ -97,18 +97,24 @@ function SpaceV1({ size = 40 }) {
   )
 }
 
-/* ── FLOW: Curved branches like git-branch, rotated 45deg ── */
+/* ── FLOW: Git-branch style with Q curves, rotated 45deg ──
+   Same layout as the v2 design you liked: input dot on left, horizontal trunk,
+   three curved branches (Q bezier) splitting to upper/middle/lower outputs. */
 function FlowV3({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none" style={{ transform: 'rotate(-45deg)' }}>
-      {/* Three curved flow lines (Q = quadratic bezier, like the original hex) */}
-      <path d="M4 30 Q14 10 24 18" fill="none" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" className="fl-line fl-b1" />
-      <path d="M10 28 Q20 12 32 16" fill="none" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b2" />
-      <path d="M16 32 Q26 18 36 22" fill="none" stroke="#6B9AEA" strokeWidth="1.5" strokeLinecap="round" className="fl-line fl-b3" />
-      {/* Endpoint dots */}
-      <circle cx="4" cy="30" r="3.5" fill="#6B9AEA" className="fl-out fl-out1" />
-      <circle cx="24" cy="18" r="3" fill="#6B9AEA" className="fl-out fl-out2" />
-      <circle cx="36" cy="22" r="3.5" fill="#6B9AEA" className="fl-out fl-out3" />
+      {/* Input dot */}
+      <circle cx="6" cy="20" r="4" fill="#3B7BF2" className="fl-src" />
+      {/* Trunk */}
+      <path d="M10 20H18" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b1" />
+      {/* Curved branches (Q = quadratic bezier, like git branch) */}
+      <path d="M18 20Q22 20 26 12" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
+      <path d="M18 20Q22 20 26 20" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
+      <path d="M18 20Q22 20 26 28" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b3" />
+      {/* Output dots */}
+      <circle cx="30" cy="12" r="3" fill="#6B9AEA" className="fl-out fl-out1" />
+      <circle cx="30" cy="20" r="3" fill="#6B9AEA" className="fl-out fl-out2" />
+      <circle cx="30" cy="28" r="3" fill="#6B9AEA" className="fl-out fl-out3" />
     </svg>
   )
 }
