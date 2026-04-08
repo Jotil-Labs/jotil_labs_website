@@ -242,12 +242,15 @@ function HexFlow({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      <path d="M422 195 Q440 175 460 185" fill="none" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" className="fl-line fl-b1" />
-      <path d="M432 185 Q450 165 470 175" fill="none" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b2" />
-      <path d="M442 195 Q460 178 480 185" fill="none" stroke="#6B9AEA" strokeWidth="1.5" strokeLinecap="round" className="fl-line fl-b3" />
-      <circle cx="422" cy="195" r="3.5" fill="#6B9AEA" className="fl-out fl-out1" />
-      <circle cx="450" cy="173" r="3" fill="#6B9AEA" className="fl-out fl-out2" />
-      <circle cx="480" cy="185" r="3.5" fill="#6B9AEA" className="fl-out fl-out3" />
+      {/* Branching design: input dot, trunk, three Q-curve branches */}
+      <circle cx="425" cy="190" r="5" fill="#3B7BF2" className="fl-src" />
+      <path d="M430 190H445" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" className="fl-line fl-b1" />
+      <path d="M445 190Q455 190 465 175" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
+      <path d="M445 190Q455 190 468 190" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
+      <path d="M445 190Q455 190 465 205" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" fill="none" className="fl-line fl-b3" />
+      <circle cx="470" cy="175" r="4" fill="#6B9AEA" className="fl-out fl-out1" />
+      <circle cx="473" cy="190" r="4" fill="#3B7BF2" className="fl-out fl-out2" />
+      <circle cx="470" cy="205" r="4" fill="#6B9AEA" className="fl-out fl-out3" />
     </svg>
   )
 }
