@@ -160,9 +160,8 @@ function AvatarV4({ size = 40 }) {
 
 /* ═══ HEX VERSIONS: Show accent inside subtle hex outline ═══ */
 function HexReceptionist({ size = 80 }) {
-  const s = size / 80
   return (
-    <svg width={size} height={size * 0.87} viewBox="220 130 320 280">
+    <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
       <rect x="424.5" y="188" width="5" height="14" rx="2.5" fill={C.light} className="rc-bar1" />
       <rect x="435.5" y="178" width="5" height="24" rx="2.5" fill={C.primary} className="rc-bar2" />
@@ -175,7 +174,7 @@ function HexReceptionist({ size = 80 }) {
 
 function HexMessenger({ size = 80 }) {
   return (
-    <svg width={size} height={size * 0.87} viewBox="220 130 320 280">
+    <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
       <circle cx="430" cy="197" r="5" fill={C.primary} className="msg-dot1" />
       <circle cx="455" cy="187" r="7" fill={C.primary} className="msg-dot2" />
@@ -186,7 +185,7 @@ function HexMessenger({ size = 80 }) {
 
 function HexOutreach({ size = 80 }) {
   return (
-    <svg width={size} height={size * 0.87} viewBox="220 130 320 280">
+    <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
       <g className="outreach-plane">
         <path d="M430 190l35-16-10 18-7-4-18 2z" fill={C.primary} opacity="0.12" />
@@ -199,7 +198,7 @@ function HexOutreach({ size = 80 }) {
 
 function HexSpace({ size = 80 }) {
   return (
-    <svg width={size} height={size * 0.87} viewBox="220 130 320 280">
+    <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
       <circle cx="440" cy="175" r="7" fill={C.primary} className="sp-shape1" />
       <rect x="455" y="168" width="14" height="14" rx="2" fill={C.primary} className="sp-shape2" />
@@ -211,7 +210,7 @@ function HexSpace({ size = 80 }) {
 
 function HexFlow({ size = 80 }) {
   return (
-    <svg width={size} height={size * 0.87} viewBox="220 130 320 280">
+    <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
       <circle cx="425" cy="185" r="5" fill={C.primary} className="fl-dot-in" />
       <path d="M430 185H445" stroke={C.primary} strokeWidth="2.5" strokeLinecap="round" className="fl-line" />
@@ -227,7 +226,7 @@ function HexFlow({ size = 80 }) {
 
 function HexAvatar({ size = 80, variant = 1 }) {
   return (
-    <svg width={size} height={size * 0.87} viewBox="220 130 320 280">
+    <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
       <circle cx="455" cy="175" r="12" stroke={C.light} strokeWidth="2" fill={C.primary} opacity="0.06" className="av-ring2" />
       <circle cx="452" cy="173" r="2" fill={C.primary} />
