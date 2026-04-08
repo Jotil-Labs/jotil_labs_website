@@ -97,24 +97,20 @@ function SpaceV1({ size = 40 }) {
   )
 }
 
-/* ── FLOW: Git-branch style with Q curves, rotated 45deg ──
-   Same layout as the v2 design you liked: input dot on left, horizontal trunk,
-   three curved branches (Q bezier) splitting to upper/middle/lower outputs. */
+/* ── FLOW: Three parallel curved lines with dots (matches hex accent exactly) ──
+   Same curves as ProductLogos.jsx FlowLogo, scaled to 40x40, rotated 45deg.
+   Data travels along the curves from start dots to end dots. */
 function FlowV3({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none" style={{ transform: 'rotate(-45deg)' }}>
-      {/* Input dot */}
-      <circle cx="6" cy="20" r="4" fill="#3B7BF2" className="fl-src" />
-      {/* Trunk */}
-      <path d="M10 20H18" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b1" />
-      {/* Curved branches (Q = quadratic bezier, like git branch) */}
-      <path d="M18 20Q22 20 26 12" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
-      <path d="M18 20Q22 20 26 20" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
-      <path d="M18 20Q22 20 26 28" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b3" />
-      {/* Output dots */}
-      <circle cx="30" cy="12" r="3" fill="#6B9AEA" className="fl-out fl-out1" />
-      <circle cx="30" cy="20" r="3" fill="#6B9AEA" className="fl-out fl-out2" />
-      <circle cx="30" cy="28" r="3" fill="#6B9AEA" className="fl-out fl-out3" />
+      {/* Three parallel Q-curves flowing upper-right (same shape as hex accent) */}
+      <path d="M4 28 Q14 14 26 20" fill="none" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" className="fl-line fl-b1" />
+      <path d="M10 24 Q20 10 32 16" fill="none" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b2" />
+      <path d="M16 28 Q26 16 38 20" fill="none" stroke="#6B9AEA" strokeWidth="1.5" strokeLinecap="round" className="fl-line fl-b3" />
+      {/* Endpoint dots */}
+      <circle cx="26" cy="20" r="3.5" fill="#6B9AEA" className="fl-out fl-out1" />
+      <circle cx="32" cy="16" r="3" fill="#6B9AEA" className="fl-out fl-out2" />
+      <circle cx="38" cy="20" r="3.5" fill="#6B9AEA" className="fl-out fl-out3" />
     </svg>
   )
 }
