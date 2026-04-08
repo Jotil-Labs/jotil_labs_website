@@ -242,16 +242,16 @@ function HexFlow({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      {/* Branching design tilted ~30deg to match hex gap angle */}
-      <g transform="rotate(-25, 450, 185)">
+      {/* Branching design tilted ~25deg, pushed outside hex opening */}
+      <g transform="rotate(-25, 460, 180) translate(15, -10)">
         <circle cx="425" cy="190" r="5" fill="#3B7BF2" className="fl-src" />
-        <path d="M430 190H445" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" className="fl-line fl-b1" />
-        <path d="M445 190Q455 190 465 175" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
-        <path d="M445 190Q455 190 468 190" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
-        <path d="M445 190Q455 190 465 205" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" fill="none" className="fl-line fl-b3" />
-        <circle cx="470" cy="175" r="4" fill="#6B9AEA" className="fl-out fl-out1" />
-        <circle cx="473" cy="190" r="4" fill="#3B7BF2" className="fl-out fl-out2" />
-        <circle cx="470" cy="205" r="4" fill="#6B9AEA" className="fl-out fl-out3" />
+        <path d="M430 190H448" stroke="#6B9AEA" strokeWidth="3.5" strokeLinecap="round" className="fl-line fl-b1" />
+        <path d="M448 190Q458 190 470 173" stroke="#6B9AEA" strokeWidth="3.5" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
+        <path d="M448 190Q458 190 472 190" stroke="#6B9AEA" strokeWidth="3.5" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
+        <path d="M448 190Q458 190 470 207" stroke="#6B9AEA" strokeWidth="3.5" strokeLinecap="round" fill="none" className="fl-line fl-b3" />
+        <circle cx="474" cy="173" r="5" fill="#6B9AEA" className="fl-out fl-out1" />
+        <circle cx="477" cy="190" r="5" fill="#3B7BF2" className="fl-out fl-out2" />
+        <circle cx="474" cy="207" r="5" fill="#6B9AEA" className="fl-out fl-out3" />
       </g>
     </svg>
   )
