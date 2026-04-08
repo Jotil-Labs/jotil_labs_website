@@ -97,24 +97,18 @@ function SpaceV1({ size = 40 }) {
   )
 }
 
-/* ── FLOW: Horizontal branch, rotated 45deg, data travels from input to outputs ── */
+/* ── FLOW: Curved branches like git-branch, rotated 45deg ── */
 function FlowV3({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none" style={{ transform: 'rotate(-45deg)' }}>
-      {/* Input dot */}
-      <circle cx="6" cy="20" r="4" fill="#3B7BF2" className="fl-src" />
-      {/* Main line */}
-      <path d="M10 20H18" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line" />
-      {/* Branches */}
-      <path d="M18 20L30 12" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b1" />
-      <path d="M18 20L30 20" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b2" />
-      <path d="M18 20L30 28" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b3" />
-      {/* Output dots - always visible at baseline */}
-      <circle cx="32" cy="12" r="3" fill="#6B9AEA" className="fl-out fl-out1" />
-      <circle cx="32" cy="20" r="3" fill="#6B9AEA" className="fl-out fl-out2" />
-      <circle cx="32" cy="28" r="3" fill="#6B9AEA" className="fl-out fl-out3" />
-      {/* Traveling packet */}
-      <circle r="2" fill="#2D6AE0" className="fl-packet" />
+      {/* Three curved flow lines (Q = quadratic bezier, like the original hex) */}
+      <path d="M4 30 Q14 10 24 18" fill="none" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" className="fl-line fl-b1" />
+      <path d="M10 28 Q20 12 32 16" fill="none" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b2" />
+      <path d="M16 32 Q26 18 36 22" fill="none" stroke="#6B9AEA" strokeWidth="1.5" strokeLinecap="round" className="fl-line fl-b3" />
+      {/* Endpoint dots */}
+      <circle cx="4" cy="30" r="3.5" fill="#6B9AEA" className="fl-out fl-out1" />
+      <circle cx="24" cy="18" r="3" fill="#6B9AEA" className="fl-out fl-out2" />
+      <circle cx="36" cy="22" r="3.5" fill="#6B9AEA" className="fl-out fl-out3" />
     </svg>
   )
 }
