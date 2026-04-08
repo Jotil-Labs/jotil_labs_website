@@ -97,20 +97,22 @@ function SpaceV1({ size = 40 }) {
   )
 }
 
-/* ── FLOW: Three parallel curves flowing lower-left to upper-right ──
-   No CSS rotation. Curves positioned naturally diagonal in the viewBox.
-   Matches the hex accent direction. Each line has a dot at the end. */
+/* ── FLOW: Branching design from v2 (the one you approved) + 45deg rotation ── */
 function FlowV3({ size = 40 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      {/* Three parallel Q-curves, lower-left to upper-right */}
-      <path d="M2 32 Q16 18 30 24" fill="none" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" className="fl-line fl-b1" />
-      <path d="M8 28 Q22 10 36 16" fill="none" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b2" />
-      <path d="M14 36 Q28 22 38 26" fill="none" stroke="#6B9AEA" strokeWidth="1.5" strokeLinecap="round" className="fl-line fl-b3" />
-      {/* Endpoint dots at the end of each curve */}
-      <circle cx="30" cy="24" r="3.5" fill="#6B9AEA" className="fl-out fl-out1" />
-      <circle cx="36" cy="16" r="3" fill="#6B9AEA" className="fl-out fl-out2" />
-      <circle cx="38" cy="26" r="3.5" fill="#6B9AEA" className="fl-out fl-out3" />
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" style={{ transform: 'rotate(-45deg)' }}>
+      {/* Input dot */}
+      <circle cx="6" cy="20" r="4" fill="#3B7BF2" className="fl-src" />
+      {/* Trunk line */}
+      <path d="M10 20H18" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b1" />
+      {/* Three Q-curve branches splitting from junction */}
+      <path d="M18 20Q22 20 26 12" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
+      <path d="M18 20Q22 20 26 20" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
+      <path d="M18 20Q22 20 26 28" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b3" />
+      {/* Output dots */}
+      <circle cx="30" cy="12" r="3" fill="#6B9AEA" className="fl-out fl-out1" />
+      <circle cx="30" cy="20" r="3" fill="#3B7BF2" className="fl-out fl-out2" />
+      <circle cx="30" cy="28" r="3" fill="#6B9AEA" className="fl-out fl-out3" />
     </svg>
   )
 }
