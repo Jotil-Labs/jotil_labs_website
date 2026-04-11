@@ -49,10 +49,57 @@ export const products = [
     integrations: ['Twilio', 'Google Calendar', 'HubSpot', 'Salesforce', 'Slack'],
     pricing: {
       type: 'tiers',
+      overageRatePerMinute: 1.50,
       tiers: [
-        { name: 'Starter', price: '$99', period: '/mo', description: 'Up to 200 minutes', features: ['200 AI call minutes', '1 phone number', 'Basic call routing', 'Email summaries'] },
-        { name: 'Professional', price: '$299', period: '/mo', description: 'Up to 1,000 minutes', features: ['1,000 AI call minutes', '3 phone numbers', 'Advanced routing rules', 'CRM integration', 'Live transfer'], highlighted: true },
-        { name: 'Enterprise', price: 'Custom', period: '', description: 'Unlimited scale', features: ['Unlimited minutes', 'Unlimited numbers', 'Custom AI training', 'Dedicated support', 'SLA guarantee'] },
+        {
+          slug: 'core',
+          name: 'Core',
+          price: '$100',
+          period: '/mo',
+          description: 'For solopreneurs and small teams getting started',
+          features: [
+            '200 AI call minutes included',
+            '1 dedicated phone number',
+            '14-day free trial',
+            'AI phone receptionist (inbound)',
+            'Call transcripts and AI summaries',
+            'Appointment booking to Google Calendar',
+            'SMS confirmations to callers',
+            'Email support',
+          ],
+        },
+        {
+          slug: 'pro',
+          name: 'Pro',
+          price: '$225',
+          period: '/mo',
+          description: 'For growing businesses with steady call volume',
+          features: [
+            '500 AI call minutes included',
+            'Everything in Core',
+            'AI web voicebot widget',
+            'Multi-agent time-based routing',
+            'Advanced call analytics and sentiment',
+            'Custom greeting and voice selection',
+            'Priority email and chat support',
+          ],
+          highlighted: true,
+        },
+        {
+          slug: 'business',
+          name: 'Business',
+          price: '$320',
+          period: '/mo',
+          description: 'For established businesses with high call volume',
+          features: [
+            '1,000 AI call minutes included',
+            'Everything in Pro',
+            'Up to 5 concurrent calls',
+            'Dedicated onboarding specialist',
+            'Phone support',
+            'Custom integrations and API access',
+          ],
+        },
       ],
     },
     faq: [
@@ -60,6 +107,40 @@ export const products = [
       { question: 'Can it handle complex call scenarios?', answer: 'Yes. The AI understands context, handles multi-turn conversations, asks clarifying questions, and knows when to escalate to a human agent.' },
       { question: 'How quickly can I get set up?', answer: 'Most businesses are live within a few hours. We handle the phone number provisioning and AI configuration.' },
       { question: 'What happens if the AI can\'t handle a call?', answer: 'The AI seamlessly transfers the call to your team with a full context summary, so the human agent can pick up right where the AI left off.' },
+    ],
+    pricingFaq: [
+      {
+        question: 'What happens if I exceed my included minutes?',
+        answer: 'Overages are billed at $1.50/min and added to your next invoice. You will get email and SMS alerts at 90% and 100% of your included minutes so there are no surprises.',
+      },
+      {
+        question: 'Can I change plans later?',
+        answer: 'Yes. You can upgrade or downgrade anytime from your dashboard or by contacting support. Changes take effect on your next billing cycle.',
+      },
+      {
+        question: 'Is there a long-term contract?',
+        answer: 'No. All plans are month-to-month. Cancel anytime from your dashboard.',
+      },
+      {
+        question: 'What is included in the 14-day free trial?',
+        answer: 'Full access to your selected plan with 60 free trial minutes. We collect your card during signup but do not charge until the trial ends. Cancel before the trial ends and you pay nothing.',
+      },
+      {
+        question: 'Do you offer annual billing?',
+        answer: 'Not yet. Annual billing with a discount is on our roadmap. Contact us if this matters for your business.',
+      },
+      {
+        question: 'What payment methods do you accept?',
+        answer: 'We accept all major credit and debit cards through Stripe. Additional payment methods are available for Business tier customers on request.',
+      },
+      {
+        question: 'Can I cancel anytime?',
+        answer: 'Yes. You can cancel from your dashboard and service continues through the end of your current billing period.',
+      },
+      {
+        question: 'Is my data secure?',
+        answer: 'Yes. Call transcripts and customer data are encrypted at rest and in transit. We never share your data with third parties. See our Privacy Policy for details.',
+      },
     ],
   },
   {
