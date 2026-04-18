@@ -107,7 +107,7 @@ export default function RootLayout({ children }) {
           </>
         )}
       </head>
-      <body className="min-h-screen bg-bg text-text antialiased">
+      <body className="min-h-screen bg-bg text-text antialiased" suppressHydrationWarning>
         <a href="#main-content" className="skip-to-main">
           Skip to main content
         </a>
