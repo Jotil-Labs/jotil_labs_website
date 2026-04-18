@@ -51,7 +51,7 @@ function formatDate(dateStr) {
   })
 }
 
-// MDX component overrides — maps to Tailwind prose-compatible styling
+// MDX component overrides -- maps to Tailwind prose-compatible styling
 const mdxComponents = {
   h2: ({ children }) => (
     <h2 className="mb-4 mt-10 font-[var(--font-sans)] text-2xl font-700 tracking-[-0.02em] text-text first:mt-0">
@@ -257,7 +257,7 @@ export default async function BlogPost({ params }) {
               <Linkedin className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
               Share on LinkedIn
             </a>
-            {/* Copy link — client interaction handled via JS in a client wrapper would be ideal,
+            {/* Copy link -- client interaction handled via JS in a client wrapper would be ideal,
                 but for SSR safety we use a plain anchor that opens the URL */}
             <CopyLinkButton postUrl={postUrl} />
           </div>

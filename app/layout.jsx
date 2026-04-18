@@ -94,7 +94,7 @@ export default function RootLayout({ children }) {
       <head>
         <OrganizationJsonLd />
         <WebsiteJsonLd />
-        {/* Google Analytics 4 — replace GA_MEASUREMENT_ID with your actual ID */}
+        {/* Google Analytics 4 -- replace GA_MEASUREMENT_ID with your actual ID */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
             <Script

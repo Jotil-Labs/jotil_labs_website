@@ -127,7 +127,7 @@ function PostCard({ post }) {
             {post.title}
           </h3>
 
-          {/* Excerpt — 2 lines */}
+          {/* Excerpt -- 2 lines */}
           <p className="mb-4 line-clamp-2 flex-1 text-sm leading-relaxed text-[var(--color-text-secondary)]">
             {post.excerpt}
           </p>
