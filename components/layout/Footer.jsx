@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import Logo, { LogoText } from '@/components/ui/Logo'
+import Logo from '@/components/ui/Logo'
 import { products } from '@/data/products'
+import { brand, copyrightLine } from '@/lib/brand'
 
 const PRODUCT_LINKS = products.map((p) => ({
   label: p.shortName,
@@ -25,7 +26,7 @@ const LEGAL_LINKS = [
 function FooterColumn({ title, links }) {
   return (
     <div>
-      <h4 className="text-sm font-semibold text-white mb-5" style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}>
+      <h4 className="font-display text-sm font-semibold text-white mb-5">
         {title}
       </h4>
       <ul className="space-y-3 list-none p-0 m-0">
@@ -46,114 +47,87 @@ function FooterColumn({ title, links }) {
 
 export function Footer() {
   return (
-    <footer className="bg-dark text-white relative">
-      {/* Gradient line at top */}
+    <footer className="bg-navy text-white relative">
       <div
         className="h-px"
         style={{
           background:
-            'linear-gradient(90deg, transparent, #3B7BF2, #6366F1, #0EA5E9, transparent)',
+            'linear-gradient(90deg, transparent, #3859a8, #22D3EE, #3859a8, transparent)',
         }}
       />
 
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
-          {/* Brand column */}
           <div className="lg:col-span-4">
-            <div className="mb-5 flex items-center gap-2">
-              <Logo size={32} />
-              <span
-                className="text-xl font-extrabold tracking-tight"
-                style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
-              >
+            <div className="mb-3 flex items-center gap-2">
+              <Logo size={32} tone="on-dark" />
+              <span className="font-display text-xl font-bold tracking-[-0.5px] leading-none">
                 <span className="text-white">Jotil</span>
-                <span className="text-primary">Labs</span>
+                <span className="text-[color:var(--color-logo-muted)]">Labs</span>
               </span>
             </div>
+            <p className="font-display text-[10px] font-semibold tracking-[0.25em] uppercase text-[color:var(--color-logo-muted)]/70 mb-5">
+              {brand.tagline}
+            </p>
             <p className="text-sm text-slate-400 leading-relaxed max-w-xs mb-8">
               The AI-first customer platform. We help businesses answer every
               call, handle every conversation, and grow without adding
               headcount.
             </p>
 
-            {/* Contact info */}
             <div className="space-y-2 mb-6">
               <p className="text-sm text-slate-400">
                 <a
-                  href="mailto:contact@jotillabs.com"
+                  href={`mailto:${brand.email}`}
                   className="no-underline text-slate-400 hover:text-white transition-colors"
                 >
-                  contact@jotillabs.com
+                  {brand.email}
                 </a>
               </p>
               <p className="text-sm text-slate-400">
                 <a
-                  href="tel:+13589000040"
+                  href={brand.phoneHref}
                   className="no-underline text-slate-400 hover:text-white transition-colors"
                 >
-                  +1 (358) 900-0040
+                  {brand.phone}
                 </a>
               </p>
-              <p className="text-sm text-slate-400">Lehi, Utah</p>
+              <p className="text-sm text-slate-400">{brand.address.city}, {brand.address.state}</p>
             </div>
 
-            {/* Social icons */}
             <div className="flex items-center gap-3">
               <a
-                href="https://linkedin.com"
+                href={brand.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-11 h-11 rounded-[10px] bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-200 no-underline"
                 aria-label="LinkedIn"
               >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
                   <rect x="2" y="9" width="4" height="12" />
                   <circle cx="4" cy="4" r="2" />
                 </svg>
               </a>
               <a
-                href="https://x.com"
+                href={brand.social.x}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-11 h-11 rounded-[10px] bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-200 no-underline"
                 aria-label="X (Twitter)"
               >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </a>
               <a
-                href="https://youtube.com"
+                href={brand.social.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-11 h-11 rounded-[10px] bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all duration-200 no-underline"
                 aria-label="YouTube"
               >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
                   <path d="m10 15 5-3-5-3z" />
                 </svg>
@@ -161,7 +135,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Link columns */}
           <div className="lg:col-span-2 lg:col-start-6">
             <FooterColumn title="Solutions" links={PRODUCT_LINKS} />
           </div>
@@ -175,7 +148,7 @@ export function Footer() {
 
         <div className="mt-14 pt-6 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-500">
-            {new Date().getFullYear()} Jotil Labs. All rights reserved.
+            {copyrightLine()}
           </p>
           <p className="text-xs text-slate-500">
             Built with AI-first principles.
