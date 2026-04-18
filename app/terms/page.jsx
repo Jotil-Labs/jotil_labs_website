@@ -3,7 +3,7 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
 export const metadata = {
   title: 'Terms & Conditions',
-  description: 'Terms and Conditions for Jotil Labs AI-powered communication services, including TCPA compliance and AI disclosure.',
+  description: 'Terms and Conditions for JotilLabs AI-powered communication services, including TCPA compliance and AI disclosure.',
 }
 
 export default function TermsPage() {

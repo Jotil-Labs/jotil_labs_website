@@ -4,7 +4,7 @@ import { OptInForm } from '@/components/sections/OptInForm'
 export const metadata = {
   title: 'Communication Consent',
   description:
-    'Provide your consent to receive AI-powered communications from Jotil Labs, including voice calls, SMS, and chat messages. TCPA-compliant opt-in form.',
+    'Provide your consent to receive AI-powered communications from JotilLabs, including voice calls, SMS, and chat messages. TCPA-compliant opt-in form.',
 }
 
 export default function OptInPage() {
@@ -33,7 +33,7 @@ export default function OptInPage() {
             </h1>
             <p className="text-text-secondary mt-4 max-w-lg mx-auto leading-relaxed">
               By submitting this form, you consent to receive AI-powered communications
-              from Jotil Labs. Please review each section carefully.
+              from JotilLabs. Please review each section carefully.
             </p>
           </AnimatedSection>
         </div>
