@@ -118,8 +118,8 @@ export function Hero() {
               style={{ background: 'rgba(59,123,242,0.06)', border: '1px solid rgba(59,123,242,0.12)' }}
             >
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="text-[11px] font-semibold text-primary tracking-[0.08em] uppercase" style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}>
-                The AI-First Customer Platform
+              <span className="text-[11px] font-semibold text-primary tracking-[0.25em] uppercase font-display">
+                Automate. Empower. Scale.
               </span>
             </motion.div>
 

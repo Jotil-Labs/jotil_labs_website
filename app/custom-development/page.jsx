@@ -13,7 +13,7 @@ import { IconBox } from '@/components/ui/IconBox'
 import { Badge } from '@/components/ui/Badge'
 
 export const metadata = {
-  title: 'Custom AI Application Development | Jotil Labs',
+  title: 'Custom AI Application Development | JotilLabs',
   description:
     'We build bespoke AI applications tailored to your business. Voice AI systems, chat platforms, workflow automation, and data integrations, all designed around how you work.',
 }
@@ -168,7 +168,7 @@ export default function CustomDevelopmentPage() {
       <section className="py-24 bg-bg-alt/40">
         <div className="max-w-5xl mx-auto px-6">
           <AnimatedSection className="text-center mb-14">
-            <Badge variant="blue" className="mb-5">Why Jotil Labs</Badge>
+            <Badge variant="blue" className="mb-5">Why JotilLabs</Badge>
             <h2
               className="font-bold tracking-[-0.03em] text-text mb-3"
               style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)' }}

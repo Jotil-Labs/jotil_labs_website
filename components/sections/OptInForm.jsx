@@ -103,7 +103,7 @@ export function OptInForm() {
             />
             <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
               I consent to receive AI-powered and automated telephone calls from
-              Jotil Labs and its clients at the phone number provided above. I
+              Jotil Labs LLC and its clients at the phone number provided above. I
               understand these calls may be generated or conducted by artificial
               intelligence technology.
             </span>
@@ -117,7 +117,7 @@ export function OptInForm() {
               className="mt-0.5 w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-primary"
             />
             <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
-              I consent to receive automated SMS/text messages from Jotil Labs and
+              I consent to receive automated SMS/text messages from Jotil Labs LLC and
               its clients at the phone number provided above, including
               appointment reminders, follow-ups, and promotional messages.
             </span>
@@ -144,7 +144,7 @@ export function OptInForm() {
               className="mt-0.5 w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer accent-primary"
             />
             <span className="text-sm text-text-secondary group-hover:text-text transition-colors">
-              I have read and agree to the Jotil Labs{' '}
+              I have read and agree to the Jotil Labs LLC{' '}
               <Link href="/terms" className="text-primary hover:underline">
                 Terms & Conditions
               </Link>
@@ -193,7 +193,7 @@ export function OptInForm() {
             you provide your prior express written consent under the Telephone
             Consumer Protection Act (TCPA), 47 U.S.C. &sect; 227, to receive
             autodialed calls and text messages, including AI-generated
-            communications, from Jotil Labs and its clients. This consent is not
+            communications, from Jotil Labs LLC and its clients. This consent is not
             a condition of purchase. You may revoke consent at any time using the
             opt-out methods described above.
           </p>

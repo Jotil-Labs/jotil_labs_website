@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: '404 — Page Not Found',
-  description: 'The page you are looking for does not exist or has been moved. Return to the Jotil Labs homepage or contact us for help.',
+  title: '404 - Page Not Found',
+  description: 'The page you are looking for does not exist or has been moved. Return to the JotilLabs homepage or contact us for help.',
 }
 
 export default function NotFound() {

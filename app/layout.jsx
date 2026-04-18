@@ -1,5 +1,5 @@
 import './globals.css'
-import { Outfit, Inter, JetBrains_Mono } from 'next/font/google'
+import { Montserrat_Alternates, Inter, JetBrains_Mono } from 'next/font/google'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -9,9 +9,9 @@ import { OrganizationJsonLd, WebsiteJsonLd } from '@/components/layout/JsonLd'
 import { AIWidget } from '@/components/widgets/AIWidget'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
 
-const outfit = Outfit({
+const montserratAlternates = Montserrat_Alternates({
   subsets: ['latin'],
-  variable: '--font-outfit',
+  variable: '--font-montserrat-alternates',
   display: 'swap',
   weight: ['400', '500', '600', '700', '800'],
 })
@@ -32,11 +32,11 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata = {
   title: {
-    default: 'Jotil Labs — AI Voice, Chat & Automation Platform',
-    template: '%s | Jotil Labs',
+    default: 'JotilLabs - AI Voice, Chat & Automation Platform',
+    template: '%s | JotilLabs',
   },
   description:
-    'Jotil Labs builds AI systems that handle your calls, chats, leads, and workflows. Voice agents, chatbots, SMS automation, and CRM tools for modern businesses.',
+    'JotilLabs builds AI systems that handle your calls, chats, leads, and workflows. Voice agents, chatbots, SMS automation, and CRM tools for modern businesses.',
   metadataBase: new URL('https://www.jotillabs.com'),
   keywords: [
     'AI voice agent',
@@ -44,25 +44,25 @@ export const metadata = {
     'business automation',
     'AI receptionist',
     'SMS automation',
-    'Jotil Labs',
+    'JotilLabs',
     'AI CRM',
     'workflow automation',
   ],
-  authors: [{ name: 'Jotil Labs' }],
-  creator: 'Jotil Labs',
+  authors: [{ name: 'JotilLabs' }],
+  creator: 'JotilLabs',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://www.jotillabs.com',
-    siteName: 'Jotil Labs',
-    title: 'Jotil Labs — AI Voice, Chat & Automation Platform',
+    siteName: 'JotilLabs',
+    title: 'JotilLabs - AI Voice, Chat & Automation Platform',
     description:
       'AI systems that handle your calls, chats, leads, and workflows. Built for modern businesses.',
     images: [{ url: '/og', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Jotil Labs — AI Voice, Chat & Automation Platform',
+    title: 'JotilLabs - AI Voice, Chat & Automation Platform',
     description:
       'AI systems that handle your calls, chats, leads, and workflows.',
     images: ['/og'],
@@ -89,12 +89,12 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${outfit.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`scroll-smooth ${montserratAlternates.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <head>
         <OrganizationJsonLd />
         <WebsiteJsonLd />
-        {/* Google Analytics 4 — replace GA_MEASUREMENT_ID with your actual ID */}
+        {/* Google Analytics 4 -- replace GA_MEASUREMENT_ID with your actual ID */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
             <Script
@@ -107,7 +107,7 @@ export default function RootLayout({ children }) {
           </>
         )}
       </head>
-      <body className="min-h-screen bg-bg text-text antialiased">
+      <body className="min-h-screen bg-bg text-text antialiased" suppressHydrationWarning>
         <a href="#main-content" className="skip-to-main">
           Skip to main content
         </a>

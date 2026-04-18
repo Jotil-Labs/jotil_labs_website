@@ -14,17 +14,17 @@ const INQUIRY_TYPES = [
 
 const FAQ_ITEMS = [
   {
-    question: 'How quickly can I get started with Jotil Labs?',
+    question: 'How quickly can I get started with JotilLabs?',
     answer:
       'Most clients are live within 2–5 business days. After an initial setup call, we configure your AI agent, connect it to your phone number or website, and handle testing before go-live. No long implementation cycles.',
   },
   {
-    question: 'Is Jotil Labs TCPA and HIPAA compliant?',
+    question: 'Is JotilLabs TCPA and HIPAA compliant?',
     answer:
       'Yes. Our platform is built with regulatory compliance as a core design principle. SMS campaigns use opt-in flows aligned with TCPA and A2P 10DLC requirements. Healthcare clients can operate under a BAA arrangement. We are happy to discuss your specific compliance needs during a demo.',
   },
   {
-    question: 'What integrations does Jotil Labs support?',
+    question: 'What integrations does JotilLabs support?',
     answer:
       'We integrate with 50+ platforms including major CRMs (HubSpot, Salesforce, Zoho), calendaring tools (Google Calendar, Calendly, Acuity), helpdesk platforms, and custom webhooks. JotilFlow can connect to virtually any API-enabled system.',
   },
@@ -361,7 +361,7 @@ export function ContactForm() {
                 width="100%"
                 height="380"
                 frameBorder="0"
-                title="Book a demo with Jotil Labs"
+                title="Book a demo with JotilLabs"
                 className="rounded-xl"
                 loading="lazy"
               />

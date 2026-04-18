@@ -14,7 +14,7 @@ import { Badge } from '@/components/ui/Badge'
 export const metadata = {
   title: 'Use Cases & Industry Solutions',
   description:
-    'See how Jotil Labs AI voice agents, chatbots, and SMS automation solve real problems across healthcare, real estate, legal, hospitality, finance, and e-commerce.',
+    'See how JotilLabs AI voice agents, chatbots, and SMS automation solve real problems across healthcare, real estate, legal, hospitality, finance, and e-commerce.',
 }
 
 const INDUSTRIES = [
@@ -135,7 +135,7 @@ export default function UseCasesPage() {
 
           <AnimatedSection delay={0.14}>
             <p className="text-lg text-text-secondary leading-relaxed max-w-2xl mx-auto">
-              From a two-person medical practice to a regional real estate firm, Jotil Labs adapts to the specific communication challenges of your industry. Stop losing business to unanswered calls and slow follow-ups.
+              From a two-person medical practice to a regional real estate firm, JotilLabs adapts to the specific communication challenges of your industry. Stop losing business to unanswered calls and slow follow-ups.
             </p>
           </AnimatedSection>
         </div>

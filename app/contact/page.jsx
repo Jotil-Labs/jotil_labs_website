@@ -3,15 +3,15 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 import { Badge } from '@/components/ui/Badge'
 
 export const metadata = {
-  title: 'Contact Jotil Labs',
+  title: 'Contact JotilLabs',
   description:
-    'Get in touch with the Jotil Labs team. Book a demo, ask about enterprise pricing, or reach out with any questions about our AI voice, chat, and automation products.',
+    'Get in touch with the JotilLabs team. Book a demo, ask about enterprise pricing, or reach out with any questions about our AI voice, chat, and automation products.',
 }
 
 const localBusinessJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'Jotil Labs',
+  name: 'JotilLabs',
   telephone: '+1-358-900-0040',
   email: 'contact@jotillabs.com',
   address: {

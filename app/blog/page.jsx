@@ -5,7 +5,7 @@ import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react'
 export const metadata = {
   title: 'Blog',
   description:
-    'Expert insights on AI voice agents, SMS automation, and business process automation. Learn how Jotil Labs helps modern businesses grow with AI.',
+    'Expert insights on AI voice agents, SMS automation, and business process automation. Learn how JotilLabs helps modern businesses grow with AI.',
 }
 
 const CATEGORY_COLORS = {
@@ -127,7 +127,7 @@ function PostCard({ post }) {
             {post.title}
           </h3>
 
-          {/* Excerpt — 2 lines */}
+          {/* Excerpt -- 2 lines */}
           <p className="mb-4 line-clamp-2 flex-1 text-sm leading-relaxed text-[var(--color-text-secondary)]">
             {post.excerpt}
           </p>
@@ -167,7 +167,7 @@ export default function BlogPage() {
           <div className="mx-auto max-w-2xl text-center">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5">
               <BookOpen className="h-3.5 w-3.5 text-primary" strokeWidth={1.5} />
-              <span className="text-xs font-600 text-primary">Jotil Labs Blog</span>
+              <span className="text-xs font-600 text-primary">JotilLabs Blog</span>
             </div>
             <h1 className="mb-4 font-[var(--font-sans)] text-4xl font-800 leading-tight tracking-[-0.03em] text-text sm:text-5xl">
               Insights &amp;{' '}

@@ -1,32 +1,39 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-outfit), "Outfit", system-ui, -apple-system, sans-serif;
+  /* Fonts */
+  --font-display: var(--font-montserrat-alternates), "Montserrat Alternates", system-ui, -apple-system, sans-serif;
+  /* font-sans aliases font-display today; kept separate so body/UI can diverge later */
+  --font-sans: var(--font-montserrat-alternates), "Montserrat Alternates", system-ui, -apple-system, sans-serif;
   --font-body: var(--font-inter), "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
 
-  --color-primary: #3B7BF2;
-  --color-primary-dark: #1B4FBA;
-  --color-primary-accent: #2D6AE0;
-  --color-primary-light: #6B9AEA;
-  --color-secondary: #6366F1;
-  --color-accent: #0EA5E9;
-  --color-glow: #3B82F6;
+  /* Brand colors */
+  --color-primary: #3859a8;
+  --color-primary-dark: #2a4688;
+  --color-navy: #0f1129;
+  --color-accent: #22D3EE;
+  --color-logo-muted: #8ca3cc;
 
+  /* Backgrounds */
   --color-bg: #FAFBFD;
-  --color-bg-alt: #F0F4FF;
-  --color-surface: rgba(15, 23, 42, 0.04);
-  --color-surface-hover: rgba(15, 23, 42, 0.07);
+  --color-bg-alt: #F4F6FB;
+  --color-surface: rgba(15, 17, 41, 0.04);
+  --color-surface-hover: rgba(15, 17, 41, 0.07);
 
-  --color-text: #111111;
-  --color-text-secondary: #6B7280;
-  --color-text-muted: #9CA3AF;
-  --color-dark: #0A0F1C;
+  /* Text */
+  --color-text: #0F1129;
+  --color-text-secondary: #4A4D6A;
+  --color-text-muted: #6B7098;
+  /* --color-dark retained as alias of --color-navy for back-compat with existing bg-dark/text-dark utility usage */
+  --color-dark: #0F1129;
   --color-white: #FFFFFF;
 
-  --color-border: rgba(0, 0, 0, 0.05);
-  --color-border-hover: rgba(59, 123, 242, 0.15);
+  /* Borders */
+  --color-border: rgba(15, 17, 41, 0.08);
+  --color-border-hover: rgba(56, 89, 168, 0.20);
 
+  /* Animations */
   --animate-float: float 6s ease-in-out infinite;
   --animate-icon-bob: icon-bob 3s ease-in-out infinite;
   --animate-orb-1: orb-drift-1 30s ease-in-out infinite;
@@ -37,6 +44,7 @@
   --animate-ring-pulse-reverse: ring-pulse-reverse 3s ease-in-out infinite;
   --animate-ring-rotate: ring-rotate 60s linear infinite;
   --animate-orbit: orbit 25s linear infinite;
+  --animate-heartbeat: heartbeat 10s ease-in-out infinite;
 }
 
 /* ── Keyframes ── */
@@ -205,7 +213,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-outfit), "Outfit", system-ui, -apple-system, sans-serif;
+  font-family: var(--font-display);
 }
 
 /* ── Glass System ── */
@@ -395,4 +403,14 @@ textarea:focus-visible {
 ::selection {
   background: rgba(59, 123, 242, 0.15);
   color: inherit;
+}
+
+/* Logo heartbeat pulse (10s cycle). Supersedes hbDot; Logo.jsx will switch to this in Task 3. */
+@keyframes heartbeat {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  3%   { transform: scale(1.3); opacity: 1; }
+  5%   { transform: scale(1);   opacity: 0.7; }
+  7%   { transform: scale(1.2); opacity: 1; }
+  10%  { transform: scale(1);   opacity: 0.55; }
+  100% { transform: scale(1);   opacity: 0.55; }
 }

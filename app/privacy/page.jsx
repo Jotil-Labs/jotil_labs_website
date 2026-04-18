@@ -3,7 +3,7 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
 export const metadata = {
   title: 'Privacy Policy',
-  description: 'Privacy Policy for Jotil Labs — how we collect, use, and protect your data across AI voice, chat, and SMS services.',
+  description: 'Privacy Policy for JotilLabs - how we collect, use, and protect your data across AI voice, chat, and SMS services.',
 }
 
 export default function PrivacyPage() {

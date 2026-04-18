@@ -14,7 +14,7 @@ import { IconBox } from '@/components/ui/IconBox'
 import { Badge } from '@/components/ui/Badge'
 
 export const metadata = {
-  title: 'AI Automation Consultancy | Jotil Labs',
+  title: 'AI Automation Consultancy | JotilLabs',
   description:
     'We help businesses identify, plan, and implement AI automation opportunities that save time, reduce costs, and drive growth. No technical expertise required on your end.',
 }

@@ -1,7 +1,7 @@
-# Jotil Labs Website
+# JotilLabs Website
 
 ## Company
-Jotil Labs — The AI-First Customer Platform (Founded 2024, Lehi, Utah). We help SMBs never miss a customer through AI-powered communication automation. 6 solutions: Receptionist, Messenger, Outreach, Space, Flow, Avatar. Target market: SMB, contact-based sales (no self-signup).
+JotilLabs (legal entity: Jotil Labs LLC) - The AI-First Customer Platform (Founded 2026, Lehi, Utah). We help SMBs never miss a customer through AI-powered communication automation. 6 solutions: Receptionist, Messenger, Outreach, Space, Flow, Avatar. Target market: SMB, contact-based sales (no self-signup).
 
 ## Stack
 - Next.js 15 App Router + React 19 + JSX (NOT TypeScript) + Tailwind CSS v4 + Framer Motion
@@ -55,20 +55,20 @@ content/blog/           — 5 MDX blog posts
 ## Design System
 
 ### Fonts
-- Headings: Outfit (via --font-outfit CSS variable)
-- Body: Inter (via --font-inter)
-- Mono: JetBrains Mono (via --font-jetbrains)
+- Headings/Display: Montserrat Alternates (via --font-montserrat-alternates CSS variable, exposed as --font-display + --font-sans)
+- Body: Inter (via --font-inter, exposed as --font-body)
+- Mono: JetBrains Mono (via --font-jetbrains, exposed as --font-mono)
 
-### Color Palette
-- Primary: #3B7BF2
-- Primary Dark: #1B4FBA
-- Primary Accent: #2D6AE0
-- Secondary: #6366F1
-- Accent: #0EA5E9
-- Background: #FAFBFD
-- Background Alt: #F0F4FF
-- Text: #111111 / Secondary: #6B7280 (WCAG AA compliant)
-- Dark (footer): #0A0F1C
+### Color Palette (single source of truth: lib/brand.js)
+- Primary: #3859a8 (royal blue)
+- Primary Dark: #2a4688 (hover)
+- Navy: #0f1129 (footer, deep sections)
+- Accent: #22D3EE (electric cyan, highlights only)
+- Logo Muted: #8ca3cc (logo dots, "Labs" wordmark on dark bg)
+- Background: #FAFBFD / Alt: #F4F6FB
+- Text: #0F1129 / Secondary: #4A4D6A / Muted: #6B7098 (WCAG AA)
+- Dark (footer alias): #0F1129 (same as Navy, kept for back-compat)
+- Edit colors and other brand constants in `lib/brand.js`, then sync the @theme tokens in `app/globals.css`.
 
 ### CSS Utility Classes (defined in globals.css)
 - `.glass` — frosted glass card
