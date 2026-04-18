@@ -289,7 +289,7 @@ export default function ProductsPage() {
                 Talk to our AI &rarr;
               </Button>
               <Button href="/about" variant="outline" size="lg">
-                About Jotil Labs
+                About JotilLabs
               </Button>
             </div>
           </AnimatedSection>

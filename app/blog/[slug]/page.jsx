@@ -159,7 +159,7 @@ export default async function BlogPost({ params }) {
     headline: post.title,
     datePublished: post.date,
     author: { '@type': 'Person', name: post.author },
-    publisher: { '@type': 'Organization', name: 'Jotil Labs' },
+    publisher: { '@type': 'Organization', name: 'JotilLabs' },
     description: post.excerpt,
     url: postUrl,
   }

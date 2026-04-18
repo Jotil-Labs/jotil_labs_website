@@ -32,11 +32,11 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata = {
   title: {
-    default: 'Jotil Labs — AI Voice, Chat & Automation Platform',
-    template: '%s | Jotil Labs',
+    default: 'JotilLabs - AI Voice, Chat & Automation Platform',
+    template: '%s | JotilLabs',
   },
   description:
-    'Jotil Labs builds AI systems that handle your calls, chats, leads, and workflows. Voice agents, chatbots, SMS automation, and CRM tools for modern businesses.',
+    'JotilLabs builds AI systems that handle your calls, chats, leads, and workflows. Voice agents, chatbots, SMS automation, and CRM tools for modern businesses.',
   metadataBase: new URL('https://www.jotillabs.com'),
   keywords: [
     'AI voice agent',
@@ -44,25 +44,25 @@ export const metadata = {
     'business automation',
     'AI receptionist',
     'SMS automation',
-    'Jotil Labs',
+    'JotilLabs',
     'AI CRM',
     'workflow automation',
   ],
-  authors: [{ name: 'Jotil Labs' }],
-  creator: 'Jotil Labs',
+  authors: [{ name: 'JotilLabs' }],
+  creator: 'JotilLabs',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://www.jotillabs.com',
-    siteName: 'Jotil Labs',
-    title: 'Jotil Labs — AI Voice, Chat & Automation Platform',
+    siteName: 'JotilLabs',
+    title: 'JotilLabs - AI Voice, Chat & Automation Platform',
     description:
       'AI systems that handle your calls, chats, leads, and workflows. Built for modern businesses.',
     images: [{ url: '/og', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Jotil Labs — AI Voice, Chat & Automation Platform',
+    title: 'JotilLabs - AI Voice, Chat & Automation Platform',
     description:
       'AI systems that handle your calls, chats, leads, and workflows.',
     images: ['/og'],

@@ -6,9 +6,9 @@ import { IconBox } from '@/components/ui/IconBox'
 import { Badge } from '@/components/ui/Badge'
 
 export const metadata = {
-  title: 'About Jotil Labs',
+  title: 'About JotilLabs',
   description:
-    'Learn about Jotil Labs, an AI automation company founded in Lehi, Utah. Our mission is to help businesses communicate smarter through intelligent automation.',
+    'Learn about JotilLabs, an AI automation company founded in Lehi, Utah. Our mission is to help businesses communicate smarter through intelligent automation.',
 }
 
 const STATS = [
@@ -50,7 +50,7 @@ const TEAM = [
     initials: 'SS',
     name: 'Sayeed Sajal',
     title: 'CEO & Co-Founder',
-    bio: 'Sayeed drives the overall vision and product strategy at Jotil Labs, combining deep expertise in AI systems with a relentless focus on delivering measurable business outcomes for clients.',
+    bio: 'Sayeed drives the overall vision and product strategy at JotilLabs, combining deep expertise in AI systems with a relentless focus on delivering measurable business outcomes for clients.',
   },
   {
     initials: 'SD',
@@ -102,7 +102,7 @@ export default function AboutPage() {
 
           <AnimatedSection delay={0.14}>
             <p className="text-lg text-text-secondary leading-relaxed max-w-2xl mx-auto">
-              Jotil Labs was founded in 2024 by three builders who kept watching
+              JotilLabs was founded in 2026 by three builders who kept watching
               businesses lose customers to missed calls, slow responses, and
               manual work that never needed to be manual. We set out to change
               that with AI that genuinely works.
@@ -139,7 +139,7 @@ export default function AboutPage() {
                   When voice AI and large language models reached a quality
                   threshold where they could genuinely serve customers without
                   frustrating them, we knew the window was open. We incorporated
-                  Jotil Labs in Lehi, Utah, and started building the platform we
+                  JotilLabs in Lehi, Utah, and started building the platform we
                   wished had existed.
                 </p>
                 <p>
@@ -200,7 +200,7 @@ export default function AboutPage() {
                   }}
                 >
                   <p className="text-sm font-medium text-primary mb-1">Founded</p>
-                  <p className="text-2xl font-bold text-text tracking-tight">2024</p>
+                  <p className="text-2xl font-bold text-text tracking-tight">2026</p>
                   <p className="text-sm text-text-secondary mt-1">Lehi, Utah</p>
                 </div>
               </AnimatedSection>

@@ -49,10 +49,10 @@ export async function POST(request) {
     const safeMessage = escapeHtml(message.trim())
 
     const { error } = await resend.emails.send({
-      from: `Jotil Labs Website <${fromEmail}>`,
+      from: `JotilLabs Website <${fromEmail}>`,
       to: 'contact@jotillabs.com',
       replyTo: email.trim(),
-      subject: `New Contact Form Submission — ${safeInquiry}`,
+      subject: `New Contact Form Submission - ${safeInquiry}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 24px; background: #FAFBFD; border-radius: 12px;">
           <div style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #E5E7EB;">

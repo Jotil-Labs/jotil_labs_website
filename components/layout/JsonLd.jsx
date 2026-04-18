@@ -1,29 +1,32 @@
+import { brand } from '@/lib/brand'
+
 export function OrganizationJsonLd() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Jotil Labs',
-    url: 'https://jotillabs.com',
-    logo: 'https://jotillabs.com/favicon.svg',
+    name: brand.name,
+    legalName: brand.legalName,
+    url: brand.url,
+    logo: `${brand.url}/favicon.svg`,
     description:
       'AI-powered business automation. Voice agents, chatbots, SMS automation, CRM, and workflow tools for modern businesses.',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Lehi',
-      addressRegion: 'UT',
-      addressCountry: 'US',
+      addressLocality: brand.address.city,
+      addressRegion: brand.address.stateCode,
+      addressCountry: brand.address.country,
     },
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+1-358-900-0040',
-      email: 'contact@jotillabs.com',
+      email: brand.email,
       contactType: 'sales',
     },
     sameAs: [
-      'https://linkedin.com/company/jotillabs',
-      'https://x.com/jotillabs',
+      brand.social.linkedin,
+      brand.social.x,
     ],
-    foundingDate: '2024',
+    foundingDate: String(brand.founded),
   }
 
   return (
@@ -38,11 +41,11 @@ export function WebsiteJsonLd() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Jotil Labs',
-    url: 'https://jotillabs.com',
+    name: brand.name,
+    url: brand.url,
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://jotillabs.com/blog?q={search_term_string}',
+      target: `${brand.url}/blog?q={search_term_string}`,
       'query-input': 'required name=search_term_string',
     },
   }
