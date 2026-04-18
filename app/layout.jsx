@@ -1,5 +1,5 @@
 import './globals.css'
-import { Outfit, Inter, JetBrains_Mono } from 'next/font/google'
+import { Montserrat_Alternates, Inter, JetBrains_Mono } from 'next/font/google'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -9,9 +9,9 @@ import { OrganizationJsonLd, WebsiteJsonLd } from '@/components/layout/JsonLd'
 import { AIWidget } from '@/components/widgets/AIWidget'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
 
-const outfit = Outfit({
+const montserratAlternates = Montserrat_Alternates({
   subsets: ['latin'],
-  variable: '--font-outfit',
+  variable: '--font-montserrat-alternates',
   display: 'swap',
   weight: ['400', '500', '600', '700', '800'],
 })
@@ -89,7 +89,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${outfit.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`scroll-smooth ${montserratAlternates.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <head>
         <OrganizationJsonLd />
