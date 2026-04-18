@@ -124,7 +124,7 @@ export default async function ProductPage({ params }) {
                   Book a Demo
                 </Button>
                 <Button
-                  href="#pricing"
+                  href={`/products/${slug}/pricing`}
                   variant="outline"
                   size="lg"
                 >
