@@ -3,6 +3,7 @@
 @theme {
   /* Fonts */
   --font-display: var(--font-montserrat-alternates), "Montserrat Alternates", system-ui, -apple-system, sans-serif;
+  /* font-sans aliases font-display today; kept separate so body/UI can diverge later */
   --font-sans: var(--font-montserrat-alternates), "Montserrat Alternates", system-ui, -apple-system, sans-serif;
   --font-body: var(--font-inter), "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
@@ -24,6 +25,7 @@
   --color-text: #0F1129;
   --color-text-secondary: #4A4D6A;
   --color-text-muted: #6B7098;
+  /* --color-dark retained as alias of --color-navy for back-compat with existing bg-dark/text-dark utility usage */
   --color-dark: #0F1129;
   --color-white: #FFFFFF;
 
@@ -31,7 +33,7 @@
   --color-border: rgba(15, 17, 41, 0.08);
   --color-border-hover: rgba(56, 89, 168, 0.20);
 
-  /* Animations (existing, preserved) */
+  /* Animations */
   --animate-float: float 6s ease-in-out infinite;
   --animate-icon-bob: icon-bob 3s ease-in-out infinite;
   --animate-orb-1: orb-drift-1 30s ease-in-out infinite;
@@ -211,7 +213,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-outfit), "Outfit", system-ui, -apple-system, sans-serif;
+  font-family: var(--font-display);
 }
 
 /* ── Glass System ── */
@@ -403,7 +405,7 @@ textarea:focus-visible {
   color: inherit;
 }
 
-/* Logo heartbeat pulse (10s cycle, short double-beat, long quiet) */
+/* Logo heartbeat pulse (10s cycle). Supersedes hbDot; Logo.jsx will switch to this in Task 3. */
 @keyframes heartbeat {
   0%   { transform: scale(1);   opacity: 0.55; }
   3%   { transform: scale(1.3); opacity: 1; }
