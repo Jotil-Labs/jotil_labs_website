@@ -91,7 +91,7 @@ export function Hero() {
   useEffect(() => setMounted(true), [])
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+    <section className="bg-brand-wash-mark relative min-h-screen flex items-center overflow-hidden pt-20">
       {/* Background gradient mesh */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         {/* Soft grid pattern */}
