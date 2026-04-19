@@ -14,7 +14,7 @@ import {
 /* ================================================================
    Shared styles / constants
    ================================================================ */
-const headingFont = { fontFamily: 'var(--font-outfit)' }
+const headingFont = { fontFamily: 'var(--font-display)' }
 const monoFont = { fontFamily: 'var(--font-jetbrains)' }
 
 const cardEntry = {

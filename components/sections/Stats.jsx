@@ -54,7 +54,7 @@ export function Stats() {
             className="text-[11px] font-semibold tracking-[0.14em] uppercase"
             style={{
               color: 'var(--color-text-secondary)',
-              fontFamily: 'var(--font-outfit), Outfit, sans-serif',
+              fontFamily: 'var(--font-display)',
             }}
           >
             Results that speak for themselves
@@ -108,7 +108,7 @@ function StatCard({ stat }) {
       <div>
         <p
           className="text-[clamp(2rem,4vw,2.75rem)] font-extrabold leading-none tracking-[-0.04em] text-gradient"
-          style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
+          style={{ fontFamily: 'var(--font-display)' }}
         >
           <CountUp end={end} suffix={suffix} decimals={decimals} duration={2.2} />
         </p>

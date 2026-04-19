@@ -103,7 +103,7 @@ export default async function ProductPricingPage({ params }) {
             </Badge>
             <h1
               className="text-4xl sm:text-5xl font-extrabold text-text tracking-tight leading-[1.07] mb-5"
-              style={{ fontFamily: 'var(--font-outfit)', fontWeight: 800 }}
+              style={{ fontFamily: 'var(--font-display)', fontWeight: 800 }}
             >
               Simple pricing.{' '}
               <span className="text-gradient">Every call handled.</span>
@@ -162,7 +162,7 @@ export default async function ProductPricingPage({ params }) {
               </p>
               <h2
                 className="text-3xl font-bold text-text tracking-tight"
-                style={{ fontFamily: 'var(--font-outfit)' }}
+                style={{ fontFamily: 'var(--font-display)' }}
               >
                 Everything at a glance
               </h2>
@@ -189,7 +189,7 @@ export default async function ProductPricingPage({ params }) {
           <AnimatedSection>
             <h2
               className="text-3xl sm:text-4xl font-extrabold text-text tracking-tight mb-4"
-              style={{ fontFamily: 'var(--font-outfit)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               Ready to try{' '}
               <span className="text-gradient">{product.name}</span>?

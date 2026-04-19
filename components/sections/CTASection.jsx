@@ -72,7 +72,7 @@ export function CTASection() {
             />
             <span
               className="text-[11px] font-semibold text-white tracking-[0.1em] uppercase"
-              style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif', opacity: 0.9 }}
+              style={{ fontFamily: 'var(--font-display)', opacity: 0.9 }}
             >
               Get started today
             </span>
@@ -84,7 +84,7 @@ export function CTASection() {
           <h2
             className="text-white font-extrabold tracking-[-0.04em] mb-6"
             style={{
-              fontFamily: 'var(--font-outfit), Outfit, sans-serif',
+              fontFamily: 'var(--font-display)',
               fontSize: 'clamp(2rem, 4.5vw, 3.25rem)',
               lineHeight: 1.1,
             }}
@@ -117,7 +117,7 @@ export function CTASection() {
               href="/contact"
               className="inline-flex items-center gap-2 no-underline text-sm font-semibold rounded-[11px] px-6 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
               style={{
-                fontFamily: 'var(--font-outfit), Outfit, sans-serif',
+                fontFamily: 'var(--font-display)',
                 background: '#FFFFFF',
                 color: 'var(--color-primary)',
                 boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
@@ -132,7 +132,7 @@ export function CTASection() {
               href="/products/receptionist"
               className="inline-flex items-center gap-2 no-underline text-sm font-semibold text-white rounded-[11px] px-6 py-3.5 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
               style={{
-                fontFamily: 'var(--font-outfit), Outfit, sans-serif',
+                fontFamily: 'var(--font-display)',
                 background: 'rgba(255,255,255,0.12)',
                 border: '1px solid rgba(255,255,255,0.22)',
                 backdropFilter: 'blur(12px)',
