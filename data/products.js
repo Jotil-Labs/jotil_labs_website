@@ -6,7 +6,7 @@ export const products = [
     shortName: 'Receptionist',
     icon: 'Phone',
     iconColor: '#3B7BF2',
-    oneLiner: 'Answer every call, 24/7',
+    oneLiner: 'AI-powered inbound voice agent. Your digital front desk.',
     tagline: 'Your AI Front Desk. Never Miss a Call Again',
     badge: 'Inbound Voice',
     description:
@@ -150,7 +150,7 @@ export const products = [
     shortName: 'Messenger',
     icon: 'MessageCircle',
     iconColor: '#6366F1',
-    oneLiner: 'Handle chats, SMS, and WhatsApp',
+    oneLiner: 'Conversational AI across web chat, WhatsApp, SMS, Teams.',
     tagline: 'Conversational AI Across Every Text Channel',
     badge: 'Inbound Text',
     description:
@@ -212,7 +212,7 @@ export const products = [
     shortName: 'Outreach',
     icon: 'TrendingUp',
     iconColor: '#0EA5E9',
-    oneLiner: 'Grow your pipeline on autopilot',
+    oneLiner: 'Automated outbound calls and SMS campaigns at scale.',
     tagline: 'AI-Powered Outbound Campaigns at Scale',
     badge: 'Outbound',
     description:
@@ -274,7 +274,7 @@ export const products = [
     shortName: 'Space',
     icon: 'LayoutGrid',
     iconColor: '#3B7BF2',
-    oneLiner: 'CRM, tickets, and scheduling in one place',
+    oneLiner: "Your team's AI workspace. Multiple AI models, one interface.",
     tagline: 'Your Team\'s Unified AI Workspace',
     badge: 'Multi-AI Platform',
     description:
@@ -347,7 +347,7 @@ export const products = [
     shortName: 'Flow',
     icon: 'GitBranch',
     iconColor: '#6366F1',
-    oneLiner: 'Automate any workflow visually',
+    oneLiner: 'Custom workflow automation engine. Connect, trigger, act.',
     tagline: 'Custom Workflow Automation Engine',
     badge: 'Automation',
     description:
