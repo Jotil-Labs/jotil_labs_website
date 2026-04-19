@@ -7,7 +7,7 @@ export const products = [
     icon: 'Phone',
     iconColor: '#3B7BF2',
     oneLiner: 'AI-powered inbound voice agent. Your digital front desk.',
-    tagline: 'Your AI Front Desk. Never Miss a Call Again',
+    tagline: 'Never miss a call. Never miss a customer.',
     badge: 'Inbound Voice',
     description:
       'AI-powered inbound voice agent that answers, qualifies, and routes every call with human-like conversation. Available 24/7 with zero hold times.',
@@ -151,7 +151,7 @@ export const products = [
     icon: 'MessageCircle',
     iconColor: '#6366F1',
     oneLiner: 'Conversational AI across web chat, WhatsApp, SMS, Teams.',
-    tagline: 'Conversational AI Across Every Text Channel',
+    tagline: 'One inbox. Every channel. Every customer.',
     badge: 'Inbound Text',
     description:
       'AI chatbot and SMS agent that engages customers across web chat, WhatsApp, SMS, and more. Qualifying leads and answering questions 24/7.',
@@ -213,7 +213,7 @@ export const products = [
     icon: 'TrendingUp',
     iconColor: '#0EA5E9',
     oneLiner: 'Automated outbound calls and SMS campaigns at scale.',
-    tagline: 'AI-Powered Outbound Campaigns at Scale',
+    tagline: 'Reach more. Book more. Grow faster.',
     badge: 'Outbound',
     description:
       'Automated outbound calls and SMS campaigns that sound natural, adapt to conversations, and drive results. All at scale.',
@@ -275,7 +275,7 @@ export const products = [
     icon: 'LayoutGrid',
     iconColor: '#3B7BF2',
     oneLiner: "Your team's AI workspace. Multiple AI models, one interface.",
-    tagline: 'Your Team\'s Unified AI Workspace',
+    tagline: 'One workspace. Every AI. Every workflow.',
     badge: 'Multi-AI Platform',
     description:
       'A unified workspace where your team manages customer relationships, tickets, and calendars. All powered by AI.',
@@ -348,7 +348,7 @@ export const products = [
     icon: 'GitBranch',
     iconColor: '#6366F1',
     oneLiner: 'Custom workflow automation engine. Connect, trigger, act.',
-    tagline: 'Custom Workflow Automation Engine',
+    tagline: 'Connect. Trigger. Automate.',
     badge: 'Automation',
     description:
       'Build custom automation workflows that connect your tools, trigger actions, and eliminate manual work, with AI intelligence built in.',
@@ -410,7 +410,7 @@ export const products = [
     icon: 'UserCircle',
     iconColor: '#0EA5E9',
     oneLiner: 'Meet customers face to face with AI',
-    tagline: 'Face-to-Face AI. Human-Like Digital Assistants',
+    tagline: 'See your brand. Hear your brand. Talk to your brand.',
     badge: 'AI Avatar',
     description:
       'Lifelike AI avatars that represent your brand in video calls, website interactions, and customer-facing touchpoints. Delivering a personal, visual AI experience.',
