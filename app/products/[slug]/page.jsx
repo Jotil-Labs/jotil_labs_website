@@ -107,8 +107,7 @@ export default async function ProductPage({ params }) {
                 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text tracking-tight leading-[1.07] mb-5"
                 style={{ fontFamily: 'var(--font-display)', fontWeight: 800 }}
               >
-                {product.displayName[0]}
-                <span className="text-gradient">{product.displayName[1]}</span>
+                <span className="text-navy">{product.displayName[0]}</span><span className="text-primary">{product.displayName[1]}</span>
               </h1>
               <p
                 className="text-xl font-semibold text-text-secondary mb-4"
@@ -297,7 +296,7 @@ export default async function ProductPage({ params }) {
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Ready to try{' '}
-              <span className="text-gradient">{product.name}</span>?
+              <span className="text-primary">{product.name}</span>?
             </h2>
             <p className="text-text-secondary mb-8 max-w-md mx-auto leading-relaxed">
               Join businesses already using {product.name} to handle their customer communications automatically.

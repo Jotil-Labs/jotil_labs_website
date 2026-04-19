@@ -192,7 +192,7 @@ export default async function ProductPricingPage({ params }) {
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Ready to try{' '}
-              <span className="text-gradient">{product.name}</span>?
+              <span className="text-primary">{product.name}</span>?
             </h2>
             <p className="text-text-secondary mb-8 max-w-md mx-auto leading-relaxed">
               Start your 14-day free trial. No credit card charged until trial
