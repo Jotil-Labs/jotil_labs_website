@@ -91,7 +91,7 @@ export function Hero() {
   useEffect(() => setMounted(true), [])
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+    <section className="bg-brand-wash-mark relative min-h-screen flex items-center overflow-hidden pt-20">
       {/* Background gradient mesh */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         {/* Soft grid pattern */}
@@ -132,7 +132,7 @@ export function Hero() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.65, delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                   className={`block leading-[1.05] tracking-[-0.04em] font-extrabold ${i === 2 ? 'text-gradient' : 'text-text'}`}
-                  style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif', fontSize: 'clamp(2.75rem, 5.5vw, 4.25rem)' }}
+                  style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.75rem, 5.5vw, 4.25rem)' }}
                 >
                   {line}
                 </motion.span>
@@ -162,7 +162,7 @@ export function Hero() {
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 no-underline text-sm font-semibold text-white btn-gradient px-6 py-3.5 rounded-[11px] shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
-                style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
+                style={{ fontFamily: 'var(--font-display)' }}
               >
                 Book a Demo
                 <ArrowRight size={15} strokeWidth={2} />
@@ -170,7 +170,7 @@ export function Hero() {
               <Link
                 href="/products"
                 className="inline-flex items-center gap-2 no-underline text-sm font-semibold text-text px-6 py-3.5 rounded-[11px] transition-all duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
-                style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.07)', fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
+                style={{ background: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.07)', fontFamily: 'var(--font-display)' }}
               >
                 See How It Works
               </Link>

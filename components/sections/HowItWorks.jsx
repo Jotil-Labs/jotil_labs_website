@@ -41,7 +41,7 @@ export function HowItWorks() {
           <p className="badge mx-auto mb-4 w-fit">How it works</p>
           <h2
             className="text-[clamp(1.9rem,3.5vw,2.75rem)] font-extrabold tracking-[-0.04em] text-text mb-4"
-            style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             Up and running in{' '}
             <span className="text-gradient">hours, not months</span>
@@ -144,7 +144,7 @@ function StepCard({ step, index }) {
       <div>
         <h3
           className="text-lg font-bold text-text mb-2 tracking-[-0.025em]"
-          style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
+          style={{ fontFamily: 'var(--font-display)' }}
         >
           {title}
         </h3>

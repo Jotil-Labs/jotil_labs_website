@@ -15,7 +15,7 @@ export function FAQAccordion({ faq }) {
           <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">FAQ</p>
           <h2
             className="text-3xl font-bold text-text tracking-tight"
-            style={{ fontFamily: 'var(--font-outfit)' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             Common questions
           </h2>
@@ -36,7 +36,7 @@ export function FAQAccordion({ faq }) {
                   >
                     <span
                       className="text-base font-semibold text-text"
-                      style={{ fontFamily: 'var(--font-outfit)' }}
+                      style={{ fontFamily: 'var(--font-display)' }}
                     >
                       {item.question}
                     </span>

@@ -21,13 +21,13 @@ export default function NotFound() {
       <div className="relative z-10 text-center max-w-lg">
         <p
           className="text-gradient font-extrabold tracking-tight mb-4"
-          style={{ fontSize: 'clamp(5rem, 12vw, 8rem)', lineHeight: 1, fontFamily: 'var(--font-outfit)' }}
+          style={{ fontSize: 'clamp(5rem, 12vw, 8rem)', lineHeight: 1, fontFamily: 'var(--font-display)' }}
         >
           404
         </p>
         <h1
           className="text-2xl sm:text-3xl font-bold text-text tracking-tight mb-4"
-          style={{ fontFamily: 'var(--font-outfit)' }}
+          style={{ fontFamily: 'var(--font-display)' }}
         >
           Page not found
         </h1>

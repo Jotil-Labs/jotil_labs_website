@@ -105,14 +105,14 @@ export default async function ProductPage({ params }) {
               <Badge variant="blue" className="mb-5">{product.badge}</Badge>
               <h1
                 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text tracking-tight leading-[1.07] mb-5"
-                style={{ fontFamily: 'var(--font-outfit)', fontWeight: 800 }}
+                style={{ fontFamily: 'var(--font-display)', fontWeight: 800 }}
               >
                 {product.displayName[0]}
                 <span className="text-gradient">{product.displayName[1]}</span>
               </h1>
               <p
                 className="text-xl font-semibold text-text-secondary mb-4"
-                style={{ fontFamily: 'var(--font-outfit)' }}
+                style={{ fontFamily: 'var(--font-display)' }}
               >
                 {product.tagline}
               </p>
@@ -166,7 +166,7 @@ export default async function ProductPage({ params }) {
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">What you get</p>
             <h2
               className="text-3xl font-bold text-text tracking-tight"
-              style={{ fontFamily: 'var(--font-outfit)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               What&apos;s included
             </h2>
@@ -184,7 +184,7 @@ export default async function ProductPage({ params }) {
                 <div className="card-premium h-full flex flex-col">
                   <h3
                     className="text-lg font-bold text-text mb-3"
-                    style={{ fontFamily: 'var(--font-outfit)' }}
+                    style={{ fontFamily: 'var(--font-display)' }}
                   >
                     {svc.name}
                   </h3>
@@ -222,7 +222,7 @@ export default async function ProductPage({ params }) {
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Why it works</p>
             <h2
               className="text-3xl font-bold text-text tracking-tight"
-              style={{ fontFamily: 'var(--font-outfit)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               Built for results
             </h2>
@@ -239,7 +239,7 @@ export default async function ProductPage({ params }) {
                     </IconBox>
                     <h3
                       className="text-base font-semibold text-text mb-2"
-                      style={{ fontFamily: 'var(--font-outfit)' }}
+                      style={{ fontFamily: 'var(--font-display)' }}
                     >
                       {feat.title}
                     </h3>
@@ -261,7 +261,7 @@ export default async function ProductPage({ params }) {
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Pricing</p>
             <h2
               className="text-3xl font-bold text-text tracking-tight"
-              style={{ fontFamily: 'var(--font-outfit)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               Simple, transparent pricing
             </h2>
@@ -294,7 +294,7 @@ export default async function ProductPage({ params }) {
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">Get Started</p>
             <h2
               className="text-3xl sm:text-4xl font-extrabold text-text tracking-tight mb-4"
-              style={{ fontFamily: 'var(--font-outfit)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               Ready to try{' '}
               <span className="text-gradient">{product.name}</span>?

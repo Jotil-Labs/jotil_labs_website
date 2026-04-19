@@ -73,7 +73,7 @@ export default function ProductsPage() {
             <Badge variant="blue" className="mb-5">Our Solutions</Badge>
             <h1
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-text tracking-tight leading-[1.08]"
-              style={{ fontFamily: 'var(--font-outfit)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               Everything your business needs.{' '}
               <span className="text-gradient">One platform.</span>
@@ -116,7 +116,7 @@ export default function ProductsPage() {
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">What we offer</p>
             <h2
               className="text-3xl font-bold text-text tracking-tight"
-              style={{ fontFamily: 'var(--font-outfit)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               Explore our solutions
             </h2>
@@ -139,7 +139,7 @@ export default function ProductsPage() {
                         <div className="flex items-center gap-2 flex-wrap mb-1.5">
                           <h3
                             className="text-xl font-bold text-text"
-                            style={{ fontFamily: 'var(--font-outfit)' }}
+                            style={{ fontFamily: 'var(--font-display)' }}
                           >
                             {product.name}
                           </h3>
@@ -201,7 +201,7 @@ export default function ProductsPage() {
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Compare</p>
             <h2
               className="text-3xl font-bold text-text tracking-tight"
-              style={{ fontFamily: 'var(--font-outfit)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               Which solution fits your business?
             </h2>
@@ -227,7 +227,7 @@ export default function ProductsPage() {
                               <Logo size={28} />
                               <span
                                 className="text-xs font-semibold text-text whitespace-nowrap"
-                                style={{ fontFamily: 'var(--font-outfit)' }}
+                                style={{ fontFamily: 'var(--font-display)' }}
                               >
                                 {p.displayName[1]}
                               </span>
@@ -277,7 +277,7 @@ export default function ProductsPage() {
           <AnimatedSection>
             <h2
               className="text-3xl font-bold text-text tracking-tight mb-4"
-              style={{ fontFamily: 'var(--font-outfit)' }}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
               Not sure which product fits?
             </h2>

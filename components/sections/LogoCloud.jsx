@@ -34,7 +34,7 @@ export function LogoCloud() {
           className="text-center text-[11px] font-semibold tracking-[0.14em] uppercase mb-8"
           style={{
             color: 'var(--color-text-secondary)',
-            fontFamily: 'var(--font-outfit), Outfit, sans-serif',
+            fontFamily: 'var(--font-display)',
           }}
         >
           Trusted by forward-thinking businesses
@@ -98,7 +98,7 @@ function LogoItem({ name }) {
           className="text-[10px] font-bold"
           style={{
             color: 'var(--color-primary)',
-            fontFamily: 'var(--font-outfit), Outfit, sans-serif',
+            fontFamily: 'var(--font-display)',
             letterSpacing: '0.03em',
           }}
         >
@@ -109,7 +109,7 @@ function LogoItem({ name }) {
       {/* Name */}
       <span
         style={{
-          fontFamily: 'var(--font-outfit), Outfit, sans-serif',
+          fontFamily: 'var(--font-display)',
           fontSize: 13,
           fontWeight: 600,
           letterSpacing: '-0.01em',

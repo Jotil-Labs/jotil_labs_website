@@ -17,7 +17,7 @@ import { products } from '@/data/products'
 
 // Derive nav items from centralized product data
 const PRODUCT_ITEMS = products.map((p) => ({
-  name: p.shortName,
+  name: p.name,
   slug: p.slug,
   description: p.oneLiner,
   icon: LucideIcons[p.icon] || LucideIcons.Sparkles,

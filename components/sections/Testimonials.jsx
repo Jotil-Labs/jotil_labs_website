@@ -42,7 +42,7 @@ export function Testimonials() {
           <p className="badge mx-auto mb-4 w-fit">Testimonials</p>
           <h2
             className="text-[clamp(1.9rem,3.5vw,2.75rem)] font-extrabold tracking-[-0.04em] text-text"
-            style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             What our{' '}
             <span className="text-gradient">clients say</span>
@@ -107,7 +107,7 @@ function TestimonialCard({ testimonial }) {
           className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 text-white text-xs font-bold"
           style={{
             background: `linear-gradient(135deg, ${avatarColor}, ${avatarColor}cc)`,
-            fontFamily: 'var(--font-outfit), Outfit, sans-serif',
+            fontFamily: 'var(--font-display)',
             letterSpacing: '0.02em',
           }}
         >
@@ -117,7 +117,7 @@ function TestimonialCard({ testimonial }) {
         <div>
           <p
             className="text-[13px] font-semibold text-text leading-none tracking-[-0.01em]"
-            style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             {name}
           </p>

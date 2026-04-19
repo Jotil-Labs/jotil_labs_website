@@ -61,7 +61,7 @@ export function ProductShowcase() {
           </p>
           <h2
             className="text-[clamp(1.9rem,3.5vw,2.75rem)] font-extrabold tracking-[-0.04em] text-text mb-4"
-            style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             One platform.{' '}
             <span className="text-gradient">Every customer touchpoint.</span>
@@ -89,7 +89,7 @@ export function ProductShowcase() {
           <Link
             href="/products"
             className="inline-flex items-center gap-2 text-sm font-semibold text-primary no-underline group"
-            style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
+            style={{ fontFamily: 'var(--font-display)' }}
           >
             See how it all works together
             <ArrowRight
@@ -144,7 +144,7 @@ function CapabilityCard({ capability }) {
         {/* Title */}
         <h3
           className="text-lg font-bold text-text mb-2 leading-tight tracking-[-0.02em]"
-          style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
+          style={{ fontFamily: 'var(--font-display)' }}
         >
           {title}
         </h3>

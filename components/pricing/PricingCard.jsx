@@ -23,7 +23,7 @@ export function PricingCard({ tier, ctaHref = '/contact' }) {
       )}
       <p
         className="text-xl font-bold text-text mb-1"
-        style={{ fontFamily: 'var(--font-outfit)' }}
+        style={{ fontFamily: 'var(--font-display)' }}
       >
         {tier.name}
       </p>
@@ -32,7 +32,7 @@ export function PricingCard({ tier, ctaHref = '/contact' }) {
       <div className="mb-6 flex items-end gap-1">
         <span
           className={`text-4xl font-extrabold tracking-tight ${isHighlighted ? 'text-primary' : 'text-text'}`}
-          style={{ fontFamily: 'var(--font-outfit)' }}
+          style={{ fontFamily: 'var(--font-display)' }}
         >
           {tier.price}
         </span>

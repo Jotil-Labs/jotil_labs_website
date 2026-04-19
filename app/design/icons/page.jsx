@@ -274,7 +274,7 @@ function HexAvatar({ size = 80 }) {
 function IconRow({ label, description, variants, hexComponent: HexComp, sizes = [16, 24, 32, 40, 64] }) {
   return (
     <div className="mb-16">
-      <h3 className="text-xl font-bold text-text mb-1 tracking-tight" style={{ fontFamily: 'var(--font-outfit)' }}>{label}</h3>
+      <h3 className="text-xl font-bold text-text mb-1 tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>{label}</h3>
       {description && <p className="text-sm text-text-secondary mb-6">{description}</p>}
       {HexComp && (
         <div className="mb-8">
@@ -483,7 +483,7 @@ export default function IconExplorationPage() {
       <div className="max-w-6xl mx-auto px-6">
         <AnimatedSection>
           <Badge variant="blue" className="mb-4">Design Exploration v4</Badge>
-          <h1 className="text-4xl font-extrabold text-text tracking-tight mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>
+          <h1 className="text-4xl font-extrabold text-text tracking-tight mb-3" style={{ fontFamily: 'var(--font-display)' }}>
             Product Icon Family
           </h1>
           <p className="text-text-secondary max-w-2xl">

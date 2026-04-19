@@ -10,46 +10,59 @@ export function CTASection() {
     <section
       className="relative py-24 overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, #3B7BF2 0%, #1B4FBA 50%, #6366F1 100%)',
+        background: 'linear-gradient(180deg, #3859a8 0%, #2a4688 45%, #0f1129 100%)',
       }}
     >
-      {/* Dot pattern overlay */}
+      {/* Brand grain noise overlay */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            'radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px)',
-          backgroundSize: '28px 28px',
-          maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)',
-          WebkitMaskImage:
-            'radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)',
+            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          opacity: 0.06,
+          mixBlendMode: 'overlay',
         }}
       />
 
-      {/* Ambient glow orbs */}
+      {/* Dot pattern overlay (sparse, for texture) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute rounded-full"
+        className="pointer-events-none absolute inset-0"
         style={{
-          width: 500,
-          height: 500,
-          top: '-20%',
-          right: '-10%',
-          background: 'radial-gradient(circle, rgba(99,102,241,0.35) 0%, transparent 70%)',
-          filter: 'blur(80px)',
+          backgroundImage:
+            'radial-gradient(circle, rgba(255,255,255,0.10) 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+          maskImage: 'radial-gradient(ellipse 80% 70% at 50% 40%, black 40%, transparent 100%)',
+          WebkitMaskImage:
+            'radial-gradient(ellipse 80% 70% at 50% 40%, black 40%, transparent 100%)',
         }}
       />
+
+      {/* Cyan ambient glow - top right, matches brand doc */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute rounded-full"
         style={{
-          width: 400,
-          height: 400,
-          bottom: '-15%',
-          left: '-8%',
-          background: 'radial-gradient(circle, rgba(59,123,242,0.30) 0%, transparent 70%)',
-          filter: 'blur(80px)',
+          width: 520,
+          height: 520,
+          top: '-25%',
+          right: '-12%',
+          background: 'radial-gradient(circle, rgba(34,211,238,0.28) 0%, transparent 70%)',
+          filter: 'blur(90px)',
+        }}
+      />
+      {/* Royal blue secondary glow - left */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute rounded-full"
+        style={{
+          width: 420,
+          height: 420,
+          top: '10%',
+          left: '-10%',
+          background: 'radial-gradient(circle, rgba(56,89,168,0.35) 0%, transparent 70%)',
+          filter: 'blur(90px)',
         }}
       />
 
@@ -72,7 +85,7 @@ export function CTASection() {
             />
             <span
               className="text-[11px] font-semibold text-white tracking-[0.1em] uppercase"
-              style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif', opacity: 0.9 }}
+              style={{ fontFamily: 'var(--font-display)', opacity: 0.9 }}
             >
               Get started today
             </span>
@@ -84,7 +97,7 @@ export function CTASection() {
           <h2
             className="text-white font-extrabold tracking-[-0.04em] mb-6"
             style={{
-              fontFamily: 'var(--font-outfit), Outfit, sans-serif',
+              fontFamily: 'var(--font-display)',
               fontSize: 'clamp(2rem, 4.5vw, 3.25rem)',
               lineHeight: 1.1,
             }}
@@ -117,7 +130,7 @@ export function CTASection() {
               href="/contact"
               className="inline-flex items-center gap-2 no-underline text-sm font-semibold rounded-[11px] px-6 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
               style={{
-                fontFamily: 'var(--font-outfit), Outfit, sans-serif',
+                fontFamily: 'var(--font-display)',
                 background: '#FFFFFF',
                 color: 'var(--color-primary)',
                 boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
@@ -132,7 +145,7 @@ export function CTASection() {
               href="/products/receptionist"
               className="inline-flex items-center gap-2 no-underline text-sm font-semibold text-white rounded-[11px] px-6 py-3.5 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
               style={{
-                fontFamily: 'var(--font-outfit), Outfit, sans-serif',
+                fontFamily: 'var(--font-display)',
                 background: 'rgba(255,255,255,0.12)',
                 border: '1px solid rgba(255,255,255,0.22)',
                 backdropFilter: 'blur(12px)',

@@ -20,7 +20,7 @@ export function FeatureComparison({ tiers, features }) {
               >
                 <div
                   className="text-base font-bold"
-                  style={{ fontFamily: 'var(--font-outfit)' }}
+                  style={{ fontFamily: 'var(--font-display)' }}
                 >
                   {tier.name}
                 </div>
