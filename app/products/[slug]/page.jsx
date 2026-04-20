@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import * as LucideIcons from 'lucide-react'
-import { Check } from 'lucide-react'
+import { Check, ArrowRight } from 'lucide-react'
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
@@ -269,13 +269,28 @@ export default async function ProductPage({ params }) {
             </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-            {product.pricing.tiers.map((tier, i) => (
-              <AnimatedSection key={i} delay={i * 0.08}>
-                <PricingCard tier={tier} index={i} />
-              </AnimatedSection>
-            ))}
-          </div>
+          {product.pricing.billingModel === 'contact' ? (
+            <AnimatedSection className="max-w-2xl mx-auto text-center">
+              <p className="text-text-secondary mb-6 leading-relaxed">
+                {product.pricing.subhead}
+              </p>
+              <Link
+                href={product.pricing.primaryCTA.href}
+                className="inline-flex items-center gap-2 btn-gradient no-underline text-white font-semibold rounded-lg px-6 py-3 hover:-translate-y-0.5 transition-transform"
+              >
+                {product.pricing.primaryCTA.label}
+                <ArrowRight size={16} strokeWidth={2} />
+              </Link>
+            </AnimatedSection>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+              {product.pricing.tiers.map((tier, i) => (
+                <AnimatedSection key={i} delay={i * 0.08}>
+                  <PricingCard tier={tier} index={i} />
+                </AnimatedSection>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
