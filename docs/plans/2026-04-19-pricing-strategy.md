@@ -262,6 +262,49 @@ Blended: realistic breakeven at ~200-300 SMB customers across all tiers.
 - Add Monthly/Annual toggle.
 - Under-the-hood: don't expose LLM model names on marketing page for Messenger (keep generic "best-in-class AI"). Model names exposed only on JotilSpace page.
 
+### 2.13 Concierge Setup (current manual-onboarding reality)
+
+Dev team sets up every account today (no self-serve infrastructure yet). Publish a **Concierge Setup** fee with strike-through messaging as a founding-customer perk.
+
+**Banner copy under the tier grid:**
+> **Concierge Setup included** - ~~$499~~ Free for founding customers.
+> Our team configures your AI, knowledge base, and channels. No technical skills required - live in days, not weeks.
+> [What's included in setup →]
+
+**Setup scope by tier (Messenger-specific):**
+
+| Tier | What concierge setup covers |
+|---|---|
+| Essentials | Knowledge base ingestion (1 source) + Web chat widget install + 1 SMS number + live test. No CRM, calendar, WhatsApp, or Teams. |
+| Starter | Above + business-hours config + basic analytics dashboard |
+| Pro | Above + WhatsApp channel + CRM sync (HubSpot / Salesforce) + AI training on your content |
+| Business | Above + Teams channel + API access + SSO + advanced analytics |
+| Enterprise | Full custom - model choice, data residency, white-glove migration, custom integrations |
+
+**Add-ons (separate section, not on pricing cards):**
+- Custom integration with a tool we do not support out of the box - from **$1,500**
+- Custom AI fine-tuning on your data - from **$2,500**
+- Branded customer portal / white-label deployment - from **$3,500**
+- Dedicated phone number pool (multi-location) - from **$500/mo**
+
+**Framing rationale:**
+- "Founding customer" (not "limited-time offer") matches reality and is honest.
+- Allows graceful escalation: setup fee returns after founding-customer cohort closes.
+- Anchors the value of Concierge Setup without dark-pattern urgency.
+- Tier-scoped features prevent Essentials from promising CRM/Calendar integrations it should not include.
+
+**Current CTAs on pricing page (until self-serve infra ships):**
+
+| Tier | CTA | Flow |
+|---|---|---|
+| Essentials | "Get started" | `/contact` form, tier-prefilled, dev onboards, Stripe invoice |
+| Starter | "Start 14-day trial" | `/contact` form, tier-prefilled |
+| Pro | "Start 14-day trial" | Same |
+| Business | "Start 14-day trial" or "Talk to sales" | Same |
+| Enterprise | "Talk to sales" | Calendar booking via Calendly/Cal.com (pending #56) |
+
+**Self-serve infra is a separate initiative** - will unlock true Stripe checkout for Essentials and move away from manual setup. Targeted for later, not in this PR.
+
 ## 3. JotilOutreach
 
 *To be added after Messenger is approved.*
