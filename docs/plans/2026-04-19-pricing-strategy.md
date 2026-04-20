@@ -636,7 +636,120 @@ Copy guideline: *"Bring your own API key OR use ours"* as an Enterprise perk (cu
 
 ## 5. JotilFlow
 
-*To be added after Space is approved.*
+### 5.1 Current positioning (approved)
+
+**JotilFlow is a bespoke service offering: workflow automation and custom AI agent development for SMBs.** Not a self-serve product today. The pricing page shows a single "Contact us" path, not tiered plans.
+
+Why this position for now:
+- Product is service-led. Each customer's automation is designed and built by the JotilLabs team.
+- Requirements vary wildly by customer; fixed tiers would mis-price 80% of engagements.
+- Consulting + development hours are the actual work, not SaaS quota.
+- Allows the team to say yes to revenue without forcing customers into a bad-fit tier.
+
+Pricing page messaging:
+> "**JotilFlow** - Workflow automation and AI agent development tailored to your business. Every engagement is scoped to what you need. Talk to us and we'll map the first automation in your free discovery call."
+> [Book discovery call →]
+
+### 5.2 Services we offer (for the Flow page)
+
+1. **Workflow automation design and build** - We map your current manual processes, identify the high-ROI ones, and build automations that run 24/7.
+2. **Custom AI agent development** - Build AI agents that handle specific tasks in your business: qualifying leads, drafting replies, summarizing calls, categorizing tickets, generating reports.
+3. **Tool integrations** - Connect the tools you already use (CRM, calendar, SMS, email, CMS, accounting, scheduling). We handle auth, data mapping, error handling.
+4. **Scheduled and event-driven automations** - Cron-like triggers, webhook listeners, time-zone-aware pacing.
+5. **AI decision logic** - Inject AI reasoning into your workflows: classifier nodes, routing decisions, content generation, content validation.
+6. **Process consulting** - Audit current operations, identify automation opportunities, prioritize by ROI, build a phased roadmap.
+7. **Migration from existing tools** - Move automations out of Zapier / Make / n8n when they've become fragile or expensive to maintain.
+8. **Monitoring and maintenance** - Ongoing watch on running workflows, alerts, and tuning.
+9. **Training and handoff** - Team training so your internal people can operate and extend the automations we build.
+10. **Retainer arrangements** - Monthly retainer for ongoing automation work (new builds + maintenance).
+
+### 5.3 Pricing page copy (Flow specifically)
+
+Replace the existing 3-tier pricing table with a single contact card:
+
+```
+Not one-size-fits-all.
+Your automations are designed around your business.
+
+Every Flow engagement starts with a 30-minute discovery call.
+We map the highest-ROI automations for you, then scope the build.
+
+[Book discovery call →]
+
+Typical engagements
+- Custom workflow build (1-3 automations): project-based
+- Monthly retainer (ongoing builds + maintenance): monthly
+- AI agent development (custom LLM agents): project-based
+- Process consulting (audit + roadmap): project-based
+
+Every engagement includes:
+- Discovery + scoping
+- Design + build
+- Testing + monitoring
+- Training + handoff
+- Documentation
+```
+
+### 5.4 Indicative price bands (internal reference, NOT published)
+
+Keep this internal for sales calls and quoting. Do NOT publish on website.
+
+| Engagement type | Typical price band | Notes |
+|---|---|---|
+| Single custom workflow build (1-3 automations) | $1,500-$5,000 project | Scoped to complexity. 1-2 weeks delivery. |
+| AI agent development (1 agent, specific task) | $3,000-$8,000 project | 2-4 weeks delivery. Includes prompt engineering, testing, deployment. |
+| Process audit + roadmap | $1,500-$3,000 project | 1 week delivery. Written report + prioritized list. |
+| Monthly retainer (ongoing builds + maintenance) | $1,500-$5,000 / mo | Negotiated. Hours of build + monitoring + team availability. |
+| Migration from existing platform (Zapier/Make/n8n) | $2,000-$10,000 project | Depending on number of workflows. |
+| Dedicated automation engineer (embedded) | $8,000-$15,000 / mo | Enterprise-only. Full-time equivalent. |
+
+**Minimum engagement: $1,500.** Below that, direct them to self-serve alternatives (Zapier, Make). Not worth our dev cycle.
+
+### 5.5 Future productization (DEFERRED)
+
+If you later decide to productize Flow as self-serve with tiers (like Zapier competitor), see Section 5.6 below for the tier analysis done during brainstorming. That analysis is **paused**, not executed. Revisit when:
+- Self-serve infrastructure is built
+- Connector library has 100+ integrations
+- Visual workflow builder is stable
+- Customer demand validates a productized model over bespoke services
+
+### 5.6 Deferred: productized tier analysis (future reference)
+
+The following analysis was done during pricing brainstorming and is preserved here for future use. **NOT the current plan.** The current plan is bespoke services per Section 5.3.
+
+Proposed tier structure (for when Flow becomes self-serve):
+
+| Tier | Price | Workflows | Executions/mo | AI Decision calls/mo | Concurrent | Consulting hours |
+|---|---|---|---|---|---|---|
+| Essentials | $99 / mo | 3 | 1,000 | — | 1 | Setup only |
+| Starter | $249 / mo | 10 | 10,000 | 500 | 2 | + 1 hr/mo check-in |
+| Pro | $599 / mo | 50 | 50,000 | 2,500 | 5 | + 2 hrs/quarter review |
+| Business | $1,499 / mo | Unlimited | 200,000 | 10,000 | 15 | + 2 hrs/mo dedicated consultant |
+| Enterprise | Custom (from $3,000 / mo) | Unlimited | Unlimited | Unlimited | Unlimited | Dedicated + weekly sync |
+
+**Key design decisions preserved:**
+- Metering: executions AND AI decision calls priced separately (protects margin on AI-heavy workflows).
+- Concurrent executions capped per tier (infra cost lever).
+- Consulting hours bundled (managed-service positioning vs DIY Zapier).
+- Setup fee ~~$999~~ free for founding customers (consistent with other products).
+- Target gross margin: 60%+ at typical use across all tiers.
+
+**Open questions that would need answering before productization:**
+- Is the visual builder built? Real drag-and-drop or hand-coded?
+- AI Decision Nodes - real feature or aspirational?
+- Connector count - 20? 50? 100+?
+- Current customers - are any actually using Flow today?
+
+### 5.7 Concierge Setup (for bespoke services)
+
+Setup fee is effectively the discovery + scoping + build time of the project itself. No separate setup line item on the website. Project price IS the setup+build price.
+
+### 5.8 Implementation notes
+
+- Replace `data/products.js` flow.pricing tier block with a single "contact" descriptor.
+- Update the Flow product page to remove the 3-card pricing table, replace with the single discovery-call CTA block (copy in Section 5.3).
+- Keep Flow in the nav Solutions dropdown with the updated oneLiner.
+- Add a separate internal Google Doc / Notion with the indicative price bands from Section 5.4 for sales team reference.
 
 ## 6. JotilAvatar
 
@@ -666,6 +779,10 @@ Copy guideline: *"Bring your own API key OR use ours"* as an Enterprise perk (cu
 | 2026-04-20 | Space Enterprise minimum = 25 users | Reasonable floor. Below that, Business tier covers them. |
 | 2026-04-20 | "Bring your own API key" as Enterprise perk | Reduces our LLM cost on the heaviest users. Customer benefits from their own rate-limits / contracts. |
 | 2026-04-20 | Setup fee strike-through standardized at $999 across all three products analyzed so far (Messenger was $499; unified to $999 for messaging consistency) | ONE strike-through number across products simplifies marketing and anchors higher perceived value. Updated Messenger to $999 as well. |
+| 2026-04-20 | JotilFlow positioned as bespoke services (NOT productized tiers) | Product is service-led today. Self-serve infra and productized tiering deferred until visual builder, connectors, and self-serve UX exist. |
+| 2026-04-20 | Flow pricing page = single "Contact us" / "Book discovery call" CTA | Every engagement scoped individually. Fixed tiers would mis-price 80% of customers. |
+| 2026-04-20 | Indicative Flow price bands kept INTERNAL (not published) | Sales team reference only. Gives quoting consistency without committing publicly. |
+| 2026-04-20 | Flow productized tier analysis PRESERVED in Section 5.6 for future | When the product is ready to self-serve, the analysis is there. Don't start from scratch. |
 
 ## 8. Open questions
 
