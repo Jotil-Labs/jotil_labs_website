@@ -307,7 +307,181 @@ Dev team sets up every account today (no self-serve infrastructure yet). Publish
 
 ## 3. JotilOutreach
 
-*To be added after Messenger is approved.*
+### 3.1 Current state (before rewrite)
+- Starter $149 / 500 outbound calls + 2,000 SMS
+- Professional $399 / 2,500 calls + 10,000 SMS
+- Enterprise Custom / unlimited
+
+Current volumes were enterprise-sized, not SMB. Revised below.
+
+### 3.2 Market analysis - competitor tier breakdown
+
+| Competitor | Tier / price | Notes |
+|---|---|---|
+| Goodcall | $49-$199 / mo | Voice + some SMS, SMB, decent AI. Closest apples-to-apples. |
+| Synthflow | $89-$349 / mo | Voice only, SMB. No SMS bundled. |
+| Squad AI | $99-$799 / mo | Outbound voice SMB |
+| Bland.ai | ~$0.09 / min + platform fee | Developer, raw API, no campaign tooling |
+| Retell | ~$0.07 / min base | Developer, raw API |
+| Regal.io | $1,500-$5,000 / mo | Contact-center AI, enterprise |
+| Air AI | $2,000-$5,000+ / mo | Enterprise only |
+| Replicant | $10K+ / mo | Enterprise only |
+| SimpleTexting / EZ Texting | $25-$299 / mo | SMS-only blast, no AI, no voice |
+| Klaviyo SMS / Attentive | Usage-based | E-commerce SMS focus |
+
+**Wedge:** No SMB platform bundles AI voice outbound + SMS campaigns + CRM sync in one plan. Competitors are voice-only, SMS-only, or enterprise-only.
+
+### 3.3 Target customer + realistic volumes
+
+| Segment | Typical outbound volume per month |
+|---|---|
+| Solo practitioner / solopreneur | 50-200 calls |
+| Small business (1-10 staff) | 200-500 calls |
+| Growing SMB (10-30 staff) | 500-1,000 calls |
+| Multi-location SMB ceiling | 1,500-2,000 calls |
+| Above 2,000 calls / mo | Call-center / enterprise |
+
+**SMB outbound does not reach 10K calls/mo.** Enterprise-sized tier volumes don't exist in this segment. Revised pricing below reflects this.
+
+Use cases by industry:
+- Dental / medical: appointment reminders, lapsed-patient reactivation
+- Real estate: lead follow-up, listing notifications
+- HVAC / plumbing / field services: seasonal reactivation, scheduling
+- Auto dealers: service reminders, trade-in campaigns
+- Legal intake: consult booking
+- Fitness / gyms: membership renewal, cold outreach
+
+### 3.4 Positioning + wedge
+"Voice + SMS outbound in one SMB-priced platform. TCPA-compliant, CRM-synced, scheduled campaigns without a call center."
+
+### 3.5 Pricing model decision: CREDITS (unique to this product)
+
+Why credits instead of separate voice-minutes and SMS buckets:
+- Customers mix voice/SMS wildly across campaigns. Fixed buckets waste capacity for most customers.
+- Simpler pricing messaging (one number on card vs two).
+- Easier to extend (WhatsApp, future channels = one more credit rate).
+- Matches industry patterns (Zapier tasks, Make operations, HeyGen credits).
+- Better margin through flexible substitution.
+
+**Conversion rate: 1 credit = 1 minute of outbound voice = 5 SMS.**
+
+Why 1:5 ratio:
+- 1 min outbound voice COGS ≈ $0.20 (Retell $0.07 + Twilio $0.014 + LLM $0.02 + dialer/pacing $0.04 + scheduling infra $0.025 + compliance $0.015)
+- 5 SMS COGS ≈ $0.125 (5 × $0.025 with A2P + LLM)
+- Ratio approximates cost parity, clean mental math
+
+**Messenger stays on conversation-buckets (not credits) because chat conversations are naturally one unit.** Credits only for Outreach where channel mix is the flexibility driver.
+
+### 3.6 Proposed tiers (credit-based)
+
+| Tier | Price | Credits / mo | Voice-only max | SMS-only max | $/credit |
+|---|---|---|---|---|---|
+| **Essentials** | $149 / mo | 150 | 150 min (~100 calls at 90s avg) | 750 SMS | $0.99 |
+| **Starter** | $249 / mo | 500 | 500 min (~330 calls) | 2,500 SMS | $0.50 |
+| **Pro** (highlighted) | $599 / mo | 1,500 | 1,500 min (~1,000 calls) | 7,500 SMS | $0.40 |
+| **Business** | $999 / mo | 3,000 | 3,000 min (~2,000 calls) | 15,000 SMS | $0.33 |
+| **Enterprise** | Custom (from **$2,000 / mo**) | 5,000+ | Negotiated | Negotiated | Custom |
+
+**$/credit decreases per tier = built-in volume discount ladder.** Pro is 60% cheaper per credit than Essentials.
+
+**Call duration caps** (protect COGS): Essentials 3 min, Starter 5 min, Pro 7 min, Business 10 min, Enterprise negotiable. Realistic outbound calls are 60-120 sec.
+
+### 3.7 Overage rates
+
+| Tier | Over-credit rate | Break-even upgrade |
+|---|---|---|
+| Essentials | $1.20 / credit | ~85 overage credits = Starter price |
+| Starter | $0.60 / credit | ~580 overage credits = Pro price |
+| Pro | $0.40 / credit | ~1,000 overage credits = Business price |
+| Business | $0.30 / credit | At 4K+ credits/mo, Enterprise conversation compelling |
+
+### 3.8 Feature matrix
+
+**Every tier baseline (non-negotiable):** TCPA + A2P 10DLC compliance, recording + transcription, basic AMD, opt-out tracking + audit trail, Concierge Setup (free for founding customers).
+
+| Capability | Essentials | Starter | Pro | Business | Enterprise |
+|---|---|---|---|---|---|
+| Active campaigns | 1 | 3 | 10 | Unlimited | Unlimited |
+| Concurrent (parallel) calls | 1 | 2 | 5 | 15 | 25+ |
+| Channels: voice + SMS | yes | yes | yes | yes | yes |
+| WhatsApp outbound | — | — | yes | yes | yes |
+| Voicemail drops (AI) | — | — | yes | yes | yes |
+| Live transfer (AI to human) | — | — | — | yes | yes |
+| Contact upload (CSV) | 500 | 5,000 | 25,000 | Unlimited | Unlimited |
+| CRM sync (HubSpot, Salesforce, Pipedrive) | — | — | yes | yes | yes + custom |
+| Script source | AI templates | AI from your offer | AI trained on your KB | + custom scripts | Custom fine-tuning |
+| Scheduling | Simple window | Time-zone aware | Advanced (best-time, drip) | + manual overrides | Custom logic |
+| Retry logic | 1 retry | Up to 3 configurable | Smart (AMD-aware) | Smart + custom rules | Custom |
+| A/B testing | — | — | yes | yes | yes |
+| Analytics | Basic | Dashboard | Funnel + sentiment | + custom dashboards + scheduled reports | + data export |
+| API access | — | — | — | yes | yes + priority |
+| Team + roles | 1 user | 3 users | 10 users | Unlimited + RBAC | + SSO/SAML |
+| Dedicated number pool | — | — | Shared | Dedicated | Dedicated + BYON |
+| SLA | — | — | — | 99.5% | 99.9% with credits |
+| Data residency | US | US | US | US | US or EU |
+| Support | Docs + AI chatbot + email | Email | Chat + email | Priority (same-day) | Dedicated CSM |
+
+**Reality flags (confirm before ship):** live transfer, voicemail drops, smart retry, best-time-to-contact ML, drip sequences, A/B testing, WhatsApp outbound, API, SSO/SAML - which are built vs roadmap? Roadmap items move to Enterprise as "available on request" or get cut.
+
+### 3.9 Unit economics check
+
+| Tier | All-voice max COGS | All-SMS max COGS | Mixed (60%) COGS | Margin at max-voice | Margin at 60% mixed |
+|---|---|---|---|---|---|
+| Essentials | 150 × $0.20 = $30 | 750 × $0.025 = $19 | ~$17 | 80% | 89% |
+| Starter | 500 × $0.20 = $100 | 2,500 × $0.025 = $63 | ~$50 | 60% | 80% |
+| Pro | 1,500 × $0.20 = $300 | 7,500 × $0.025 = $188 | ~$150 | 50% | 75% |
+| Business | 3,000 × $0.20 = $600 | 15,000 × $0.025 = $375 | ~$300 | 40% | 70% |
+
+Every tier clears 40%+ gross margin even at worst-case (all-voice, max usage). Typical use hits 70-80%+.
+
+### 3.10 Concierge Setup scope per tier
+
+| Tier | Setup includes | Estimated internal cost |
+|---|---|---|
+| Essentials | Caller ID + A2P 10DLC registration + 1 campaign + basic script + test calls | ~3 hrs (~$150) |
+| Starter | + CRM CSV import + 2-3 templates + time-zone pacing | ~4 hrs (~$200) |
+| Pro | + A/B testing + CRM sync + AI script training + AMD tuning | ~8 hrs (~$400) |
+| Business | + API integration + dedicated number pool + SSO + custom analytics | ~15 hrs (~$750) |
+| Enterprise | + TCPA compliance audit + custom AI fine-tuning + SLA + white-glove migration | Custom ($2,500-$5,000) |
+
+**Setup-fee messaging on the pricing page:**
+
+> **Concierge Setup included** - ~~$999~~ Free for founding customers.
+> We configure your campaigns, register A2P 10DLC, connect your CRM, and train the AI on your scripts. No technical skills required. Live in days, not weeks.
+> [What's included in setup →]
+
+Strike-through set at $999 (not $499 like Messenger) because Outreach has materially higher setup overhead - A2P registration alone, compliance verification, caller ID, initial campaign design. Higher strikethrough anchors more perceived value.
+
+### 3.11 Pricing page layout
+
+Same pattern as Messenger:
+- Essentials = quiet single-line entry card above main grid
+- 3-card comparison grid: Starter / Pro (highlighted) / Business
+- Enterprise = "Need more? Talk to sales →" banner below
+- "Concierge Setup - $999 free" banner at bottom with expandable details
+- Add-ons section (custom integrations, custom AI, dedicated infra)
+- Monthly / Annual toggle (annual = 2 months free = 17%)
+- On each card, show examples: "150 credits = ~100 calls OR 750 SMS OR any mix"
+
+### 3.12 Current CTAs (until self-serve infra ships)
+
+| Tier | CTA | Flow |
+|---|---|---|
+| Essentials | "Get started" | `/contact` form, tier-prefilled, dev onboards, Stripe invoice |
+| Starter | "Start 14-day trial" | `/contact` form |
+| Pro | "Start 14-day trial" | Same |
+| Business | "Start 14-day trial" or "Talk to sales" | Same |
+| Enterprise | "Talk to sales" | Calendar booking (pending #56) |
+
+### 3.13 Implementation notes (for later PR)
+
+- Update `data/products.js` outreach.pricing block to credit-based model (new shape, different from Messenger's conversation buckets).
+- Add `pricing.type: 'credits'` discriminator so the pricing page renders the credit card UI vs bucket UI.
+- Credit conversion rate stored alongside: `{ creditMinutesVoice: 1, creditSMS: 5 }`.
+- Pricing card template: show credit count + "equals ~X calls OR Y SMS" examples.
+- Feature matrix UI for comparison table (probably the existing `FeatureComparison` component needs extension).
+- Concierge Setup strike-through: $999 for Outreach (different from Messenger's $499).
+- Compliance copy callout on product page (A2P + TCPA as features, not warnings).
 
 ## 4. JotilSpace
 
@@ -333,6 +507,12 @@ Dev team sets up every account today (no self-serve infrastructure yet). Publish
 | 2026-04-19 | "Essentials" chosen over Solo / Lite / Basic / Launch / Spark | Customer-centric, works across all 6 products, proven in category (Dropbox, Adobe, Shopify). |
 | 2026-04-19 | LLM model names (GPT, Gemini, Claude) NOT exposed on marketing pages | Avoid lock-in signaling, customer doesn't care, preserves flexibility. **Exception: JotilSpace page exposes model choice as a feature.** |
 | 2026-04-19 | Annual discount = 17% (2 months free) on all tiers | Industry standard, cash-flow friendly. |
+| 2026-04-20 | Messenger Concierge Setup scope limited per tier (Essentials does NOT include CRM/Calendar integrations) | Tier features must ladder. Essentials is a light-touch entry tier, not a full setup. |
+| 2026-04-20 | Outreach uses CREDIT-BASED pricing, 1 cr = 1 min voice = 5 SMS | Multi-channel flexible use demands it. Messenger stays on conversation buckets. |
+| 2026-04-20 | Outreach SMB volume ceilings corrected (Business = 3,000 credits ≈ 2,000 calls, not 10K) | Earlier proposal was enterprise-sized; SMB reality is 1.5-2K calls/mo max before call-center territory. |
+| 2026-04-20 | Outreach Concierge Setup strike-through = $999 (vs Messenger $499) | Outreach has materially higher setup overhead: A2P registration, caller ID, campaign design, compliance verification. |
+| 2026-04-20 | Concurrent/parallel call caps per tier (1/2/5/15/25+) | Parallel calls = real infra cost driver. Throttling protects margin and creates a speed-advantage reason to upgrade. |
+| 2026-04-20 | Call duration caps per tier (3/5/7/10/custom min) | Protect COGS. Realistic outbound is 60-120s; caps are generous but prevent runaway cost. |
 
 ## 8. Open questions
 
