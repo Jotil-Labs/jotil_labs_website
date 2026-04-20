@@ -1,5 +1,5 @@
 import './globals.css'
-import { Montserrat_Alternates, Inter, JetBrains_Mono } from 'next/font/google'
+import { Montserrat_Alternates, Inter, JetBrains_Mono, Fraunces } from 'next/font/google'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -28,6 +28,14 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains',
   display: 'swap',
   weight: ['400', '500'],
+})
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  display: 'swap',
+  weight: 'variable',
+  axes: ['opsz'],
 })
 
 export const metadata = {
@@ -89,7 +97,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${montserratAlternates.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`scroll-smooth ${montserratAlternates.variable} ${inter.variable} ${jetbrainsMono.variable} ${fraunces.variable}`}
     >
       <head>
         <OrganizationJsonLd />
