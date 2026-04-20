@@ -267,9 +267,11 @@ Blended: realistic breakeven at ~200-300 SMB customers across all tiers.
 Dev team sets up every account today (no self-serve infrastructure yet). Publish a **Concierge Setup** fee with strike-through messaging as a founding-customer perk.
 
 **Banner copy under the tier grid:**
-> **Concierge Setup included** - ~~$499~~ Free for founding customers.
+> **Concierge Setup included** - ~~$999~~ Free for founding customers.
 > Our team configures your AI, knowledge base, and channels. No technical skills required - live in days, not weeks.
 > [What's included in setup →]
+
+(Note: Messenger strike-through updated from $499 to $999 to standardize across all products.)
 
 **Setup scope by tier (Messenger-specific):**
 
@@ -485,7 +487,152 @@ Same pattern as Messenger:
 
 ## 4. JotilSpace
 
-*To be added after Outreach is approved.*
+### 4.1 Current state (before rewrite)
+- Team $49 / user / mo / up to 10 users
+- Business $99 / user / mo / unlimited users
+- Enterprise Custom / custom deployment
+
+### 4.2 Product scope
+SMB workspace bundling: CRM + Help Desk / Tickets + Calendar + **multi-model AI Agents** (LibreChat-style). The ONLY JotilLabs product where model names (GPT-4o, Claude, Gemini) are exposed publicly because model choice IS the product value.
+
+### 4.3 Market analysis
+
+| Category | Competitor | Per-user price | Notes |
+|---|---|---|---|
+| CRM | HubSpot Starter / Pro | $18-$100 / user / mo | Strong SMB |
+| CRM | Salesforce | $25-$330 / user / mo | Enterprise-weighted |
+| CRM | Pipedrive | $14-$99 / user / mo | SMB standard |
+| CRM | Zoho CRM | $14-$52 / user / mo | SMB |
+| CRM | Copper | $29-$134 / user / mo | Gmail-first |
+| Help desk | Zendesk | $19-$199 / user / mo | Category standard |
+| Help desk | Freshdesk | Free-$83 / user / mo | SMB |
+| Help desk | Intercom | $39-$139 / user / mo | Premium SMB |
+| AI workspace | ChatGPT Team | $25 / user / mo | Single-model |
+| AI workspace | Claude Team | $25-$30 / user / mo | Single-model |
+| AI workspace | Poe / LibreChat cloud | $5-$20 / user / mo | Chat only, no CRM |
+| Workspace | Monday CRM | $19-$28 / user / mo | Generic workspace |
+| Workspace | Notion | $10-$15 / user / mo | Docs-first |
+| Workspace | ClickUp | $7-$12 / user / mo | Project management |
+
+### 4.4 Wedge
+**No competitor bundles CRM + Tickets + Calendar + MULTI-MODEL AI in one product.** HubSpot Einstein locked to their model. Salesforce Einstein same. LibreChat is AI-only (no CRM). Our angle: *"Your CRM + Tickets + Calendar AND every frontier AI model (GPT, Claude, Gemini) in one interface. Stop paying for five subscriptions."*
+
+### 4.5 Target customer
+- SMB teams 2-50 users, some mid-market (up to 200 users)
+- Currently paying for: CRM (HubSpot/Pipedrive) + Help desk (Zendesk) + Calendar + ChatGPT Team = $100-150/user aggregate
+- Want consolidation, multi-model AI access, no enterprise complexity
+- Model choice matters (different work suits different models)
+
+### 4.6 Positioning
+"One workspace. Your CRM, tickets, calendar, and every AI in one interface. Pay for what your team uses, not five separate subscriptions."
+
+### 4.7 Proposed tiers (per-user, industry standard)
+
+| Tier | Price / user / mo | AI queries / user / mo | Contacts | Tickets / mo | AI models |
+|---|---|---|---|---|---|
+| **Essentials** | $19 | 0 (no AI agents) | 500 | 200 | — |
+| **Starter** | $39 | 500 | 2,500 | 1,000 | GPT-4o-mini |
+| **Pro** (highlighted) | $79 | 2,500 | Unlimited | 5,000 | GPT-4o, Claude Sonnet, Gemini Pro |
+| **Business** | $149 | 5,000 | Unlimited | Unlimited | All + concurrent multi-agent |
+| **Enterprise** | Custom (from **$199 / user**, 25 user minimum) | Unlimited / negotiated | Unlimited | Unlimited | All + fine-tuned on your data |
+
+### 4.8 Feature matrix
+
+| Capability | Essentials | Starter | Pro | Business | Enterprise |
+|---|---|---|---|---|---|
+| CRM pipelines | yes | yes | + custom fields + sequences | + advanced automations | + custom workflow engine |
+| Tickets | yes | yes | + AI auto-response | + AI triage + routing | + custom logic |
+| Calendar | yes | + AI booking | + smart scheduling | + team calendars + rules | + custom integrations |
+| AI Agents | — | 1 model, 500 q | 3 models, 2,500 q, concurrent | All models, 5,000 q | Custom + fine-tuned |
+| Knowledge bases | 1 | 3 | 10 | 50 | Unlimited |
+| Automations | — | 5 | 25 | Unlimited | Custom |
+| Integrations | Email | + Zapier | + HubSpot/Salesforce + 100+ connectors | + API access | Custom |
+| Team roles | 1 admin | Admin + member | + custom roles | RBAC + SSO | SSO/SAML + data residency |
+| Analytics | Basic | Dashboard | + funnel + AI insights | + custom dashboards + scheduled reports | + data export |
+| Support | Docs + email | Email | Chat + email | Priority (same-day) | Dedicated CSM |
+
+### 4.9 Unit economics check
+
+Per-user COGS assumptions (confirm with real infra data):
+- LLM cost per query: $0.01 average (mix of cheap and frontier models)
+- Base SaaS infra per user (DB, storage, compute, monitoring): $3-8/mo
+- Payment processing: 3% of revenue
+
+| Tier | LLM cost | Infra cost | Total COGS/user | Revenue/user | Margin |
+|---|---|---|---|---|---|
+| Essentials | $0 | $3 | $3 | $19 | 84% |
+| Starter | $5 | $4 | $9 | $39 | 77% |
+| Pro | $25 | $6 | $31 | $79 | 61% |
+| Business | $50 | $8 | $58 | $149 | 61% |
+| Enterprise | Capped per contract | $10+ | Custom | $199+ | Target 65%+ |
+
+All tiers clear 60%+ gross margin. Healthy.
+
+### 4.10 AI query definition
+"Query" = one user-AI interaction that produces a model response. Multi-turn conversations = multiple queries (each new user message counts as 1). Token-capped at ~4K input + 2K output per query to prevent runaway cost. Overage rate: $0.05/query above included allotment. Alerts at 90% and 100%.
+
+### 4.11 Concierge Setup
+
+Setup includes:
+- CRM pipeline configuration + data migration (from HubSpot/Pipedrive/Salesforce CSV)
+- Ticket routing rules + templates
+- Calendar integration (Google/Outlook)
+- User provisioning + roles setup
+- AI agents configured per tier (Starter+)
+- Knowledge base ingestion (Starter+)
+- Training session with admin user
+
+Per-tier internal cost:
+
+| Tier | Internal hours | Internal cost |
+|---|---|---|
+| Essentials | ~3 | ~$150 |
+| Starter | ~5 | ~$250 |
+| Pro | ~10 | ~$500 |
+| Business | ~20 | ~$1,000 |
+| Enterprise | Custom | $3,000-$10,000 |
+
+**Setup fee: ~~$999~~ free for founding customers** (same strike-through as Outreach for consistency). Business tier's true cost approaches the $999 anchor; Essentials/Starter give room during founding phase.
+
+### 4.12 Multi-model exposure on pricing page
+
+Unlike other products, Space explicitly lists AI models because model choice IS the value:
+
+- **Starter**: "GPT-4o-mini"
+- **Pro**: "GPT-4o, Claude Sonnet, Gemini Pro"
+- **Business**: "All frontier models + custom system prompts per agent"
+- **Enterprise**: "All models + fine-tune on your data + custom deployment"
+
+Copy guideline: *"Bring your own API key OR use ours"* as an Enterprise perk (customers with existing OpenAI/Anthropic contracts can use their own billing, reducing our LLM cost + giving them control).
+
+### 4.13 Current CTAs (until self-serve infra ships)
+
+| Tier | CTA | Flow |
+|---|---|---|
+| Essentials | "Get started" | `/contact` form, tier-prefilled |
+| Starter | "Start 14-day trial" | `/contact` form |
+| Pro | "Start 14-day trial" | Same |
+| Business | "Start 14-day trial" or "Talk to sales" | Same |
+| Enterprise | "Talk to sales" | Calendar booking (pending #56) |
+
+### 4.14 Open decisions
+
+1. Essentials $19 OK or push to $25 for margin safety?
+2. Enterprise minimum = 25 users? Some SaaS set 50+; raises floor but harder to land.
+3. Business $149 concrete vs "Talk to sales"?
+4. Query cap = per-user-per-month vs pooled team quota? Per-user is standard; pooled is more flexible for small teams.
+5. Which models are actually wired in the backend today? Marketing pages can only promise what's built.
+6. "Bring your own API key" for Enterprise - confirm architecturally possible?
+
+### 4.15 Implementation notes (for later PR)
+
+- Update `data/products.js` space.pricing block to 5-tier per-user structure.
+- Add `pricing.billingUnit: 'per_user'` discriminator.
+- Add AI queries/user/mo as a field.
+- Expose model list per tier on the pricing page (unlike Messenger/Outreach/Receptionist which use generic "best-in-class AI").
+- Strike-through $999 Concierge Setup banner.
+- Per-user pricing toggle: show monthly-per-user AND annual-per-user (with 17% discount).
+- User-count input widget on pricing card: lets visitor enter team size, see total cost per month.
 
 ## 5. JotilFlow
 
@@ -513,6 +660,12 @@ Same pattern as Messenger:
 | 2026-04-20 | Outreach Concierge Setup strike-through = $999 (vs Messenger $499) | Outreach has materially higher setup overhead: A2P registration, caller ID, campaign design, compliance verification. |
 | 2026-04-20 | Concurrent/parallel call caps per tier (1/2/5/15/25+) | Parallel calls = real infra cost driver. Throttling protects margin and creates a speed-advantage reason to upgrade. |
 | 2026-04-20 | Call duration caps per tier (3/5/7/10/custom min) | Protect COGS. Realistic outbound is 60-120s; caps are generous but prevent runaway cost. |
+| 2026-04-20 | Space uses per-user pricing (not credits) | Industry standard for workspace/CRM. Users = seats = value metric. |
+| 2026-04-20 | Space AI queries metered per-user-per-month (not pooled) | Standard SaaS AI pattern. Predictable per-seat economics. |
+| 2026-04-20 | Space explicitly lists AI model names on pricing page | Multi-model IS the product wedge - naming models is the feature, not lock-in. Exception to the "don't name models" rule for other products. |
+| 2026-04-20 | Space Enterprise minimum = 25 users | Reasonable floor. Below that, Business tier covers them. |
+| 2026-04-20 | "Bring your own API key" as Enterprise perk | Reduces our LLM cost on the heaviest users. Customer benefits from their own rate-limits / contracts. |
+| 2026-04-20 | Setup fee strike-through standardized at $999 across all three products analyzed so far (Messenger was $499; unified to $999 for messaging consistency) | ONE strike-through number across products simplifies marketing and anchors higher perceived value. Updated Messenger to $999 as well. |
 
 ## 8. Open questions
 
