@@ -753,7 +753,129 @@ Setup fee is effectively the discovery + scoping + build time of the project its
 
 ## 6. JotilAvatar
 
-*To be added after Flow is approved.*
+### 6.1 Current positioning (approved)
+
+**JotilAvatar is a bespoke service offering: branded AI avatars for websites and digital touchpoints.** Not self-serve. Every engagement is scoped per customer because avatar training, brand voice, and integration setup are custom work.
+
+Status as of 2026-04-20:
+- Avatar is LIVE
+- Backed by **Anam AI** (Anam has its own subscription + per-minute usage cost that flows to us)
+- Real features: website embedding, on-premise deployment option, 30+ languages
+- **NOT built (but marketing claims it):** video-meeting avatar, SOC 2 compliance, video-call context-awareness. See issue #57 for removal.
+
+### 6.2 Services we offer (for the Avatar page)
+
+1. **Website AI Avatar deployment** - Embed a branded avatar on your site that greets visitors, answers questions, guides them to products. Real-time lip sync + natural conversation.
+2. **Custom avatar creation** - Train an avatar on your brand voice, clothing, personality, appearance. Multiple personas for different site sections if needed.
+3. **Multilingual avatars** - Deploy in any of 30+ languages with native accents.
+4. **Integration with your content** - Feed the avatar your product docs, FAQs, pricing so it answers grounded in your actual business.
+5. **On-premise deployment** (for regulated industries) - Deploy avatar infrastructure inside your environment for data-sensitive use cases.
+6. **Analytics and conversation review** - See what visitors ask, improve the avatar's responses over time.
+7. **Ongoing tuning** - Monthly retainer for updates, new content ingestion, persona changes.
+
+### 6.3 Pricing page copy (Avatar specifically)
+
+Replace the existing 3-tier pricing table with a single contact card:
+
+```
+Every avatar is built for your brand.
+
+Your avatar looks like your brand, sounds like your brand, and knows your products.
+Every engagement starts with a 30-minute discovery call.
+We design the avatar, train it on your content, and deploy it on your site.
+
+[Book discovery call →]
+
+What's included in every engagement
+- Avatar design (appearance, voice, personality tuned to your brand)
+- Content ingestion (your FAQs, product docs, pricing)
+- Website embed with brand-matched styling
+- Multi-language support if needed
+- Analytics dashboard
+- 30-day tuning period after launch
+
+Optional add-ons
+- On-premise deployment (for regulated industries)
+- Multiple avatars / personas (different for marketing, support, onboarding)
+- Monthly retainer for content updates and tuning
+```
+
+### 6.4 Indicative price bands (internal reference, NOT published)
+
+| Engagement type | Typical price band | Notes |
+|---|---|---|
+| Single-avatar website deployment | $3,000-$8,000 project + monthly | Project = avatar design + training + embed. Monthly = Anam AI subscription pass-through + our compute + light maintenance. |
+| Monthly subscription (after launch) | $299-$999 / mo | Covers Anam AI usage (~$200-600/mo typical) + our infra + minor tuning. Plan limits based on avatar-minute usage. |
+| Multi-avatar deployment (3+ personas) | $8,000-$20,000 project + $899+/mo | Multiple personas share infra, different content domains. |
+| On-premise deployment | $20,000-$50,000 project + $2,000-$5,000/mo | Private compute, dedicated Anam enterprise contract or alternative. |
+| Monthly tuning retainer | $500-$1,500 / mo | Content updates, persona adjustments, analytics review. |
+| Dedicated avatar engineer (enterprise) | $10,000-$18,000 / mo | Full-time equivalent for enterprise deployments. |
+
+**Minimum engagement: $3,000 one-time + $299/mo.** Below that, the cost of Anam AI + our infra + engineering time makes it unprofitable.
+
+**Anam AI pass-through consideration:** Anam has its own subscription + per-minute usage costs. These flow to JotilLabs as COGS. Monthly subscription tiers should be **margin-positive above Anam cost + our infra**, not just cover Anam.
+
+### 6.5 Unit economics (so you know the cost floor)
+
+Per-minute of interactive avatar use:
+- Anam AI per-minute: $0.30-$0.50
+- LLM for conversation: $0.02-$0.05
+- TTS / streaming: $0.02-$0.05
+- Our compute / infra: $0.02-$0.04
+- **Total per-minute COGS: $0.36-$0.64**
+
+Typical usage patterns:
+- Light use (small website, 5-10 avatar-min/day): 150-300 min/mo = $54-$192 COGS
+- Moderate (medium website, 30-60 avatar-min/day): 900-1,800 min/mo = $324-$1,152 COGS
+- Heavy (high-traffic site, 100+ avatar-min/day): 3,000+ min/mo = $1,080+ COGS
+
+Monthly pricing must cover COGS + infra + margin. Minimum $299/mo covers light use. Heavier use requires bigger monthly subscriptions (or usage-metered overage).
+
+### 6.6 Monthly subscription tiers (internal reference - may eventually publish)
+
+These are NOT the website pricing. They're what we quote in discovery calls after scoping the customer's expected avatar-minutes.
+
+| Plan | Monthly | Included avatar-minutes | Target customer |
+|---|---|---|---|
+| Avatar Lite | $299 / mo | 500 min | Low-traffic website, single avatar |
+| Avatar Standard | $699 / mo | 1,500 min | Medium website, 1-2 personas |
+| Avatar Pro | $1,499 / mo | 4,000 min | High-traffic site, multiple personas, full tuning |
+| Avatar Enterprise | Custom (from $3,500/mo) | Custom | On-premise, enterprise deployment |
+
+Overage at all tiers: $0.75/min above included allotment. Equivalent to "upgrade to next tier makes sense at ~30% over cap."
+
+### 6.7 Future productization (DEFERRED)
+
+If Avatar becomes self-serve later (customer-driven avatar creation UI, auto-training on uploaded content, self-serve billing), productized tier model would look like:
+
+| Tier | Price | Avatars | Avatar-minutes/mo | Channels |
+|---|---|---|---|---|
+| Essentials | $99 | 1 | 200 min | Website embed only |
+| Starter | $299 | 1 | 500 min | + multi-language |
+| Pro | $699 | 2 | 1,500 min | + analytics + multiple personas |
+| Business | $1,499 | 5 | 4,000 min | + on-premise option + API |
+| Enterprise | Custom | Unlimited | Negotiated | + dedicated + SLA + fine-tuning |
+
+Gated on:
+- Self-serve avatar creation UI (customers design their own avatars without our team)
+- Auto content ingestion (upload site URL, auto-extract FAQ)
+- Billing integration (Stripe usage-metered)
+- SOC 2 certification (for Enterprise)
+- Video-meeting avatar capability (if that becomes a feature)
+
+### 6.8 Concierge Setup
+
+For bespoke services: the project fee IS the setup. Discovery call scopes it, invoice is sent.
+
+For when/if productized: Setup fee ~~$1,499~~ free for founding customers (higher than other products because avatar setup is more custom - training the avatar on voice/appearance/content takes ~10-20 hours of work).
+
+### 6.9 Implementation notes
+
+- Replace `data/products.js` avatar.pricing tier block with a single "contact" descriptor.
+- Update the Avatar product page to remove the 3-card pricing table, replace with the single discovery-call CTA block (copy in Section 6.3).
+- **Fix false claims** per issue #57 before updating pricing page (remove SOC 2, video meeting avatar, video call context).
+- Keep Avatar in the nav Solutions dropdown with the updated oneLiner.
+- Add indicative price bands from Section 6.4 + monthly tiers from Section 6.6 to the internal sales reference doc.
 
 ## 7. Decision log
 
@@ -783,6 +905,11 @@ Setup fee is effectively the discovery + scoping + build time of the project its
 | 2026-04-20 | Flow pricing page = single "Contact us" / "Book discovery call" CTA | Every engagement scoped individually. Fixed tiers would mis-price 80% of customers. |
 | 2026-04-20 | Indicative Flow price bands kept INTERNAL (not published) | Sales team reference only. Gives quoting consistency without committing publicly. |
 | 2026-04-20 | Flow productized tier analysis PRESERVED in Section 5.6 for future | When the product is ready to self-serve, the analysis is there. Don't start from scratch. |
+| 2026-04-20 | JotilAvatar positioned as bespoke services (NOT productized tiers) | Not self-serve today. Avatar training + brand voice + content ingestion is custom per engagement. |
+| 2026-04-20 | Avatar uses Anam AI (not HeyGen as previously noted) | Confirmed with user 2026-04-20. Anam has subscription + per-minute cost; flows to JotilLabs as COGS. |
+| 2026-04-20 | False claims on Avatar page (SOC 2, video meeting avatar, video call context) flagged for removal | See issue #57. SOC 2 false-claim carries legal risk. |
+| 2026-04-20 | Avatar minimum engagement $3,000 one-time + $299/mo | Anam AI + our infra + engineering time make below this unprofitable. |
+| 2026-04-20 | Avatar productized tier model deferred; gated on self-serve UI + content ingestion + SOC 2 | Same pattern as Flow. Services-led today, productized later if demand justifies. |
 
 ## 8. Open questions
 
