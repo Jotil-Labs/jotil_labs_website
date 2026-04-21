@@ -158,9 +158,11 @@ export default async function ProductPricingPage({ params }) {
                 </div>
               )}
 
-              {/* Main 4-card tier grid (Starter + Pro + Business + Enterprise) */}
+              {/* Main 4-card tier grid (Starter + Pro + Business + Enterprise).
+                  auto-rows-fr forces all rows to match the tallest card so
+                  internal section min-heights align horizontally. */}
               <div
-                className={`grid grid-cols-1 md:grid-cols-2 ${gridTiers.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-6 items-stretch`}
+                className={`grid grid-cols-1 md:grid-cols-2 ${gridTiers.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} auto-rows-fr gap-6 items-stretch`}
               >
                 {gridTiers.map((tier, i) => (
                   <AnimatedSection key={tier.slug ?? i} delay={i * 0.06}>

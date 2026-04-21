@@ -43,23 +43,25 @@ export function PricingCard({ tier, productSlug, unitLabel }) {
             : 'border-primary-100 bg-white shadow-[0_1px_3px_rgba(15,17,41,0.05)]'
         }`}
       >
-        {/* Name */}
+        {/* Name — fixed row height so tier labels align across all cards */}
         <p
-          className="text-xl font-bold text-primary mb-2"
+          className="text-xl font-bold text-primary mb-2 min-h-[2rem] flex items-center"
           style={{ fontFamily: 'var(--font-display)' }}
         >
           {tier.name}
         </p>
-        {tier.description && (
-          <p className="text-sm text-text-secondary leading-relaxed mb-6 min-h-[3rem]">
-            {tier.description}
-          </p>
-        )}
 
-        {/* Price */}
-        <div className="mb-6 flex items-baseline gap-1">
+        {/* Description — min-h locks height so all following rows align
+            even when one tier has a longer description that wraps to 2 lines. */}
+        <p className="text-sm text-text-secondary leading-relaxed mb-6 min-h-[3.5rem]">
+          {tier.description ?? ''}
+        </p>
+
+        {/* Price — fixed row so the big numbers land on the same baseline
+            across every card regardless of description length. */}
+        <div className="mb-6 flex items-baseline gap-1 h-[3.5rem]">
           <span
-            className={`text-5xl font-extrabold tracking-tight ${
+            className={`text-5xl font-extrabold tracking-tight leading-none ${
               isEnterprise ? 'text-text' : 'text-primary'
             }`}
             style={{ fontFamily: 'var(--font-display)' }}
@@ -71,32 +73,37 @@ export function PricingCard({ tier, productSlug, unitLabel }) {
           )}
         </div>
 
-        {/* Quota line — subtle, single sentence */}
-        {quotaLine && (
-          <p className="text-sm text-text font-semibold mb-4 pb-4 border-b border-black/5">
-            {quotaLine}
-          </p>
-        )}
+        {/* Quota line — min-h reserves the row even when a tier has no
+            quota data, so the divider + features list start at the same Y
+            on every card. */}
+        <div className="min-h-[2.5rem] mb-4 pb-4 border-b border-black/5 flex items-start">
+          {quotaLine ? (
+            <p className="text-sm text-text font-semibold leading-snug">{quotaLine}</p>
+          ) : null}
+        </div>
 
-        {/* Features */}
+        {/* Features — flex-1 pushes the CTA to the bottom. */}
         <ul className="space-y-2.5 mb-8 flex-1">
           {tier.features?.map((f, fi) => {
             const isInheritance = f.toLowerCase().startsWith('everything in')
             return (
               <li
                 key={fi}
-                className={`flex items-start gap-2.5 text-sm ${
+                className={`flex items-start gap-2 text-sm ${
                   isInheritance
                     ? 'text-text font-semibold pb-2 mb-1 border-b border-black/5'
                     : 'text-text-secondary'
                 }`}
               >
                 {!isInheritance && (
-                  <span className="mt-0.5 shrink-0 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-100">
-                    <Check size={10} strokeWidth={3} className="text-emerald-600" />
-                  </span>
+                  <Check
+                    size={16}
+                    strokeWidth={2.5}
+                    className="text-emerald-600 mt-0.5 shrink-0"
+                    aria-hidden="true"
+                  />
                 )}
-                <span className={isInheritance ? 'pt-0' : ''}>{f}</span>
+                <span>{f}</span>
               </li>
             )
           })}
