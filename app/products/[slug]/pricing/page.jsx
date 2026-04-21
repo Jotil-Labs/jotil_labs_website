@@ -8,7 +8,6 @@ import { PricingCard } from '@/components/pricing/PricingCard'
 import { FeatureComparison } from '@/components/pricing/FeatureComparison'
 import { FAQAccordion } from '@/components/product/FAQAccordion'
 import { EssentialsCard } from '@/components/pricing/EssentialsCard'
-import { EnterpriseBanner } from '@/components/pricing/EnterpriseBanner'
 import { ContactOnlyPricing } from '@/components/pricing/ContactOnlyPricing'
 import { ConciergeSetupBanner } from '@/components/pricing/ConciergeSetupBanner'
 
@@ -32,26 +31,24 @@ export async function generateMetadata({ params }) {
 /**
  * Build the feature comparison matrix from the tier features.
  * Handles "Everything in X" inheritance between tiers.
+ * Operates across the combined tier list (core tiers + synthesized enterprise).
  */
 function buildComparisonMatrix(tiers) {
-  // Start with each tier's own features (excluding "Everything in X" sentences)
   const tierFeatureSets = tiers.map((tier) => {
     return new Set(
-      tier.features.filter((f) => !f.toLowerCase().startsWith('everything in'))
+      (tier.features ?? []).filter((f) => !f.toLowerCase().startsWith('everything in'))
     )
   })
 
-  // Apply inheritance — if a tier says "Everything in X", it inherits the previous tier's set
   tiers.forEach((tier, i) => {
     if (
       i > 0 &&
-      tier.features.some((f) => f.toLowerCase().startsWith('everything in'))
+      (tier.features ?? []).some((f) => f.toLowerCase().startsWith('everything in'))
     ) {
       tierFeatureSets[i - 1].forEach((f) => tierFeatureSets[i].add(f))
     }
   })
 
-  // Collect every unique feature across all tiers (preserving order from lowest tier first)
   const seen = new Set()
   const ordered = []
   tierFeatureSets.forEach((set) => {
@@ -69,6 +66,25 @@ function buildComparisonMatrix(tiers) {
   }))
 }
 
+/**
+ * Synthesize an inline Enterprise tier object from product.pricing.enterprise
+ * so it can render as the 4th peer card in the main grid instead of a
+ * separate banner below. Returns null when product has no enterprise data.
+ */
+function buildEnterpriseTier(product) {
+  const ent = product.pricing?.enterprise
+  if (!ent) return null
+  return {
+    slug: 'enterprise',
+    name: 'Enterprise',
+    price: 'Custom',
+    period: '',
+    description: ent.description,
+    priceFrom: ent.priceFrom,
+    features: ent.features ?? [],
+  }
+}
+
 export default async function ProductPricingPage({ params }) {
   const { slug } = await params
   const { getProductBySlug } = await import('@/data/products')
@@ -76,23 +92,17 @@ export default async function ProductPricingPage({ params }) {
 
   if (!product) notFound()
 
-  const tiers = product.pricing?.tiers ?? []
+  const coreTiers = product.pricing?.tiers ?? []
+  const enterpriseTier = buildEnterpriseTier(product)
+  const gridTiers = enterpriseTier ? [...coreTiers, enterpriseTier] : coreTiers
   const pricingFaq = product.pricingFaq ?? []
-  const comparisonRows = buildComparisonMatrix(tiers)
+  const comparisonRows = buildComparisonMatrix(gridTiers)
+  const unitLabel = product.pricing?.unitLabel
 
   return (
     <>
       {/* ─── 1. Hero ─── */}
-      <section className="relative pt-28 pb-16 px-4 overflow-hidden bg-gradient-to-br from-[#F0F4FF] via-[#F7F9FF] to-white">
-        <div
-          className="absolute top-0 right-0 w-[600px] h-[500px] rounded-full opacity-40 pointer-events-none"
-          aria-hidden="true"
-          style={{
-            background:
-              'radial-gradient(ellipse, #3859a815 0%, transparent 65%)',
-            filter: 'blur(80px)',
-          }}
-        />
+      <section className="relative pt-28 pb-16 px-4">
         <div className="relative max-w-4xl mx-auto text-center">
           <AnimatedSection>
             <Link
@@ -122,7 +132,7 @@ export default async function ProductPricingPage({ params }) {
               )}
             </p>
             {product.pricing.billingModel !== 'contact' && (
-              <div className="inline-flex items-center gap-2 bg-white border border-black/5 rounded-full px-4 py-2 text-sm text-text-secondary">
+              <div className="inline-flex items-center gap-2 bg-white border border-primary-100 rounded-full px-4 py-2 text-sm text-text-secondary">
                 <span className="h-2 w-2 rounded-full bg-emerald-500" />
                 14-day free trial · No credit card charged until trial ends
               </div>
@@ -131,18 +141,16 @@ export default async function ProductPricingPage({ params }) {
         </div>
       </section>
 
-      <div className="gradient-divider" />
-
       {/* ─── 2. Pricing block (branches by billingModel) ─── */}
-      <section className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
+      <section className="pb-20 px-4">
+        <div className="max-w-7xl mx-auto">
           {product.pricing.billingModel === 'contact' ? (
             <ContactOnlyPricing product={product} />
           ) : (
             <>
-              {/* Essentials card (quiet, above the grid) */}
+              {/* Essentials entry card — slim, above main grid */}
               {product.pricing.essentials && (
-                <div className="max-w-5xl mx-auto">
+                <div className="max-w-5xl mx-auto mb-10">
                   <EssentialsCard
                     product={product}
                     essentials={product.pricing.essentials}
@@ -150,16 +158,22 @@ export default async function ProductPricingPage({ params }) {
                 </div>
               )}
 
-              {/* Main 3-tier grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-                {tiers.map((tier, i) => (
-                  <AnimatedSection key={tier.slug ?? i} delay={i * 0.08}>
-                    <PricingCard tier={tier} productSlug={slug} />
+              {/* Main 4-card tier grid (Starter + Pro + Business + Enterprise) */}
+              <div
+                className={`grid grid-cols-1 md:grid-cols-2 ${gridTiers.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-6 items-stretch`}
+              >
+                {gridTiers.map((tier, i) => (
+                  <AnimatedSection key={tier.slug ?? i} delay={i * 0.06}>
+                    <PricingCard
+                      tier={tier}
+                      productSlug={slug}
+                      unitLabel={unitLabel}
+                    />
                   </AnimatedSection>
                 ))}
               </div>
 
-              {/* Overage note for tiered products */}
+              {/* Overage note */}
               {product.pricing.overageRatePerUnit && (
                 <AnimatedSection delay={0.25}>
                   <p className="text-center text-sm text-text-secondary mt-10">
@@ -172,19 +186,9 @@ export default async function ProductPricingPage({ params }) {
                 </AnimatedSection>
               )}
 
-              {/* Enterprise banner below grid */}
-              {product.pricing.enterprise && (
-                <div className="max-w-5xl mx-auto">
-                  <EnterpriseBanner
-                    product={product}
-                    enterprise={product.pricing.enterprise}
-                  />
-                </div>
-              )}
-
-              {/* Concierge Setup banner */}
+              {/* Concierge setup fee banner */}
               {product.pricing.setupFee && (
-                <div className="max-w-5xl mx-auto">
+                <div className="max-w-5xl mx-auto mt-10">
                   <ConciergeSetupBanner setupFee={product.pricing.setupFee} />
                 </div>
               )}
@@ -193,12 +197,10 @@ export default async function ProductPricingPage({ params }) {
         </div>
       </section>
 
-      <div className="gradient-divider" />
-
       {/* ─── 3. Feature comparison ─── */}
       {comparisonRows.length > 0 && (
-        <section className="py-20 px-4 bg-[#FAFBFD]">
-          <div className="max-w-5xl mx-auto">
+        <section className="py-20 px-4">
+          <div className="max-w-6xl mx-auto">
             <AnimatedSection className="text-center mb-12">
               <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">
                 Compare plans
@@ -211,20 +213,16 @@ export default async function ProductPricingPage({ params }) {
               </h2>
             </AnimatedSection>
             <AnimatedSection delay={0.1}>
-              <div className="card-premium">
-                <FeatureComparison tiers={tiers} features={comparisonRows} />
+              <div className="rounded-2xl border border-primary-100 bg-white p-6 sm:p-8">
+                <FeatureComparison tiers={gridTiers} features={comparisonRows} />
               </div>
             </AnimatedSection>
           </div>
         </section>
       )}
 
-      <div className="gradient-divider" />
-
       {/* ─── 4. Pricing FAQ ─── */}
       {pricingFaq.length > 0 && <FAQAccordion faq={pricingFaq} />}
-
-      <div className="gradient-divider" />
 
       {/* ─── 5. Bottom CTA ─── */}
       <section className="py-20 px-4">
