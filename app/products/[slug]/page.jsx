@@ -253,10 +253,10 @@ export default async function ProductPage({ params }) {
 
       <div className="gradient-divider" />
 
-      {/* ─── 5. Pricing ─── */}
+      {/* ─── 5. Pricing teaser — single highlighted tier + CTA to full pricing page ─── */}
       <section id="pricing" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <AnimatedSection className="text-center mb-14">
+          <AnimatedSection className="text-center mb-12">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Pricing</p>
             <h2
               className="text-3xl font-bold text-text tracking-tight"
@@ -283,12 +283,35 @@ export default async function ProductPage({ params }) {
               </Link>
             </AnimatedSection>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-              {product.pricing.tiers.map((tier, i) => (
-                <AnimatedSection key={i} delay={i * 0.08}>
-                  <PricingCard tier={tier} index={i} />
-                </AnimatedSection>
-              ))}
+            <div className="max-w-sm mx-auto">
+              {(() => {
+                // Teaser shows the highlighted (Most Popular) tier only. Full tier
+                // grid + compare-plan table + Essentials + Enterprise live on the
+                // dedicated pricing page, preventing redundant display.
+                const featuredTier =
+                  product.pricing.tiers.find((t) => t.highlighted) ??
+                  product.pricing.tiers[Math.floor(product.pricing.tiers.length / 2)]
+                return (
+                  <AnimatedSection>
+                    <PricingCard
+                      tier={featuredTier}
+                      productSlug={slug}
+                      unitLabel={product.pricing.unitLabel}
+                    />
+                  </AnimatedSection>
+                )
+              })()}
+              <AnimatedSection delay={0.1}>
+                <div className="text-center mt-10">
+                  <Link
+                    href={`/products/${slug}/pricing`}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-primary no-underline hover:gap-3 transition-all"
+                  >
+                    See full pricing — all tiers and compare plans
+                    <ArrowRight size={16} strokeWidth={2} />
+                  </Link>
+                </div>
+              </AnimatedSection>
             </div>
           )}
         </div>
