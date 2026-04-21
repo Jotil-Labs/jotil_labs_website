@@ -8,7 +8,7 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 export function CTASection() {
   return (
     <section
-      className="relative py-24 overflow-hidden"
+      className="surface-navy relative py-24 overflow-hidden"
       style={{
         background: 'linear-gradient(180deg, #3859a8 0%, #2a4688 45%, #0f1129 100%)',
       }}

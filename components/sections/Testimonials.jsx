@@ -34,7 +34,7 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section className="py-24" style={{ background: 'var(--color-bg)' }}>
+    <section className="surface-warm py-24">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}

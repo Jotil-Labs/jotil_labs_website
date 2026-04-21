@@ -93,7 +93,7 @@ export function IntegrationStrip() {
   const row2 = INTEGRATIONS.slice(10, 20)
 
   return (
-    <section className="py-24" style={{ background: 'var(--color-bg)' }}>
+    <section className="surface-raised py-24">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}

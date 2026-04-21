@@ -42,10 +42,7 @@ const STATS = [
 
 export function Stats() {
   return (
-    <section
-      className="py-20"
-      style={{ background: 'var(--color-bg-alt)' }}
-    >
+    <section className="surface-sunken py-20">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Optional section label */}

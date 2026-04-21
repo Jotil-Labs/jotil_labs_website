@@ -16,14 +16,7 @@ const TRACK = [...LOGOS, ...LOGOS]
 
 export function LogoCloud() {
   return (
-    <section
-      className="py-12 overflow-hidden"
-      style={{
-        background: '#FFFFFF',
-        borderTop: '1px solid rgba(0,0,0,0.04)',
-        borderBottom: '1px solid rgba(0,0,0,0.04)',
-      }}
-    >
+    <section className="surface-warm py-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         {/* Label */}
         <motion.p
