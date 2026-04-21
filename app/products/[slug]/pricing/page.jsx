@@ -89,7 +89,7 @@ export default async function ProductPricingPage({ params }) {
           aria-hidden="true"
           style={{
             background:
-              'radial-gradient(ellipse, #3B7BF215 0%, transparent 65%)',
+              'radial-gradient(ellipse, #3859a815 0%, transparent 65%)',
             filter: 'blur(80px)',
           }}
         />

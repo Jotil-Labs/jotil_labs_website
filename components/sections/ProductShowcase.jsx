@@ -121,8 +121,8 @@ function CapabilityCard({ capability }) {
         }}
         onMouseEnter={e => {
           e.currentTarget.style.transform = 'translateY(-2px)'
-          e.currentTarget.style.boxShadow = '0 12px 40px rgba(59,123,242,0.1), 0 4px 12px rgba(0,0,0,0.04)'
-          e.currentTarget.style.borderColor = 'rgba(59,123,242,0.14)'
+          e.currentTarget.style.boxShadow = '0 12px 40px rgba(56, 89, 168,0.1), 0 4px 12px rgba(0,0,0,0.04)'
+          e.currentTarget.style.borderColor = 'rgba(56, 89, 168,0.14)'
         }}
         onMouseLeave={e => {
           e.currentTarget.style.transform = 'translateY(0)'
@@ -134,8 +134,8 @@ function CapabilityCard({ capability }) {
         <div
           className="w-12 h-12 rounded-[14px] flex items-center justify-center shrink-0 mb-5"
           style={{
-            background: 'linear-gradient(135deg, rgba(59,123,242,0.08), rgba(99,102,241,0.06))',
-            border: '1px solid rgba(59,123,242,0.10)',
+            background: 'linear-gradient(135deg, rgba(56, 89, 168,0.08), rgba(34, 211, 238,0.06))',
+            border: '1px solid rgba(56, 89, 168,0.10)',
           }}
         >
           <Icon size={20} strokeWidth={1.5} style={{ color: 'var(--color-primary)' }} />

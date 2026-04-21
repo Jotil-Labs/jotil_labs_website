@@ -15,7 +15,7 @@ const INTEGRATIONS = [
   { label: 'WhatsApp', color: '#25D366' },
   { label: 'Stripe', color: '#635BFF' },
   { label: 'Airtable', color: '#18BFFF' },
-  { label: 'Retell AI', color: '#3B7BF2' },
+  { label: 'Retell AI', color: '#3859a8' },
   { label: 'Google Sheets', color: '#34A853' },
   { label: 'Calendly', color: '#006BFF' },
   { label: 'Zoho CRM', color: '#D32011' },

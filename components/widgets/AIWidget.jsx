@@ -21,7 +21,7 @@ function ChatPanel() {
         <div className="flex gap-2.5">
           <div
             className="w-7 h-7 rounded-full shrink-0 flex items-center justify-center text-white text-[10px] font-bold"
-            style={{ background: 'linear-gradient(135deg, #3B7BF2, #2D6AE0)' }}
+            style={{ background: 'linear-gradient(135deg, #3859a8, #2a4688)' }}
           >
             J
           </div>
@@ -57,7 +57,7 @@ function ChatPanel() {
             disabled={!input.trim()}
             aria-label="Send message"
             className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 border-none cursor-pointer disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-            style={{ background: 'linear-gradient(135deg, #3B7BF2, #2D6AE0)' }}
+            style={{ background: 'linear-gradient(135deg, #3859a8, #2a4688)' }}
           >
             <Send size={14} color="#fff" strokeWidth={2} />
           </button>
@@ -82,17 +82,17 @@ function VoicePanel() {
         className="relative w-20 h-20 rounded-full border-none cursor-pointer flex items-center justify-center transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2"
         style={{
           background: listening
-            ? 'linear-gradient(135deg, #1B4FBA, #3B7BF2)'
-            : 'linear-gradient(135deg, #3B7BF2, #2D6AE0)',
+            ? 'linear-gradient(135deg, #22396E, #3859a8)'
+            : 'linear-gradient(135deg, #3859a8, #2a4688)',
           boxShadow: listening
-            ? '0 0 40px rgba(59,123,242,0.4)'
-            : '0 8px 24px rgba(59,123,242,0.3)',
+            ? '0 0 40px rgba(56, 89, 168,0.4)'
+            : '0 8px 24px rgba(56, 89, 168,0.3)',
         }}
       >
         {listening && (
           <span
             className="absolute inset-0 rounded-full animate-ping"
-            style={{ background: 'rgba(59,123,242,0.2)' }}
+            style={{ background: 'rgba(56, 89, 168,0.2)' }}
           />
         )}
         <Mic size={28} color="#fff" strokeWidth={1.5} />
@@ -117,7 +117,7 @@ function AvatarPanel() {
         className="w-28 h-28 rounded-full flex items-center justify-center"
         style={{
           background: 'linear-gradient(135deg, #F0F4FF, #E8F0FE)',
-          border: '2px solid rgba(59,123,242,0.15)',
+          border: '2px solid rgba(56, 89, 168,0.15)',
         }}
       >
         <User size={40} className="text-primary/40" strokeWidth={1.2} />
@@ -133,7 +133,7 @@ function AvatarPanel() {
 
       <div
         className="w-full rounded-xl p-3 text-center"
-        style={{ background: 'rgba(59,123,242,0.04)', border: '1px solid rgba(59,123,242,0.08)' }}
+        style={{ background: 'rgba(56, 89, 168,0.04)', border: '1px solid rgba(56, 89, 168,0.08)' }}
       >
         <p className="text-[11px] text-primary font-medium">Powered by Anam AI</p>
       </div>
@@ -168,7 +168,7 @@ export function AIWidget() {
             {/* Header */}
             <div
               className="flex items-center justify-between px-4 py-3"
-              style={{ background: 'linear-gradient(135deg, #3B7BF2, #2D6AE0)' }}
+              style={{ background: 'linear-gradient(135deg, #3859a8, #2a4688)' }}
             >
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
@@ -196,8 +196,8 @@ export function AIWidget() {
                   aria-label={`${label} tab`}
                   className="flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-semibold border-none bg-transparent cursor-pointer transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-inset"
                   style={{
-                    color: tab === key ? '#3B7BF2' : '#6B7280',
-                    borderBottom: tab === key ? '2px solid #3B7BF2' : '2px solid transparent',
+                    color: tab === key ? '#3859a8' : '#6B7280',
+                    borderBottom: tab === key ? '2px solid #3859a8' : '2px solid transparent',
                   }}
                 >
                   <Icon size={13} strokeWidth={tab === key ? 2 : 1.5} />
@@ -221,8 +221,8 @@ export function AIWidget() {
         whileTap={{ scale: 0.95 }}
         className="w-14 h-14 rounded-full border-none cursor-pointer flex items-center justify-center shadow-xl transition-shadow duration-300"
         style={{
-          background: 'linear-gradient(135deg, #3B7BF2, #2D6AE0)',
-          boxShadow: '0 8px 32px rgba(59,123,242,0.4)',
+          background: 'linear-gradient(135deg, #3859a8, #2a4688)',
+          boxShadow: '0 8px 32px rgba(56, 89, 168,0.4)',
         }}
         aria-label={open ? 'Close AI assistant' : 'Open AI assistant'}
       >

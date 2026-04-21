@@ -27,7 +27,7 @@ export function FAQAccordion({ faq }) {
             return (
               <AnimatedSection key={i} delay={i * 0.05}>
                 <div
-                  className="bg-white border border-black/5 rounded-2xl overflow-hidden transition-all duration-200 hover:border-[#3B7BF2]/15"
+                  className="bg-white border border-black/5 rounded-2xl overflow-hidden transition-all duration-200 hover:border-[#3859a8]/15"
                 >
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}

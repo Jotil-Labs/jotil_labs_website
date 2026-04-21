@@ -2,8 +2,8 @@ import { cn } from '@/lib/utils'
 
 const variantStyles = {
   default: 'bg-bg-alt text-primary',
-  blue: 'bg-[#E8F0FE] text-[#3B7BF2]',
-  dark: 'bg-[#1B4FBA] text-white',
+  blue: 'bg-[#E8F0FE] text-[#3859a8]',
+  dark: 'bg-[#22396E] text-white',
 }
 
 export function Badge({

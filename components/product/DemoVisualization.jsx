@@ -60,19 +60,19 @@ function ReceptionistDemo() {
           {callState === 'ringing' && (
             <>
               <motion.div
-                className="absolute left-5 top-4 h-9 w-9 rounded-full border-2 border-[#3B7BF2]/30"
+                className="absolute left-5 top-4 h-9 w-9 rounded-full border-2 border-[#3859a8]/30"
                 animate={{ scale: [1, 1.8], opacity: [0.6, 0] }}
                 transition={{ duration: 1.2, repeat: Infinity }}
               />
               <motion.div
-                className="absolute left-5 top-4 h-9 w-9 rounded-full border-2 border-[#3B7BF2]/20"
+                className="absolute left-5 top-4 h-9 w-9 rounded-full border-2 border-[#3859a8]/20"
                 animate={{ scale: [1, 2.2], opacity: [0.4, 0] }}
                 transition={{ duration: 1.2, repeat: Infinity, delay: 0.4 }}
               />
             </>
           )}
 
-          <div className="relative h-9 w-9 rounded-full bg-gradient-to-br from-[#3B7BF2] to-[#6366F1] flex items-center justify-center shrink-0">
+          <div className="relative h-9 w-9 rounded-full bg-gradient-to-br from-[#3859a8] to-[#22D3EE] flex items-center justify-center shrink-0">
             <AnimatePresence mode="wait">
               {callState === 'ringing' ? (
                 <motion.div key="ring" animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 0.5, repeat: Infinity }}>
@@ -121,10 +121,10 @@ function ReceptionistDemo() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="mx-5 mt-4 p-3 rounded-xl bg-[#F0F4FF] border border-[#3B7BF2]/10 flex items-center gap-3"
+          className="mx-5 mt-4 p-3 rounded-xl bg-[#F0F4FF] border border-[#3859a8]/10 flex items-center gap-3"
         >
           <div className="h-10 w-10 rounded-full bg-white border border-black/5 flex items-center justify-center shrink-0">
-            <User size={16} className="text-[#3B7BF2]" />
+            <User size={16} className="text-[#3859a8]" />
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-text">Sarah Mitchell</p>
@@ -140,7 +140,7 @@ function ReceptionistDemo() {
           <motion.div
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 1.2, repeat: Infinity }}
-            className="h-2 w-2 rounded-full bg-[#3B7BF2] shrink-0"
+            className="h-2 w-2 rounded-full bg-[#3859a8] shrink-0"
           />
           <p className="text-xs text-text-secondary font-medium">
             {callState === 'transcript' ? 'AI Handling Conversation' : 'AI Connecting...'}
@@ -169,7 +169,7 @@ function ReceptionistDemo() {
             >
               {msg.from === 'ai' && (
                 <div className="h-5 w-5 rounded-full bg-[#EEF3FE] flex items-center justify-center shrink-0 mt-0.5">
-                  <Zap size={10} className="text-[#3B7BF2]" />
+                  <Zap size={10} className="text-[#3859a8]" />
                 </div>
               )}
               <div
@@ -187,7 +187,7 @@ function ReceptionistDemo() {
 
         {/* Waveform bar */}
         <div className="px-5 py-4 border-t border-black/5 flex items-center gap-3">
-          <div className="h-8 w-8 rounded-full bg-[#3B7BF2] flex items-center justify-center shrink-0">
+          <div className="h-8 w-8 rounded-full bg-[#3859a8] flex items-center justify-center shrink-0">
             <Mic size={14} className="text-white" />
           </div>
           <div className="flex-1 flex items-center gap-[3px]">
@@ -196,7 +196,7 @@ function ReceptionistDemo() {
               return (
                 <motion.div
                   key={i}
-                  className="w-[3px] rounded-full bg-[#3B7BF2]/40"
+                  className="w-[3px] rounded-full bg-[#3859a8]/40"
                   style={{ height: h * 1.5 }}
                   animate={{ height: [h * 1.5, h * 2.8, h * 1.2, h * 2.4, h * 1.5] }}
                   transition={{ duration: 0.7 + i * 0.03, repeat: Infinity, ease: 'easeInOut' }}
@@ -220,8 +220,8 @@ function MessengerDemo() {
   const [activeChannel, setActiveChannel] = useState('web')
 
   const channels = [
-    { id: 'web', label: 'Web Chat', icon: Globe, color: '#3B7BF2' },
-    { id: 'sms', label: 'SMS', icon: Smartphone, color: '#6366F1' },
+    { id: 'web', label: 'Web Chat', icon: Globe, color: '#3859a8' },
+    { id: 'sms', label: 'SMS', icon: Smartphone, color: '#22D3EE' },
     { id: 'whatsapp', label: 'WhatsApp', icon: Hash, color: '#25D366' },
   ]
 
@@ -255,7 +255,7 @@ function MessengerDemo() {
       <motion.div {...cardEntry} className="card-premium p-0 overflow-hidden">
         {/* Header */}
         <div className="flex items-center gap-3 px-5 py-4 border-b border-black/5 bg-[#F8FAFF]">
-          <div className="h-9 w-9 rounded-full bg-gradient-to-br from-[#3B7BF2] to-[#6366F1] flex items-center justify-center shrink-0">
+          <div className="h-9 w-9 rounded-full bg-gradient-to-br from-[#3859a8] to-[#22D3EE] flex items-center justify-center shrink-0">
             <MessageSquare size={16} className="text-white" />
           </div>
           <div className="flex-1">
@@ -277,7 +277,7 @@ function MessengerDemo() {
                 key={ch.id}
                 onClick={() => setActiveChannel(ch.id)}
                 className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-medium transition-colors relative ${
-                  isActive ? 'text-[#3B7BF2]' : 'text-text-secondary hover:text-text'
+                  isActive ? 'text-[#3859a8]' : 'text-text-secondary hover:text-text'
                 }`}
               >
                 <Icon size={13} style={isActive ? { color: ch.color } : undefined} />
@@ -285,7 +285,7 @@ function MessengerDemo() {
                 {isActive && (
                   <motion.div
                     layoutId="channel-tab"
-                    className="absolute bottom-0 left-2 right-2 h-[2px] rounded-full bg-[#3B7BF2]"
+                    className="absolute bottom-0 left-2 right-2 h-[2px] rounded-full bg-[#3859a8]"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -315,7 +315,7 @@ function MessengerDemo() {
                 <div
                   className={`max-w-[220px] rounded-2xl px-3.5 py-2 text-[13px] leading-snug ${
                     msg.from === 'user'
-                      ? 'bg-[#3B7BF2] text-white rounded-tr-sm'
+                      ? 'bg-[#3859a8] text-white rounded-tr-sm'
                       : 'bg-[#F0F4FF] text-text rounded-tl-sm'
                   }`}
                 >
@@ -333,7 +333,7 @@ function MessengerDemo() {
         <div className="px-4 pb-4">
           <div className="flex items-center gap-2 bg-[#F8FAFF] border border-black/[0.06] rounded-xl px-4 py-2.5">
             <p className="flex-1 text-sm text-text-secondary/50">Type a message...</p>
-            <div className="h-7 w-7 rounded-lg bg-[#3B7BF2] flex items-center justify-center">
+            <div className="h-7 w-7 rounded-lg bg-[#3859a8] flex items-center justify-center">
               <Send size={12} className="text-white" />
             </div>
           </div>
@@ -356,9 +356,9 @@ function OutreachDemo() {
   }, [])
 
   const funnelSteps = [
-    { label: 'Contacts', value: 4200, width: '100%', color: 'bg-[#3B7BF2]/15 text-[#3B7BF2]' },
-    { label: 'Delivered', value: 3860, width: '92%', color: 'bg-[#6366F1]/15 text-[#6366F1]' },
-    { label: 'Opened', value: 2150, width: '51%', color: 'bg-[#0EA5E9]/15 text-[#0EA5E9]' },
+    { label: 'Contacts', value: 4200, width: '100%', color: 'bg-[#3859a8]/15 text-[#3859a8]' },
+    { label: 'Delivered', value: 3860, width: '92%', color: 'bg-[#22D3EE]/15 text-[#22D3EE]' },
+    { label: 'Opened', value: 2150, width: '51%', color: 'bg-[#22D3EE]/15 text-[#22D3EE]' },
     { label: 'Responded', value: 847, width: '20%', color: 'bg-emerald-500/15 text-emerald-600' },
   ]
 
@@ -402,7 +402,7 @@ function OutreachDemo() {
                 transition={{ delay: 0.15 * i + 0.3 }}
                 className="bg-white px-4 py-3.5 text-center"
               >
-                <Icon size={14} className="text-[#3B7BF2] mx-auto mb-1.5" />
+                <Icon size={14} className="text-[#3859a8] mx-auto mb-1.5" />
                 <p className="text-lg font-bold text-text tabular-nums" style={monoFont}>{kpi.value}</p>
                 <p className="text-[10px] text-text-secondary mt-0.5">{kpi.label}</p>
               </motion.div>
@@ -450,7 +450,7 @@ function OutreachDemo() {
                 className="flex items-center gap-2 py-1.5"
               >
                 <div className={`h-1.5 w-1.5 rounded-full shrink-0 ${
-                  a.type === 'success' ? 'bg-emerald-500' : a.type === 'info' ? 'bg-[#3B7BF2]' : 'bg-gray-300'
+                  a.type === 'success' ? 'bg-emerald-500' : a.type === 'info' ? 'bg-[#3859a8]' : 'bg-gray-300'
                 }`} />
                 <p className="text-[12px] text-text-secondary flex-1 truncate">{a.text}</p>
                 <p className="text-[10px] text-text-secondary/50 shrink-0">{a.time}</p>
@@ -477,8 +477,8 @@ function SpaceDemo() {
   ]
 
   const calendarItems = [
-    { time: '10:00 AM', title: 'Discovery Call', subtitle: 'Sarah Chen, Acme Corp', color: 'border-l-[#3B7BF2]' },
-    { time: '1:30 PM', title: 'Demo Presentation', subtitle: 'James Okafor, Meridian', color: 'border-l-[#6366F1]' },
+    { time: '10:00 AM', title: 'Discovery Call', subtitle: 'Sarah Chen, Acme Corp', color: 'border-l-[#3859a8]' },
+    { time: '1:30 PM', title: 'Demo Presentation', subtitle: 'James Okafor, Meridian', color: 'border-l-[#22D3EE]' },
     { time: '3:00 PM', title: 'Follow-up Review', subtitle: 'Team Standup', color: 'border-l-emerald-500' },
   ]
 
@@ -510,7 +510,7 @@ function SpaceDemo() {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 text-xs font-medium transition-colors relative ${
-                  isActive ? 'text-[#3B7BF2]' : 'text-text-secondary hover:text-text'
+                  isActive ? 'text-[#3859a8]' : 'text-text-secondary hover:text-text'
                 }`}
               >
                 <Icon size={13} />
@@ -518,7 +518,7 @@ function SpaceDemo() {
                 {isActive && (
                   <motion.div
                     layoutId="space-tab"
-                    className="absolute bottom-0 left-2 right-2 h-[2px] rounded-full bg-[#3B7BF2]"
+                    className="absolute bottom-0 left-2 right-2 h-[2px] rounded-full bg-[#3859a8]"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -553,8 +553,8 @@ function SpaceDemo() {
                     transition={{ delay: 0.1 * i + 0.15 }}
                     className="flex items-center gap-3 px-5 py-3"
                   >
-                    <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#3B7BF2]/10 to-[#6366F1]/10 flex items-center justify-center shrink-0">
-                      <span className="text-[10px] font-bold text-[#3B7BF2]">{lead.avatar}</span>
+                    <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#3859a8]/10 to-[#22D3EE]/10 flex items-center justify-center shrink-0">
+                      <span className="text-[10px] font-bold text-[#3859a8]">{lead.avatar}</span>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-text truncate">{lead.name}</p>
@@ -566,10 +566,10 @@ function SpaceDemo() {
                           initial={{ width: 0 }}
                           animate={{ width: `${lead.score}%` }}
                           transition={{ duration: 0.8, delay: 0.3 + i * 0.1, ease: 'easeOut' }}
-                          className="h-full bg-gradient-to-r from-[#3B7BF2] to-[#6366F1] rounded-full"
+                          className="h-full bg-gradient-to-r from-[#3859a8] to-[#22D3EE] rounded-full"
                         />
                       </div>
-                      <span className="text-[11px] font-semibold text-[#3B7BF2] tabular-nums" style={monoFont}>
+                      <span className="text-[11px] font-semibold text-[#3859a8] tabular-nums" style={monoFont}>
                         {lead.score}
                       </span>
                     </div>
@@ -583,7 +583,7 @@ function SpaceDemo() {
               {/* Summary */}
               <div className="px-5 py-3 border-t border-black/5 bg-[#F8FAFF]">
                 <p className="text-xs text-text-secondary">
-                  <span className="font-semibold text-[#3B7BF2]">12 leads</span> synced from all channels &middot; Updated just now
+                  <span className="font-semibold text-[#3859a8]">12 leads</span> synced from all channels &middot; Updated just now
                 </p>
               </div>
             </motion.div>
@@ -620,7 +620,7 @@ function SpaceDemo() {
               </div>
               <div className="px-5 py-3 border-t border-black/5 bg-[#F8FAFF]">
                 <p className="text-xs text-text-secondary">
-                  <span className="font-semibold text-[#3B7BF2]">3 events</span> scheduled for today
+                  <span className="font-semibold text-[#3859a8]">3 events</span> scheduled for today
                 </p>
               </div>
             </motion.div>
@@ -637,9 +637,9 @@ function SpaceDemo() {
    ================================================================ */
 function FlowDemo() {
   const nodes = [
-    { label: 'New Lead', sub: 'Webhook Trigger', icon: Zap, color: 'from-[#3B7BF2] to-[#2D6AE0]' },
-    { label: 'AI Classify', sub: 'Score & Route', icon: GitBranch, color: 'from-[#6366F1] to-[#4F46E5]' },
-    { label: 'CRM Update', sub: 'Create Record', icon: Database, color: 'from-[#0EA5E9] to-[#0284C7]' },
+    { label: 'New Lead', sub: 'Webhook Trigger', icon: Zap, color: 'from-[#3859a8] to-[#2a4688]' },
+    { label: 'AI Classify', sub: 'Score & Route', icon: GitBranch, color: 'from-[#22D3EE] to-[#4F46E5]' },
+    { label: 'CRM Update', sub: 'Create Record', icon: Database, color: 'from-[#22D3EE] to-[#0284C7]' },
     { label: 'Notify Team', sub: 'Slack + Email', icon: CheckCircle, color: 'from-emerald-500 to-emerald-600' },
   ]
 
@@ -670,7 +670,7 @@ function FlowDemo() {
                   {/* Subtle shimmer on active node */}
                   {i === 1 && (
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-[#3B7BF2]/[0.04] to-transparent"
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-[#3859a8]/[0.04] to-transparent"
                       animate={{ x: ['-100%', '200%'] }}
                       transition={{ duration: 2.5, repeat: Infinity, ease: 'linear' }}
                     />
@@ -691,8 +691,8 @@ function FlowDemo() {
                       transition={{ duration: 1.5, repeat: Infinity }}
                       className="flex items-center gap-1"
                     >
-                      <div className="h-1.5 w-1.5 rounded-full bg-[#6366F1]" />
-                      <span className="text-[10px] text-[#6366F1] font-medium">Processing</span>
+                      <div className="h-1.5 w-1.5 rounded-full bg-[#22D3EE]" />
+                      <span className="text-[10px] text-[#22D3EE] font-medium">Processing</span>
                     </motion.div>
                   )}
 
@@ -704,14 +704,14 @@ function FlowDemo() {
                 {/* Connector with animated data packet */}
                 {i < nodes.length - 1 && (
                   <div className="relative flex flex-col items-center my-1 h-6">
-                    <div className="h-full w-px bg-gradient-to-b from-[#3B7BF2]/30 to-[#6366F1]/30" />
+                    <div className="h-full w-px bg-gradient-to-b from-[#3859a8]/30 to-[#22D3EE]/30" />
                     {/* Animated data packet */}
                     <motion.div
-                      className="absolute w-2 h-2 rounded-full bg-[#3B7BF2] shadow-sm shadow-[#3B7BF2]/30"
+                      className="absolute w-2 h-2 rounded-full bg-[#3859a8] shadow-sm shadow-[#3859a8]/30"
                       animate={{ top: ['-2px', '20px'], opacity: [1, 0.3] }}
                       transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.6, ease: 'easeIn' }}
                     />
-                    <svg width="8" height="5" viewBox="0 0 8 5" fill="#3B7BF2" className="opacity-40 -mt-px">
+                    <svg width="8" height="5" viewBox="0 0 8 5" fill="#3859a8" className="opacity-40 -mt-px">
                       <path d="M4 5L0 0h8z" />
                     </svg>
                   </div>
@@ -731,7 +731,7 @@ function FlowDemo() {
               transition={{ delay: 0.8 + i * 0.1 }}
               className="bg-[#F8FAFF] rounded-xl px-3 py-2.5 text-center"
             >
-              <p className="text-sm font-bold text-[#3B7BF2]" style={monoFont}>{val}</p>
+              <p className="text-sm font-bold text-[#3859a8]" style={monoFont}>{val}</p>
               <p className="text-[10px] text-text-secondary mt-0.5">{lbl}</p>
             </motion.div>
           ))}
@@ -759,7 +759,7 @@ function AvatarDemo() {
         {/* Video header */}
         <div className="px-5 py-3.5 border-b border-black/5 bg-[#F8FAFF] flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <Video size={15} className="text-[#3B7BF2]" />
+            <Video size={15} className="text-[#3859a8]" />
             <p className="text-sm font-semibold text-text" style={headingFont}>AI Avatar Session</p>
           </div>
           <motion.span
@@ -780,14 +780,14 @@ function AvatarDemo() {
               {/* Outer glow when speaking */}
               {isSpeaking && (
                 <motion.div
-                  className="absolute -inset-4 rounded-full bg-[#3B7BF2]/10"
+                  className="absolute -inset-4 rounded-full bg-[#3859a8]/10"
                   animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.6, 0.3] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 />
               )}
 
               {/* Avatar circle */}
-              <div className="relative h-24 w-24 rounded-full bg-gradient-to-br from-[#3B7BF2] to-[#6366F1] flex items-center justify-center shadow-lg shadow-[#3B7BF2]/20">
+              <div className="relative h-24 w-24 rounded-full bg-gradient-to-br from-[#3859a8] to-[#22D3EE] flex items-center justify-center shadow-lg shadow-[#3859a8]/20">
                 <User size={40} className="text-white/90" />
 
                 {/* Lip-sync indicator */}
@@ -830,7 +830,7 @@ function AvatarDemo() {
             <motion.div
               animate={{ scale: isSpeaking ? [1, 1.3, 1] : 1 }}
               transition={{ duration: 0.8, repeat: isSpeaking ? Infinity : 0 }}
-              className={`h-2 w-2 rounded-full ${isSpeaking ? 'bg-[#3B7BF2]' : 'bg-amber-400'}`}
+              className={`h-2 w-2 rounded-full ${isSpeaking ? 'bg-[#3859a8]' : 'bg-amber-400'}`}
             />
             <span className="text-[10px] font-medium text-text">
               {isSpeaking ? 'Speaking' : 'Listening'}
@@ -849,7 +849,7 @@ function AvatarDemo() {
               transition={{ duration: 0.2 }}
               className="bg-[#F0F4FF] rounded-xl px-4 py-2.5"
             >
-              <p className="text-[10px] font-semibold text-[#3B7BF2] mb-0.5">
+              <p className="text-[10px] font-semibold text-[#3859a8] mb-0.5">
                 {isSpeaking ? 'AI Avatar' : 'You'}
               </p>
               <p className="text-[13px] text-text leading-snug">
@@ -876,7 +876,7 @@ function AvatarDemo() {
                 key={i}
                 className={`h-9 w-9 rounded-xl flex items-center justify-center ${
                   ctrl.active
-                    ? 'bg-[#3B7BF2]/10 text-[#3B7BF2]'
+                    ? 'bg-[#3859a8]/10 text-[#3859a8]'
                     : 'bg-gray-100 text-text-secondary'
                 }`}
               >

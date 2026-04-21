@@ -28,7 +28,7 @@ const INDUSTRY_ITEMS = [
   { name: 'Restaurant', slug: 'restaurant', description: 'Reservations, orders, and guest experience', icon: UtensilsCrossed, color: '#EF4444' },
   { name: 'Dental & Medical', slug: 'dental-medical', description: 'Dental offices and medical practices', icon: Stethoscope, color: '#3B82F6' },
   { name: 'Real Estate', slug: 'real-estate', description: 'Agents, brokerages, and property managers', icon: Home, color: '#F59E0B' },
-  { name: 'Legal', slug: 'legal', description: 'Law firms and legal practices', icon: Scale, color: '#6366F1' },
+  { name: 'Legal', slug: 'legal', description: 'Law firms and legal practices', icon: Scale, color: '#22D3EE' },
   { name: 'Hospitality', slug: 'hospitality', description: 'Hotels, venues, and event spaces', icon: Hotel, color: '#EC4899' },
   { name: 'Finance & Insurance', slug: 'finance-insurance', description: 'Financial advisors and insurance agencies', icon: TrendingUp, color: '#10B981' },
   { name: 'E-commerce', slug: 'ecommerce', description: 'Online stores and retail businesses', icon: ShoppingCart, color: '#8B5CF6' },

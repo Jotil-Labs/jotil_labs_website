@@ -10,7 +10,7 @@ const TESTIMONIALS = [
     role: 'Practice Manager',
     company: 'Meridian Health',
     initials: 'SM',
-    avatarColor: '#3B7BF2',
+    avatarColor: '#3859a8',
   },
   {
     quote:
@@ -19,7 +19,7 @@ const TESTIMONIALS = [
     role: 'CEO',
     company: 'Apex Realty Group',
     initials: 'JT',
-    avatarColor: '#6366F1',
+    avatarColor: '#22D3EE',
   },
   {
     quote:
@@ -28,7 +28,7 @@ const TESTIMONIALS = [
     role: 'VP Sales',
     company: 'Summit Finance',
     initials: 'RK',
-    avatarColor: '#0EA5E9',
+    avatarColor: '#22D3EE',
   },
 ]
 
@@ -79,7 +79,7 @@ function TestimonialCard({ testimonial }) {
           fontFamily: 'Georgia, serif',
           fontSize: 72,
           lineHeight: 0.7,
-          background: 'linear-gradient(135deg, rgba(59,123,242,0.14), rgba(99,102,241,0.08))',
+          background: 'linear-gradient(135deg, rgba(56, 89, 168,0.14), rgba(34, 211, 238,0.08))',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',

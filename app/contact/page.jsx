@@ -37,7 +37,7 @@ export default function ContactPage() {
           style={{
             width: 480,
             height: 480,
-            background: 'radial-gradient(circle, rgba(59,123,242,0.08) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(56, 89, 168,0.08) 0%, transparent 70%)',
             filter: 'blur(80px)',
           }}
         />

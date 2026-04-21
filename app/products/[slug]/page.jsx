@@ -90,12 +90,12 @@ export default async function ProductPage({ params }) {
         <div
           className="absolute top-0 right-0 w-[600px] h-[500px] rounded-full opacity-40 pointer-events-none"
           aria-hidden="true"
-          style={{ background: 'radial-gradient(ellipse, #3B7BF215 0%, transparent 65%)', filter: 'blur(80px)' }}
+          style={{ background: 'radial-gradient(ellipse, #3859a815 0%, transparent 65%)', filter: 'blur(80px)' }}
         />
         <div
           className="absolute bottom-0 left-0 w-[400px] h-[300px] rounded-full opacity-25 pointer-events-none"
           aria-hidden="true"
-          style={{ background: 'radial-gradient(ellipse, #6366F110 0%, transparent 70%)', filter: 'blur(60px)' }}
+          style={{ background: 'radial-gradient(ellipse, #22D3EE10 0%, transparent 70%)', filter: 'blur(60px)' }}
         />
 
         <div className="relative max-w-6xl mx-auto">
@@ -138,8 +138,8 @@ export default async function ProductPage({ params }) {
                 className="relative w-full max-w-md aspect-[4/3] rounded-3xl flex flex-col items-center justify-center gap-4 overflow-hidden"
                 style={{
                   background: 'linear-gradient(135deg, #F0F4FF, #F7F9FF, #FFFFFF)',
-                  border: '1px solid rgba(59,123,242,0.1)',
-                  boxShadow: '0 16px 48px rgba(59,123,242,0.08), 0 4px 16px rgba(0,0,0,0.04)',
+                  border: '1px solid rgba(56, 89, 168,0.1)',
+                  boxShadow: '0 16px 48px rgba(56, 89, 168,0.08), 0 4px 16px rgba(0,0,0,0.04)',
                 }}
               >
                 {Logo && <Logo size={80} />}

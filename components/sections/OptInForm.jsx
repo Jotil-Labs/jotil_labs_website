@@ -51,7 +51,7 @@ export function OptInForm() {
               required
               value={formData.fullName}
               onChange={handleChange}
-              className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(59,123,242,0.06)] transition-all"
+              className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(56, 89, 168,0.06)] transition-all"
               placeholder="John Doe"
             />
           </div>
@@ -68,7 +68,7 @@ export function OptInForm() {
                 required
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(59,123,242,0.06)] transition-all"
+                className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(56, 89, 168,0.06)] transition-all"
                 placeholder="+1 (555) 000-0000"
               />
             </div>
@@ -83,7 +83,7 @@ export function OptInForm() {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(59,123,242,0.06)] transition-all"
+                className="w-full bg-white/60 border border-border rounded-[10px] px-4 py-3 text-sm text-text placeholder:text-text-secondary/50 outline-none focus:border-primary/30 focus:shadow-[0_0_0_3px_rgba(56, 89, 168,0.06)] transition-all"
                 placeholder="john@company.com"
               />
             </div>

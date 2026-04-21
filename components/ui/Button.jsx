@@ -5,11 +5,11 @@ import { cn } from '@/lib/utils'
 
 const variants = {
   primary:
-    'bg-gradient-to-r from-[#1B4FBA] to-[#3B7BF2] text-white shadow-md shadow-[#3B7BF2]/20 hover:shadow-lg hover:shadow-[#3B7BF2]/30',
+    'bg-gradient-to-r from-[#22396E] to-[#3859a8] text-white shadow-md shadow-[#3859a8]/20 hover:shadow-lg hover:shadow-[#3859a8]/30',
   outline:
-    'border border-[#3B7BF2]/30 text-[#3B7BF2] bg-transparent hover:bg-[#3B7BF2]/5',
+    'border border-[#3859a8]/30 text-[#3859a8] bg-transparent hover:bg-[#3859a8]/5',
   ghost:
-    'text-[#3B7BF2] bg-transparent hover:bg-[#3B7BF2]/5',
+    'text-[#3859a8] bg-transparent hover:bg-[#3859a8]/5',
 }
 
 const sizes = {
@@ -40,7 +40,7 @@ export const Button = forwardRef(function Button(
       className={cn(
         'inline-flex items-center justify-center font-semibold tracking-[-0.01em] transition-all duration-200',
         'active:scale-[0.98] hover:scale-[1.02]',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B7BF2]/40 focus-visible:ring-offset-2',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3859a8]/40 focus-visible:ring-offset-2',
         'disabled:pointer-events-none disabled:opacity-50',
         'select-none cursor-pointer',
         variants[variant],

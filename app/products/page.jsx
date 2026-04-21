@@ -65,7 +65,7 @@ export default function ProductsPage() {
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full opacity-30 pointer-events-none"
           aria-hidden="true"
-          style={{ background: 'radial-gradient(ellipse, #3B7BF220 0%, transparent 70%)', filter: 'blur(60px)' }}
+          style={{ background: 'radial-gradient(ellipse, #3859a820 0%, transparent 70%)', filter: 'blur(60px)' }}
         />
 
         <div className="relative max-w-4xl mx-auto text-center">

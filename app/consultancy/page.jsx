@@ -89,7 +89,7 @@ export default function ConsultancyPage() {
             width: 560,
             height: 560,
             background:
-              'radial-gradient(circle, rgba(59,123,242,0.09) 0%, transparent 70%)',
+              'radial-gradient(circle, rgba(56, 89, 168,0.09) 0%, transparent 70%)',
             filter: 'blur(80px)',
           }}
         />
@@ -100,7 +100,7 @@ export default function ConsultancyPage() {
             width: 420,
             height: 420,
             background:
-              'radial-gradient(circle, rgba(99,102,241,0.07) 0%, transparent 70%)',
+              'radial-gradient(circle, rgba(34, 211, 238,0.07) 0%, transparent 70%)',
             filter: 'blur(70px)',
           }}
         />
@@ -157,7 +157,7 @@ export default function ConsultancyPage() {
                 <AnimatedSection key={service.title} delay={i * 0.09}>
                   <div className="card-premium h-full p-7">
                     <IconBox size="md" className="mb-5" glow>
-                      <Icon size={20} color="#3B7BF2" strokeWidth={1.5} />
+                      <Icon size={20} color="#3859a8" strokeWidth={1.5} />
                     </IconBox>
                     <h3 className="font-semibold text-text text-lg mb-2">
                       {service.title}
@@ -200,7 +200,7 @@ export default function ConsultancyPage() {
                   <div className="card-premium h-full p-7">
                     <div className="flex items-start gap-4">
                       <IconBox size="md" glow>
-                        <Icon size={20} color="#3B7BF2" strokeWidth={1.5} />
+                        <Icon size={20} color="#3859a8" strokeWidth={1.5} />
                       </IconBox>
                       <div>
                         <p className="text-xs font-semibold text-primary mb-1 uppercase tracking-wider">
@@ -232,8 +232,8 @@ export default function ConsultancyPage() {
               className="rounded-[24px] p-10 md:p-14 text-center"
               style={{
                 background:
-                  'linear-gradient(135deg, rgba(59,123,242,0.07), rgba(99,102,241,0.05), rgba(14,165,233,0.04))',
-                border: '1px solid rgba(59,123,242,0.12)',
+                  'linear-gradient(135deg, rgba(56, 89, 168,0.07), rgba(34, 211, 238,0.05), rgba(34, 211, 238,0.04))',
+                border: '1px solid rgba(56, 89, 168,0.12)',
               }}
             >
               <h2

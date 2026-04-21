@@ -16,7 +16,7 @@ export default function PrivacyPage() {
             style={{
               top: '-5%',
               right: '10%',
-              background: 'radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 60%)',
+              background: 'radial-gradient(circle, rgba(34, 211, 238, 0.3) 0%, transparent 60%)',
               filter: 'blur(100px)',
             }}
           />
