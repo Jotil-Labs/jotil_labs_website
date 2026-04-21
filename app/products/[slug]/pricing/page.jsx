@@ -215,9 +215,11 @@ export default async function ProductPricingPage({ params }) {
               </h2>
             </AnimatedSection>
             <AnimatedSection delay={0.1}>
-              <div className="rounded-2xl border border-primary-100 bg-white p-6 sm:p-8">
-                <FeatureComparison tiers={gridTiers} features={comparisonRows} />
-              </div>
+              <FeatureComparison
+                tiers={gridTiers}
+                features={comparisonRows}
+                productSlug={slug}
+              />
             </AnimatedSection>
           </div>
         </section>

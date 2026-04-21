@@ -283,25 +283,51 @@ export default async function ProductPage({ params }) {
               </Link>
             </AnimatedSection>
           ) : (
-            <div className="max-w-sm mx-auto">
+            <>
               {(() => {
-                // Teaser shows the highlighted (Most Popular) tier only. Full tier
-                // grid + compare-plan table + Essentials + Enterprise live on the
-                // dedicated pricing page, preventing redundant display.
-                const featuredTier =
-                  product.pricing.tiers.find((t) => t.highlighted) ??
-                  product.pricing.tiers[Math.floor(product.pricing.tiers.length / 2)]
+                // Build the same 4-tier grid as the dedicated pricing page —
+                // Starter / Pro / Business / Enterprise (Enterprise synthesized
+                // inline from pricing.enterprise data). Keeps the product page
+                // and the dedicated /pricing page visually consistent, which
+                // is the industry pattern (HubSpot / Dialpad / Zendesk / etc.).
+                const coreTiers = product.pricing.tiers
+                const ent = product.pricing.enterprise
+                const enterpriseTier = ent
+                  ? {
+                      slug: 'enterprise',
+                      name: 'Enterprise',
+                      price: 'Custom',
+                      period: '',
+                      description: ent.description,
+                      priceFrom: ent.priceFrom,
+                      features: ent.features ?? [],
+                    }
+                  : null
+                const gridTiers = enterpriseTier
+                  ? [...coreTiers, enterpriseTier]
+                  : coreTiers
+                const gridColsClass =
+                  gridTiers.length === 4
+                    ? 'lg:grid-cols-4'
+                    : 'lg:grid-cols-3'
                 return (
-                  <AnimatedSection>
-                    <PricingCard
-                      tier={featuredTier}
-                      productSlug={slug}
-                      unitLabel={product.pricing.unitLabel}
-                    />
-                  </AnimatedSection>
+                  <div
+                    className={`grid grid-cols-1 md:grid-cols-2 ${gridColsClass} auto-rows-fr gap-6 items-stretch`}
+                  >
+                    {gridTiers.map((tier, i) => (
+                      <AnimatedSection key={tier.slug ?? i} delay={i * 0.06}>
+                        <PricingCard
+                          tier={tier}
+                          productSlug={slug}
+                          unitLabel={product.pricing.unitLabel}
+                        />
+                      </AnimatedSection>
+                    ))}
+                  </div>
                 )
               })()}
-              <AnimatedSection delay={0.1}>
+
+              <AnimatedSection delay={0.3}>
                 <div className="text-center mt-10">
                   <Link
                     href={`/products/${slug}/pricing`}
@@ -312,7 +338,7 @@ export default async function ProductPage({ params }) {
                   </Link>
                 </div>
               </AnimatedSection>
-            </div>
+            </>
           )}
         </div>
       </section>
