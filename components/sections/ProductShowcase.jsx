@@ -51,7 +51,7 @@ const CAPABILITIES = [
 
 export function ProductShowcase() {
   return (
-    <section className="py-24" style={{ background: 'var(--color-bg)' }}>
+    <section className="surface-sunken py-24">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}

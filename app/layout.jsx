@@ -8,6 +8,7 @@ import { Footer } from '@/components/layout/Footer'
 import { OrganizationJsonLd, WebsiteJsonLd } from '@/components/layout/JsonLd'
 import { AIWidget } from '@/components/widgets/AIWidget'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
+import { GrainOverlay } from '@/components/design'
 
 const montserratAlternates = Montserrat_Alternates({
   subsets: ['latin'],
@@ -116,11 +117,19 @@ export default function RootLayout({ children }) {
         )}
       </head>
       <body className="min-h-screen bg-bg text-text antialiased" suppressHydrationWarning>
+        {/* Global grain texture — fixed to viewport, z-behind everything.
+            Provides subliminal depth to every surface site-wide at 2.5%. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-0"
+        >
+          <GrainOverlay tone="light" opacity={0.025} />
+        </div>
         <a href="#main-content" className="skip-to-main">
           Skip to main content
         </a>
         <Navbar />
-        <main id="main-content">{children}</main>
+        <main id="main-content" className="relative z-10">{children}</main>
         <Footer />
         <ScrollToTop />
         <AIWidget />

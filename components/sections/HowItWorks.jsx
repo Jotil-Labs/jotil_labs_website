@@ -33,7 +33,7 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section className="py-24" style={{ background: '#FFFFFF' }}>
+    <section className="surface-raised py-24">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
