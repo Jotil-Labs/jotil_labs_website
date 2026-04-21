@@ -10,24 +10,24 @@ const STEPS = [
     icon: Plug,
     title: 'Connect',
     desc: 'Link your phone numbers, website, and tools. No code required.',
-    color: '#3B7BF2',
-    colorAlpha: 'rgba(59,123,242,0.10)',
+    color: '#3859a8',
+    colorAlpha: 'rgba(56, 89, 168,0.10)',
   },
   {
     number: '02',
     icon: SlidersHorizontal,
     title: 'Configure',
     desc: 'Tell the AI about your business. Train it on your FAQs and workflows.',
-    color: '#6366F1',
-    colorAlpha: 'rgba(99,102,241,0.10)',
+    color: '#22D3EE',
+    colorAlpha: 'rgba(34, 211, 238,0.10)',
   },
   {
     number: '03',
     icon: Zap,
     title: 'Automate',
     desc: 'Go live. Your AI handles calls, chats, and follow-ups around the clock.',
-    color: '#0EA5E9',
-    colorAlpha: 'rgba(14,165,233,0.10)',
+    color: '#22D3EE',
+    colorAlpha: 'rgba(34, 211, 238,0.10)',
   },
 ]
 
@@ -79,7 +79,7 @@ export function HowItWorks() {
                   <div
                     className="w-px h-10"
                     style={{
-                      background: 'linear-gradient(to bottom, rgba(59,123,242,0.25), rgba(99,102,241,0.15))',
+                      background: 'linear-gradient(to bottom, rgba(56, 89, 168,0.25), rgba(34, 211, 238,0.15))',
                     }}
                   />
                 </div>
@@ -171,8 +171,8 @@ function Connector() {
             width: 3,
             height: 3,
             background: i % 2 === 0
-              ? 'rgba(59,123,242,0.30)'
-              : 'rgba(99,102,241,0.15)',
+              ? 'rgba(56, 89, 168,0.30)'
+              : 'rgba(34, 211, 238,0.15)',
           }}
         />
       ))}
@@ -180,7 +180,7 @@ function Connector() {
       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
         <path
           d="M2 2L8 5L2 8"
-          stroke="rgba(59,123,242,0.35)"
+          stroke="rgba(56, 89, 168,0.35)"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"

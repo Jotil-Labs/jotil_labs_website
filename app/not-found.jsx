@@ -12,7 +12,7 @@ export default function NotFound() {
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(59,123,242,0.06) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(56, 89, 168,0.06) 0%, transparent 70%)',
           filter: 'blur(80px)',
         }}
         aria-hidden="true"

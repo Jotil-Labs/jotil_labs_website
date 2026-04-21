@@ -9,7 +9,7 @@ import Logo from '@/components/ui/Logo'
    PRODUCT ICON EXPLORATION v4
    RULES:
    - All icons visible at rest (min opacity 0.3-0.55, never 0)
-   - Unified brand blue: #3B7BF2, #6B9AEA, #2D6AE0
+   - Unified brand blue: #3859a8, #8CA3CC, #2a4688
    - 10s heartbeat cycle (burst 0-10%, rest 10-100%)
    - Hex versions match original HTML exactly
 ═══════════════════════════════════════════════════ */
@@ -23,11 +23,11 @@ function JotilLabsLogo({ size = 80 }) {
 function ReceptionistV1({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <rect x="4" y="16" width="5" height="8" rx="2.5" fill="#6B9AEA" className="vb vb1" />
-      <rect x="11" y="10" width="5" height="20" rx="2.5" fill="#6B9AEA" className="vb vb2" />
-      <rect x="18" y="6" width="5" height="28" rx="2.5" fill="#6B9AEA" className="vb vb3" />
-      <rect x="25" y="12" width="5" height="16" rx="2.5" fill="#6B9AEA" className="vb vb4" />
-      <rect x="32" y="14" width="5" height="12" rx="2.5" fill="#6B9AEA" className="vb vb5" />
+      <rect x="4" y="16" width="5" height="8" rx="2.5" fill="#8CA3CC" className="vb vb1" />
+      <rect x="11" y="10" width="5" height="20" rx="2.5" fill="#8CA3CC" className="vb vb2" />
+      <rect x="18" y="6" width="5" height="28" rx="2.5" fill="#8CA3CC" className="vb vb3" />
+      <rect x="25" y="12" width="5" height="16" rx="2.5" fill="#8CA3CC" className="vb vb4" />
+      <rect x="32" y="14" width="5" height="12" rx="2.5" fill="#8CA3CC" className="vb vb5" />
     </svg>
   )
 }
@@ -35,11 +35,11 @@ function ReceptionistV1({ size = 40 }) {
 function ReceptionistV2({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <rect x="6" y="18" width="4" height="4" rx="2" fill="#6B9AEA" className="vb vb1" />
-      <rect x="13" y="12" width="4" height="16" rx="2" fill="#6B9AEA" className="vb vb2" />
-      <rect x="20" y="6" width="4" height="28" rx="2" fill="#6B9AEA" className="vb vb3" />
-      <rect x="27" y="10" width="4" height="20" rx="2" fill="#6B9AEA" className="vb vb4" />
-      <rect x="34" y="16" width="4" height="8" rx="2" fill="#6B9AEA" className="vb vb5" />
+      <rect x="6" y="18" width="4" height="4" rx="2" fill="#8CA3CC" className="vb vb1" />
+      <rect x="13" y="12" width="4" height="16" rx="2" fill="#8CA3CC" className="vb vb2" />
+      <rect x="20" y="6" width="4" height="28" rx="2" fill="#8CA3CC" className="vb vb3" />
+      <rect x="27" y="10" width="4" height="20" rx="2" fill="#8CA3CC" className="vb vb4" />
+      <rect x="34" y="16" width="4" height="8" rx="2" fill="#8CA3CC" className="vb vb5" />
     </svg>
   )
 }
@@ -47,12 +47,12 @@ function ReceptionistV2({ size = 40 }) {
 function ReceptionistV3({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <rect x="3" y="17" width="3.5" height="6" rx="1.75" fill="#6B9AEA" className="vb vb1" />
-      <rect x="9" y="12" width="3.5" height="16" rx="1.75" fill="#6B9AEA" className="vb vb2" />
-      <rect x="15" y="7" width="4" height="26" rx="2" fill="#6B9AEA" className="vb vb3" />
-      <rect x="21.5" y="9" width="3.5" height="22" rx="1.75" fill="#6B9AEA" className="vb vb4" />
-      <rect x="27.5" y="13" width="3.5" height="14" rx="1.75" fill="#6B9AEA" className="vb vb5" />
-      <rect x="33.5" y="17" width="3.5" height="6" rx="1.75" fill="#6B9AEA" className="vb vb6" />
+      <rect x="3" y="17" width="3.5" height="6" rx="1.75" fill="#8CA3CC" className="vb vb1" />
+      <rect x="9" y="12" width="3.5" height="16" rx="1.75" fill="#8CA3CC" className="vb vb2" />
+      <rect x="15" y="7" width="4" height="26" rx="2" fill="#8CA3CC" className="vb vb3" />
+      <rect x="21.5" y="9" width="3.5" height="22" rx="1.75" fill="#8CA3CC" className="vb vb4" />
+      <rect x="27.5" y="13" width="3.5" height="14" rx="1.75" fill="#8CA3CC" className="vb vb5" />
+      <rect x="33.5" y="17" width="3.5" height="6" rx="1.75" fill="#8CA3CC" className="vb vb6" />
     </svg>
   )
 }
@@ -61,9 +61,9 @@ function ReceptionistV3({ size = 40 }) {
 function MessengerV2({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="10" cy="20" r="3.5" fill="#3B7BF2" className="md md1" />
-      <circle cx="20" cy="20" r="3.5" fill="#3B7BF2" className="md md2" />
-      <circle cx="30" cy="20" r="3.5" fill="#3B7BF2" className="md md3" />
+      <circle cx="10" cy="20" r="3.5" fill="#3859a8" className="md md1" />
+      <circle cx="20" cy="20" r="3.5" fill="#3859a8" className="md md2" />
+      <circle cx="30" cy="20" r="3.5" fill="#3859a8" className="md md3" />
     </svg>
   )
 }
@@ -73,13 +73,13 @@ function OutreachV1({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
       {/* Static base plane always visible */}
-      <path d="M26 16L8 14l8 10-2 10z" fill="#3B7BF2" opacity="0.25" />
+      <path d="M26 16L8 14l8 10-2 10z" fill="#3859a8" opacity="0.25" />
       {/* Animated planes that fly out */}
       <g className="pp pp1">
-        <path d="M26 16L8 14l8 10-2 10z" fill="#3B7BF2" />
+        <path d="M26 16L8 14l8 10-2 10z" fill="#3859a8" />
       </g>
       <g className="pp pp2">
-        <path d="M26 16L8 14l8 10-2 10z" fill="#3B7BF2" />
+        <path d="M26 16L8 14l8 10-2 10z" fill="#3859a8" />
       </g>
     </svg>
   )
@@ -89,10 +89,10 @@ function OutreachV1({ size = 40 }) {
 function SpaceV1({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="12" cy="12" r="6" fill="#3B7BF2" className="sp sp1" />
-      <rect x="22" y="6" width="12" height="12" rx="2" fill="#3B7BF2" className="sp sp2" />
-      <polygon points="12,28 18,40 6,40" fill="#3B7BF2" className="sp sp3" />
-      <polygon points="28,26 34,32 28,38 22,32" fill="#3B7BF2" className="sp sp4" />
+      <circle cx="12" cy="12" r="6" fill="#3859a8" className="sp sp1" />
+      <rect x="22" y="6" width="12" height="12" rx="2" fill="#3859a8" className="sp sp2" />
+      <polygon points="12,28 18,40 6,40" fill="#3859a8" className="sp sp3" />
+      <polygon points="28,26 34,32 28,38 22,32" fill="#3859a8" className="sp sp4" />
     </svg>
   )
 }
@@ -102,17 +102,17 @@ function FlowV3({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none" style={{ transform: 'rotate(-45deg)' }}>
       {/* Input dot */}
-      <circle cx="6" cy="20" r="4" fill="#3B7BF2" className="fl-src" />
+      <circle cx="6" cy="20" r="4" fill="#3859a8" className="fl-src" />
       {/* Trunk line */}
-      <path d="M10 20H18" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b1" />
+      <path d="M10 20H18" stroke="#8CA3CC" strokeWidth="2" strokeLinecap="round" className="fl-line fl-b1" />
       {/* Three Q-curve branches splitting from junction */}
-      <path d="M18 20Q22 20 26 12" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
-      <path d="M18 20Q22 20 26 20" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
-      <path d="M18 20Q22 20 26 28" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b3" />
+      <path d="M18 20Q22 20 26 12" stroke="#8CA3CC" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
+      <path d="M18 20Q22 20 26 20" stroke="#8CA3CC" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
+      <path d="M18 20Q22 20 26 28" stroke="#8CA3CC" strokeWidth="2" strokeLinecap="round" fill="none" className="fl-line fl-b3" />
       {/* Output dots */}
-      <circle cx="30" cy="12" r="3" fill="#6B9AEA" className="fl-out fl-out1" />
-      <circle cx="30" cy="20" r="3" fill="#3B7BF2" className="fl-out fl-out2" />
-      <circle cx="30" cy="28" r="3" fill="#6B9AEA" className="fl-out fl-out3" />
+      <circle cx="30" cy="12" r="3" fill="#8CA3CC" className="fl-out fl-out1" />
+      <circle cx="30" cy="20" r="3" fill="#3859a8" className="fl-out fl-out2" />
+      <circle cx="30" cy="28" r="3" fill="#8CA3CC" className="fl-out fl-out3" />
     </svg>
   )
 }
@@ -121,13 +121,13 @@ function FlowV3({ size = 40 }) {
 function AvatarV1({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="20" cy="18" r="17" stroke="#6B9AEA" strokeWidth="1" fill="none" className="av-ring av-ring1" />
-      <circle cx="20" cy="18" r="12" stroke="#6B9AEA" strokeWidth="1.2" fill="none" className="av-ring av-ring2" />
-      <circle cx="20" cy="16" r="6" fill="#3B7BF2" opacity="0.08" />
-      <circle cx="18" cy="14.5" r="1.3" fill="#3B7BF2" />
-      <circle cx="22" cy="14.5" r="1.3" fill="#3B7BF2" />
-      <path d="M17 18.5Q20 21 23 18.5" stroke="#3B7BF2" strokeWidth="1.3" strokeLinecap="round" fill="none" />
-      <path d="M11 32Q20 26 29 32" stroke="#6B9AEA" strokeWidth="2" strokeLinecap="round" fill="none" />
+      <circle cx="20" cy="18" r="17" stroke="#8CA3CC" strokeWidth="1" fill="none" className="av-ring av-ring1" />
+      <circle cx="20" cy="18" r="12" stroke="#8CA3CC" strokeWidth="1.2" fill="none" className="av-ring av-ring2" />
+      <circle cx="20" cy="16" r="6" fill="#3859a8" opacity="0.08" />
+      <circle cx="18" cy="14.5" r="1.3" fill="#3859a8" />
+      <circle cx="22" cy="14.5" r="1.3" fill="#3859a8" />
+      <path d="M17 18.5Q20 21 23 18.5" stroke="#3859a8" strokeWidth="1.3" strokeLinecap="round" fill="none" />
+      <path d="M11 32Q20 26 29 32" stroke="#8CA3CC" strokeWidth="2" strokeLinecap="round" fill="none" />
     </svg>
   )
 }
@@ -135,15 +135,15 @@ function AvatarV1({ size = 40 }) {
 function AvatarV2({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="20" cy="14" r="8" fill="#3B7BF2" opacity="0.06" stroke="#3B7BF2" strokeWidth="1.2" />
-      <circle cx="17.5" cy="12.5" r="1.3" fill="#3B7BF2" />
-      <circle cx="22.5" cy="12.5" r="1.3" fill="#3B7BF2" />
-      <path d="M17 17Q20 20 23 17" stroke="#3B7BF2" strokeWidth="1.3" strokeLinecap="round" fill="none" />
-      <rect x="10" y="28" width="2.5" height="6" rx="1.25" fill="#6B9AEA" className="vb vb1" />
-      <rect x="15" y="26" width="2.5" height="10" rx="1.25" fill="#6B9AEA" className="vb vb2" />
-      <rect x="20" y="25" width="2.5" height="12" rx="1.25" fill="#6B9AEA" className="vb vb3" />
-      <rect x="25" y="27" width="2.5" height="8" rx="1.25" fill="#6B9AEA" className="vb vb4" />
-      <rect x="30" y="29" width="2.5" height="4" rx="1.25" fill="#6B9AEA" className="vb vb5" />
+      <circle cx="20" cy="14" r="8" fill="#3859a8" opacity="0.06" stroke="#3859a8" strokeWidth="1.2" />
+      <circle cx="17.5" cy="12.5" r="1.3" fill="#3859a8" />
+      <circle cx="22.5" cy="12.5" r="1.3" fill="#3859a8" />
+      <path d="M17 17Q20 20 23 17" stroke="#3859a8" strokeWidth="1.3" strokeLinecap="round" fill="none" />
+      <rect x="10" y="28" width="2.5" height="6" rx="1.25" fill="#8CA3CC" className="vb vb1" />
+      <rect x="15" y="26" width="2.5" height="10" rx="1.25" fill="#8CA3CC" className="vb vb2" />
+      <rect x="20" y="25" width="2.5" height="12" rx="1.25" fill="#8CA3CC" className="vb vb3" />
+      <rect x="25" y="27" width="2.5" height="8" rx="1.25" fill="#8CA3CC" className="vb vb4" />
+      <rect x="30" y="29" width="2.5" height="4" rx="1.25" fill="#8CA3CC" className="vb vb5" />
     </svg>
   )
 }
@@ -151,12 +151,12 @@ function AvatarV2({ size = 40 }) {
 function AvatarV3({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="20" cy="30" r="8" fill="#3B7BF2" opacity="0.08" stroke="#6B9AEA" strokeWidth="1.5" className="hb hb1" />
-      <circle cx="20" cy="19" r="5" fill="#3B7BF2" opacity="0.1" stroke="#6B9AEA" strokeWidth="1.5" className="hb hb2" />
-      <circle cx="20" cy="10" r="6" fill="#3B7BF2" opacity="0.06" stroke="#3B7BF2" strokeWidth="1.5" className="hb hb3" />
-      <circle cx="18" cy="9" r="1" fill="#3B7BF2" />
-      <circle cx="22" cy="9" r="1" fill="#3B7BF2" />
-      <path d="M18 12Q20 14 22 12" stroke="#3B7BF2" strokeWidth="1" strokeLinecap="round" fill="none" />
+      <circle cx="20" cy="30" r="8" fill="#3859a8" opacity="0.08" stroke="#8CA3CC" strokeWidth="1.5" className="hb hb1" />
+      <circle cx="20" cy="19" r="5" fill="#3859a8" opacity="0.1" stroke="#8CA3CC" strokeWidth="1.5" className="hb hb2" />
+      <circle cx="20" cy="10" r="6" fill="#3859a8" opacity="0.06" stroke="#3859a8" strokeWidth="1.5" className="hb hb3" />
+      <circle cx="18" cy="9" r="1" fill="#3859a8" />
+      <circle cx="22" cy="9" r="1" fill="#3859a8" />
+      <path d="M18 12Q20 14 22 12" stroke="#3859a8" strokeWidth="1" strokeLinecap="round" fill="none" />
     </svg>
   )
 }
@@ -164,13 +164,13 @@ function AvatarV3({ size = 40 }) {
 function AvatarV4({ size = 40 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <rect x="4" y="6" width="32" height="22" rx="4" stroke="#6B9AEA" strokeWidth="1.5" fill="#3B7BF2" opacity="0.04" />
-      <circle cx="20" cy="14" r="5" fill="#3B7BF2" opacity="0.08" stroke="#3B7BF2" strokeWidth="1" />
-      <circle cx="18.5" cy="13" r="1" fill="#3B7BF2" />
-      <circle cx="21.5" cy="13" r="1" fill="#3B7BF2" />
-      <path d="M18 16.5Q20 18.5 22 16.5" stroke="#3B7BF2" strokeWidth="1" strokeLinecap="round" fill="none" />
-      <circle cx="32" cy="10" r="2" fill="#2D6AE0" className="av-live" />
-      <rect x="12" y="32" width="16" height="3" rx="1.5" fill="#6B9AEA" opacity="0.3" />
+      <rect x="4" y="6" width="32" height="22" rx="4" stroke="#8CA3CC" strokeWidth="1.5" fill="#3859a8" opacity="0.04" />
+      <circle cx="20" cy="14" r="5" fill="#3859a8" opacity="0.08" stroke="#3859a8" strokeWidth="1" />
+      <circle cx="18.5" cy="13" r="1" fill="#3859a8" />
+      <circle cx="21.5" cy="13" r="1" fill="#3859a8" />
+      <path d="M18 16.5Q20 18.5 22 16.5" stroke="#3859a8" strokeWidth="1" strokeLinecap="round" fill="none" />
+      <circle cx="32" cy="10" r="2" fill="#2a4688" className="av-live" />
+      <rect x="12" y="32" width="16" height="3" rx="1.5" fill="#8CA3CC" opacity="0.3" />
     </svg>
   )
 }
@@ -180,9 +180,9 @@ function HexJotilLabs({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      <g className="hb hb1" fill="#3B7BF2"><path d="M424.23 202.37 c-2.05 -1.83 -2.42 -2.64 -2.42 -5.42 0 -4.18 2.05 -7.11 5.94 -8.50 2.57 -0.88 3.22 -0.88 5.57 0.22 3.37 1.61 5.35 5.42 4.62 9.02 -1.25 6.60 -8.80 9.09 -13.71 4.69z" /></g>
-      <g className="hb hb2" fill="#3B7BF2"><path d="M453.70 193.35 c-4.54 -2.35 -6.60 -5.64 -6.60 -10.63 0 -7.48 3.52 -11.29 11.73 -12.75 10.70 -1.83 17.22 11.80 9.82 20.60 -3.81 4.47 -9.53 5.50 -14.95 2.79z" /></g>
-      <g className="hb hb3" fill="#3B7BF2"><path d="M491.08 180.60 c-6.16 -2.64 -9.53 -8.06 -9.53 -15.32 0 -10.41 7.33 -17.88 17.44 -17.96 9.68 0 16.27 6.67 16.27 16.49 0 7.18 -3.81 13.12 -10.41 16.56 -3.30 1.69 -10.11 1.83 -13.78 0.22z" /></g>
+      <g className="hb hb1" fill="#3859a8"><path d="M424.23 202.37 c-2.05 -1.83 -2.42 -2.64 -2.42 -5.42 0 -4.18 2.05 -7.11 5.94 -8.50 2.57 -0.88 3.22 -0.88 5.57 0.22 3.37 1.61 5.35 5.42 4.62 9.02 -1.25 6.60 -8.80 9.09 -13.71 4.69z" /></g>
+      <g className="hb hb2" fill="#3859a8"><path d="M453.70 193.35 c-4.54 -2.35 -6.60 -5.64 -6.60 -10.63 0 -7.48 3.52 -11.29 11.73 -12.75 10.70 -1.83 17.22 11.80 9.82 20.60 -3.81 4.47 -9.53 5.50 -14.95 2.79z" /></g>
+      <g className="hb hb3" fill="#3859a8"><path d="M491.08 180.60 c-6.16 -2.64 -9.53 -8.06 -9.53 -15.32 0 -10.41 7.33 -17.88 17.44 -17.96 9.68 0 16.27 6.67 16.27 16.49 0 7.18 -3.81 13.12 -10.41 16.56 -3.30 1.69 -10.11 1.83 -13.78 0.22z" /></g>
     </svg>
   )
 }
@@ -191,11 +191,11 @@ function HexReceptionist({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      <rect x="424.5" y="188" width="5" height="14" rx="2.5" fill="#6B9AEA" className="vb vb1" />
-      <rect x="435.5" y="178" width="5" height="24" rx="2.5" fill="#6B9AEA" className="vb vb2" />
-      <rect x="446.5" y="170" width="5" height="30" rx="2.5" fill="#6B9AEA" className="vb vb3" />
-      <rect x="457.5" y="170" width="5" height="20" rx="2.5" fill="#6B9AEA" className="vb vb4" />
-      <rect x="468.5" y="167" width="5" height="16" rx="2.5" fill="#6B9AEA" className="vb vb5" />
+      <rect x="424.5" y="188" width="5" height="14" rx="2.5" fill="#8CA3CC" className="vb vb1" />
+      <rect x="435.5" y="178" width="5" height="24" rx="2.5" fill="#8CA3CC" className="vb vb2" />
+      <rect x="446.5" y="170" width="5" height="30" rx="2.5" fill="#8CA3CC" className="vb vb3" />
+      <rect x="457.5" y="170" width="5" height="20" rx="2.5" fill="#8CA3CC" className="vb vb4" />
+      <rect x="468.5" y="167" width="5" height="16" rx="2.5" fill="#8CA3CC" className="vb vb5" />
     </svg>
   )
 }
@@ -205,9 +205,9 @@ function HexMessenger({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      <g className="md md1" fill="#3B7BF2"><path d="M424.23 202.37 c-2.05 -1.83 -2.42 -2.64 -2.42 -5.42 0 -4.18 2.05 -7.11 5.94 -8.50 2.57 -0.88 3.22 -0.88 5.57 0.22 3.37 1.61 5.35 5.42 4.62 9.02 -1.25 6.60 -8.80 9.09 -13.71 4.69z" /></g>
-      <g className="md md2" fill="#3B7BF2"><path d="M453.70 193.35 c-4.54 -2.35 -6.60 -5.64 -6.60 -10.63 0 -7.48 3.52 -11.29 11.73 -12.75 10.70 -1.83 17.22 11.80 9.82 20.60 -3.81 4.47 -9.53 5.50 -14.95 2.79z" /></g>
-      <g className="md md3" fill="#3B7BF2"><path d="M491.08 180.60 c-6.16 -2.64 -9.53 -8.06 -9.53 -15.32 0 -10.41 7.33 -17.88 17.44 -17.96 9.68 0 16.27 6.67 16.27 16.49 0 7.18 -3.81 13.12 -10.41 16.56 -3.30 1.69 -10.11 1.83 -13.78 0.22z" /></g>
+      <g className="md md1" fill="#3859a8"><path d="M424.23 202.37 c-2.05 -1.83 -2.42 -2.64 -2.42 -5.42 0 -4.18 2.05 -7.11 5.94 -8.50 2.57 -0.88 3.22 -0.88 5.57 0.22 3.37 1.61 5.35 5.42 4.62 9.02 -1.25 6.60 -8.80 9.09 -13.71 4.69z" /></g>
+      <g className="md md2" fill="#3859a8"><path d="M453.70 193.35 c-4.54 -2.35 -6.60 -5.64 -6.60 -10.63 0 -7.48 3.52 -11.29 11.73 -12.75 10.70 -1.83 17.22 11.80 9.82 20.60 -3.81 4.47 -9.53 5.50 -14.95 2.79z" /></g>
+      <g className="md md3" fill="#3859a8"><path d="M491.08 180.60 c-6.16 -2.64 -9.53 -8.06 -9.53 -15.32 0 -10.41 7.33 -17.88 17.44 -17.96 9.68 0 16.27 6.67 16.27 16.49 0 7.18 -3.81 13.12 -10.41 16.56 -3.30 1.69 -10.11 1.83 -13.78 0.22z" /></g>
     </svg>
   )
 }
@@ -217,10 +217,10 @@ function HexOutreach({ size = 80 }) {
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
       {/* Static base plane always visible */}
-      <path d="M474 174 L450 171 L457 183 L450 195 Z" fill="#3B7BF2" opacity="0.25" />
-      <g className="pp pp1" fill="#3B7BF2"><path d="M474 174 L450 171 L457 183 L450 195 Z" /></g>
-      <g className="pp pp2" fill="#3B7BF2"><path d="M474 174 L450 171 L457 183 L450 195 Z" /></g>
-      <g className="pp pp3" fill="#3B7BF2"><path d="M474 174 L450 171 L457 183 L450 195 Z" /></g>
+      <path d="M474 174 L450 171 L457 183 L450 195 Z" fill="#3859a8" opacity="0.25" />
+      <g className="pp pp1" fill="#3859a8"><path d="M474 174 L450 171 L457 183 L450 195 Z" /></g>
+      <g className="pp pp2" fill="#3859a8"><path d="M474 174 L450 171 L457 183 L450 195 Z" /></g>
+      <g className="pp pp3" fill="#3859a8"><path d="M474 174 L450 171 L457 183 L450 195 Z" /></g>
     </svg>
   )
 }
@@ -230,10 +230,10 @@ function HexSpace({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      <g className="cs cs-circle" opacity="0"><circle cx="458" cy="183" r="10" fill="#3B7BF2" /></g>
-      <g className="cs cs-diamond" opacity="0"><polygon points="458,172 468,183 458,194 448,183" fill="#3B7BF2" /></g>
-      <g className="cs cs-triangle" opacity="0"><polygon points="458,172 470,194 446,194" fill="#3B7BF2" /></g>
-      <g className="cs cs-square" opacity="0"><rect x="448" y="173" width="20" height="20" rx="2" fill="#3B7BF2" /></g>
+      <g className="cs cs-circle" opacity="0"><circle cx="458" cy="183" r="10" fill="#3859a8" /></g>
+      <g className="cs cs-diamond" opacity="0"><polygon points="458,172 468,183 458,194 448,183" fill="#3859a8" /></g>
+      <g className="cs cs-triangle" opacity="0"><polygon points="458,172 470,194 446,194" fill="#3859a8" /></g>
+      <g className="cs cs-square" opacity="0"><rect x="448" y="173" width="20" height="20" rx="2" fill="#3859a8" /></g>
     </svg>
   )
 }
@@ -244,14 +244,14 @@ function HexFlow({ size = 80 }) {
       <HexContainer />
       {/* Branching design tilted ~25deg, pushed outside hex opening */}
       <g transform="rotate(-25, 460, 180) translate(15, -10)">
-        <circle cx="425" cy="190" r="5" fill="#3B7BF2" className="fl-src" />
-        <path d="M430 190H448" stroke="#6B9AEA" strokeWidth="3.5" strokeLinecap="round" className="fl-line fl-b1" />
-        <path d="M448 190Q458 190 470 173" stroke="#6B9AEA" strokeWidth="3.5" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
-        <path d="M448 190Q458 190 472 190" stroke="#6B9AEA" strokeWidth="3.5" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
-        <path d="M448 190Q458 190 470 207" stroke="#6B9AEA" strokeWidth="3.5" strokeLinecap="round" fill="none" className="fl-line fl-b3" />
-        <circle cx="474" cy="173" r="5" fill="#6B9AEA" className="fl-out fl-out1" />
-        <circle cx="477" cy="190" r="5" fill="#3B7BF2" className="fl-out fl-out2" />
-        <circle cx="474" cy="207" r="5" fill="#6B9AEA" className="fl-out fl-out3" />
+        <circle cx="425" cy="190" r="5" fill="#3859a8" className="fl-src" />
+        <path d="M430 190H448" stroke="#8CA3CC" strokeWidth="3.5" strokeLinecap="round" className="fl-line fl-b1" />
+        <path d="M448 190Q458 190 470 173" stroke="#8CA3CC" strokeWidth="3.5" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
+        <path d="M448 190Q458 190 472 190" stroke="#8CA3CC" strokeWidth="3.5" strokeLinecap="round" fill="none" className="fl-line fl-b2" />
+        <path d="M448 190Q458 190 470 207" stroke="#8CA3CC" strokeWidth="3.5" strokeLinecap="round" fill="none" className="fl-line fl-b3" />
+        <circle cx="474" cy="173" r="5" fill="#8CA3CC" className="fl-out fl-out1" />
+        <circle cx="477" cy="190" r="5" fill="#3859a8" className="fl-out fl-out2" />
+        <circle cx="474" cy="207" r="5" fill="#8CA3CC" className="fl-out fl-out3" />
       </g>
     </svg>
   )
@@ -261,11 +261,11 @@ function HexAvatar({ size = 80 }) {
   return (
     <svg width={size} height={size} viewBox="220 130 320 280">
       <HexContainer />
-      <circle cx="455" cy="175" r="12" stroke="#6B9AEA" strokeWidth="2" fill="#3B7BF2" opacity="0.06" className="av-ring av-ring2" />
-      <circle cx="452" cy="173" r="2" fill="#3B7BF2" />
-      <circle cx="458" cy="173" r="2" fill="#3B7BF2" />
-      <path d="M451 178Q455 182 459 178" stroke="#3B7BF2" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      <path d="M442 195Q455 188 468 195" stroke="#6B9AEA" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+      <circle cx="455" cy="175" r="12" stroke="#8CA3CC" strokeWidth="2" fill="#3859a8" opacity="0.06" className="av-ring av-ring2" />
+      <circle cx="452" cy="173" r="2" fill="#3859a8" />
+      <circle cx="458" cy="173" r="2" fill="#3859a8" />
+      <path d="M451 178Q455 182 459 178" stroke="#3859a8" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+      <path d="M442 195Q455 188 468 195" stroke="#8CA3CC" strokeWidth="2.5" strokeLinecap="round" fill="none" />
     </svg>
   )
 }
@@ -293,7 +293,7 @@ function IconRow({ label, description, variants, hexComponent: HexComp, sizes = 
       )}
       <div className="space-y-8">
         {variants.map(({ name, Component, picked }, vi) => (
-          <div key={vi} className={picked ? 'rounded-2xl p-5 -mx-5' : ''} style={picked ? { background: 'rgba(59,123,242,0.04)', border: '1px solid rgba(59,123,242,0.1)' } : {}}>
+          <div key={vi} className={picked ? 'rounded-2xl p-5 -mx-5' : ''} style={picked ? { background: 'rgba(56, 89, 168,0.04)', border: '1px solid rgba(56, 89, 168,0.1)' } : {}}>
             <div className="flex items-center gap-2 mb-3">
               <p className="text-xs font-semibold text-text-secondary uppercase tracking-wider">V{vi + 1}: {name}</p>
               {picked && <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">PICKED</span>}
@@ -329,12 +329,12 @@ export default function IconExplorationPage() {
         .vb5 { animation: vbPulse 10s ease-in-out infinite 0.4s; }
         .vb6 { animation: vbPulse 10s ease-in-out infinite 0.5s; }
         @keyframes vbPulse {
-          0%   { opacity: 0.55; fill: #6B9AEA; }
-          3%   { opacity: 1;    fill: #2D6AE0; }
-          5%   { opacity: 0.65; fill: #6B9AEA; }
-          7%   { opacity: 1;    fill: #2D6AE0; }
-          10%  { opacity: 0.55; fill: #6B9AEA; }
-          100% { opacity: 0.55; fill: #6B9AEA; }
+          0%   { opacity: 0.55; fill: #8CA3CC; }
+          3%   { opacity: 1;    fill: #2a4688; }
+          5%   { opacity: 0.65; fill: #8CA3CC; }
+          7%   { opacity: 1;    fill: #2a4688; }
+          10%  { opacity: 0.55; fill: #8CA3CC; }
+          100% { opacity: 0.55; fill: #8CA3CC; }
         }
 
         /* ═══ Messenger dots: filled, scale pulse ═══ */
@@ -415,12 +415,12 @@ export default function IconExplorationPage() {
         .fl-b2 { animation-delay: 0.15s; }
         .fl-b3 { animation-delay: 0.3s; }
         @keyframes flLine {
-          0%   { opacity: 0.3; stroke: #6B9AEA; }
-          3%   { opacity: 1;   stroke: #2D6AE0; }
-          5%   { opacity: 0.4; stroke: #6B9AEA; }
-          7%   { opacity: 0.9; stroke: #2D6AE0; }
-          10%  { opacity: 0.3; stroke: #6B9AEA; }
-          100% { opacity: 0.3; stroke: #6B9AEA; }
+          0%   { opacity: 0.3; stroke: #8CA3CC; }
+          3%   { opacity: 1;   stroke: #2a4688; }
+          5%   { opacity: 0.4; stroke: #8CA3CC; }
+          7%   { opacity: 0.9; stroke: #2a4688; }
+          10%  { opacity: 0.3; stroke: #8CA3CC; }
+          100% { opacity: 0.3; stroke: #8CA3CC; }
         }
         .fl-src { animation: flSrc 10s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
         @keyframes flSrc {
@@ -435,11 +435,11 @@ export default function IconExplorationPage() {
         .fl-out2 { animation-delay: 0.5s; }
         .fl-out3 { animation-delay: 0.7s; }
         @keyframes flOut {
-          0%   { opacity: 0.25; fill: #6B9AEA; transform: scale(0.8); }
-          4%   { opacity: 1;    fill: #2D6AE0; transform: scale(1.25); }
-          7%   { opacity: 0.7;  fill: #3B7BF2; transform: scale(1); }
-          10%  { opacity: 0.25; fill: #6B9AEA; transform: scale(0.8); }
-          100% { opacity: 0.25; fill: #6B9AEA; transform: scale(0.8); }
+          0%   { opacity: 0.25; fill: #8CA3CC; transform: scale(0.8); }
+          4%   { opacity: 1;    fill: #2a4688; transform: scale(1.25); }
+          7%   { opacity: 0.7;  fill: #3859a8; transform: scale(1); }
+          10%  { opacity: 0.25; fill: #8CA3CC; transform: scale(0.8); }
+          100% { opacity: 0.25; fill: #8CA3CC; transform: scale(0.8); }
         }
         /* Data packet travels along the middle branch */
         .fl-packet { animation: flPkt 10s ease-in-out infinite; }
@@ -499,7 +499,7 @@ export default function IconExplorationPage() {
         />
         <div className="gradient-divider my-10" />
 
-        <IconRow label="Receptionist" description="Voice waveform. vbPulse animation (color shift #6B9AEA to #2D6AE0)." hexComponent={HexReceptionist}
+        <IconRow label="Receptionist" description="Voice waveform. vbPulse animation (color shift #8CA3CC to #2a4688)." hexComponent={HexReceptionist}
           variants={[
             { name: 'Symmetric 5-bar', Component: ReceptionistV1 },
             { name: 'Thin 5-bar', Component: ReceptionistV2 },

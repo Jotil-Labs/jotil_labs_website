@@ -24,7 +24,7 @@ export function IconBox({
         'icon-gradient-bg inline-flex items-center justify-center rounded-[14px] shrink-0',
         sizeMap[size],
         iconSizeMap[size],
-        glow && 'shadow-[0_0_20px_rgba(59,123,242,0.25)]',
+        glow && 'shadow-[0_0_20px_rgba(56, 89, 168,0.25)]',
         className
       )}
     >

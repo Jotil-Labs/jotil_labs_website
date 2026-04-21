@@ -90,8 +90,8 @@ function LogoItem({ name }) {
       <div
         className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
         style={{
-          background: 'rgba(59,123,242,0.06)',
-          border: '1px solid rgba(59,123,242,0.10)',
+          background: 'rgba(56, 89, 168,0.06)',
+          border: '1px solid rgba(56, 89, 168,0.10)',
         }}
       >
         <span

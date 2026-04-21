@@ -67,7 +67,7 @@ export async function POST(request) {
             </tr>
             <tr>
               <td style="padding: 10px 0; color: #999; font-weight: 600; vertical-align: top;">Email</td>
-              <td style="padding: 10px 0; color: #111;"><a href="mailto:${safeEmail}" style="color: #3B7BF2;">${safeEmail}</a></td>
+              <td style="padding: 10px 0; color: #111;"><a href="mailto:${safeEmail}" style="color: #3859a8;">${safeEmail}</a></td>
             </tr>
             ${safeCompany ? `
             <tr>

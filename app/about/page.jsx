@@ -78,7 +78,7 @@ export default function AboutPage() {
             width: 560,
             height: 560,
             background:
-              'radial-gradient(circle, rgba(59,123,242,0.09) 0%, transparent 70%)',
+              'radial-gradient(circle, rgba(56, 89, 168,0.09) 0%, transparent 70%)',
             filter: 'blur(80px)',
           }}
         />
@@ -157,7 +157,7 @@ export default function AboutPage() {
                 <div className="card-premium p-7">
                   <div className="flex items-start gap-4">
                     <IconBox size="md" glow>
-                      <Target size={20} color="#3B7BF2" strokeWidth={1.5} />
+                      <Target size={20} color="#3859a8" strokeWidth={1.5} />
                     </IconBox>
                     <div>
                       <h3 className="font-semibold text-text text-lg mb-2">Our Mission</h3>
@@ -176,7 +176,7 @@ export default function AboutPage() {
                 <div className="card-premium p-7">
                   <div className="flex items-start gap-4">
                     <IconBox size="md" glow>
-                      <Eye size={20} color="#6366F1" strokeWidth={1.5} />
+                      <Eye size={20} color="#22D3EE" strokeWidth={1.5} />
                     </IconBox>
                     <div>
                       <h3 className="font-semibold text-text text-lg mb-2">Our Vision</h3>
@@ -195,8 +195,8 @@ export default function AboutPage() {
                 <div
                   className="rounded-[20px] p-7"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(59,123,242,0.07), rgba(99,102,241,0.05))',
-                    border: '1px solid rgba(59,123,242,0.12)',
+                    background: 'linear-gradient(135deg, rgba(56, 89, 168,0.07), rgba(34, 211, 238,0.05))',
+                    border: '1px solid rgba(56, 89, 168,0.12)',
                   }}
                 >
                   <p className="text-sm font-medium text-primary mb-1">Founded</p>
@@ -272,7 +272,7 @@ export default function AboutPage() {
                 <AnimatedSection key={value.title} delay={i * 0.09}>
                   <div className="card-premium h-full p-7">
                     <IconBox size="md" className="mb-5" glow>
-                      <Icon size={20} color="#3B7BF2" strokeWidth={1.5} />
+                      <Icon size={20} color="#3859a8" strokeWidth={1.5} />
                     </IconBox>
                     <h3 className="font-semibold text-text text-lg mb-2">{value.title}</h3>
                     <p className="text-text-secondary text-sm leading-relaxed">{value.description}</p>
@@ -309,8 +309,8 @@ export default function AboutPage() {
                   <div
                     className="w-16 h-16 rounded-full flex items-center justify-center mb-4 font-bold text-white text-lg tracking-tight shrink-0"
                     style={{
-                      background: 'linear-gradient(135deg, #3B7BF2, #6366F1)',
-                      boxShadow: '0 8px 24px rgba(59,123,242,0.3)',
+                      background: 'linear-gradient(135deg, #3859a8, #22D3EE)',
+                      boxShadow: '0 8px 24px rgba(56, 89, 168,0.3)',
                     }}
                   >
                     {member.initials}
@@ -339,8 +339,8 @@ export default function AboutPage() {
             <div
               className="rounded-[24px] p-10 md:p-14 text-center"
               style={{
-                background: 'linear-gradient(135deg, rgba(59,123,242,0.07), rgba(99,102,241,0.05), rgba(14,165,233,0.04))',
-                border: '1px solid rgba(59,123,242,0.12)',
+                background: 'linear-gradient(135deg, rgba(56, 89, 168,0.07), rgba(34, 211, 238,0.05), rgba(34, 211, 238,0.04))',
+                border: '1px solid rgba(56, 89, 168,0.12)',
               }}
             >
               <h2

@@ -139,9 +139,9 @@ export function ContactForm() {
               >
                 <div
                   className="w-14 h-14 rounded-full flex items-center justify-center mb-5"
-                  style={{ background: 'rgba(59,123,242,0.1)' }}
+                  style={{ background: 'rgba(56, 89, 168,0.1)' }}
                 >
-                  <CheckCircle2 size={28} color="#3B7BF2" strokeWidth={1.5} />
+                  <CheckCircle2 size={28} color="#3859a8" strokeWidth={1.5} />
                 </div>
                 <h3 className="font-bold text-text text-lg mb-2">Message received</h3>
                 <p className="text-sm text-text-secondary max-w-sm">
@@ -296,9 +296,9 @@ export function ContactForm() {
               >
                 <div
                   className="w-10 h-10 rounded-[12px] flex items-center justify-center shrink-0"
-                  style={{ background: 'rgba(59,123,242,0.08)' }}
+                  style={{ background: 'rgba(56, 89, 168,0.08)' }}
                 >
-                  <Mail size={16} color="#3B7BF2" strokeWidth={1.5} />
+                  <Mail size={16} color="#3859a8" strokeWidth={1.5} />
                 </div>
                 <div>
                   <p className="text-xs text-text-secondary mb-0.5">Email</p>
@@ -314,9 +314,9 @@ export function ContactForm() {
               >
                 <div
                   className="w-10 h-10 rounded-[12px] flex items-center justify-center shrink-0"
-                  style={{ background: 'rgba(59,123,242,0.08)' }}
+                  style={{ background: 'rgba(56, 89, 168,0.08)' }}
                 >
-                  <Phone size={16} color="#3B7BF2" strokeWidth={1.5} />
+                  <Phone size={16} color="#3859a8" strokeWidth={1.5} />
                 </div>
                 <div>
                   <p className="text-xs text-text-secondary mb-0.5">Phone</p>
@@ -329,9 +329,9 @@ export function ContactForm() {
               <div className="flex items-center gap-3">
                 <div
                   className="w-10 h-10 rounded-[12px] flex items-center justify-center shrink-0"
-                  style={{ background: 'rgba(59,123,242,0.08)' }}
+                  style={{ background: 'rgba(56, 89, 168,0.08)' }}
                 >
-                  <MapPin size={16} color="#3B7BF2" strokeWidth={1.5} />
+                  <MapPin size={16} color="#3859a8" strokeWidth={1.5} />
                 </div>
                 <div>
                   <p className="text-xs text-text-secondary mb-0.5">Location</p>
@@ -345,8 +345,8 @@ export function ContactForm() {
           <div
             className="rounded-[20px] overflow-hidden"
             style={{
-              background: 'linear-gradient(135deg, #3B7BF2, #2D6AE0)',
-              boxShadow: '0 12px 40px rgba(59,123,242,0.35)',
+              background: 'linear-gradient(135deg, #3859a8, #2a4688)',
+              boxShadow: '0 12px 40px rgba(56, 89, 168,0.35)',
             }}
           >
             <div className="p-7 pb-4">

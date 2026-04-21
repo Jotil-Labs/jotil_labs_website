@@ -116,7 +116,7 @@ export function AirtableLogo() {
 export function RetellLogo() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="12" fill="#3B7BF2" />
+      <circle cx="12" cy="12" r="12" fill="#3859a8" />
       <rect x="8" y="9" width="2" height="6" rx="1" fill="#fff" />
       <rect x="11" y="7" width="2" height="10" rx="1" fill="#fff" />
       <rect x="14" y="10" width="2" height="4" rx="1" fill="#fff" />
