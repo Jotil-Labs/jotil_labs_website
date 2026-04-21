@@ -64,12 +64,12 @@ export function ScrollGradientMesh({
   const blobs =
     tone === 'dark'
       ? [
-          { x: '20%', y: '30%', size: 640, color: 'rgba(34, 211, 238, 0.28)' },
+          { x: '20%', y: '30%', size: 640, color: 'rgba(59, 130, 246, 0.28)' },
           { x: '75%', y: '20%', size: 520, color: 'rgba(56, 89, 168, 0.35)' },
           { x: '50%', y: '85%', size: 700, color: 'rgba(15, 17, 41, 0.55)' },
         ]
       : [
-          { x: '15%', y: '25%', size: 580, color: 'rgba(34, 211, 238, 0.22)' },
+          { x: '15%', y: '25%', size: 580, color: 'rgba(59, 130, 246, 0.22)' },
           { x: '80%', y: '30%', size: 520, color: 'rgba(56, 89, 168, 0.18)' },
           { x: '55%', y: '90%', size: 720, color: 'rgba(140, 163, 204, 0.22)' },
         ]

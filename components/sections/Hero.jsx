@@ -22,8 +22,8 @@ const FLOATING_DOTS = [
 
 const LIVE_INDICATORS = [
   { icon: PhoneCall, label: 'Missed calls recovered', value: '80%', color: '#3859a8' },
-  { icon: MessageSquare, label: 'Faster response time', value: '< 3s', color: '#22D3EE' },
-  { icon: Zap, label: 'Avg. setup time', value: '4 hrs', color: '#22D3EE' },
+  { icon: MessageSquare, label: 'Faster response time', value: '< 3s', color: '#3B82F6' },
+  { icon: Zap, label: 'Avg. setup time', value: '4 hrs', color: '#3B82F6' },
 ]
 
 function VoiceOrb() {
@@ -36,7 +36,7 @@ function VoiceOrb() {
 
       {/* Rings */}
       <div className="absolute rounded-full pointer-events-none animate-ring-pulse-reverse" style={{ width: 370, height: 370, top: '50%', left: '50%', transform: 'translate(-50%,-50%)', border: '1px dotted rgba(56, 89, 168,0.07)' }} />
-      <div className="absolute rounded-full pointer-events-none animate-ring-rotate" style={{ width: 355, height: 355, top: '50%', left: '50%', marginTop: -177.5, marginLeft: -177.5, border: '1px dashed rgba(34, 211, 238,0.09)' }} />
+      <div className="absolute rounded-full pointer-events-none animate-ring-rotate" style={{ width: 355, height: 355, top: '50%', left: '50%', marginTop: -177.5, marginLeft: -177.5, border: '1px dashed rgba(59, 130, 246,0.09)' }} />
       <div className="absolute rounded-full pointer-events-none animate-ring-pulse" style={{ width: 344, height: 344, top: '50%', left: '50%', transform: 'translate(-50%,-50%)', border: '1px solid rgba(56, 89, 168,0.12)' }} />
 
       {/* Floating dots */}
@@ -70,7 +70,7 @@ function VoiceOrb() {
             <motion.div
               key={i}
               className="w-[2.5px] rounded-full"
-              style={{ background: active ? 'linear-gradient(to top, #3859a8, #22D3EE)' : 'rgba(56, 89, 168,0.2)' }}
+              style={{ background: active ? 'linear-gradient(to top, #3859a8, #3B82F6)' : 'rgba(56, 89, 168,0.2)' }}
               animate={active ? { height: [5, bar.height, 5] } : { height: 5 }}
               transition={active ? { duration: 0.5, delay: bar.delay, repeat: Infinity, ease: 'easeInOut' } : { duration: 0.3 }}
             />
@@ -99,8 +99,8 @@ export function Hero() {
 
         {/* Gradient orbs */}
         <div className="absolute rounded-full animate-orb-1" style={{ width: 600, height: 600, top: '-10%', left: '-10%', background: 'radial-gradient(circle, rgba(56, 89, 168,0.10) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-        <div className="absolute rounded-full animate-orb-2" style={{ width: 500, height: 500, top: '10%', right: '-8%', background: 'radial-gradient(circle, rgba(34, 211, 238,0.08) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-        <div className="absolute rounded-full animate-orb-3" style={{ width: 400, height: 400, bottom: '0%', left: '30%', background: 'radial-gradient(circle, rgba(34, 211, 238,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
+        <div className="absolute rounded-full animate-orb-2" style={{ width: 500, height: 500, top: '10%', right: '-8%', background: 'radial-gradient(circle, rgba(59, 130, 246,0.08) 0%, transparent 70%)', filter: 'blur(80px)' }} />
+        <div className="absolute rounded-full animate-orb-3" style={{ width: 400, height: 400, bottom: '0%', left: '30%', background: 'radial-gradient(circle, rgba(59, 130, 246,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
         <div className="absolute rounded-full animate-orb-4" style={{ width: 350, height: 350, top: '50%', left: '55%', background: 'radial-gradient(circle, rgba(56, 89, 168,0.06) 0%, transparent 70%)', filter: 'blur(80px)' }} />
       </div>
 

@@ -14,7 +14,7 @@
   --color-primary: #3859a8;
   --color-primary-dark: #2a4688;
   --color-navy: #0f1129;
-  --color-accent: #22D3EE;
+  --color-accent: #3B82F6;
   --color-logo-muted: #8ca3cc;
 
   /* Primary tonal scale — royal blue (#3859a8 is 500). Use these for
@@ -44,18 +44,21 @@
   --color-navy-900: #0F1129;  /* alias of --color-navy */
   --color-navy-950: #090B1A;
 
-  /* Accent tonal scale — electric cyan highlights. #22D3EE is 500. */
-  --color-accent-50:  #ECFDFD;
-  --color-accent-100: #CFFAFA;
-  --color-accent-200: #A5F3F5;
-  --color-accent-300: #67E8EC;
-  --color-accent-400: #3DDFE6;
-  --color-accent-500: #22D3EE;  /* alias of --color-accent */
-  --color-accent-600: #0EB6D1;
-  --color-accent-700: #0D92A8;
-  --color-accent-800: #106F82;
-  --color-accent-900: #125B6C;
-  --color-accent-950: #083C47;
+  /* Accent tonal scale — sapphire blue highlights. #3B82F6 is 500.
+     Matches Tailwind's blue-* scale so consumers can reason about
+     intensity intuitively. Pairs with primary (royal blue) + navy
+     without clashing. */
+  --color-accent-50:  #EFF6FF;
+  --color-accent-100: #DBEAFE;
+  --color-accent-200: #BFDBFE;
+  --color-accent-300: #93C5FD;
+  --color-accent-400: #60A5FA;
+  --color-accent-500: #3B82F6;  /* alias of --color-accent */
+  --color-accent-600: #2563EB;
+  --color-accent-700: #1D4ED8;
+  --color-accent-800: #1E40AF;
+  --color-accent-900: #1E3A8A;
+  --color-accent-950: #172554;
 
   /* Backgrounds */
   --color-bg: #FAFBFD;
@@ -84,7 +87,7 @@
   --shadow-lg: 0 12px 32px rgba(15, 17, 41, 0.08), 0 4px 12px rgba(15, 17, 41, 0.05);
   --shadow-xl: 0 24px 60px rgba(15, 17, 41, 0.12), 0 8px 20px rgba(15, 17, 41, 0.06);
   /* Ambient cyan glow for interactive/highlight moments */
-  --shadow-glow-cyan: 0 0 0 1px rgba(34, 211, 238, 0.10), 0 8px 32px rgba(34, 211, 238, 0.18);
+  --shadow-glow-accent: 0 0 0 1px rgba(59, 130, 246, 0.10), 0 8px 32px rgba(59, 130, 246, 0.18);
   --shadow-glow-primary: 0 0 0 1px rgba(56, 89, 168, 0.10), 0 8px 32px rgba(56, 89, 168, 0.20);
 
   /* Animations */
@@ -362,7 +365,7 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--color-primary-300);
   box-shadow:
     var(--shadow-xl),
-    var(--shadow-glow-cyan),
+    var(--shadow-glow-accent),
     inset 0 1px 0 rgba(255, 255, 255, 0.95);
   transform: translateY(-2px);
 }
@@ -384,14 +387,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-premium:hover::before {
-  background: linear-gradient(135deg, rgba(56, 89, 168, 0.4), rgba(34, 211, 238, 0.3), rgba(56, 89, 168, 0.4));
+  background: linear-gradient(135deg, rgba(56, 89, 168, 0.4), rgba(59, 130, 246, 0.3), rgba(56, 89, 168, 0.4));
   opacity: 1;
 }
 
 /* ── Gradients ── */
 
 .text-gradient {
-  background: linear-gradient(135deg, #3859a8, #22D3EE);
+  background: linear-gradient(135deg, #3859a8, #3B82F6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -402,7 +405,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .icon-gradient-bg {
-  background: linear-gradient(135deg, rgba(56, 89, 168, 0.10), rgba(34, 211, 238, 0.08));
+  background: linear-gradient(135deg, rgba(56, 89, 168, 0.10), rgba(59, 130, 246, 0.08));
 }
 
 /* Brand light wash - subtle blue-lavender gradient + grain (use on hero areas) */
@@ -464,7 +467,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .gradient-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(56, 89, 168, 0.2), rgba(34, 211, 238, 0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(56, 89, 168, 0.2), rgba(59, 130, 246, 0.15), transparent);
 }
 
 /* ── Badge ── */
@@ -496,7 +499,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #3859a8, #22D3EE);
+  background: linear-gradient(90deg, #3859a8, #3B82F6);
   border-radius: 1px;
   transition: all 0.3s ease;
   transform: translateX(-50%);
@@ -520,7 +523,7 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid rgba(34, 211, 238, 0.6);
+  outline: 2px solid rgba(59, 130, 246, 0.6);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -582,7 +585,7 @@ textarea:focus-visible {
 .shadow-md-brand { box-shadow: var(--shadow-md); }
 .shadow-lg-brand { box-shadow: var(--shadow-lg); }
 .shadow-xl-brand { box-shadow: var(--shadow-xl); }
-.shadow-glow-cyan { box-shadow: var(--shadow-glow-cyan); }
+.shadow-glow-accent { box-shadow: var(--shadow-glow-accent); }
 .shadow-glow-primary { box-shadow: var(--shadow-glow-primary); }
 
 /* Warm editorial bg section - break the cool-color monotony */
@@ -645,10 +648,10 @@ textarea:focus-visible {
 }
 .surface-navy .card:hover,
 .surface-navy .card-premium:hover {
-  border-color: rgba(34, 211, 238, 0.35);
+  border-color: rgba(59, 130, 246, 0.35);
   box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.35),
-    var(--shadow-glow-cyan),
+    var(--shadow-glow-accent),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 

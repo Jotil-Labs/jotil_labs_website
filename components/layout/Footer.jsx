@@ -52,7 +52,7 @@ export function Footer() {
         className="h-px"
         style={{
           background:
-            'linear-gradient(90deg, transparent, #3859a8, #22D3EE, #3859a8, transparent)',
+            'linear-gradient(90deg, transparent, #3859a8, #3B82F6, #3859a8, transparent)',
         }}
       />
 

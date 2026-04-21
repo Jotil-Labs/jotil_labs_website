@@ -134,7 +134,7 @@ function CapabilityCard({ capability }) {
         <div
           className="w-12 h-12 rounded-[14px] flex items-center justify-center shrink-0 mb-5"
           style={{
-            background: 'linear-gradient(135deg, rgba(56, 89, 168,0.08), rgba(34, 211, 238,0.06))',
+            background: 'linear-gradient(135deg, rgba(56, 89, 168,0.08), rgba(59, 130, 246,0.06))',
             border: '1px solid rgba(56, 89, 168,0.10)',
           }}
         >

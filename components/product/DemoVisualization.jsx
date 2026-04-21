@@ -72,7 +72,7 @@ function ReceptionistDemo() {
             </>
           )}
 
-          <div className="relative h-9 w-9 rounded-full bg-gradient-to-br from-[#3859a8] to-[#22D3EE] flex items-center justify-center shrink-0">
+          <div className="relative h-9 w-9 rounded-full bg-gradient-to-br from-[#3859a8] to-[#3B82F6] flex items-center justify-center shrink-0">
             <AnimatePresence mode="wait">
               {callState === 'ringing' ? (
                 <motion.div key="ring" animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 0.5, repeat: Infinity }}>
@@ -221,7 +221,7 @@ function MessengerDemo() {
 
   const channels = [
     { id: 'web', label: 'Web Chat', icon: Globe, color: '#3859a8' },
-    { id: 'sms', label: 'SMS', icon: Smartphone, color: '#22D3EE' },
+    { id: 'sms', label: 'SMS', icon: Smartphone, color: '#3B82F6' },
     { id: 'whatsapp', label: 'WhatsApp', icon: Hash, color: '#25D366' },
   ]
 
@@ -255,7 +255,7 @@ function MessengerDemo() {
       <motion.div {...cardEntry} className="card-premium p-0 overflow-hidden">
         {/* Header */}
         <div className="flex items-center gap-3 px-5 py-4 border-b border-black/5 bg-[#F8FAFF]">
-          <div className="h-9 w-9 rounded-full bg-gradient-to-br from-[#3859a8] to-[#22D3EE] flex items-center justify-center shrink-0">
+          <div className="h-9 w-9 rounded-full bg-gradient-to-br from-[#3859a8] to-[#3B82F6] flex items-center justify-center shrink-0">
             <MessageSquare size={16} className="text-white" />
           </div>
           <div className="flex-1">
@@ -357,8 +357,8 @@ function OutreachDemo() {
 
   const funnelSteps = [
     { label: 'Contacts', value: 4200, width: '100%', color: 'bg-[#3859a8]/15 text-[#3859a8]' },
-    { label: 'Delivered', value: 3860, width: '92%', color: 'bg-[#22D3EE]/15 text-[#22D3EE]' },
-    { label: 'Opened', value: 2150, width: '51%', color: 'bg-[#22D3EE]/15 text-[#22D3EE]' },
+    { label: 'Delivered', value: 3860, width: '92%', color: 'bg-[#3B82F6]/15 text-[#3B82F6]' },
+    { label: 'Opened', value: 2150, width: '51%', color: 'bg-[#3B82F6]/15 text-[#3B82F6]' },
     { label: 'Responded', value: 847, width: '20%', color: 'bg-emerald-500/15 text-emerald-600' },
   ]
 
@@ -478,7 +478,7 @@ function SpaceDemo() {
 
   const calendarItems = [
     { time: '10:00 AM', title: 'Discovery Call', subtitle: 'Sarah Chen, Acme Corp', color: 'border-l-[#3859a8]' },
-    { time: '1:30 PM', title: 'Demo Presentation', subtitle: 'James Okafor, Meridian', color: 'border-l-[#22D3EE]' },
+    { time: '1:30 PM', title: 'Demo Presentation', subtitle: 'James Okafor, Meridian', color: 'border-l-[#3B82F6]' },
     { time: '3:00 PM', title: 'Follow-up Review', subtitle: 'Team Standup', color: 'border-l-emerald-500' },
   ]
 
@@ -553,7 +553,7 @@ function SpaceDemo() {
                     transition={{ delay: 0.1 * i + 0.15 }}
                     className="flex items-center gap-3 px-5 py-3"
                   >
-                    <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#3859a8]/10 to-[#22D3EE]/10 flex items-center justify-center shrink-0">
+                    <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#3859a8]/10 to-[#3B82F6]/10 flex items-center justify-center shrink-0">
                       <span className="text-[10px] font-bold text-[#3859a8]">{lead.avatar}</span>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -566,7 +566,7 @@ function SpaceDemo() {
                           initial={{ width: 0 }}
                           animate={{ width: `${lead.score}%` }}
                           transition={{ duration: 0.8, delay: 0.3 + i * 0.1, ease: 'easeOut' }}
-                          className="h-full bg-gradient-to-r from-[#3859a8] to-[#22D3EE] rounded-full"
+                          className="h-full bg-gradient-to-r from-[#3859a8] to-[#3B82F6] rounded-full"
                         />
                       </div>
                       <span className="text-[11px] font-semibold text-[#3859a8] tabular-nums" style={monoFont}>
@@ -638,8 +638,8 @@ function SpaceDemo() {
 function FlowDemo() {
   const nodes = [
     { label: 'New Lead', sub: 'Webhook Trigger', icon: Zap, color: 'from-[#3859a8] to-[#2a4688]' },
-    { label: 'AI Classify', sub: 'Score & Route', icon: GitBranch, color: 'from-[#22D3EE] to-[#4F46E5]' },
-    { label: 'CRM Update', sub: 'Create Record', icon: Database, color: 'from-[#22D3EE] to-[#0284C7]' },
+    { label: 'AI Classify', sub: 'Score & Route', icon: GitBranch, color: 'from-[#3B82F6] to-[#4F46E5]' },
+    { label: 'CRM Update', sub: 'Create Record', icon: Database, color: 'from-[#3B82F6] to-[#0284C7]' },
     { label: 'Notify Team', sub: 'Slack + Email', icon: CheckCircle, color: 'from-emerald-500 to-emerald-600' },
   ]
 
@@ -691,8 +691,8 @@ function FlowDemo() {
                       transition={{ duration: 1.5, repeat: Infinity }}
                       className="flex items-center gap-1"
                     >
-                      <div className="h-1.5 w-1.5 rounded-full bg-[#22D3EE]" />
-                      <span className="text-[10px] text-[#22D3EE] font-medium">Processing</span>
+                      <div className="h-1.5 w-1.5 rounded-full bg-[#3B82F6]" />
+                      <span className="text-[10px] text-[#3B82F6] font-medium">Processing</span>
                     </motion.div>
                   )}
 
@@ -704,7 +704,7 @@ function FlowDemo() {
                 {/* Connector with animated data packet */}
                 {i < nodes.length - 1 && (
                   <div className="relative flex flex-col items-center my-1 h-6">
-                    <div className="h-full w-px bg-gradient-to-b from-[#3859a8]/30 to-[#22D3EE]/30" />
+                    <div className="h-full w-px bg-gradient-to-b from-[#3859a8]/30 to-[#3B82F6]/30" />
                     {/* Animated data packet */}
                     <motion.div
                       className="absolute w-2 h-2 rounded-full bg-[#3859a8] shadow-sm shadow-[#3859a8]/30"
@@ -787,7 +787,7 @@ function AvatarDemo() {
               )}
 
               {/* Avatar circle */}
-              <div className="relative h-24 w-24 rounded-full bg-gradient-to-br from-[#3859a8] to-[#22D3EE] flex items-center justify-center shadow-lg shadow-[#3859a8]/20">
+              <div className="relative h-24 w-24 rounded-full bg-gradient-to-br from-[#3859a8] to-[#3B82F6] flex items-center justify-center shadow-lg shadow-[#3859a8]/20">
                 <User size={40} className="text-white/90" />
 
                 {/* Lip-sync indicator */}

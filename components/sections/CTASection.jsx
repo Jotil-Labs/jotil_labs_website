@@ -48,7 +48,7 @@ export function CTASection() {
           height: 520,
           top: '-25%',
           right: '-12%',
-          background: 'radial-gradient(circle, rgba(34,211,238,0.28) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(59, 130, 246,0.28) 0%, transparent 70%)',
           filter: 'blur(90px)',
         }}
       />
