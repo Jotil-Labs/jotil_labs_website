@@ -176,7 +176,7 @@ export default function AboutPage() {
                 <div className="card-premium p-7">
                   <div className="flex items-start gap-4">
                     <IconBox size="md" glow>
-                      <Eye size={20} color="#22D3EE" strokeWidth={1.5} />
+                      <Eye size={20} color="#3B82F6" strokeWidth={1.5} />
                     </IconBox>
                     <div>
                       <h3 className="font-semibold text-text text-lg mb-2">Our Vision</h3>
@@ -195,7 +195,7 @@ export default function AboutPage() {
                 <div
                   className="rounded-[20px] p-7"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(56, 89, 168,0.07), rgba(34, 211, 238,0.05))',
+                    background: 'linear-gradient(135deg, rgba(56, 89, 168,0.07), rgba(59, 130, 246,0.05))',
                     border: '1px solid rgba(56, 89, 168,0.12)',
                   }}
                 >
@@ -309,7 +309,7 @@ export default function AboutPage() {
                   <div
                     className="w-16 h-16 rounded-full flex items-center justify-center mb-4 font-bold text-white text-lg tracking-tight shrink-0"
                     style={{
-                      background: 'linear-gradient(135deg, #3859a8, #22D3EE)',
+                      background: 'linear-gradient(135deg, #3859a8, #3B82F6)',
                       boxShadow: '0 8px 24px rgba(56, 89, 168,0.3)',
                     }}
                   >
@@ -339,7 +339,7 @@ export default function AboutPage() {
             <div
               className="rounded-[24px] p-10 md:p-14 text-center"
               style={{
-                background: 'linear-gradient(135deg, rgba(56, 89, 168,0.07), rgba(34, 211, 238,0.05), rgba(34, 211, 238,0.04))',
+                background: 'linear-gradient(135deg, rgba(56, 89, 168,0.07), rgba(59, 130, 246,0.05), rgba(59, 130, 246,0.04))',
                 border: '1px solid rgba(56, 89, 168,0.12)',
               }}
             >

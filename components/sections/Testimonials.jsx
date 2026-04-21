@@ -19,7 +19,7 @@ const TESTIMONIALS = [
     role: 'CEO',
     company: 'Apex Realty Group',
     initials: 'JT',
-    avatarColor: '#22D3EE',
+    avatarColor: '#3B82F6',
   },
   {
     quote:
@@ -28,13 +28,13 @@ const TESTIMONIALS = [
     role: 'VP Sales',
     company: 'Summit Finance',
     initials: 'RK',
-    avatarColor: '#22D3EE',
+    avatarColor: '#3B82F6',
   },
 ]
 
 export function Testimonials() {
   return (
-    <section className="surface-warm py-24">
+    <section className="py-24">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
@@ -79,7 +79,7 @@ function TestimonialCard({ testimonial }) {
           fontFamily: 'Georgia, serif',
           fontSize: 72,
           lineHeight: 0.7,
-          background: 'linear-gradient(135deg, rgba(56, 89, 168,0.14), rgba(34, 211, 238,0.08))',
+          background: 'linear-gradient(135deg, rgba(56, 89, 168,0.14), rgba(59, 130, 246,0.08))',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',

@@ -21,7 +21,7 @@ const INDUSTRIES = [
   {
     icon: HeartPulse,
     name: 'Healthcare',
-    color: '#22D3EE',
+    color: '#3B82F6',
     painPoints: [
       'Book and reschedule appointments without adding front desk staff',
       'Send patient follow-ups and reminders automatically',
@@ -45,7 +45,7 @@ const INDUSTRIES = [
   {
     icon: Scale,
     name: 'Legal',
-    color: '#22D3EE',
+    color: '#3B82F6',
     painPoints: [
       'Capture case details on the first call, before the consult even starts',
       'Let potential clients book consultations without tying up staff time',
@@ -113,7 +113,7 @@ export default function UseCasesPage() {
           style={{
             width: 400,
             height: 400,
-            background: 'radial-gradient(circle, rgba(34, 211, 238,0.07) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(59, 130, 246,0.07) 0%, transparent 70%)',
             filter: 'blur(80px)',
           }}
         />
@@ -276,7 +276,7 @@ export default function UseCasesPage() {
             <div
               className="rounded-[24px] p-10 md:p-14 text-center"
               style={{
-                background: 'linear-gradient(135deg, rgba(56, 89, 168,0.07), rgba(34, 211, 238,0.05), rgba(34, 211, 238,0.04))',
+                background: 'linear-gradient(135deg, rgba(56, 89, 168,0.07), rgba(59, 130, 246,0.05), rgba(59, 130, 246,0.04))',
                 border: '1px solid rgba(56, 89, 168,0.12)',
               }}
             >

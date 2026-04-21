@@ -89,7 +89,7 @@ export default function CustomDevelopmentPage() {
             width: 420,
             height: 420,
             background:
-              'radial-gradient(circle, rgba(34, 211, 238,0.07) 0%, transparent 70%)',
+              'radial-gradient(circle, rgba(59, 130, 246,0.07) 0%, transparent 70%)',
             filter: 'blur(70px)',
           }}
         />
@@ -214,7 +214,7 @@ export default function CustomDevelopmentPage() {
               className="rounded-[24px] p-10 md:p-14 text-center"
               style={{
                 background:
-                  'linear-gradient(135deg, rgba(56, 89, 168,0.07), rgba(34, 211, 238,0.05), rgba(34, 211, 238,0.04))',
+                  'linear-gradient(135deg, rgba(56, 89, 168,0.07), rgba(59, 130, 246,0.05), rgba(59, 130, 246,0.04))',
                 border: '1px solid rgba(56, 89, 168,0.12)',
               }}
             >

@@ -18,22 +18,22 @@ const STEPS = [
     icon: SlidersHorizontal,
     title: 'Configure',
     desc: 'Tell the AI about your business. Train it on your FAQs and workflows.',
-    color: '#22D3EE',
-    colorAlpha: 'rgba(34, 211, 238,0.10)',
+    color: '#3B82F6',
+    colorAlpha: 'rgba(59, 130, 246,0.10)',
   },
   {
     number: '03',
     icon: Zap,
     title: 'Automate',
     desc: 'Go live. Your AI handles calls, chats, and follow-ups around the clock.',
-    color: '#22D3EE',
-    colorAlpha: 'rgba(34, 211, 238,0.10)',
+    color: '#3B82F6',
+    colorAlpha: 'rgba(59, 130, 246,0.10)',
   },
 ]
 
 export function HowItWorks() {
   return (
-    <section className="surface-raised py-24">
+    <section className="py-24">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Heading */}
@@ -79,7 +79,7 @@ export function HowItWorks() {
                   <div
                     className="w-px h-10"
                     style={{
-                      background: 'linear-gradient(to bottom, rgba(56, 89, 168,0.25), rgba(34, 211, 238,0.15))',
+                      background: 'linear-gradient(to bottom, rgba(56, 89, 168,0.25), rgba(59, 130, 246,0.15))',
                     }}
                   />
                 </div>
@@ -172,7 +172,7 @@ function Connector() {
             height: 3,
             background: i % 2 === 0
               ? 'rgba(56, 89, 168,0.30)'
-              : 'rgba(34, 211, 238,0.15)',
+              : 'rgba(59, 130, 246,0.15)',
           }}
         />
       ))}

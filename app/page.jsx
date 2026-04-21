@@ -15,43 +15,40 @@ export const metadata = {
 }
 
 // Surface color references — keep in sync with app/globals.css @theme tokens.
-// Used only by the AtmosphericDividers on this page to bleed from one
-// section's bottom color into the next section's top color.
+// Used by the AtmosphericDividers on this page to bleed between sections
+// where colors change (no divider needed when neighbors share a color).
 const BG = 'var(--color-bg)'
-const WARM = 'var(--color-warm)'
 const SUNKEN = 'var(--color-primary-50)'
-const NAVY = 'var(--color-navy)'
 const PRIMARY = 'var(--color-primary)'
 
 export default function Home() {
   return (
     <>
       <Hero />
-      {/* Hero wash → warm cream (LogoCloud) */}
-      <AtmosphericDivider from={BG} to={WARM} height={100} />
+      {/* Hero wash → flat bg (LogoCloud) — very subtle */}
 
       <LogoCloud />
-      {/* Warm → sunken cool (ProductShowcase) */}
-      <AtmosphericDivider from={WARM} to={SUNKEN} height={100} />
+      {/* Flat bg → sunken cool (ProductShowcase) */}
+      <AtmosphericDivider from={BG} to={SUNKEN} height={80} />
 
       <ProductShowcase />
-      {/* Sunken → raised (HowItWorks) — small lift */}
-      <AtmosphericDivider from={SUNKEN} to="#FFFFFF" height={60} />
+      {/* Sunken → flat bg (HowItWorks) */}
+      <AtmosphericDivider from={SUNKEN} to={BG} height={80} />
 
       <HowItWorks />
-      {/* Raised-bottom (primary-50) → sunken (primary-50) — seamless, no divider */}
+      {/* Flat bg → sunken cool (Stats) */}
+      <AtmosphericDivider from={BG} to={SUNKEN} height={80} />
 
       <Stats />
-      {/* Stats sunken → warm cream (Testimonials) */}
-      <AtmosphericDivider from={SUNKEN} to={WARM} height={100} />
+      {/* Sunken → flat bg (Testimonials) */}
+      <AtmosphericDivider from={SUNKEN} to={BG} height={80} />
 
       <Testimonials />
-      {/* Warm → raised (IntegrationStrip) */}
-      <AtmosphericDivider from={WARM} to="#FFFFFF" height={100} />
+      {/* Testimonials and IntegrationStrip both flat bg — no divider */}
 
       <IntegrationStrip />
-      {/* Raised-bottom → navy CTASection — dramatic radial closer */}
-      <AtmosphericDivider from={SUNKEN} to={PRIMARY} height={140} direction="radial" />
+      {/* Flat bg → navy CTASection — dramatic radial closer */}
+      <AtmosphericDivider from={BG} to={PRIMARY} height={140} direction="radial" />
 
       <CTASection />
     </>

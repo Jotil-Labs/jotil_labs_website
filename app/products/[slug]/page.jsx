@@ -95,7 +95,7 @@ export default async function ProductPage({ params }) {
         <div
           className="absolute bottom-0 left-0 w-[400px] h-[300px] rounded-full opacity-25 pointer-events-none"
           aria-hidden="true"
-          style={{ background: 'radial-gradient(ellipse, #22D3EE10 0%, transparent 70%)', filter: 'blur(60px)' }}
+          style={{ background: 'radial-gradient(ellipse, #3B82F610 0%, transparent 70%)', filter: 'blur(60px)' }}
         />
 
         <div className="relative max-w-6xl mx-auto">
