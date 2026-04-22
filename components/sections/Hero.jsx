@@ -91,7 +91,7 @@ export function Hero() {
   useEffect(() => setMounted(true), [])
 
   return (
-    <section className="bg-brand-wash-mark relative min-h-screen flex items-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
       {/* Background gradient mesh */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         {/* Soft grid pattern */}
@@ -211,8 +211,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent, var(--color-bg))' }} />
+      {/* Bottom fade removed — BrandBackground handles the transition now */}
     </section>
   )
 }
