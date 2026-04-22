@@ -19,7 +19,7 @@ export const metadata = {
 // where colors change (no divider needed when neighbors share a color).
 const BG = 'var(--color-bg)'
 const SUNKEN = 'var(--color-primary-50)'
-const PRIMARY = 'var(--color-primary)'
+const NAVY = 'var(--color-navy)'
 
 export default function Home() {
   return (
@@ -47,8 +47,9 @@ export default function Home() {
       {/* Testimonials and IntegrationStrip both flat bg — no divider */}
 
       <IntegrationStrip />
-      {/* Flat bg → navy CTASection — dramatic radial closer */}
-      <AtmosphericDivider from={BG} to={PRIMARY} height={140} direction="radial" />
+      {/* Flat bg → navy CTASection — linear transition straight into dark,
+          no bright primary-blue "sunrise" flare before the navy. */}
+      <AtmosphericDivider from={BG} to={NAVY} height={100} />
 
       <CTASection />
     </>
