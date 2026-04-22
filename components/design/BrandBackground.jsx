@@ -51,17 +51,17 @@ export function BrandBackground({ variant = 'quiet' }) {
       currentX += (mouseX - currentX) * 0.08
       currentY += (mouseY - currentY) * 0.08
 
-      const blobX = (currentX - 0.5) * -18
+      const blobX = (currentX - 0.5) * -16
       const blobY = (currentY - 0.5) * -10
       if (blobRef.current) {
-        blobRef.current.style.transform = `translate3d(${blobX}px, ${blobY}px, 0)`
+        blobRef.current.style.transform = `translate3d(${blobX}px, ${blobY}px, 0) scale(1.03)`
       }
       if (grainRef.current) {
-        grainRef.current.style.transform = `translate3d(${blobX * 0.5}px, ${blobY * 0.5}px, 0)`
+        grainRef.current.style.transform = `translate3d(${blobX * 0.5}px, ${blobY * 0.5}px, 0) scale(1.03)`
       }
 
-      const tiltX = (currentY - 0.5) * -6
-      const tiltY = (currentX - 0.5) * 10
+      const tiltX = (currentY - 0.5) * -14
+      const tiltY = (currentX - 0.5) * 18
       if (watermarkRef.current) {
         watermarkRef.current.style.transform = `perspective(1100px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`
       }
@@ -81,68 +81,69 @@ export function BrandBackground({ variant = 'quiet' }) {
     }
   }, [variant])
 
-  // Hero variant: stronger blob + grain + watermark.
-  // Quiet variant: softer blob + softer grain, no watermark.
-  const blobOpacity = variant === 'hero' ? 0.95 : 0.55
-  const grainOpacity = variant === 'hero' ? 0.38 : 0.22
+  const isHero = variant === 'hero'
+  const blobOpacity = isHero ? 1 : 0.6
+  const grainOpacity = isHero ? 0.14 : 0.08
 
   return (
     <div
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
     >
-      {/* Blob — asymmetric radial gradient bottom-left. Brand primary #3859a8. */}
+      {/* Blob -- lavender-blue radial, bottom-left */}
       <div
         ref={blobRef}
         className="absolute inset-0 will-change-transform"
         style={{
           opacity: blobOpacity,
-          background: `radial-gradient(ellipse 62% 68% at -8% 112%,
-            rgba(56, 89, 168, 0.55) 0%,
-            rgba(56, 89, 168, 0.38) 22%,
-            rgba(140, 155, 210, 0.22) 42%,
-            rgba(200, 210, 232, 0.08) 58%,
-            transparent 70%)`,
+          background: `radial-gradient(ellipse 65% 72% at -6% 110%,
+            rgba(90, 115, 185, 0.78) 0%,
+            rgba(110, 140, 200, 0.52) 24%,
+            rgba(155, 170, 215, 0.28) 44%,
+            rgba(200, 210, 230, 0.10) 60%,
+            transparent 72%)`,
           transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
         }}
       />
 
-      {/* Grain — high-frequency SVG noise masked to the same blob shape.
-          Multiply blend darkens where there's already color; invisible where
-          the blob fades to transparent. */}
+      {/* Grain -- neutral noise tile, overlay blend, masked to blob region */}
       <div
         ref={grainRef}
         className="absolute inset-0 will-change-transform"
         style={{
           opacity: grainOpacity,
           backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(
-            `<svg viewBox='0 0 260 260' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.14 0 0 0 0 0.22 0 0 0 0 0.42 0 0 0 0.85 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>`
+            `<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>`
           )}")`,
-          backgroundSize: '260px 260px',
+          backgroundSize: '200px 200px',
           WebkitMaskImage:
-            'radial-gradient(ellipse 62% 68% at -8% 112%, black 0%, black 35%, transparent 70%)',
+            'radial-gradient(ellipse 65% 72% at -6% 110%, black 0%, black 38%, transparent 72%)',
           maskImage:
-            'radial-gradient(ellipse 62% 68% at -8% 112%, black 0%, black 35%, transparent 70%)',
-          mixBlendMode: 'multiply',
+            'radial-gradient(ellipse 65% 72% at -6% 110%, black 0%, black 38%, transparent 72%)',
+          mixBlendMode: 'overlay',
           transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
         }}
       />
 
-      {/* Logo watermark — real brand Logo, partially revealed on right edge.
-          Hero variant only. Hidden below md breakpoint. Uses the actual
-          Logo component (hex body + depth + 3 dots), not a simplified mockup. */}
-      {variant === 'hero' && (
+      {/* Watermark -- brand logo, right-anchored, 40% pushed off-screen.
+          White is invisible on our near-white bg so we use brand blue
+          at low opacity for a subtle tinted watermark. */}
+      {isHero && (
         <div
-          ref={watermarkRef}
-          className="absolute inset-y-0 hidden md:flex items-center will-change-transform"
-          style={{
-            right: '-18%',
-            opacity: 0.07,
-            transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
-            transformStyle: 'preserve-3d',
-          }}
+          className="absolute inset-y-0 right-0 hidden md:flex items-center"
+          style={{ transform: 'translateX(40%)' }}
         >
-          <Logo size={800} tone="brand" animate={false} />
+          <div
+            ref={watermarkRef}
+            className="will-change-transform"
+            style={{
+              opacity: 0.055,
+              transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+              transformStyle: 'preserve-3d',
+            }}
+          >
+            <Logo size={1600} tone="brand" animate={false} />
+          </div>
         </div>
       )}
     </div>
