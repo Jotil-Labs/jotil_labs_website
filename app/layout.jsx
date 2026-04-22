@@ -8,7 +8,7 @@ import { Footer } from '@/components/layout/Footer'
 import { OrganizationJsonLd, WebsiteJsonLd } from '@/components/layout/JsonLd'
 import { AIWidget } from '@/components/widgets/AIWidget'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
-import { GrainOverlay } from '@/components/design'
+import { BrandBackgroundGate } from '@/components/design'
 
 const montserratAlternates = Montserrat_Alternates({
   subsets: ['latin'],
@@ -117,14 +117,11 @@ export default function RootLayout({ children }) {
         )}
       </head>
       <body className="min-h-screen bg-bg text-text antialiased" suppressHydrationWarning>
-        {/* Global grain texture — fixed to viewport, z-behind everything.
-            Provides subliminal depth to every surface site-wide at 2.5%. */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed inset-0 z-0"
-        >
-          <GrainOverlay tone="light" opacity={0.025} />
-        </div>
+        {/* Signature brand background — asymmetric blue blob bottom-left,
+            grain masked to the blob, optional logo watermark on the right
+            (homepage only). Fixed-positioned behind all content. Variant
+            is route-aware: hero treatment on "/", quieter elsewhere. */}
+        <BrandBackgroundGate />
         <a href="#main-content" className="skip-to-main">
           Skip to main content
         </a>

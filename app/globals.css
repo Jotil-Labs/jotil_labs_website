@@ -320,54 +320,100 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ── Card System ──
-   Surface gradient + inner highlight + primary-tinted border replaces
-   the flat white rectangle. card-premium adds a cyan glow halo on hover
-   to distinguish elevated cards. */
+   Glassmorphic translucent surfaces. Cards become windows onto the brand
+   background (see BrandBackground.jsx) rather than opaque boxes. Bg shows
+   through at ~40% — the reason the fixed brand bg feels alive when the
+   visitor scrolls. Backdrop-filter is gated on @supports for older
+   browsers (opaque fallback rendered at 96% white, still legible). */
 
 .card {
-  background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFD 100%);
-  border: 1px solid var(--color-primary-100);
+  background: rgba(255, 255, 255, 0.60);
+  border: 1px solid rgba(255, 255, 255, 0.75);
   border-radius: 20px;
   padding: 32px;
   box-shadow:
     var(--shadow-sm),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   transition:
     border-color var(--duration-micro) var(--ease-micro),
     box-shadow var(--duration-card-lift) var(--ease-card),
+    background-color var(--duration-micro) var(--ease-micro),
     transform var(--duration-card-lift) var(--ease-card);
 }
 
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .card {
+    backdrop-filter: blur(12px) saturate(1.5);
+    -webkit-backdrop-filter: blur(12px) saturate(1.5);
+  }
+}
+@supports not ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .card {
+    background: rgba(255, 255, 255, 0.96);
+  }
+}
+
 .card:hover {
-  border-color: var(--color-primary-200);
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(56, 89, 168, 0.20);
   box-shadow:
     var(--shadow-lg),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
   transform: translateY(-2px);
 }
 
 .card-premium {
-  background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFD 100%);
-  border: 1px solid var(--color-primary-100);
+  background: rgba(255, 255, 255, 0.60);
+  border: 1px solid rgba(255, 255, 255, 0.75);
   border-radius: 20px;
   padding: 32px;
   position: relative;
   box-shadow:
     var(--shadow-sm),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   transition:
     border-color var(--duration-micro) var(--ease-micro),
     box-shadow var(--duration-card-lift) var(--ease-card),
+    background-color var(--duration-micro) var(--ease-micro),
     transform var(--duration-card-lift) var(--ease-card);
 }
 
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .card-premium {
+    backdrop-filter: blur(12px) saturate(1.5);
+    -webkit-backdrop-filter: blur(12px) saturate(1.5);
+  }
+}
+@supports not ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .card-premium {
+    background: rgba(255, 255, 255, 0.96);
+  }
+}
+
 .card-premium:hover {
-  border-color: var(--color-primary-300);
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(56, 89, 168, 0.28);
   box-shadow:
     var(--shadow-xl),
     var(--shadow-glow-accent),
     inset 0 1px 0 rgba(255, 255, 255, 0.95);
   transform: translateY(-2px);
+}
+
+/* Mobile: backdrop-filter is expensive on iOS Safari + low-end Android.
+   Reduce blur and rely on near-opaque bg instead. */
+@media (max-width: 768px) {
+  .card,
+  .card-premium {
+    background: rgba(255, 255, 255, 0.92);
+  }
+  @supports ((backdrop-filter: blur(6px)) or (-webkit-backdrop-filter: blur(6px))) {
+    .card,
+    .card-premium {
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+  }
 }
 
 .card-premium::before {
