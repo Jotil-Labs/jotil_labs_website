@@ -93,10 +93,7 @@
   /* Animations */
   --animate-float: float 6s ease-in-out infinite;
   --animate-icon-bob: icon-bob 3s ease-in-out infinite;
-  --animate-orb-1: orb-drift-1 30s ease-in-out infinite;
-  --animate-orb-2: orb-drift-2 35s ease-in-out infinite;
-  --animate-orb-3: orb-drift-3 28s ease-in-out infinite;
-  --animate-orb-4: orb-drift-4 32s ease-in-out infinite;
+  --animate-grain-shift: grain-shift 0.6s steps(8) infinite;
   --animate-ring-pulse: ring-pulse 3s ease-in-out infinite;
   --animate-ring-pulse-reverse: ring-pulse-reverse 3s ease-in-out infinite;
   --animate-ring-rotate: ring-rotate 60s linear infinite;
@@ -126,31 +123,17 @@
   50% { transform: translateY(-6px); }
 }
 
-@keyframes orb-drift-1 {
+@keyframes grain-shift {
   0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(40px, -30px); }
-  50% { transform: translate(-20px, 40px); }
-  75% { transform: translate(30px, 20px); }
-}
-
-@keyframes orb-drift-2 {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(-35px, 25px); }
-  50% { transform: translate(30px, -35px); }
-  75% { transform: translate(-25px, -20px); }
-}
-
-@keyframes orb-drift-3 {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(25px, 35px); }
-  50% { transform: translate(-40px, -15px); }
-  75% { transform: translate(15px, -40px); }
-}
-
-@keyframes orb-drift-4 {
-  0%, 100% { transform: translate(0, 0); }
-  33% { transform: translate(-30px, -25px); }
-  66% { transform: translate(20px, 30px); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
 }
 
 @keyframes ring-pulse {
@@ -266,7 +249,7 @@
 /* ── Base ── */
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior handled by Lenis smooth scroll */
 }
 
 body {
