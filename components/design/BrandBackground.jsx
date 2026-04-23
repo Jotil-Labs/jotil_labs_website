@@ -3,28 +3,10 @@
 import { useEffect, useRef } from 'react'
 import Logo from '@/components/ui/Logo'
 
-/**
- * Signature site background: asymmetric blue radial blob bottom-left,
- * visible grain masked to the blob area, optional real-logo watermark
- * on the right edge (homepage only).
- *
- * Variants:
- *   - "hero"  — homepage: blob + grain + real logo watermark + mouse parallax
- *   - "quiet" — other pages: blob + grain at lower intensity, no watermark
- *
- * Notes:
- *   - Uses the real brand <Logo> component for the watermark (not a simplified
- *     mockup). Animate=false so the dots don't pulse distractingly behind
- *     content.
- *   - All CSS + SVG; no canvas, no per-frame JS at rest. Parallax loop
- *     self-cancels when lerp is near target.
- *   - Parallax gated on (pointer: fine) AND prefers-reduced-motion:
- *     no-preference. Touch + reduced-motion users get static composition.
- */
+const NOISE_SVG = `data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E`
+
 export function BrandBackground({ variant = 'quiet' }) {
-  const blobRef = useRef(null)
   const watermarkRef = useRef(null)
-  const grainRef = useRef(null)
 
   useEffect(() => {
     if (variant !== 'hero') return
@@ -51,15 +33,6 @@ export function BrandBackground({ variant = 'quiet' }) {
       currentX += (mouseX - currentX) * 0.08
       currentY += (mouseY - currentY) * 0.08
 
-      const blobX = (currentX - 0.5) * -16
-      const blobY = (currentY - 0.5) * -10
-      if (blobRef.current) {
-        blobRef.current.style.transform = `translate3d(${blobX}px, ${blobY}px, 0) scale(1.03)`
-      }
-      if (grainRef.current) {
-        grainRef.current.style.transform = `translate3d(${blobX * 0.5}px, ${blobY * 0.5}px, 0) scale(1.03)`
-      }
-
       const tiltX = (currentY - 0.5) * -14
       const tiltY = (currentX - 0.5) * 18
       if (watermarkRef.current) {
@@ -82,62 +55,72 @@ export function BrandBackground({ variant = 'quiet' }) {
   }, [variant])
 
   const isHero = variant === 'hero'
-  const blobOpacity = isHero ? 1 : 0.6
-  const grainOpacity = isHero ? 0.14 : 0.08
 
   return (
     <div
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
     >
-      {/* Blob -- lavender-blue radial, bottom-left */}
+      {/* Atmosphere layer 1: violet + pink wash, top-left biased */}
       <div
-        ref={blobRef}
-        className="absolute inset-0 will-change-transform"
+        className={isHero ? 'atmosphere-drift-1' : ''}
         style={{
-          opacity: blobOpacity,
-          background: `radial-gradient(ellipse 65% 72% at -6% 110%,
-            rgba(90, 115, 185, 0.78) 0%,
-            rgba(110, 140, 200, 0.52) 24%,
-            rgba(155, 170, 215, 0.28) 44%,
-            rgba(200, 210, 230, 0.10) 60%,
-            transparent 72%)`,
-          transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+          position: 'absolute',
+          top: '-20%',
+          left: '-10%',
+          width: '70%',
+          height: '80%',
+          background:
+            'radial-gradient(circle at 30% 30%, rgba(138, 107, 255, 0.35), transparent 60%), radial-gradient(circle at 70% 60%, rgba(255, 122, 182, 0.25), transparent 55%)',
+          filter: 'blur(60px)',
+          opacity: isHero ? 1 : 0.55,
+          willChange: isHero ? 'transform' : 'auto',
         }}
       />
 
-      {/* Grain -- neutral noise tile, overlay blend, masked to blob region */}
+      {/* Atmosphere layer 2: blue + peach wash, bottom-right biased */}
       <div
-        ref={grainRef}
-        className="absolute inset-0 will-change-transform"
+        className={isHero ? 'atmosphere-drift-2' : ''}
         style={{
-          opacity: grainOpacity,
-          backgroundImage: `url("data:image/svg+xml;utf8,${encodeURIComponent(
-            `<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>`
-          )}")`,
-          backgroundSize: '200px 200px',
-          WebkitMaskImage:
-            'radial-gradient(ellipse 65% 72% at -6% 110%, black 0%, black 38%, transparent 72%)',
-          maskImage:
-            'radial-gradient(ellipse 65% 72% at -6% 110%, black 0%, black 38%, transparent 72%)',
+          position: 'absolute',
+          top: '10%',
+          right: '-15%',
+          width: '65%',
+          height: '70%',
+          background:
+            'radial-gradient(circle at 60% 40%, rgba(47, 91, 255, 0.28), transparent 60%), radial-gradient(circle at 30% 70%, rgba(255, 201, 163, 0.3), transparent 55%)',
+          filter: 'blur(70px)',
+          opacity: isHero ? 1 : 0.55,
+          willChange: isHero ? 'transform' : 'auto',
+        }}
+      />
+
+      {/* Noise grain overlay */}
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          pointerEvents: 'none',
+          zIndex: 1,
+          opacity: 0.35,
           mixBlendMode: 'overlay',
-          transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+          backgroundImage: `url("${NOISE_SVG}")`,
+          backgroundSize: '200px 200px',
+          backgroundRepeat: 'repeat',
         }}
       />
 
-      {/* Watermark -- brand logo, right-anchored, 40% pushed off-screen.
-          White is invisible on our near-white bg so we use brand blue
-          at low opacity for a subtle tinted watermark. */}
+      {/* Watermark logo (above noise, no grain on it) */}
       {isHero && (
         <div
           className="absolute inset-y-0 right-0 hidden md:flex items-center"
-          style={{ transform: 'translateX(40%)' }}
+          style={{ transform: 'translateX(40%)', zIndex: 2 }}
         >
           <div
             ref={watermarkRef}
             className="will-change-transform"
             style={{
-              opacity: 0.055,
+              opacity: 0.06,
               transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
               transformStyle: 'preserve-3d',
             }}
