@@ -1,6 +1,6 @@
 import { Hero } from '@/components/sections/Hero'
 import { LogoCloud } from '@/components/sections/LogoCloud'
-import { ProductShowcase } from '@/components/sections/ProductShowcase'
+import { ScrollProductShowcase } from '@/components/sections/ScrollProductShowcase'
 import { HowItWorks } from '@/components/sections/HowItWorks'
 import { Stats } from '@/components/sections/Stats'
 import { Testimonials } from '@/components/sections/Testimonials'
@@ -29,7 +29,7 @@ export default function Home() {
     <>
       <Hero />
       <LogoCloud />
-      <ProductShowcase />
+      <ScrollProductShowcase />
       <HowItWorks />
       <Stats />
       <Testimonials />
