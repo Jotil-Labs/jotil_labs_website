@@ -27,7 +27,7 @@ export function SlideDevice({ slug, deviceType, isActive }) {
   const vibrate = deviceType === 'phone' && slug === 'receptionist'
 
   return (
-    <div className="flex justify-center items-center" data-device>
+    <div className="flex justify-center items-center scale-[0.85] md:scale-100 origin-center" data-device>
       <Device vibrate={vibrate && isActive}>
         <Screen isActive={isActive} />
       </Device>

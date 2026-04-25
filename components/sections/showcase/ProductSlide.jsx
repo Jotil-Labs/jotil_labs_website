@@ -6,7 +6,7 @@ export function ProductSlide({ product, index, isActive }) {
 
   return (
     <div
-      className="product-slide absolute inset-0 flex items-center justify-center px-6 md:px-[60px]"
+      className="product-slide md:absolute md:inset-0 flex items-center justify-center px-6 md:px-[60px] py-16 md:py-0"
       data-index={index}
     >
       <div

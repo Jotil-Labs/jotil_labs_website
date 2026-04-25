@@ -7,15 +7,54 @@ import { useGSAP } from '@gsap/react'
 import { PRODUCT_SLIDES } from './showcase/data'
 import { ProductSlide } from './showcase/ProductSlide'
 import { FlowCard } from './showcase/FlowCard'
+import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const SCROLL_PER_PRODUCT = 1500
 const TOTAL_SCROLL = PRODUCT_SLIDES.length * SCROLL_PER_PRODUCT
 
+function ProgressDots({ activeIndex, total }) {
+  return (
+    <div className="absolute right-6 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col gap-3">
+      {Array.from({ length: total }).map((_, i) => (
+        <button
+          key={i}
+          aria-label={`Go to ${PRODUCT_SLIDES[i].badge}`}
+          className="w-2.5 h-2.5 rounded-full transition-all duration-300"
+          style={{
+            backgroundColor: i === activeIndex ? '#3859a8' : 'rgba(56, 89, 168, 0.2)',
+            transform: i === activeIndex ? 'scale(1.3)' : 'scale(1)',
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+function SectionHeading() {
+  return (
+    <AnimatedSection className="text-center pt-24 pb-12 px-6">
+      <p
+        className="text-sm font-semibold tracking-wide uppercase mb-3"
+        style={{ color: '#3859a8' }}
+      >
+        What Changes for Your Business
+      </p>
+      <h2
+        className="text-[clamp(1.75rem,4vw,3rem)] font-bold tracking-[-0.03em] text-text max-w-2xl mx-auto"
+        style={{ fontFamily: 'var(--font-display)' }}
+      >
+        One platform. Every customer touchpoint.
+      </h2>
+    </AnimatedSection>
+  )
+}
+
 export function ScrollProductShowcase() {
   const containerRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
 
   useGSAP(() => {
     const container = containerRef.current
@@ -23,11 +62,11 @@ export function ScrollProductShowcase() {
 
     const mm = gsap.matchMedia()
 
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // Desktop: full scroll-locked experience
+    mm.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
       const slides = container.querySelectorAll('.product-slide')
       const tl = gsap.timeline()
 
-      // Initial state: all slides hidden except first
       gsap.set(slides, { opacity: 0 })
       slides.forEach(slide => {
         gsap.set(slide.querySelectorAll('.slide-text > *'), { x: -80, opacity: 0 })
@@ -41,7 +80,6 @@ export function ScrollProductShowcase() {
         const textEls = slide.querySelectorAll('.slide-text > *')
         const deviceEl = slide.querySelector('[data-device]')
 
-        // ENTER
         tl.addLabel(`enter-${i}`)
         tl.to(slide, { opacity: 1, duration: 0.01 }, `enter-${i}`)
         tl.to(textEls, { x: 0, opacity: 1, stagger: 0.02, duration: 0.15, ease: 'power2.out' }, `enter-${i}`)
@@ -49,12 +87,10 @@ export function ScrollProductShowcase() {
           tl.to(deviceEl, { x: 0, opacity: 1, scale: 1, duration: 0.18, ease: 'power2.out' }, `enter-${i}+=0.03`)
         }
 
-        // HOLD
         tl.addLabel(`hold-${i}`)
         snapPoints.push(tl.labels[`hold-${i}`] / tl.duration())
         tl.to({}, { duration: 0.35 })
 
-        // EXIT (skip for last slide)
         if (i < slides.length - 1) {
           tl.addLabel(`exit-${i}`)
           tl.to(textEls, { x: -120, opacity: 0, stagger: 0.01, duration: 0.15, ease: 'power2.in' }, `exit-${i}`)
@@ -86,7 +122,20 @@ export function ScrollProductShowcase() {
       })
     })
 
-    // Reduced motion fallback
+    // Mobile: no pin, show slides in normal flow
+    mm.add('(max-width: 767px)', () => {
+      setIsMobile(true)
+      const slides = container.querySelectorAll('.product-slide')
+      gsap.set(slides, { position: 'relative', opacity: 1 })
+      slides.forEach(slide => {
+        gsap.set(slide.querySelectorAll('.slide-text > *'), { x: 0, opacity: 1 })
+        const deviceEl = slide.querySelector('[data-device]')
+        if (deviceEl) gsap.set(deviceEl, { x: 0, opacity: 1, scale: 1 })
+      })
+      return () => setIsMobile(false)
+    })
+
+    // Reduced motion fallback (any screen size)
     mm.add('(prefers-reduced-motion: reduce)', () => {
       const slides = container.querySelectorAll('.product-slide')
       gsap.set(slides, { position: 'relative', opacity: 1 })
@@ -100,9 +149,10 @@ export function ScrollProductShowcase() {
 
   return (
     <>
+      <SectionHeading />
       <section
         ref={containerRef}
-        className="relative h-screen overflow-hidden"
+        className={`relative overflow-hidden ${isMobile ? 'mobile-showcase' : 'h-screen'}`}
         aria-label="Product showcase"
         role="region"
       >
@@ -111,9 +161,12 @@ export function ScrollProductShowcase() {
             key={product.slug}
             product={product}
             index={i}
-            isActive={activeIndex === i}
+            isActive={isMobile || activeIndex === i}
           />
         ))}
+        {!isMobile && (
+          <ProgressDots activeIndex={activeIndex} total={PRODUCT_SLIDES.length} />
+        )}
       </section>
       <FlowCard />
     </>
