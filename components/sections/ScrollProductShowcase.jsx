@@ -74,8 +74,6 @@ export function ScrollProductShowcase() {
         if (deviceEl) gsap.set(deviceEl, { x: 80, opacity: 0, scale: 0.95 })
       })
 
-      const snapPoints = []
-
       slides.forEach((slide, i) => {
         const textEls = slide.querySelectorAll('.slide-text > *')
         const deviceEl = slide.querySelector('[data-device]')
@@ -88,7 +86,6 @@ export function ScrollProductShowcase() {
         }
 
         tl.addLabel(`hold-${i}`)
-        snapPoints.push(tl.labels[`hold-${i}`] / tl.duration())
         tl.to({}, { duration: 0.35 })
 
         if (i < slides.length - 1) {
@@ -102,6 +99,12 @@ export function ScrollProductShowcase() {
         }
       })
 
+      // Snap points must be calculated AFTER full timeline is built
+      const totalDuration = tl.duration()
+      const snapPoints = Array.from(slides).map((_, i) =>
+        tl.labels[`hold-${i}`] / totalDuration
+      )
+
       ScrollTrigger.create({
         trigger: container,
         pin: true,
@@ -110,14 +113,23 @@ export function ScrollProductShowcase() {
         scrub: 1,
         snap: {
           snapTo: snapPoints,
-          duration: { min: 0.2, max: 0.8 },
-          delay: 0.1,
+          duration: { min: 0.2, max: 0.6 },
+          delay: 0.05,
           ease: 'power1.inOut',
         },
         animation: tl,
         onUpdate: (self) => {
-          const idx = Math.round(self.progress * (slides.length - 1))
-          setActiveIndex(idx)
+          const progress = self.progress
+          let closest = 0
+          let minDist = Infinity
+          for (let i = 0; i < snapPoints.length; i++) {
+            const dist = Math.abs(progress - snapPoints[i])
+            if (dist < minDist) {
+              minDist = dist
+              closest = i
+            }
+          }
+          setActiveIndex(closest)
         },
       })
     })
