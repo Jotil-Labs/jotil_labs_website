@@ -8,7 +8,7 @@ import { Footer } from '@/components/layout/Footer'
 import { OrganizationJsonLd, WebsiteJsonLd } from '@/components/layout/JsonLd'
 import { AIWidget } from '@/components/widgets/AIWidget'
 import { ScrollToTop } from '@/components/layout/ScrollToTop'
-import { BrandBackgroundGate } from '@/components/design'
+import { BrandBackgroundGate, SmoothScroll } from '@/components/design'
 
 const montserratAlternates = Montserrat_Alternates({
   subsets: ['latin'],
@@ -98,7 +98,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`scroll-smooth ${montserratAlternates.variable} ${inter.variable} ${jetbrainsMono.variable} ${fraunces.variable}`}
+      className={`${montserratAlternates.variable} ${inter.variable} ${jetbrainsMono.variable} ${fraunces.variable}`}
     >
       <head>
         <OrganizationJsonLd />
@@ -121,13 +121,15 @@ export default function RootLayout({ children }) {
             grain masked to the blob, optional logo watermark on the right
             (homepage only). Fixed-positioned behind all content. Variant
             is route-aware: hero treatment on "/", quieter elsewhere. */}
-        <BrandBackgroundGate />
-        <a href="#main-content" className="skip-to-main">
-          Skip to main content
-        </a>
-        <Navbar />
-        <main id="main-content" className="relative z-10">{children}</main>
-        <Footer />
+        <SmoothScroll>
+          <BrandBackgroundGate />
+          <a href="#main-content" className="skip-to-main">
+            Skip to main content
+          </a>
+          <Navbar />
+          <main id="main-content" className="relative z-10">{children}</main>
+          <Footer />
+        </SmoothScroll>
         <ScrollToTop />
         <AIWidget />
         <Analytics />
