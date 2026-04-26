@@ -1,6 +1,7 @@
 'use client'
 
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
+import { SerifAccent } from '@/components/design'
 
 const TESTIMONIALS = [
   {
@@ -90,12 +91,13 @@ function TestimonialCard({ testimonial }) {
       </div>
 
       {/* Quote */}
-      <blockquote
+      <SerifAccent
+        as="blockquote"
         className="flex-1 text-[15px] text-text leading-[1.7]"
-        style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}
+        weight={400}
       >
         {quote}
-      </blockquote>
+      </SerifAccent>
 
       {/* Divider */}
       <div className="gradient-divider" />

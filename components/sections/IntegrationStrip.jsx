@@ -33,8 +33,10 @@ function IntegrationPill({ label }) {
     <div
       className="flex items-center gap-2.5 px-4 py-2.5 rounded-full shrink-0 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
       style={{
-        background: 'rgba(255,255,255,0.95)',
-        border: '1px solid rgba(0,0,0,0.06)',
+        background: 'rgba(255,255,255,0.55)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        border: '1px solid rgba(255,255,255,0.60)',
         boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
       }}
     >
@@ -59,8 +61,8 @@ function MarqueeRow({ items, reverse = false, speed = 30 }) {
   return (
     <div className="relative overflow-hidden">
       {/* Fade edges */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 z-10" style={{ background: 'linear-gradient(to right, #FAFBFD, transparent)' }} />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 z-10" style={{ background: 'linear-gradient(to left, #FAFBFD, transparent)' }} />
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 z-10" style={{ background: 'linear-gradient(to right, var(--color-bg), transparent)' }} />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 z-10" style={{ background: 'linear-gradient(to left, var(--color-bg), transparent)' }} />
 
       <div
         className="flex gap-3 w-max"

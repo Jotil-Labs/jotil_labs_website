@@ -42,7 +42,7 @@ const STATS = [
 
 export function Stats() {
   return (
-    <section className="py-20">
+    <section className="surface-navy py-20">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Optional section label */}
@@ -50,7 +50,7 @@ export function Stats() {
           <p
             className="text-[11px] font-semibold tracking-[0.14em] uppercase"
             style={{
-              color: 'var(--color-text-secondary)',
+              color: 'rgba(255, 255, 255, 0.6)',
               fontFamily: 'var(--font-display)',
             }}
           >
@@ -79,18 +79,23 @@ function StatCard({ stat }) {
     <div
       className="rounded-[20px] p-5 sm:p-7 flex flex-col gap-3 sm:gap-4 transition-all duration-300"
       style={{
-        background: '#FFFFFF',
-        border: '1px solid rgba(0,0,0,0.05)',
+        background: 'rgba(255,255,255,0.12)',
+        backdropFilter: 'blur(16px) saturate(1.5)',
+        WebkitBackdropFilter: 'blur(16px) saturate(1.5)',
+        border: '1px solid rgba(255,255,255,0.18)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.10)',
       }}
       onMouseEnter={e => {
-        e.currentTarget.style.transform = 'translateY(-2px)'
-        e.currentTarget.style.boxShadow = `0 12px 40px ${color}14, 0 4px 12px rgba(0,0,0,0.04)`
-        e.currentTarget.style.borderColor = `${color}20`
+        e.currentTarget.style.transform = 'translateY(-3px)'
+        e.currentTarget.style.boxShadow = `0 16px 48px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.15)`
+        e.currentTarget.style.borderColor = `rgba(255,255,255,0.28)`
+        e.currentTarget.style.background = 'rgba(255,255,255,0.16)'
       }}
       onMouseLeave={e => {
         e.currentTarget.style.transform = 'translateY(0)'
-        e.currentTarget.style.boxShadow = 'none'
-        e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'
+        e.currentTarget.style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,0.10)'
+        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'
+        e.currentTarget.style.background = 'rgba(255,255,255,0.12)'
       }}
     >
       {/* Icon */}

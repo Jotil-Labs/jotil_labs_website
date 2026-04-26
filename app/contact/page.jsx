@@ -1,6 +1,7 @@
 import { ContactForm } from '@/components/sections/ContactForm'
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
 import { Badge } from '@/components/ui/Badge'
+import { AtmosphericDivider } from '@/components/design'
 
 export const metadata = {
   title: 'Contact JotilLabs',
@@ -65,7 +66,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <div className="gradient-divider max-w-6xl mx-auto" />
+      <AtmosphericDivider from="var(--color-bg)" to="var(--color-primary-50)" height={40} />
 
       {/* Form + Sidebar + FAQ */}
       <section className="py-16 pb-28">

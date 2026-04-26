@@ -4,6 +4,7 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 import { CountUp } from '@/components/ui/CountUp'
 import { IconBox } from '@/components/ui/IconBox'
 import { Badge } from '@/components/ui/Badge'
+import { AtmosphericDivider } from '@/components/design'
 
 export const metadata = {
   title: 'About JotilLabs',
@@ -111,7 +112,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="gradient-divider max-w-6xl mx-auto" />
+      <AtmosphericDivider from="var(--color-bg)" to="var(--color-primary-50)" height={40} />
 
       {/* Story + Mission / Vision */}
       <section className="py-24">
@@ -209,7 +210,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="gradient-divider max-w-6xl mx-auto" />
+      <AtmosphericDivider from="var(--color-bg)" to="var(--color-bg-alt)" height={50} />
 
       {/* Stats */}
       <section className="py-24 bg-bg-alt/40">
@@ -250,7 +251,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="gradient-divider max-w-6xl mx-auto" />
+      <AtmosphericDivider from="var(--color-bg-alt)" to="var(--color-bg)" height={50} />
 
       {/* Values */}
       <section className="py-24">
@@ -284,7 +285,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="gradient-divider max-w-6xl mx-auto" />
+      <AtmosphericDivider from="var(--color-bg)" to="var(--color-bg-alt)" height={50} />
 
       {/* Team */}
       <section className="py-24 bg-bg-alt/40">
@@ -330,7 +331,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="gradient-divider max-w-6xl mx-auto" />
+      <AtmosphericDivider from="var(--color-bg-alt)" to="var(--color-bg)" height={50} />
 
       {/* CTA */}
       <section className="py-24">

@@ -146,7 +146,23 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 pt-6 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Giant brand text watermark */}
+        <div className="mt-14 relative overflow-hidden" aria-hidden="true">
+          <p
+            className="text-[clamp(3.5rem,15vw,16rem)] font-black leading-none tracking-[-0.02em] text-center select-none"
+            style={{
+              fontFamily: 'var(--font-display)',
+              background: 'linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 85%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            JotilLabs
+          </p>
+        </div>
+
+        <div className="pt-6 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-500">
             {copyrightLine()}
           </p>

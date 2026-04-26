@@ -4,6 +4,7 @@ import * as LucideIcons from 'lucide-react'
 import { Check, ArrowRight } from 'lucide-react'
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
 import { Badge } from '@/components/ui/Badge'
+import { AtmosphericDivider } from '@/components/design'
 import { Button } from '@/components/ui/Button'
 import { IconBox } from '@/components/ui/IconBox'
 import { PricingCard } from '@/components/pricing/PricingCard'
@@ -85,7 +86,7 @@ export default async function ProductPage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       {/* ─── 1. Hero ─── */}
-      <section className="relative pt-28 pb-20 px-4 overflow-hidden bg-gradient-to-br from-[#F0F4FF] via-[#F7F9FF] to-white">
+      <section className="relative pt-28 pb-20 px-4 overflow-hidden">
         {/* Background orbs */}
         <div
           className="absolute top-0 right-0 w-[600px] h-[500px] rounded-full opacity-40 pointer-events-none"
@@ -137,7 +138,9 @@ export default async function ProductPage({ params }) {
               <div
                 className="relative w-full max-w-md aspect-[4/3] rounded-3xl flex flex-col items-center justify-center gap-4 overflow-hidden"
                 style={{
-                  background: 'linear-gradient(135deg, #F0F4FF, #F7F9FF, #FFFFFF)',
+                  background: 'rgba(255,255,255,0.30)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
                   border: '1px solid rgba(56, 89, 168,0.1)',
                   boxShadow: '0 16px 48px rgba(56, 89, 168,0.08), 0 4px 16px rgba(0,0,0,0.04)',
                 }}
@@ -156,7 +159,7 @@ export default async function ProductPage({ params }) {
         </div>
       </section>
 
-      <div className="gradient-divider" />
+      <AtmosphericDivider from="var(--color-primary-50)" to="var(--color-bg)" height={50} />
 
       {/* ─── 2. Services breakdown ─── */}
       <section className="py-20 px-4">
@@ -207,15 +210,15 @@ export default async function ProductPage({ params }) {
         </div>
       </section>
 
-      <div className="gradient-divider" />
+      <AtmosphericDivider from="var(--color-bg)" to="var(--color-bg-alt)" height={40} />
 
       {/* ─── 3. Demo visualization (client component) ─── */}
       <DemoVisualization slug={slug} />
 
-      <div className="gradient-divider" />
+      <AtmosphericDivider from="var(--color-bg-alt)" to="var(--color-bg)" height={40} />
 
       {/* ─── 4. Features grid ─── */}
-      <section className="py-20 px-4 bg-[#FAFBFD]">
+      <section className="py-20 px-4 surface-sunken">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection className="text-center mb-12">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Why it works</p>
@@ -251,7 +254,7 @@ export default async function ProductPage({ params }) {
         </div>
       </section>
 
-      <div className="gradient-divider" />
+      <AtmosphericDivider from="var(--color-bg-alt)" to="var(--color-bg)" height={40} />
 
       {/* ─── 5. Pricing teaser — single highlighted tier + CTA to full pricing page ─── */}
       <section id="pricing" className="py-20 px-4">
@@ -343,12 +346,12 @@ export default async function ProductPage({ params }) {
         </div>
       </section>
 
-      <div className="gradient-divider" />
+      <AtmosphericDivider from="var(--color-bg)" to="var(--color-bg-alt)" height={40} />
 
       {/* ─── 6. FAQ (client accordion) ─── */}
       <FAQAccordion faq={product.faq} />
 
-      <div className="gradient-divider" />
+      <AtmosphericDivider from="var(--color-bg-alt)" to="var(--color-bg)" height={40} />
 
       {/* ─── 7. Bottom CTA ─── */}
       <section className="py-20 px-4">

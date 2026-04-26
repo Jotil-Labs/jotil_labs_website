@@ -116,18 +116,23 @@ function CapabilityCard({ capability }) {
       <article
         className="h-full flex flex-col p-7 rounded-[20px] transition-all duration-300 cursor-pointer"
         style={{
-          background: '#FFFFFF',
-          border: '1px solid rgba(0,0,0,0.05)',
+          background: 'rgba(255,255,255,0.55)',
+          backdropFilter: 'blur(16px) saturate(1.8)',
+          WebkitBackdropFilter: 'blur(16px) saturate(1.8)',
+          border: '1px solid rgba(255,255,255,0.70)',
+          boxShadow: '0 2px 8px rgba(15,17,41,0.04), inset 0 1px 0 rgba(255,255,255,0.95)',
         }}
         onMouseEnter={e => {
-          e.currentTarget.style.transform = 'translateY(-2px)'
-          e.currentTarget.style.boxShadow = '0 12px 40px rgba(56, 89, 168,0.1), 0 4px 12px rgba(0,0,0,0.04)'
-          e.currentTarget.style.borderColor = 'rgba(56, 89, 168,0.14)'
+          e.currentTarget.style.transform = 'translateY(-3px)'
+          e.currentTarget.style.boxShadow = '0 16px 48px rgba(56, 89, 168,0.12), 0 4px 16px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,1)'
+          e.currentTarget.style.borderColor = 'rgba(56, 89, 168,0.22)'
+          e.currentTarget.style.background = 'rgba(255,255,255,0.70)'
         }}
         onMouseLeave={e => {
           e.currentTarget.style.transform = 'translateY(0)'
-          e.currentTarget.style.boxShadow = 'none'
-          e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'
+          e.currentTarget.style.boxShadow = '0 2px 8px rgba(15,17,41,0.04), inset 0 1px 0 rgba(255,255,255,0.95)'
+          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.70)'
+          e.currentTarget.style.background = 'rgba(255,255,255,0.55)'
         }}
       >
         {/* Icon */}

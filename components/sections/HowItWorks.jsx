@@ -101,19 +101,22 @@ function StepCard({ step, index }) {
     <div
       className="h-full p-8 rounded-[20px] flex flex-col gap-5 transition-all duration-300"
       style={{
-        background: '#FAFBFD',
-        border: '1px solid rgba(0,0,0,0.05)',
+        background: 'rgba(255,255,255,0.55)',
+        backdropFilter: 'blur(16px) saturate(1.8)',
+        WebkitBackdropFilter: 'blur(16px) saturate(1.8)',
+        border: '1px solid rgba(255,255,255,0.70)',
+        boxShadow: '0 2px 8px rgba(15,17,41,0.04), inset 0 1px 0 rgba(255,255,255,0.95)',
       }}
       onMouseEnter={e => {
-        e.currentTarget.style.background = '#FFFFFF'
-        e.currentTarget.style.boxShadow = `0 12px 40px ${color}18, 0 4px 12px rgba(0,0,0,0.04)`
-        e.currentTarget.style.borderColor = `${color}22`
-        e.currentTarget.style.transform = 'translateY(-2px)'
+        e.currentTarget.style.background = 'rgba(255,255,255,0.70)'
+        e.currentTarget.style.boxShadow = `0 16px 48px ${color}14, 0 4px 16px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,1)`
+        e.currentTarget.style.borderColor = `${color}25`
+        e.currentTarget.style.transform = 'translateY(-3px)'
       }}
       onMouseLeave={e => {
-        e.currentTarget.style.background = '#FAFBFD'
-        e.currentTarget.style.boxShadow = 'none'
-        e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'
+        e.currentTarget.style.background = 'rgba(255,255,255,0.55)'
+        e.currentTarget.style.boxShadow = '0 2px 8px rgba(15,17,41,0.04), inset 0 1px 0 rgba(255,255,255,0.95)'
+        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.70)'
         e.currentTarget.style.transform = 'translateY(0)'
       }}
     >

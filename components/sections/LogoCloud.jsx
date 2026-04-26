@@ -38,11 +38,11 @@ export function LogoCloud() {
       <div className="relative">
         <div
           className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-24"
-          style={{ background: 'linear-gradient(to right, #FFFFFF, transparent)' }}
+          style={{ background: 'linear-gradient(to right, var(--color-bg), transparent)' }}
         />
         <div
           className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-24"
-          style={{ background: 'linear-gradient(to left, #FFFFFF, transparent)' }}
+          style={{ background: 'linear-gradient(to left, var(--color-bg), transparent)' }}
         />
 
         {/* Marquee track */}
