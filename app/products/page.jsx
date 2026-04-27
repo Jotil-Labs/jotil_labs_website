@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Check, Minus } from 'lucide-react'
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
 import { Badge } from '@/components/ui/Badge'
+import { AtmosphericDivider } from '@/components/design'
 import { Button } from '@/components/ui/Button'
 import {
   ReceptionistLogo,
@@ -60,7 +61,7 @@ export default function ProductsPage() {
   return (
     <>
       {/* ─── Hero ─── */}
-      <section className="relative pt-28 pb-16 px-4 overflow-hidden bg-gradient-to-b from-[#F0F4FF] to-[#FAFBFD]">
+      <section className="relative pt-28 pb-16 px-4 overflow-hidden">
         {/* Subtle orb */}
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full opacity-30 pointer-events-none"
@@ -107,7 +108,7 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <div className="gradient-divider" />
+      <AtmosphericDivider from="var(--color-primary-50)" to="var(--color-bg)" height={50} />
 
       {/* ─── Products grid ─── */}
       <section className="py-20 px-4">
@@ -192,10 +193,10 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <div className="gradient-divider" />
+      <AtmosphericDivider from="var(--color-bg)" to="var(--color-bg-alt)" height={40} />
 
       {/* ─── Comparison table ─── */}
-      <section className="py-20 px-4 bg-[#FAFBFD]">
+      <section className="py-20 px-4 surface-sunken">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection className="text-center mb-12">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Compare</p>
@@ -269,7 +270,7 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <div className="gradient-divider" />
+      <AtmosphericDivider from="var(--color-bg-alt)" to="var(--color-bg)" height={40} />
 
       {/* ─── Bottom CTA ─── */}
       <section className="py-20 px-4">

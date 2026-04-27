@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, PhoneCall } from 'lucide-react'
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
+import { SerifAccent } from '@/components/design'
 
 export function CTASection() {
   return (
@@ -118,7 +119,7 @@ export function CTASection() {
             }}
           >
             Join hundreds of businesses already using Jotil to handle calls,
-            chats, and follow-ups. 24/7, without extra headcount.
+            chats, and follow-ups. <SerifAccent weight={600}>24/7</SerifAccent>, without extra headcount.
           </p>
         </AnimatedSection>
 

@@ -92,17 +92,7 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Background gradient mesh */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        {/* Soft grid pattern */}
-        <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(rgba(56, 89, 168,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 89, 168,0.03) 1px, transparent 1px)', backgroundSize: '64px 64px' }} />
-
-        {/* Gradient orbs */}
-        <div className="absolute rounded-full animate-orb-1" style={{ width: 600, height: 600, top: '-10%', left: '-10%', background: 'radial-gradient(circle, rgba(56, 89, 168,0.10) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-        <div className="absolute rounded-full animate-orb-2" style={{ width: 500, height: 500, top: '10%', right: '-8%', background: 'radial-gradient(circle, rgba(59, 130, 246,0.08) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-        <div className="absolute rounded-full animate-orb-3" style={{ width: 400, height: 400, bottom: '0%', left: '30%', background: 'radial-gradient(circle, rgba(59, 130, 246,0.07) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-        <div className="absolute rounded-full animate-orb-4" style={{ width: 350, height: 350, top: '50%', left: '55%', background: 'radial-gradient(circle, rgba(56, 89, 168,0.06) 0%, transparent 70%)', filter: 'blur(80px)' }} />
-      </div>
+      {/* Background handled by BrandBackground */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center min-h-[calc(100vh-80px)] py-16">
