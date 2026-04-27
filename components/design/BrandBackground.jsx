@@ -73,7 +73,7 @@ export function BrandBackground({ variant = 'quiet' }) {
           background:
             'radial-gradient(circle at 30% 30%, rgba(138, 107, 255, 0.35), transparent 60%), radial-gradient(circle at 70% 60%, rgba(255, 122, 182, 0.25), transparent 55%)',
           filter: 'blur(60px)',
-          opacity: isHero ? 1 : 0.72,
+          opacity: (isHero ? 1 : 0.72) * 0.4,
           willChange: isHero ? 'transform' : 'auto',
         }}
       />
@@ -90,7 +90,7 @@ export function BrandBackground({ variant = 'quiet' }) {
           background:
             'radial-gradient(circle at 60% 40%, rgba(47, 91, 255, 0.28), transparent 60%), radial-gradient(circle at 30% 70%, rgba(255, 201, 163, 0.3), transparent 55%)',
           filter: 'blur(70px)',
-          opacity: isHero ? 1 : 0.72,
+          opacity: (isHero ? 1 : 0.72) * 0.4,
           willChange: isHero ? 'transform' : 'auto',
         }}
       />
@@ -102,7 +102,7 @@ export function BrandBackground({ variant = 'quiet' }) {
           inset: 0,
           pointerEvents: 'none',
           zIndex: 1,
-          opacity: 0.35,
+          opacity: 0.35 * 0.4,
           mixBlendMode: 'overlay',
           backgroundImage: `url("${NOISE_SVG}")`,
           backgroundSize: '200px 200px',

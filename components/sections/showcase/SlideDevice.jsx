@@ -26,9 +26,9 @@ const DEVICES = {
 }
 
 const TILT = {
-  phone: 'rotateY(-8deg) rotateX(4deg)',
-  laptop: 'rotateY(-6deg) rotateX(3deg)',
-  monitor: 'rotateY(-5deg) rotateX(2deg)',
+  phone: 'none',
+  laptop: 'none',
+  monitor: 'none',
 }
 
 export function SlideDevice({ slug, deviceType, isActive }) {
@@ -52,7 +52,7 @@ export function SlideDevice({ slug, deviceType, isActive }) {
 
   return (
     <div
-      className="relative flex justify-center items-center scale-[0.85] md:scale-100 origin-center"
+      className="relative flex justify-center items-center scale-[0.72] md:scale-100 origin-center"
       style={{
         perspective: '1200px',
         perspectiveOrigin: '50% 50%',

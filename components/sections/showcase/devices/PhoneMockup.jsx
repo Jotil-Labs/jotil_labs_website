@@ -6,7 +6,7 @@ export function PhoneMockup({ children, vibrate = false, glass = false }) {
         <div className="absolute left-[-2.5px] top-[124px] w-[3px] h-[32px] rounded-l-sm" style={{ background: 'linear-gradient(180deg, #3a3a40, #2a2a30)' }} />
         <div className="absolute left-[-2.5px] top-[164px] w-[3px] h-[32px] rounded-l-sm" style={{ background: 'linear-gradient(180deg, #3a3a40, #2a2a30)' }} />
         <div className="absolute right-[-2.5px] top-[130px] w-[3px] h-[40px] rounded-r-sm" style={{ background: 'linear-gradient(180deg, #3a3a40, #2a2a30)' }} />
-        <div className={`w-[280px] h-[580px] rounded-[46px] p-[10px] relative ${vibrate ? 'animate-phone-vibrate' : ''}`}
+        <div className={`w-[320px] h-[660px] rounded-[46px] p-[10px] relative ${vibrate ? 'animate-phone-vibrate' : ''}`}
           style={{
             background: 'linear-gradient(160deg, #2c2c30 0%, #1c1c20 40%, #0e0e12 100%)',
             boxShadow: [
@@ -39,7 +39,7 @@ export function PhoneMockup({ children, vibrate = false, glass = false }) {
       <div className="absolute right-[-2px] top-[130px] w-[2.5px] h-[40px] rounded-r-sm" style={{ background: 'linear-gradient(180deg, #d8d8dc, #c0c0c4)' }} />
 
       <div
-        className={`w-[280px] h-[580px] rounded-[46px] p-[10px] relative ${vibrate ? 'animate-phone-vibrate' : ''}`}
+        className={`w-[320px] h-[660px] rounded-[46px] p-[10px] relative ${vibrate ? 'animate-phone-vibrate' : ''}`}
         style={{
           background: 'linear-gradient(160deg, rgba(255,255,255,0.85) 0%, rgba(240,240,245,0.7) 30%, rgba(220,220,230,0.5) 70%, rgba(255,255,255,0.6) 100%)',
           backdropFilter: 'blur(20px) saturate(1.2)',
