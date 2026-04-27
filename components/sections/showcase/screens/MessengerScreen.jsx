@@ -2,40 +2,132 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send, Calendar, Bell, Ticket, Sparkles } from 'lucide-react'
+import { Send, Calendar, Bell, Ticket, Sparkles, MessageSquare, Globe, MessageCircle, Users } from 'lucide-react'
 import Logo from '@/components/ui/Logo'
 
 const CHANNELS = [
-  { id: 'sms', label: 'SMS' },
-  { id: 'web', label: 'Web' },
-  { id: 'whatsapp', label: 'WhatsApp' },
-  { id: 'teams', label: 'Teams' },
+  { id: 'sms', label: 'SMS', icon: MessageSquare, color: '#3859a8' },
+  { id: 'web', label: 'Web Chat', icon: Globe, color: '#6366F1' },
+  { id: 'whatsapp', label: 'WhatsApp', icon: MessageCircle, color: '#25d366' },
+  { id: 'teams', label: 'Teams', icon: Users, color: '#5b5fc7' },
 ]
 
-const SCRIPT = [
-  { type: 'msg', role: 'user', text: 'Hey, do you have any openings this week?' },
-  { type: 'msg', role: 'ai', text: 'Checking your calendar now...' },
-  { type: 'msg', role: 'ai', text: 'I have Thursday at 10 AM and Friday at 3 PM. Which works?' },
-  { type: 'msg', role: 'user', text: 'Thursday at 10, please.' },
-  { type: 'action', id: 'calendar', icon: Calendar, label: 'Appointment booked', sublabel: 'Thu, 10:00 AM' },
-  { type: 'channel', to: 1 },
-  { type: 'msg', role: 'user', text: "What's on the lunch menu today?" },
-  { type: 'msg', role: 'ai', text: "Today's specials: Grilled Salmon, Pasta Primavera, and Thai Curry Bowl." },
-  { type: 'msg', role: 'user', text: 'Can you remind me about my appointment tomorrow?' },
-  { type: 'action', id: 'reminder', icon: Bell, label: 'Reminder set', sublabel: 'SMS at 9:00 AM' },
-  { type: 'channel', to: 2 },
-  { type: 'msg', role: 'user', text: 'I need to reschedule my Friday meeting.' },
-  { type: 'msg', role: 'ai', text: 'No problem. Monday 2 PM or Tuesday 11 AM available. Preference?' },
-  { type: 'msg', role: 'user', text: 'Tuesday 11 works.' },
-  { type: 'action', id: 'reschedule', icon: Calendar, label: 'Rescheduled', sublabel: 'Tue, 11:00 AM' },
-  { type: 'channel', to: 3 },
-  { type: 'msg', role: 'user', text: 'Can you create a support ticket for the billing issue?' },
-  { type: 'msg', role: 'ai', text: "I'll create that right away with all the details from our conversation." },
-  { type: 'action', id: 'ticket', icon: Ticket, label: 'Ticket created', sublabel: 'Added to CRM' },
-  { type: 'msg', role: 'ai', text: 'Done! Ticket #4821 is assigned to your account manager.' },
-]
+const CHANNEL_SCRIPTS = {
+  0: [
+    { type: 'msg', role: 'user', text: 'Hey, do you have any openings this week?' },
+    { type: 'msg', role: 'ai', text: 'I have Thursday at 10 AM and Friday at 3 PM. Which works?' },
+    { type: 'msg', role: 'user', text: 'Thursday at 10, please.' },
+    { type: 'action', id: 'calendar', icon: Calendar, label: 'Appointment booked', sublabel: 'Thu, 10:00 AM' },
+    { type: 'msg', role: 'ai', text: "You're all set! I'll send a confirmation." },
+  ],
+  1: [
+    { type: 'msg', role: 'user', text: "What's on the lunch menu today?" },
+    { type: 'msg', role: 'ai', text: "Today's specials: Grilled Salmon, Pasta Primavera, and Thai Curry Bowl." },
+    { type: 'msg', role: 'user', text: 'Can you remind me about my appointment tomorrow?' },
+    { type: 'action', id: 'reminder', icon: Bell, label: 'Reminder set', sublabel: 'SMS at 9:00 AM' },
+    { type: 'msg', role: 'ai', text: "Done! You'll get an SMS at 9 AM tomorrow." },
+  ],
+  2: [
+    { type: 'msg', role: 'user', text: 'I need to reschedule my Friday meeting.' },
+    { type: 'msg', role: 'ai', text: 'Monday 2 PM or Tuesday 11 AM available. Preference?' },
+    { type: 'msg', role: 'user', text: 'Tuesday 11 works.' },
+    { type: 'action', id: 'reschedule', icon: Calendar, label: 'Rescheduled', sublabel: 'Tue, 11:00 AM' },
+    { type: 'msg', role: 'ai', text: 'Updated! Calendar invite sent.' },
+  ],
+  3: [
+    { type: 'msg', role: 'user', text: 'Can you create a support ticket for the billing issue?' },
+    { type: 'msg', role: 'ai', text: "I'll create that with all conversation details." },
+    { type: 'action', id: 'ticket', icon: Ticket, label: 'Ticket created', sublabel: 'Added to CRM' },
+    { type: 'msg', role: 'ai', text: 'Ticket #4821 assigned to your account manager.' },
+  ],
+}
 
-const LOOP_DURATION = 38000
+const LOOP_DURATION = 40000
+const TYPE_DUR = 1000
+const MSG_GAP = 400
+const USER_GAP = 500
+const ACTION_LEAD = 200
+const ACTION_DUR = 1000
+const ACTION_TAIL = 300
+const CHANNEL_SWITCH = 1200
+
+function ChannelStrip({ channel, isActive }) {
+  const Icon = channel.icon
+  return (
+    <motion.div
+      layout
+      className="flex items-center gap-2 px-2.5 overflow-hidden"
+      animate={{
+        height: isActive ? 32 : 22,
+        opacity: isActive ? 1 : 0.45,
+      }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      style={{
+        borderLeft: isActive ? `3px solid ${channel.color}` : '3px solid transparent',
+        background: isActive ? `${channel.color}08` : 'transparent',
+      }}
+    >
+      <div
+        className="shrink-0 rounded flex items-center justify-center"
+        style={{
+          width: isActive ? 18 : 14,
+          height: isActive ? 18 : 14,
+          backgroundColor: `${channel.color}15`,
+          transition: 'width 0.4s, height 0.4s',
+        }}
+      >
+        <Icon size={isActive ? 10 : 8} strokeWidth={1.5} style={{ color: channel.color }} />
+      </div>
+      <span
+        className="font-semibold truncate"
+        style={{
+          fontSize: isActive ? 10 : 8,
+          color: isActive ? channel.color : '#999',
+          transition: 'font-size 0.4s, color 0.4s',
+        }}
+      >
+        {channel.label}
+      </span>
+      {isActive && (
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="ml-auto w-1.5 h-1.5 rounded-full shrink-0"
+          style={{ backgroundColor: channel.color }}
+        />
+      )}
+    </motion.div>
+  )
+}
+
+function ChatBubble({ msg }) {
+  const isUser = msg.role === 'user'
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
+      className={`flex mb-1.5 ${isUser ? 'justify-end' : 'items-end gap-1.5'}`}
+    >
+      {!isUser && (
+        <div
+          className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+          style={{ background: 'linear-gradient(135deg, #4a6fc2, #3859a8)' }}
+        >
+          <Logo size={9} tone="on-dark" animate={false} />
+        </div>
+      )}
+      <div
+        className={`max-w-[78%] px-2.5 py-1.5 text-[10px] leading-[1.4] ${
+          isUser ? 'rounded-xl rounded-br-sm text-white' : 'rounded-xl rounded-bl-sm text-gray-900'
+        }`}
+        style={{ backgroundColor: isUser ? '#3859a8' : '#f1f3f5' }}
+      >
+        {msg.text}
+      </div>
+    </motion.div>
+  )
+}
 
 function BlingAction({ action }) {
   const Icon = action.icon
@@ -120,66 +212,6 @@ function TypingOrb() {
   )
 }
 
-function ChatBubble({ msg }) {
-  const isUser = msg.role === 'user'
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.25, ease: 'easeOut' }}
-      className={`flex mb-1.5 ${isUser ? 'justify-end' : 'items-end gap-1.5'}`}
-    >
-      {!isUser && (
-        <div
-          className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-          style={{ background: 'linear-gradient(135deg, #4a6fc2, #3859a8)' }}
-        >
-          <Logo size={9} tone="on-dark" animate={false} />
-        </div>
-      )}
-      <div
-        className={`max-w-[78%] px-2.5 py-1.5 text-[10px] leading-[1.4] ${
-          isUser ? 'rounded-xl rounded-br-sm text-white' : 'rounded-xl rounded-bl-sm text-gray-900'
-        }`}
-        style={{ backgroundColor: isUser ? '#3859a8' : '#f1f3f5' }}
-      >
-        {msg.text}
-      </div>
-    </motion.div>
-  )
-}
-
-function ChannelTab({ channel, isActive, offset }) {
-  return (
-    <motion.div
-      className="relative px-3 pb-1.5 text-center cursor-default"
-      animate={{
-        y: isActive ? 0 : 2,
-        scale: isActive ? 1 : 0.95,
-        opacity: isActive ? 1 : 0.5,
-      }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
-    >
-      <span className="text-[9px] font-medium" style={{ color: isActive ? '#3859a8' : '#999' }}>
-        {channel.label}
-      </span>
-      <AnimatePresence>
-        {isActive && (
-          <motion.span
-            layoutId="channel-underline"
-            className="absolute bottom-0 left-1/4 right-1/4 h-[2px] rounded-full"
-            style={{ backgroundColor: '#3859a8' }}
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            exit={{ scaleX: 0 }}
-            transition={{ duration: 0.3 }}
-          />
-        )}
-      </AnimatePresence>
-    </motion.div>
-  )
-}
-
 export function MessengerScreen({ isActive, onAction }) {
   const [items, setItems] = useState([])
   const [activeChannel, setActiveChannel] = useState(0)
@@ -205,7 +237,50 @@ export function MessengerScreen({ isActive, onAction }) {
     }
 
     const timers = []
-    const schedule = (fn, ms) => { const id = setTimeout(fn, ms); timers.push(id); return id }
+    const schedule = (fn, ms) => {
+      const id = setTimeout(fn, ms)
+      timers.push(id)
+      return id
+    }
+
+    const playChannel = (chIdx, startAt) => {
+      let t = startAt
+      const script = CHANNEL_SCRIPTS[chIdx]
+
+      script.forEach((step) => {
+        if (step.type === 'msg') {
+          if (step.role === 'ai') {
+            schedule(() => setIsTyping(true), t)
+            t += TYPE_DUR
+            const msg = step
+            schedule(() => {
+              setIsTyping(false)
+              setItems((prev) => [...prev, msg])
+            }, t)
+            t += MSG_GAP
+          } else {
+            const msg = step
+            schedule(() => setItems((prev) => [...prev, msg]), t)
+            t += USER_GAP
+          }
+        } else if (step.type === 'action') {
+          t += ACTION_LEAD
+          const action = step
+          schedule(() => {
+            setBlingAction(action)
+            if (onAction) onAction(action.id)
+          }, t)
+          t += ACTION_DUR
+          schedule(() => {
+            setBlingAction(null)
+            setItems((prev) => [...prev, action])
+          }, t)
+          t += ACTION_TAIL
+        }
+      })
+
+      return t
+    }
 
     const runLoop = () => {
       setItems([])
@@ -214,50 +289,20 @@ export function MessengerScreen({ isActive, onAction }) {
       setBlingAction(null)
 
       let t = 600
-      const typeDur = 900
-      const gap = 350
+      t = playChannel(0, t)
 
-      SCRIPT.forEach((step) => {
-        if (step.type === 'msg') {
-          if (step.role === 'ai') {
-            schedule(() => setIsTyping(true), t)
-            t += typeDur
-            const msg = step
-            schedule(() => {
-              setIsTyping(false)
-              setItems((prev) => [...prev, msg])
-            }, t)
-            t += gap
-          } else {
-            const msg = step
-            schedule(() => setItems((prev) => [...prev, msg]), t)
-            t += gap + 300
-          }
-        } else if (step.type === 'action') {
-          t += 200
-          const action = step
-          schedule(() => {
-            setBlingAction(action)
-            if (onAction) onAction(action.id)
-          }, t)
-          t += 1000
-          schedule(() => {
-            setBlingAction(null)
-            setItems((prev) => [...prev, action])
-          }, t)
-          t += 300
-        } else if (step.type === 'channel') {
-          const ch = step.to
-          t += 400
-          schedule(() => {
-            setActiveChannel(ch)
-            setItems([])
-            setIsTyping(false)
-            setBlingAction(null)
-          }, t)
-          t += 800
-        }
-      })
+      for (let ch = 1; ch < CHANNELS.length; ch++) {
+        t += 400
+        const chIdx = ch
+        schedule(() => {
+          setActiveChannel(chIdx)
+          setItems([])
+          setIsTyping(false)
+          setBlingAction(null)
+        }, t)
+        t += 800
+        t = playChannel(chIdx, t)
+      }
 
       schedule(runLoop, Math.max(t + 2000, LOOP_DURATION))
     }
@@ -269,17 +314,15 @@ export function MessengerScreen({ isActive, onAction }) {
 
   return (
     <div className="w-full h-full flex flex-col bg-white text-[11px] relative overflow-hidden">
-      {/* Channel tabs */}
-      <div className="pt-8 px-1 flex border-b border-gray-100 shrink-0">
+      {/* Channel strip stack */}
+      <div className="pt-7 shrink-0 border-b border-gray-100">
         {CHANNELS.map((ch, i) => (
-          <div key={ch.id} className="flex-1">
-            <ChannelTab channel={ch} isActive={activeChannel === i} offset={i} />
-          </div>
+          <ChannelStrip key={ch.id} channel={ch} isActive={activeChannel === i} />
         ))}
       </div>
 
       {/* Chat header */}
-      <div className="flex items-center gap-2 px-3 py-2 border-b border-gray-50 shrink-0">
+      <div className="flex items-center gap-2 px-3 py-1.5 border-b border-gray-50 shrink-0">
         <div
           className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
           style={{ background: 'linear-gradient(135deg, #4a6fc2, #3859a8)' }}
