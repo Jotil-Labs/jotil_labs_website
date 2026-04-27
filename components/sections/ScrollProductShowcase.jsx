@@ -13,10 +13,14 @@ gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const MESSENGER_INDEX = 1
 const MESSENGER_CHANNELS = 4
+const SPACE_INDEX = 3
+const SPACE_SCENES = 3
 const BASE_SCROLL = 1200
-const TOTAL_SCROLL = PRODUCT_SLIDES.reduce((sum, _, i) =>
-  sum + (i === MESSENGER_INDEX ? BASE_SCROLL * MESSENGER_CHANNELS : BASE_SCROLL), 0
-)
+const TOTAL_SCROLL = PRODUCT_SLIDES.reduce((sum, _, i) => {
+  if (i === MESSENGER_INDEX) return sum + BASE_SCROLL * MESSENGER_CHANNELS
+  if (i === SPACE_INDEX) return sum + BASE_SCROLL * SPACE_SCENES
+  return sum + BASE_SCROLL
+}, 0)
 
 function ProgressDots({ activeIndex, total }) {
   return (
@@ -65,6 +69,7 @@ export function ScrollProductShowcase() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const messengerProgressRef = useRef(0)
+  const spaceProgressRef = useRef(0)
 
   useGSAP(() => {
     const container = containerRef.current
@@ -130,6 +135,23 @@ export function ScrollProductShowcase() {
               messengerProgressRef.current = proxy.progress
             },
           })
+        } else if (i === SPACE_INDEX) {
+          const holdDur = 0.4 * SPACE_SCENES
+          const proxy = { progress: 0 }
+
+          tl.addLabel(`hold-${i}`)
+          for (let sc = 0; sc < SPACE_SCENES; sc++) {
+            tl.addLabel(`space-scene-${sc}`, `hold-${i}+=${(sc / SPACE_SCENES) * holdDur}`)
+          }
+
+          tl.to(proxy, {
+            progress: 1,
+            duration: holdDur,
+            ease: 'none',
+            onUpdate: () => {
+              spaceProgressRef.current = proxy.progress
+            },
+          })
         } else {
           tl.addLabel(`hold-${i}`)
           tl.to({}, { duration: 0.4 })
@@ -163,6 +185,10 @@ export function ScrollProductShowcase() {
         if (i === MESSENGER_INDEX) {
           for (let ch = 0; ch < MESSENGER_CHANNELS; ch++) {
             snapPoints.push(tl.labels[`channel-${ch}`] / totalDuration)
+          }
+        } else if (i === SPACE_INDEX) {
+          for (let sc = 0; sc < SPACE_SCENES; sc++) {
+            snapPoints.push(tl.labels[`space-scene-${sc}`] / totalDuration)
           }
         } else {
           snapPoints.push(tl.labels[`hold-${i}`] / totalDuration)
@@ -243,6 +269,7 @@ export function ScrollProductShowcase() {
             index={i}
             isActive={isMobile || activeIndex === i}
             messengerProgressRef={i === MESSENGER_INDEX ? messengerProgressRef : undefined}
+            spaceProgressRef={i === SPACE_INDEX ? spaceProgressRef : undefined}
           />
         ))}
         {!isMobile && (
