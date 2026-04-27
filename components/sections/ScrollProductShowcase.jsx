@@ -142,12 +142,13 @@ export function ScrollProductShowcase() {
         pin: true,
         start: 'top top',
         end: `+=${TOTAL_SCROLL}`,
-        scrub: 0.3,
+        scrub: 0.6,
         snap: {
           snapTo: snapPoints,
-          duration: { min: 0.3, max: 0.8 },
-          delay: 0.1,
+          duration: { min: 0.4, max: 0.9 },
+          delay: 0.3,
           ease: 'power2.inOut',
+          inertia: false,
         },
         animation: tl,
         onUpdate: (self) => {

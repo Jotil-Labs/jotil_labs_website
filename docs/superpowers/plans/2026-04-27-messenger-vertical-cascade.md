@@ -1,3 +1,71 @@
+# MessengerScreen Vertical Cascade Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Rewrite MessengerScreen with 4 vertically stacked channel layers (SMS, Web Chat, WhatsApp, Teams) that auto-cycle through separate conversations with bling actions and typing orb animations.
+
+**Architecture:** Single-file rewrite of MessengerScreen.jsx. Channel data (scripts, colors, icons) defined as constants at top. ChannelStrip component handles the stacked layer UI with Framer Motion layout animations. Chat components (ChatBubble, BlingAction, TypingOrb) follow the same patterns already established in ReceptionistScreen. Timer-based animation loop cycles through channels sequentially. Also a one-line update to cardData.js for floating cards.
+
+**Tech Stack:** React 19, Framer Motion, lucide-react, Logo component from `@/components/ui/Logo`
+
+---
+
+## File Map
+
+| File | Action | Responsibility |
+|------|--------|---------------|
+| `components/sections/showcase/screens/MessengerScreen.jsx` | Full rewrite | All messenger UI + animation logic |
+| `components/sections/showcase/cards/cardData.js` | Modify lines 9-13 | Update messenger floating cards |
+
+---
+
+### Task 1: Update floating card data
+
+**Files:**
+- Modify: `components/sections/showcase/cards/cardData.js:1,9-13`
+
+- [ ] **Step 1: Update imports and messenger card data**
+
+Replace the imports line and the messenger array in `cardData.js`:
+
+```jsx
+// Line 1 - replace entire import line:
+import { Calendar, MessageSquare, UserPlus, Bell, Ticket, UserCheck, Mail, Phone, BarChart3, Brain, Inbox, Camera, Route, Sparkles } from 'lucide-react'
+
+// Lines 9-13 - replace the messenger array:
+  messenger: [
+    { id: 'calendar', icon: Calendar, label: 'Thu 10:00 AM', sublabel: 'Booked', top: '-30px', right: '-60px', rotate: '4deg', depth: '-50px' },
+    { id: 'reminder', icon: Bell, label: 'Reminder set', sublabel: 'SMS 9:00 AM', bottom: '60px', right: '-65px', rotate: '-3deg', depth: '-30px' },
+    { id: 'ticket', icon: Ticket, label: 'Ticket #4821', sublabel: 'CRM', top: '80px', left: '-55px', rotate: '-5deg', depth: '-60px' },
+  ],
+```
+
+- [ ] **Step 2: Verify build**
+
+Run: `npm run build 2>&1 | tail -5`
+Expected: Build succeeds with no errors.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add components/sections/showcase/cards/cardData.js
+git commit -m "feat(messenger): update floating cards for vertical cascade channels"
+```
+
+---
+
+### Task 2: Write MessengerScreen channel data and constants
+
+**Files:**
+- Modify: `components/sections/showcase/screens/MessengerScreen.jsx` (replace entire file)
+
+This task writes the top portion of the file: imports, channel definitions, per-channel scripts, and timing constants. The component functions come in Tasks 3-5.
+
+- [ ] **Step 1: Write imports, channel data, and script arrays**
+
+Replace the entire contents of `MessengerScreen.jsx` with:
+
+```jsx
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
@@ -50,7 +118,29 @@ const ACTION_LEAD = 200
 const ACTION_DUR = 1000
 const ACTION_TAIL = 300
 const CHANNEL_SWITCH = 1200
+```
 
+This is just the data layer -- no components yet, so the file won't export anything. That's fine; we'll add components in the next tasks.
+
+- [ ] **Step 2: Commit**
+
+```bash
+git add components/sections/showcase/screens/MessengerScreen.jsx
+git commit -m "feat(messenger): add channel data, scripts, and timing constants"
+```
+
+---
+
+### Task 3: Write sub-components (ChannelStrip, ChatBubble, BlingAction, TypingOrb)
+
+**Files:**
+- Modify: `components/sections/showcase/screens/MessengerScreen.jsx` (append after constants)
+
+- [ ] **Step 1: Add ChannelStrip component**
+
+Append after the timing constants:
+
+```jsx
 function ChannelStrip({ channel, isActive }) {
   const Icon = channel.icon
   return (
@@ -99,7 +189,13 @@ function ChannelStrip({ channel, isActive }) {
     </motion.div>
   )
 }
+```
 
+- [ ] **Step 2: Add ChatBubble component**
+
+Append after ChannelStrip:
+
+```jsx
 function ChatBubble({ msg }) {
   const isUser = msg.role === 'user'
   return (
@@ -128,7 +224,13 @@ function ChatBubble({ msg }) {
     </motion.div>
   )
 }
+```
 
+- [ ] **Step 3: Add BlingAction component**
+
+Append after ChatBubble:
+
+```jsx
 function BlingAction({ action }) {
   const Icon = action.icon
   return (
@@ -180,7 +282,13 @@ function BlingAction({ action }) {
     </motion.div>
   )
 }
+```
 
+- [ ] **Step 4: Add TypingOrb component**
+
+Append after BlingAction:
+
+```jsx
 function TypingOrb() {
   return (
     <div className="flex justify-start mb-1.5">
@@ -211,7 +319,27 @@ function TypingOrb() {
     </div>
   )
 }
+```
 
+- [ ] **Step 5: Commit**
+
+```bash
+git add components/sections/showcase/screens/MessengerScreen.jsx
+git commit -m "feat(messenger): add ChannelStrip, ChatBubble, BlingAction, TypingOrb components"
+```
+
+---
+
+### Task 4: Write the main MessengerScreen component with animation loop
+
+**Files:**
+- Modify: `components/sections/showcase/screens/MessengerScreen.jsx` (append after sub-components)
+
+- [ ] **Step 1: Add the exported MessengerScreen component**
+
+Append at the end of the file:
+
+```jsx
 export function MessengerScreen({ isActive, onAction }) {
   const [items, setItems] = useState([])
   const [activeChannel, setActiveChannel] = useState(0)
@@ -424,3 +552,100 @@ export function MessengerScreen({ isActive, onAction }) {
     </div>
   )
 }
+```
+
+- [ ] **Step 2: Verify build**
+
+Run: `npm run build 2>&1 | tail -5`
+Expected: Build succeeds with no errors.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add components/sections/showcase/screens/MessengerScreen.jsx
+git commit -m "feat(messenger): vertical cascade layout with channel cycling and animation loop"
+```
+
+---
+
+### Task 5: Visual QA and final verification
+
+**Files:**
+- No file changes expected (fix anything found)
+
+- [ ] **Step 1: Start dev server and test**
+
+Run: `npm run dev`
+
+Open `http://localhost:3000` and scroll to the Messenger slide. Verify:
+1. Four channel strips visible at top, SMS active by default
+2. Conversation plays through with typing orb before each AI message
+3. Bling actions animate for calendar booking
+4. After SMS script completes, strips rearrange -- Web Chat becomes active
+5. Chat clears, new conversation starts
+6. Repeats for WhatsApp and Teams
+7. Loop resets to SMS after all 4 channels
+8. Bottom orb pulses during AI typing, quiet when idle
+9. Floating cards behind phone highlight when `onAction` fires
+
+- [ ] **Step 2: Test mobile viewport**
+
+In browser DevTools, toggle to mobile viewport (375px width). Verify:
+1. Phone mockup scales down cleanly
+2. Channel strips are still readable
+3. No overflow or clipping issues
+
+- [ ] **Step 3: Final commit if any fixes were needed**
+
+```bash
+git add -A
+git commit -m "fix(messenger): visual QA fixes"
+```
+
+Only run this step if fixes were made.
+
+---
+
+### Task 6: Push and create PR
+
+- [ ] **Step 1: Push branch**
+
+```bash
+git push -u origin feat/messenger-vertical-cascade
+```
+
+- [ ] **Step 2: Create PR**
+
+```bash
+gh pr create --title "Messenger vertical cascade with 4 channel layers" --body "$(cat <<'EOF'
+## Summary
+- Rewrite MessengerScreen with vertical cascade layout (Safari-style tab stacking)
+- 4 channels (SMS, Web Chat, WhatsApp, Teams) as stacked header strips
+- Active channel expands to full chat card, inactive strips compress above
+- Each channel has its own conversation with business actions (calendar, reminder, reschedule, CRM ticket)
+- JotilLabs logo/orb throughout, typing animation with pulsing orb
+- Bling action animations matching ReceptionistScreen pattern
+- Updated floating card data for messenger
+
+Closes design spec: docs/superpowers/specs/2026-04-27-messenger-vertical-cascade-design.md
+
+## Test plan
+- [ ] Verify 4 channel strips visible at top of messenger screen
+- [ ] Verify active channel has colored left border and active dot
+- [ ] Verify channel switch animates strips smoothly (~600ms)
+- [ ] Verify each channel plays its own conversation
+- [ ] Verify typing orb animates before each AI message
+- [ ] Verify bling actions fire for calendar, reminder, reschedule, ticket
+- [ ] Verify floating cards highlight when actions fire
+- [ ] Verify bottom orb pulses during AI typing
+- [ ] Verify loop resets after all 4 channels complete
+- [ ] Test mobile viewport for responsive scaling
+EOF
+)"
+```
+
+- [ ] **Step 3: Merge**
+
+```bash
+gh pr merge --squash --delete-branch
+```
