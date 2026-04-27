@@ -52,9 +52,9 @@ const CONVERSATIONS = [
 
 const STACK_OFFSETS = [
   { x: 0, y: 0, scale: 1, opacity: 1 },
-  { x: 14, y: -22, scale: 0.94, opacity: 0.65 },
-  { x: 26, y: -42, scale: 0.88, opacity: 0.4 },
-  { x: 36, y: -58, scale: 0.83, opacity: 0.25 },
+  { x: 18, y: -28, scale: 0.93, opacity: 0.7 },
+  { x: 34, y: -52, scale: 0.86, opacity: 0.45 },
+  { x: 48, y: -72, scale: 0.8, opacity: 0.25 },
 ]
 
 function lerp(a, b, t) {
@@ -139,6 +139,28 @@ function ChannelCard({ channel, conversation }) {
           </div>
           <div className="max-w-[78%] px-2.5 py-1.5 text-[10px] leading-[1.4] rounded-xl rounded-bl-sm text-gray-900 bg-[#f1f3f5]">
             {conversation.finalMsg}
+          </div>
+        </div>
+
+        <div className="flex items-end gap-1.5">
+          <div
+            className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+            style={{ background: 'linear-gradient(135deg, #4a6fc2, #3859a8)' }}
+          >
+            <Logo size={9} tone="on-dark" animate={false} />
+          </div>
+          <div className="flex items-center gap-[3px] px-2.5 py-2 rounded-xl rounded-bl-sm bg-[#f1f3f5]">
+            {[0, 1, 2].map((dot) => (
+              <div
+                key={dot}
+                className="w-[5px] h-[5px] rounded-full"
+                style={{
+                  backgroundColor: channel.color,
+                  opacity: 0.5,
+                  animation: `typing-dot 1.4s ease-in-out ${dot * 0.2}s infinite`,
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>
