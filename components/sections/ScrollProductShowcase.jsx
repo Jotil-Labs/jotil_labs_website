@@ -11,22 +11,27 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-const SCROLL_PER_PRODUCT = 1500
+const SCROLL_PER_PRODUCT = 1200
 const TOTAL_SCROLL = PRODUCT_SLIDES.length * SCROLL_PER_PRODUCT
 
 function ProgressDots({ activeIndex, total }) {
   return (
-    <div className="absolute right-6 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col gap-3">
+    <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col gap-3">
       {Array.from({ length: total }).map((_, i) => (
         <button
           key={i}
           aria-label={`Go to ${PRODUCT_SLIDES[i].badge}`}
-          className="w-2.5 h-2.5 rounded-full transition-all duration-300"
-          style={{
-            backgroundColor: i === activeIndex ? '#3859a8' : 'rgba(56, 89, 168, 0.2)',
-            transform: i === activeIndex ? 'scale(1.3)' : 'scale(1)',
-          }}
-        />
+          className="group relative w-3 h-3 flex items-center justify-center"
+        >
+          <span
+            className="absolute inset-0 rounded-full transition-all duration-500 ease-out"
+            style={{
+              backgroundColor: i === activeIndex ? '#3859a8' : 'rgba(56, 89, 168, 0.15)',
+              transform: i === activeIndex ? 'scale(1)' : 'scale(0.65)',
+              boxShadow: i === activeIndex ? '0 0 10px rgba(56,89,168,0.25)' : 'none',
+            }}
+          />
+        </button>
       ))}
     </div>
   )
@@ -62,44 +67,71 @@ export function ScrollProductShowcase() {
 
     const mm = gsap.matchMedia()
 
-    // Desktop: full scroll-locked experience
     mm.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
       const slides = container.querySelectorAll('.product-slide')
       const tl = gsap.timeline()
 
-      gsap.set(slides, { opacity: 0 })
-      slides.forEach(slide => {
-        gsap.set(slide.querySelectorAll('.slide-text > *'), { x: -80, opacity: 0 })
-        const deviceEl = slide.querySelector('[data-device]')
-        if (deviceEl) gsap.set(deviceEl, { x: 80, opacity: 0, scale: 0.95 })
+      slides.forEach((slide, i) => {
+        if (i === 0) {
+          gsap.set(slide, { opacity: 1, visibility: 'visible' })
+          gsap.set(slide.querySelectorAll('.slide-text > *'), { y: 0, opacity: 1 })
+          const deviceEl = slide.querySelector('[data-device]')
+          if (deviceEl) gsap.set(deviceEl, { y: 0, opacity: 1, scale: 1 })
+        } else {
+          gsap.set(slide, { opacity: 0, visibility: 'hidden' })
+          gsap.set(slide.querySelectorAll('.slide-text > *'), { y: 50, opacity: 0 })
+          const deviceEl = slide.querySelector('[data-device]')
+          if (deviceEl) gsap.set(deviceEl, { y: 40, opacity: 0, scale: 0.9 })
+        }
       })
 
       slides.forEach((slide, i) => {
         const textEls = slide.querySelectorAll('.slide-text > *')
         const deviceEl = slide.querySelector('[data-device]')
 
-        tl.addLabel(`enter-${i}`)
-        tl.to(slide, { opacity: 1, duration: 0.01 }, `enter-${i}`)
-        tl.to(textEls, { x: 0, opacity: 1, stagger: 0.02, duration: 0.15, ease: 'power2.out' }, `enter-${i}`)
-        if (deviceEl) {
-          tl.to(deviceEl, { x: 0, opacity: 1, scale: 1, duration: 0.18, ease: 'power2.out' }, `enter-${i}+=0.03`)
+        if (i > 0) {
+          tl.addLabel(`enter-${i}`)
+          tl.set(slide, { visibility: 'visible' }, `enter-${i}`)
+          tl.to(slide, { opacity: 1, duration: 0.12, ease: 'power1.in' }, `enter-${i}`)
+          tl.to(textEls, {
+            y: 0, opacity: 1,
+            stagger: 0.04,
+            duration: 0.25,
+            ease: 'power3.out',
+          }, `enter-${i}+=0.04`)
+          if (deviceEl) {
+            tl.to(deviceEl, {
+              y: 0, opacity: 1, scale: 1,
+              duration: 0.3,
+              ease: 'power3.out',
+            }, `enter-${i}+=0.08`)
+          }
         }
 
         tl.addLabel(`hold-${i}`)
-        tl.to({}, { duration: 0.35 })
+        tl.to({}, { duration: 0.4 })
 
         if (i < slides.length - 1) {
           tl.addLabel(`exit-${i}`)
-          tl.to(textEls, { x: -120, opacity: 0, stagger: 0.01, duration: 0.15, ease: 'power2.in' }, `exit-${i}`)
+          tl.to(textEls, {
+            y: -35, opacity: 0,
+            stagger: 0.02,
+            duration: 0.2,
+            ease: 'power2.inOut',
+          }, `exit-${i}`)
           if (deviceEl) {
-            tl.to(deviceEl, { x: 120, opacity: 0, scale: 0.95, duration: 0.15, ease: 'power2.in' }, `exit-${i}`)
+            tl.to(deviceEl, {
+              y: -25, opacity: 0, scale: 1.04,
+              duration: 0.22,
+              ease: 'power2.inOut',
+            }, `exit-${i}`)
           }
-          tl.to(slide, { opacity: 0, duration: 0.01 }, `exit-${i}+=0.15`)
-          tl.to({}, { duration: 0.08 })
+          tl.to(slide, { opacity: 0, duration: 0.08, ease: 'power1.out' }, `exit-${i}+=0.18`)
+          tl.set(slide, { visibility: 'hidden' }, `exit-${i}+=0.26`)
+          tl.to({}, { duration: 0.04 })
         }
       })
 
-      // Snap points must be calculated AFTER full timeline is built
       const totalDuration = tl.duration()
       const snapPoints = Array.from(slides).map((_, i) =>
         tl.labels[`hold-${i}`] / totalDuration
@@ -110,12 +142,12 @@ export function ScrollProductShowcase() {
         pin: true,
         start: 'top top',
         end: `+=${TOTAL_SCROLL}`,
-        scrub: 1,
+        scrub: 0.3,
         snap: {
           snapTo: snapPoints,
-          duration: { min: 0.2, max: 0.6 },
-          delay: 0.05,
-          ease: 'power1.inOut',
+          duration: { min: 0.3, max: 0.8 },
+          delay: 0.1,
+          ease: 'power2.inOut',
         },
         animation: tl,
         onUpdate: (self) => {
@@ -134,27 +166,25 @@ export function ScrollProductShowcase() {
       })
     })
 
-    // Mobile: no pin, show slides in normal flow
     mm.add('(max-width: 767px)', () => {
       setIsMobile(true)
       const slides = container.querySelectorAll('.product-slide')
-      gsap.set(slides, { position: 'relative', opacity: 1 })
+      gsap.set(slides, { position: 'relative', opacity: 1, visibility: 'visible' })
       slides.forEach(slide => {
-        gsap.set(slide.querySelectorAll('.slide-text > *'), { x: 0, opacity: 1 })
+        gsap.set(slide.querySelectorAll('.slide-text > *'), { y: 0, opacity: 1 })
         const deviceEl = slide.querySelector('[data-device]')
-        if (deviceEl) gsap.set(deviceEl, { x: 0, opacity: 1, scale: 1 })
+        if (deviceEl) gsap.set(deviceEl, { y: 0, opacity: 1, scale: 1 })
       })
       return () => setIsMobile(false)
     })
 
-    // Reduced motion fallback (any screen size)
     mm.add('(prefers-reduced-motion: reduce)', () => {
       const slides = container.querySelectorAll('.product-slide')
-      gsap.set(slides, { position: 'relative', opacity: 1 })
+      gsap.set(slides, { position: 'relative', opacity: 1, visibility: 'visible' })
       slides.forEach(slide => {
-        gsap.set(slide.querySelectorAll('.slide-text > *'), { x: 0, opacity: 1 })
+        gsap.set(slide.querySelectorAll('.slide-text > *'), { y: 0, opacity: 1 })
         const deviceEl = slide.querySelector('[data-device]')
-        if (deviceEl) gsap.set(deviceEl, { x: 0, opacity: 1, scale: 1 })
+        if (deviceEl) gsap.set(deviceEl, { y: 0, opacity: 1, scale: 1 })
       })
     })
   }, { scope: containerRef })
