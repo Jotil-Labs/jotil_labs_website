@@ -31,7 +31,7 @@ const TILT = {
   monitor: 'none',
 }
 
-export function SlideDevice({ slug, deviceType, isActive, messengerProgressRef }) {
+export function SlideDevice({ slug, deviceType, isActive, messengerProgressRef, spaceProgressRef }) {
   const Device = DEVICES[deviceType]
   const Screen = SCREENS[slug]
   const vibrate = deviceType === 'phone' && slug === 'receptionist'
@@ -93,7 +93,11 @@ export function SlideDevice({ slug, deviceType, isActive, messengerProgressRef }
             </div>
           ) : (
             <Device vibrate={vibrate && isActive} glass>
-              <Screen isActive={isActive} onAction={onAction} />
+              <Screen
+                isActive={isActive}
+                onAction={onAction}
+                progressRef={spaceProgressRef}
+              />
             </Device>
           )}
         </div>
