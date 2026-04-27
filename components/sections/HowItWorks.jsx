@@ -1,8 +1,9 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { forwardRef, useRef } from 'react'
 import { Plug, SlidersHorizontal, Zap } from 'lucide-react'
 import { AnimatedSection } from '@/components/ui/AnimatedSection'
+import { useGsapScroll } from '@/lib/useGsapScroll'
 
 const STEPS = [
   {
@@ -10,182 +11,255 @@ const STEPS = [
     icon: Plug,
     title: 'Connect',
     desc: 'Link your phone numbers, website, and tools. No code required.',
+    detail:
+      'Bring your existing systems online in minutes. Twilio, HubSpot, Calendar, your CRM. Everything plugs in without engineering.',
     color: '#3B7BF2',
-    colorAlpha: 'rgba(59,123,242,0.10)',
   },
   {
     number: '02',
     icon: SlidersHorizontal,
     title: 'Configure',
     desc: 'Tell the AI about your business. Train it on your FAQs and workflows.',
+    detail:
+      'Drop in your knowledge base, set escalation rules, choose a voice. The AI learns how you talk and how you handle every kind of customer.',
     color: '#6366F1',
-    colorAlpha: 'rgba(99,102,241,0.10)',
   },
   {
     number: '03',
     icon: Zap,
     title: 'Automate',
     desc: 'Go live. Your AI handles calls, chats, and follow-ups around the clock.',
+    detail:
+      'Every call answered. Every lead followed up. Every conversation logged. You watch it run while your team focuses on closing.',
     color: '#0EA5E9',
-    colorAlpha: 'rgba(14,165,233,0.10)',
   },
 ]
 
 export function HowItWorks() {
+  const stageRef = useRef(null)
+  const railFillRef = useRef(null)
+  const stepRefs = useRef([])
+  const setStepRef = el => {
+    if (el && !stepRefs.current.includes(el)) stepRefs.current.push(el)
+  }
+
+  const scopeRef = useGsapScroll(({ gsap, ScrollTrigger }) => {
+    const mm = gsap.matchMedia()
+
+    mm.add('(min-width: 1024px)', () => {
+      const stage = stageRef.current
+      const fill = railFillRef.current
+      if (!stage || !fill) return
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: stage,
+          start: 'top top',
+          end: '+=90%',
+          pin: true,
+          scrub: 0.6,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: self => {
+            const idx = Math.min(
+              STEPS.length - 1,
+              Math.floor(self.progress * STEPS.length * 0.999),
+            )
+            stepRefs.current.forEach((el, i) => {
+              if (!el) return
+              const dot = el.querySelector('.step-dot')
+              const card = el.querySelector('.step-card')
+              const isReached = i <= idx
+              const isCurrent = i === idx
+              const accent = STEPS[i].color
+              if (dot) {
+                dot.style.background = isReached ? accent : 'rgba(15,17,41,0.18)'
+                dot.style.transform = `translateX(-50%) scale(${isReached ? 1.15 : 1})`
+                dot.style.boxShadow = isReached
+                  ? `0 0 0 6px #fff, 0 0 24px ${accent}66`
+                  : '0 0 0 6px #fff'
+              }
+              if (card) {
+                card.style.transform = isCurrent ? 'translateY(-6px)' : 'translateY(0)'
+                card.style.boxShadow = isCurrent
+                  ? `0 24px 60px -24px ${accent}55, 0 4px 16px rgba(15,17,41,0.05)`
+                  : '0 8px 24px -16px rgba(15,17,41,0.12)'
+                card.style.borderColor = isCurrent ? `${accent}55` : 'rgba(15,17,41,0.06)'
+              }
+            })
+          },
+        },
+      })
+
+      tl.fromTo(fill, { scaleX: 0 }, { scaleX: 1, ease: 'none' })
+    })
+  }, [])
+
   return (
-    <section className="py-24" style={{ background: '#FFFFFF' }}>
-      <div className="max-w-7xl mx-auto px-6">
-
-        {/* Heading */}
-        <AnimatedSection className="text-center mb-16">
-          <p className="badge mx-auto mb-4 w-fit">How it works</p>
-          <h2
-            className="text-[clamp(1.9rem,3.5vw,2.75rem)] font-extrabold tracking-[-0.04em] text-text mb-4"
-            style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
-          >
-            Up and running in{' '}
-            <span className="text-gradient">hours, not months</span>
-          </h2>
-          <p
-            className="text-base text-text-secondary leading-relaxed max-w-md mx-auto"
-            style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}
-          >
-            Three straightforward steps stand between you and a fully automated
-            communication layer.
-          </p>
-        </AnimatedSection>
-
-        {/* Steps */}
-        <div className="relative flex flex-col lg:flex-row gap-0 lg:gap-0 items-stretch">
-
-          {STEPS.map((step, i) => (
-            <div key={step.number} className="flex-1 flex flex-col lg:flex-row items-stretch">
-
-              {/* Step card */}
-              <AnimatedSection delay={i * 0.12} className="flex-1">
-                <StepCard step={step} index={i} />
-              </AnimatedSection>
-
-              {/* Connector — visible between steps on desktop */}
-              {i < STEPS.length - 1 && (
-                <div className="hidden lg:flex items-center justify-center w-14 shrink-0 self-center">
-                  <Connector />
-                </div>
-              )}
-
-              {/* Vertical connector for mobile */}
-              {i < STEPS.length - 1 && (
-                <div className="lg:hidden flex justify-center my-3">
-                  <div
-                    className="w-px h-10"
-                    style={{
-                      background: 'linear-gradient(to bottom, rgba(59,123,242,0.25), rgba(99,102,241,0.15))',
-                    }}
-                  />
-                </div>
-              )}
-
-            </div>
-          ))}
+    <section
+      ref={scopeRef}
+      className="relative"
+      style={{ background: '#FFFFFF' }}
+      aria-label="How it works"
+    >
+      <div ref={stageRef} className="relative lg:min-h-screen lg:flex lg:flex-col lg:justify-center">
+        {/* Background flourish */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div
+            className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full"
+            style={{
+              background:
+                'radial-gradient(circle, rgba(59,123,242,0.08), transparent 70%)',
+              filter: 'blur(80px)',
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                'linear-gradient(rgba(59,123,242,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(59,123,242,0.035) 1px, transparent 1px)',
+              backgroundSize: '64px 64px',
+              maskImage:
+                'radial-gradient(ellipse at center, rgba(0,0,0,0.7), transparent 75%)',
+            }}
+          />
         </div>
 
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-16 w-full">
+          {/* Heading */}
+          <AnimatedSection className="text-center max-w-2xl mx-auto">
+            <p className="badge mx-auto mb-4 w-fit">How it works</p>
+            <h2
+              className="text-[clamp(1.9rem,3.5vw,2.75rem)] font-extrabold tracking-[-0.04em] text-text mb-3"
+              style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
+            >
+              Up and running in{' '}
+              <span className="text-gradient">hours, not months</span>
+            </h2>
+            <p
+              className="text-base text-text-secondary leading-relaxed"
+              style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}
+            >
+              Three straightforward steps. Scroll to follow the path.
+            </p>
+          </AnimatedSection>
+
+          {/* Steps grid */}
+          <div className="relative mt-12 lg:mt-20">
+            <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 lg:gap-x-8 lg:pt-8 w-full">
+              {/* Continuous rail (desktop only) — sits above the cards, aligned with dot centers */}
+              <div
+                className="hidden lg:block absolute h-[2px] overflow-hidden"
+                style={{
+                  top: '23px',
+                  left: 'calc(100% / 6 - 10.667px)',
+                  right: 'calc(100% / 6 - 10.667px)',
+                  background: 'rgba(15,17,41,0.07)',
+                }}
+                aria-hidden="true"
+              >
+                <div
+                  ref={railFillRef}
+                  className="absolute inset-0 origin-left"
+                  style={{
+                    background:
+                      'linear-gradient(90deg, #3B7BF2, #6366F1, #0EA5E9)',
+                    transform: 'scaleX(0)',
+                  }}
+                />
+              </div>
+
+              {STEPS.map(step => (
+                <StepPanel
+                  key={step.number}
+                  step={step}
+                  ref={setStepRef}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )
 }
 
-function StepCard({ step, index }) {
-  const { number, icon: Icon, title, desc, color, colorAlpha } = step
+const StepPanel = forwardRef(function StepPanel({ step }, ref) {
+  const { number, icon: Icon, title, desc, detail, color } = step
 
   return (
-    <div
-      className="h-full p-8 rounded-[20px] flex flex-col gap-5 transition-all duration-300"
-      style={{
-        background: '#FAFBFD',
-        border: '1px solid rgba(0,0,0,0.05)',
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.background = '#FFFFFF'
-        e.currentTarget.style.boxShadow = `0 12px 40px ${color}18, 0 4px 12px rgba(0,0,0,0.04)`
-        e.currentTarget.style.borderColor = `${color}22`
-        e.currentTarget.style.transform = 'translateY(-2px)'
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.background = '#FAFBFD'
-        e.currentTarget.style.boxShadow = 'none'
-        e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'
-        e.currentTarget.style.transform = 'translateY(0)'
-      }}
-    >
-      {/* Step number */}
-      <span
-        className="text-[3.5rem] font-extrabold leading-none select-none"
-        style={{
-          fontFamily: 'var(--font-jetbrains), JetBrains Mono, monospace',
-          background: `linear-gradient(135deg, ${color}, ${color}55)`,
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          letterSpacing: '-0.04em',
-        }}
-      >
-        {number}
-      </span>
-
-      {/* Icon */}
-      <div
-        className="w-11 h-11 rounded-[12px] flex items-center justify-center"
-        style={{ background: colorAlpha, border: `1px solid ${color}22` }}
-      >
-        <Icon size={20} strokeWidth={1.75} style={{ color }} />
-      </div>
-
-      {/* Title */}
-      <div>
-        <h3
-          className="text-lg font-bold text-text mb-2 tracking-[-0.025em]"
-          style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
-        >
-          {title}
-        </h3>
-        <p
-          className="text-sm text-text-secondary leading-relaxed"
-          style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}
-        >
-          {desc}
-        </p>
-      </div>
-    </div>
-  )
-}
-
-function Connector() {
-  return (
-    <div className="flex flex-col items-center gap-1">
-      {/* Dashed line */}
-      {Array.from({ length: 5 }).map((_, i) => (
+      <div ref={ref} className="relative">
+        {/* Rail dot — sits above the card on the rail line */}
         <div
-          key={i}
-          className="rounded-full"
+          className="step-dot hidden lg:block absolute z-10 w-4 h-4 rounded-full"
           style={{
-            width: 3,
-            height: 3,
-            background: i % 2 === 0
-              ? 'rgba(59,123,242,0.30)'
-              : 'rgba(99,102,241,0.15)',
+            top: '-16px',
+            left: '50%',
+            background: 'rgba(15,17,41,0.18)',
+            boxShadow: '0 0 0 6px #fff',
+            transform: 'translateX(-50%) scale(1)',
+            transition: 'background-color 400ms ease, transform 400ms cubic-bezier(0.22,1,0.36,1), box-shadow 400ms ease',
           }}
+          aria-hidden="true"
         />
-      ))}
-      {/* Arrow tip */}
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-        <path
-          d="M2 2L8 5L2 8"
-          stroke="rgba(59,123,242,0.35)"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+
+        <div
+          className="step-card relative h-full p-7 lg:p-8 rounded-3xl flex flex-col gap-5"
+          style={{
+            background: '#FFFFFF',
+            border: '1px solid rgba(15,17,41,0.06)',
+            boxShadow: '0 8px 24px -16px rgba(15,17,41,0.12)',
+            transition: 'transform 500ms cubic-bezier(0.22,1,0.36,1), box-shadow 500ms ease, border-color 500ms ease',
+          }}
+        >
+          {/* Top row */}
+          <div className="flex items-center justify-between">
+            <span
+              className="text-[3.25rem] font-extrabold leading-none select-none"
+              style={{
+                fontFamily: 'var(--font-jetbrains), JetBrains Mono, monospace',
+                background: `linear-gradient(135deg, ${color}, ${color}55)`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                letterSpacing: '-0.04em',
+              }}
+            >
+              {number}
+            </span>
+            <div
+              className="w-12 h-12 rounded-[14px] flex items-center justify-center"
+              style={{
+                background: `${color}12`,
+                border: `1px solid ${color}26`,
+              }}
+            >
+              <Icon size={20} strokeWidth={1.75} style={{ color }} />
+            </div>
+          </div>
+
+          {/* Body */}
+          <div>
+            <h3
+              className="text-xl font-bold text-text mb-2 tracking-[-0.025em]"
+              style={{ fontFamily: 'var(--font-outfit), Outfit, sans-serif' }}
+            >
+              {title}
+            </h3>
+            <p
+              className="text-sm text-text-secondary leading-relaxed mb-3"
+              style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}
+            >
+              {desc}
+            </p>
+            <p
+              className="hidden lg:block text-[13px] text-text-secondary/85 leading-relaxed"
+              style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}
+            >
+              {detail}
+            </p>
+        </div>
+      </div>
     </div>
   )
-}
+})
