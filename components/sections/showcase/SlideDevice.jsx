@@ -31,7 +31,7 @@ const TILT = {
   monitor: 'none',
 }
 
-export function SlideDevice({ slug, deviceType, isActive }) {
+export function SlideDevice({ slug, deviceType, isActive, messengerProgressRef }) {
   const Device = DEVICES[deviceType]
   const Screen = SCREENS[slug]
   const vibrate = deviceType === 'phone' && slug === 'receptionist'
@@ -50,6 +50,8 @@ export function SlideDevice({ slug, deviceType, isActive }) {
     }, 1800)
   }, [])
 
+  const isMessenger = slug === 'messenger'
+
   return (
     <div
       className="relative flex justify-center items-center scale-[0.72] md:scale-100 origin-center"
@@ -59,7 +61,6 @@ export function SlideDevice({ slug, deviceType, isActive }) {
       }}
       data-device
     >
-      {/* 3D scene container -- everything inside shares the same 3D space */}
       <div
         className="relative"
         style={{
@@ -67,14 +68,34 @@ export function SlideDevice({ slug, deviceType, isActive }) {
           transform: TILT[deviceType],
         }}
       >
-        {/* Floating cards at different Z depths (behind the phone) */}
         <FloatingCards slug={slug} highlightedCards={highlightedCards} />
 
-        {/* Device at z=0 (front layer) */}
         <div className="relative" style={{ transform: 'translateZ(0px)' }}>
-          <Device vibrate={vibrate && isActive} glass>
-            <Screen isActive={isActive} onAction={onAction} />
-          </Device>
+          {isMessenger ? (
+            <div className="relative" style={{ width: 320, height: 660 }}>
+              <Device glass>
+                <div className="w-full h-full bg-gray-50/50" />
+              </Device>
+              <div
+                className="absolute"
+                style={{
+                  top: 10, left: 10,
+                  width: 300, height: 640,
+                  overflow: 'visible',
+                }}
+              >
+                <Screen
+                  isActive={isActive}
+                  onAction={onAction}
+                  progressRef={messengerProgressRef}
+                />
+              </div>
+            </div>
+          ) : (
+            <Device vibrate={vibrate && isActive} glass>
+              <Screen isActive={isActive} onAction={onAction} />
+            </Device>
+          )}
         </div>
       </div>
     </div>

@@ -11,8 +11,12 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-const SCROLL_PER_PRODUCT = 1200
-const TOTAL_SCROLL = PRODUCT_SLIDES.length * SCROLL_PER_PRODUCT
+const MESSENGER_INDEX = 1
+const MESSENGER_CHANNELS = 4
+const BASE_SCROLL = 1200
+const TOTAL_SCROLL = PRODUCT_SLIDES.reduce((sum, _, i) =>
+  sum + (i === MESSENGER_INDEX ? BASE_SCROLL * MESSENGER_CHANNELS : BASE_SCROLL), 0
+)
 
 function ProgressDots({ activeIndex, total }) {
   return (
@@ -60,6 +64,7 @@ export function ScrollProductShowcase() {
   const containerRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
+  const messengerProgressRef = useRef(0)
 
   useGSAP(() => {
     const container = containerRef.current
@@ -108,8 +113,27 @@ export function ScrollProductShowcase() {
           }
         }
 
-        tl.addLabel(`hold-${i}`)
-        tl.to({}, { duration: 0.4 })
+        if (i === MESSENGER_INDEX) {
+          const holdDur = 0.4 * MESSENGER_CHANNELS
+          const proxy = { progress: 0 }
+
+          tl.addLabel(`hold-${i}`)
+          for (let ch = 0; ch < MESSENGER_CHANNELS; ch++) {
+            tl.addLabel(`channel-${ch}`, `hold-${i}+=${(ch / MESSENGER_CHANNELS) * holdDur}`)
+          }
+
+          tl.to(proxy, {
+            progress: 1,
+            duration: holdDur,
+            ease: 'none',
+            onUpdate: () => {
+              messengerProgressRef.current = proxy.progress
+            },
+          })
+        } else {
+          tl.addLabel(`hold-${i}`)
+          tl.to({}, { duration: 0.4 })
+        }
 
         if (i < slides.length - 1) {
           tl.addLabel(`exit-${i}`)
@@ -133,9 +157,22 @@ export function ScrollProductShowcase() {
       })
 
       const totalDuration = tl.duration()
-      const snapPoints = Array.from(slides).map((_, i) =>
-        tl.labels[`hold-${i}`] / totalDuration
-      )
+
+      const snapPoints = []
+      slides.forEach((_, i) => {
+        if (i === MESSENGER_INDEX) {
+          for (let ch = 0; ch < MESSENGER_CHANNELS; ch++) {
+            snapPoints.push(tl.labels[`channel-${ch}`] / totalDuration)
+          }
+        } else {
+          snapPoints.push(tl.labels[`hold-${i}`] / totalDuration)
+        }
+      })
+
+      const slideHoldPoints = []
+      slides.forEach((_, i) => {
+        slideHoldPoints.push(tl.labels[`hold-${i}`] / totalDuration)
+      })
 
       ScrollTrigger.create({
         trigger: container,
@@ -155,8 +192,8 @@ export function ScrollProductShowcase() {
           const progress = self.progress
           let closest = 0
           let minDist = Infinity
-          for (let i = 0; i < snapPoints.length; i++) {
-            const dist = Math.abs(progress - snapPoints[i])
+          for (let i = 0; i < slideHoldPoints.length; i++) {
+            const dist = Math.abs(progress - slideHoldPoints[i])
             if (dist < minDist) {
               minDist = dist
               closest = i
@@ -205,6 +242,7 @@ export function ScrollProductShowcase() {
             product={product}
             index={i}
             isActive={isMobile || activeIndex === i}
+            messengerProgressRef={i === MESSENGER_INDEX ? messengerProgressRef : undefined}
           />
         ))}
         {!isMobile && (

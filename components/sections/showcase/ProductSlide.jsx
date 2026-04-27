@@ -1,7 +1,7 @@
 import { SlideText } from './SlideText'
 import { SlideDevice } from './SlideDevice'
 
-export function ProductSlide({ product, index, isActive }) {
+export function ProductSlide({ product, index, isActive, messengerProgressRef }) {
   const isEven = index % 2 === 1
 
   return (
@@ -21,6 +21,7 @@ export function ProductSlide({ product, index, isActive }) {
             slug={product.slug}
             deviceType={product.deviceType}
             isActive={isActive}
+            messengerProgressRef={messengerProgressRef}
           />
         </div>
       </div>
