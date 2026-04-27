@@ -13,47 +13,51 @@ export function FloatingCards({ slug, highlightedCards = new Set() }) {
         const Icon = card.icon
         const isHighlighted = highlightedCards.has(card.id)
 
-        const posStyle = {}
-        if (card.top) posStyle.top = card.top
-        if (card.bottom) posStyle.bottom = card.bottom
-        if (card.left) posStyle.left = card.left
-        if (card.right) posStyle.right = card.right
-
         return (
           <motion.div
             key={card.id}
-            className="absolute z-0 hidden md:flex"
+            className="absolute z-0 hidden md:block"
             style={{
-              ...posStyle,
-              transform: `rotate(${card.rotate})`,
+              top: card.top,
+              bottom: card.bottom,
+              left: card.left,
+              right: card.right,
+              transform: `rotate(${card.rotate}) translateZ(${card.depth || '-40px'})`,
+              transformStyle: 'preserve-3d',
             }}
             animate={{
-              opacity: isHighlighted ? 1 : 0.4,
-              scale: isHighlighted ? 1.05 : 0.95,
+              opacity: isHighlighted ? 1 : 0.5,
+              scale: isHighlighted ? 1.08 : 0.96,
             }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             <div
-              className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl"
+              className="rounded-2xl px-4 py-3 flex items-center gap-3"
               style={{
-                background: 'rgba(255, 255, 255, 0.92)',
-                backdropFilter: 'blur(8px)',
-                border: `1px solid ${isHighlighted ? 'rgba(56, 89, 168, 0.25)' : 'rgba(0,0,0,0.06)'}`,
+                minWidth: 140,
+                background: isHighlighted
+                  ? 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,242,255,0.9) 100%)'
+                  : 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(245,245,250,0.65) 100%)',
+                backdropFilter: 'blur(16px) saturate(1.3)',
+                WebkitBackdropFilter: 'blur(16px) saturate(1.3)',
+                border: `1px solid ${isHighlighted ? 'rgba(56, 89, 168, 0.2)' : 'rgba(255,255,255,0.6)'}`,
                 boxShadow: isHighlighted
-                  ? '0 4px 20px rgba(56, 89, 168, 0.15), 0 2px 8px rgba(0,0,0,0.06)'
-                  : '0 2px 8px rgba(0,0,0,0.04)',
-                transition: 'border-color 0.3s, box-shadow 0.3s',
+                  ? '0 8px 32px rgba(56, 89, 168, 0.12), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)'
+                  : '0 4px 20px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.02), inset 0 1px 0 rgba(255,255,255,0.6)',
+                transition: 'border-color 0.4s, box-shadow 0.4s, background 0.4s',
               }}
             >
               <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
                 style={{
-                  background: isHighlighted ? 'rgba(56, 89, 168, 0.1)' : 'rgba(0,0,0,0.03)',
+                  background: isHighlighted
+                    ? 'linear-gradient(135deg, rgba(56, 89, 168, 0.12), rgba(56, 89, 168, 0.06))'
+                    : 'rgba(0,0,0,0.03)',
                   transition: 'background 0.3s',
                 }}
               >
                 <Icon
-                  size={15}
+                  size={16}
                   strokeWidth={1.5}
                   style={{
                     color: isHighlighted ? '#3859a8' : '#9ca3af',
@@ -62,8 +66,8 @@ export function FloatingCards({ slug, highlightedCards = new Set() }) {
                 />
               </div>
               <div>
-                <p className="text-[10px] font-semibold text-gray-800 leading-tight">{card.label}</p>
-                <p className="text-[9px] text-gray-400 leading-tight">{card.sublabel}</p>
+                <p className="text-[11px] font-semibold text-gray-800 leading-tight">{card.label}</p>
+                <p className="text-[9px] text-gray-400 leading-tight mt-0.5">{card.sublabel}</p>
               </div>
             </div>
           </motion.div>

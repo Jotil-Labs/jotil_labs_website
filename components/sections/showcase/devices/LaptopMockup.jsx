@@ -1,17 +1,35 @@
 export function LaptopMockup({ children, glass = false }) {
+  const borderStyle = glass
+    ? '2px solid rgba(255, 255, 255, 0.5)'
+    : '2px solid #1a1a1e'
+
+  const shellBg = glass
+    ? 'linear-gradient(160deg, rgba(255,255,255,0.8) 0%, rgba(240,240,245,0.6) 50%, rgba(255,255,255,0.7) 100%)'
+    : undefined
+
   return (
     <div className="flex flex-col items-center">
       {/* Screen */}
       <div
         className="w-[480px] rounded-t-xl overflow-hidden relative"
         style={{
-          border: glass ? '2px solid rgba(26, 26, 30, 0.5)' : '2px solid #1a1a1e',
+          border: borderStyle,
           borderBottom: 'none',
-          boxShadow: [
-            '0 4px 12px rgba(15,17,41,0.12)',
-            '0 12px 32px rgba(15,17,41,0.18)',
-            '0 32px 64px rgba(15,17,41,0.14)',
-          ].join(', '),
+          background: glass ? shellBg : undefined,
+          backdropFilter: glass ? 'blur(20px) saturate(1.2)' : undefined,
+          WebkitBackdropFilter: glass ? 'blur(20px) saturate(1.2)' : undefined,
+          boxShadow: glass
+            ? [
+                'inset 0 1px 0 rgba(255,255,255,0.8)',
+                '0 4px 16px rgba(0,0,0,0.05)',
+                '0 12px 40px rgba(0,0,0,0.06)',
+                '0 32px 80px rgba(0,0,0,0.05)',
+              ].join(', ')
+            : [
+                '0 4px 12px rgba(15,17,41,0.12)',
+                '0 12px 32px rgba(15,17,41,0.18)',
+                '0 32px 64px rgba(15,17,41,0.14)',
+              ].join(', '),
         }}
       >
         {/* Browser chrome */}
@@ -19,7 +37,7 @@ export function LaptopMockup({ children, glass = false }) {
           className="flex items-center gap-2 px-4 py-2.5 border-b border-black/5"
           style={{
             background: glass
-              ? 'rgba(246, 246, 246, 0.75)'
+              ? 'rgba(250, 250, 252, 0.7)'
               : 'linear-gradient(180deg, #f8f8f8, #f0f0f0)',
             backdropFilter: glass ? 'blur(12px)' : 'none',
             WebkitBackdropFilter: glass ? 'blur(12px)' : 'none',
@@ -45,13 +63,19 @@ export function LaptopMockup({ children, glass = false }) {
         className="w-[520px] h-[14px] rounded-b-lg"
         style={{
           background: glass
-            ? 'linear-gradient(180deg, rgba(200,200,204,0.7), rgba(176,176,180,0.7))'
+            ? 'linear-gradient(180deg, rgba(230,230,235,0.7), rgba(210,210,218,0.6))'
             : 'linear-gradient(180deg, #c8c8cc, #b0b0b4)',
-          boxShadow: '0 2px 6px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.3)',
-          backdropFilter: glass ? 'blur(8px)' : 'none',
-          WebkitBackdropFilter: glass ? 'blur(8px)' : 'none',
+          boxShadow: glass
+            ? '0 2px 6px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6)'
+            : '0 2px 6px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.3)',
+          backdropFilter: glass ? 'blur(12px)' : 'none',
+          WebkitBackdropFilter: glass ? 'blur(12px)' : 'none',
         }}
       />
+      {/* Glass sheen overlay */}
+      {glass && (
+        <div className="absolute inset-0 rounded-t-xl pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 30%, transparent 70%, rgba(255,255,255,0.1) 100%)' }} />
+      )}
     </div>
   )
 }

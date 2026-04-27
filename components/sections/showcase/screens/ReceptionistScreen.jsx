@@ -13,14 +13,14 @@ const CONVERSATION = [
 ]
 
 const ACTIONS = [
-  { id: 'calendar', label: 'Appointment booked', delay: 7400 },
-  { id: 'sms', label: 'Confirmation SMS sent', delay: 8000 },
-  { id: 'crm', label: 'Contact saved to CRM', delay: 8600 },
+  { id: 'calendar', label: 'Appointment booked', delay: 8800 },
+  { id: 'sms', label: 'Confirmation SMS sent', delay: 9400 },
+  { id: 'crm', label: 'Contact saved to CRM', delay: 10000 },
 ]
 
 const FINAL_MSG = { role: 'ai', text: "All set! You'll get a confirmation shortly." }
 
-const LOOP_DURATION = 11000
+const LOOP_DURATION = 13000
 
 function RingingPhase() {
   return (
@@ -29,7 +29,7 @@ function RingingPhase() {
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className="absolute inset-0 rounded-full border-2 border-white/20"
+            className="absolute rounded-full border-2 border-white/20"
             style={{
               animation: `ring-expand 2s ease-out ${i * 0.5}s infinite`,
               width: 72,
@@ -70,7 +70,57 @@ function RingingPhase() {
   )
 }
 
-function ActiveCallPhase({ visibleLines, actions, aiSpeaking }) {
+function WaveformBubble({ isAI }) {
+  const barCount = 5
+  return (
+    <div className={`flex mb-1.5 ${isAI ? 'justify-start' : 'justify-end'}`}>
+      <div
+        className={`px-3 py-2.5 ${
+          isAI ? 'rounded-xl rounded-bl-sm bg-[#f1f3f5]' : 'rounded-xl rounded-br-sm'
+        }`}
+        style={isAI ? {} : { backgroundColor: '#3859a8' }}
+      >
+        <div className="flex items-center gap-[3px] h-[14px]">
+          {Array.from({ length: barCount }).map((_, i) => (
+            <div
+              key={i}
+              className="w-[3px] rounded-full"
+              style={{
+                backgroundColor: isAI ? '#3859a8' : 'rgba(255,255,255,0.8)',
+                animation: `wave-bar 0.8s ease-in-out ${i * 0.1}s infinite`,
+                height: 14,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ChatBubble({ line, index }) {
+  const isAI = line.role === 'ai'
+  return (
+    <motion.div
+      key={`msg-${index}`}
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
+      className={`flex mb-1.5 ${isAI ? 'justify-start' : 'justify-end'}`}
+    >
+      <div
+        className={`max-w-[80%] px-2.5 py-1.5 text-[10.5px] leading-[1.4] ${
+          isAI ? 'rounded-xl rounded-bl-sm bg-[#f1f3f5] text-gray-900' : 'rounded-xl rounded-br-sm text-white'
+        }`}
+        style={isAI ? {} : { backgroundColor: '#3859a8' }}
+      >
+        {line.text}
+      </div>
+    </motion.div>
+  )
+}
+
+function ActiveCallPhase({ messages, speakingRole, actions }) {
   return (
     <div className="w-full h-full flex flex-col bg-white text-[11px]">
       {/* Call header */}
@@ -86,8 +136,8 @@ function ActiveCallPhase({ visibleLines, actions, aiSpeaking }) {
               style={{
                 height: 16,
                 backgroundColor: 'rgba(255,255,255,0.7)',
-                animation: aiSpeaking ? `wave-bar 1.2s ease-in-out ${i * 0.12}s infinite` : 'none',
-                transform: aiSpeaking ? undefined : 'scaleY(0.3)',
+                animation: speakingRole ? `wave-bar 1.2s ease-in-out ${i * 0.12}s infinite` : 'none',
+                transform: speakingRole ? undefined : 'scaleY(0.3)',
                 transition: 'transform 0.3s',
               }}
             />
@@ -95,30 +145,25 @@ function ActiveCallPhase({ visibleLines, actions, aiSpeaking }) {
         </div>
       </div>
 
-      {/* Chat bubbles */}
+      {/* Chat area */}
       <div className="flex-1 px-3 py-2 overflow-hidden">
-        <AnimatePresence>
-          {CONVERSATION.slice(0, visibleLines).map((line, i) => {
-            const isAI = line.role === 'ai'
-            return (
-              <motion.div
-                key={`msg-${i}`}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-                className={`flex mb-1.5 ${isAI ? 'justify-start' : 'justify-end'}`}
-              >
-                <div
-                  className={`max-w-[80%] px-2.5 py-1.5 text-[10.5px] leading-[1.4] ${
-                    isAI ? 'rounded-xl rounded-bl-sm bg-[#f1f3f5] text-gray-900' : 'rounded-xl rounded-br-sm text-white'
-                  }`}
-                  style={isAI ? {} : { backgroundColor: '#3859a8' }}
-                >
-                  {line.text}
-                </div>
-              </motion.div>
-            )
-          })}
+        <AnimatePresence mode="popLayout">
+          {messages.map((msg, i) => (
+            <ChatBubble key={`bubble-${i}`} line={msg} index={i} />
+          ))}
+
+          {/* Active waveform for whoever is currently speaking */}
+          {speakingRole && (
+            <motion.div
+              key={`wave-${speakingRole}-${messages.length}`}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+            >
+              <WaveformBubble isAI={speakingRole === 'ai'} />
+            </motion.div>
+          )}
 
           {/* Action indicators */}
           {actions.map((action) => (
@@ -140,9 +185,9 @@ function ActiveCallPhase({ visibleLines, actions, aiSpeaking }) {
           {actions.length === ACTIONS.length && (
             <motion.div
               key="final"
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.3 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
               className="flex justify-start mb-1.5"
             >
               <div className="max-w-[80%] px-2.5 py-1.5 text-[10.5px] leading-[1.4] rounded-xl rounded-bl-sm bg-[#f1f3f5] text-gray-900">
@@ -158,17 +203,17 @@ function ActiveCallPhase({ visibleLines, actions, aiSpeaking }) {
 
 export function ReceptionistScreen({ isActive, onAction }) {
   const [phase, setPhase] = useState('ring')
-  const [visibleLines, setVisibleLines] = useState(0)
+  const [messages, setMessages] = useState([])
+  const [speakingRole, setSpeakingRole] = useState(null)
   const [firedActions, setFiredActions] = useState([])
-  const [aiSpeaking, setAiSpeaking] = useState(false)
   const loopRef = useRef(null)
 
   useEffect(() => {
     if (!isActive) {
       setPhase('ring')
-      setVisibleLines(0)
+      setMessages([])
+      setSpeakingRole(null)
       setFiredActions([])
-      setAiSpeaking(false)
       if (loopRef.current) loopRef.current.forEach(clearTimeout)
       return
     }
@@ -182,20 +227,30 @@ export function ReceptionistScreen({ isActive, onAction }) {
 
     const runLoop = () => {
       setPhase('ring')
-      setVisibleLines(0)
+      setMessages([])
+      setSpeakingRole(null)
       setFiredActions([])
-      setAiSpeaking(false)
 
       schedule(() => setPhase('connect'), 2200)
       schedule(() => setPhase('active'), 3000)
 
-      schedule(() => { setAiSpeaking(true) }, 3000)
-      schedule(() => { setVisibleLines(1); setAiSpeaking(false) }, 3600)
-      schedule(() => setVisibleLines(2), 4200)
-      schedule(() => { setAiSpeaking(true) }, 4800)
-      schedule(() => { setVisibleLines(3); setAiSpeaking(false) }, 5400)
-      schedule(() => setVisibleLines(4), 6600)
+      // Message 1: AI speaks (waveform first, then text)
+      schedule(() => setSpeakingRole('ai'), 3000)
+      schedule(() => { setSpeakingRole(null); setMessages([CONVERSATION[0]]) }, 3800)
 
+      // Message 2: Caller speaks
+      schedule(() => setSpeakingRole('caller'), 4200)
+      schedule(() => { setSpeakingRole(null); setMessages([CONVERSATION[0], CONVERSATION[1]]) }, 5000)
+
+      // Message 3: AI speaks
+      schedule(() => setSpeakingRole('ai'), 5400)
+      schedule(() => { setSpeakingRole(null); setMessages([CONVERSATION[0], CONVERSATION[1], CONVERSATION[2]]) }, 6400)
+
+      // Message 4: Caller speaks
+      schedule(() => setSpeakingRole('caller'), 6800)
+      schedule(() => { setSpeakingRole(null); setMessages(CONVERSATION.slice(0, 4)) }, 7600)
+
+      // Actions
       ACTIONS.forEach((action) => {
         schedule(() => {
           setFiredActions((prev) => [...prev, action])
@@ -233,9 +288,9 @@ export function ReceptionistScreen({ isActive, onAction }) {
           transition={{ duration: 0.3 }}
         >
           <ActiveCallPhase
-            visibleLines={visibleLines}
+            messages={messages}
+            speakingRole={speakingRole}
             actions={firedActions}
-            aiSpeaking={aiSpeaking}
           />
         </motion.div>
       )}

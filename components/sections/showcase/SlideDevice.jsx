@@ -26,9 +26,9 @@ const DEVICES = {
 }
 
 const TILT = {
-  phone: 'perspective(1200px) rotateY(-8deg) rotateX(4deg)',
-  laptop: 'perspective(1400px) rotateY(-6deg) rotateX(3deg)',
-  monitor: 'perspective(1400px) rotateY(-5deg) rotateX(2deg)',
+  phone: 'rotateY(-8deg) rotateX(4deg)',
+  laptop: 'rotateY(-6deg) rotateX(3deg)',
+  monitor: 'rotateY(-5deg) rotateX(2deg)',
 }
 
 export function SlideDevice({ slug, deviceType, isActive }) {
@@ -53,18 +53,29 @@ export function SlideDevice({ slug, deviceType, isActive }) {
   return (
     <div
       className="relative flex justify-center items-center scale-[0.85] md:scale-100 origin-center"
-      style={{ transformStyle: 'preserve-3d' }}
+      style={{
+        perspective: '1200px',
+        perspectiveOrigin: '50% 50%',
+      }}
       data-device
     >
-      <FloatingCards slug={slug} highlightedCards={highlightedCards} />
-
+      {/* 3D scene container -- everything inside shares the same 3D space */}
       <div
-        className="relative z-10 will-change-transform"
-        style={{ transform: TILT[deviceType] }}
+        className="relative"
+        style={{
+          transformStyle: 'preserve-3d',
+          transform: TILT[deviceType],
+        }}
       >
-        <Device vibrate={vibrate && isActive} glass>
-          <Screen isActive={isActive} onAction={onAction} />
-        </Device>
+        {/* Floating cards at different Z depths (behind the phone) */}
+        <FloatingCards slug={slug} highlightedCards={highlightedCards} />
+
+        {/* Device at z=0 (front layer) */}
+        <div className="relative" style={{ transform: 'translateZ(0px)' }}>
+          <Device vibrate={vibrate && isActive} glass>
+            <Screen isActive={isActive} onAction={onAction} />
+          </Device>
+        </div>
       </div>
     </div>
   )
