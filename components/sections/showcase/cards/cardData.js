@@ -1,4 +1,4 @@
-import { Calendar, MessageSquare, UserPlus, MessageCircle, Users, UserCheck, Mail, Phone, BarChart3, Brain, Inbox, Camera, Route, Sparkles } from 'lucide-react'
+import { Calendar, MessageSquare, UserPlus, Bell, Ticket, UserCheck, Mail, Phone, BarChart3, Brain, Inbox, Camera, Route, Sparkles } from 'lucide-react'
 
 export const FLOATING_CARDS = {
   receptionist: [
@@ -7,9 +7,9 @@ export const FLOATING_CARDS = {
     { id: 'crm', icon: UserPlus, label: 'Sarah Mitchell', sublabel: 'Added to CRM', top: '80px', left: '-55px', rotate: '-5deg', depth: '-60px' },
   ],
   messenger: [
-    { id: 'whatsapp', icon: MessageCircle, label: 'New message', sublabel: 'WhatsApp', top: '-30px', right: '-60px', rotate: '4deg', depth: '-50px' },
-    { id: 'teams', icon: Users, label: 'Channel synced', sublabel: 'Teams', bottom: '60px', right: '-65px', rotate: '-3deg', depth: '-30px' },
-    { id: 'handoff', icon: UserCheck, label: 'Escalated', sublabel: 'Human agent', top: '80px', left: '-55px', rotate: '-5deg', depth: '-60px' },
+    { id: 'calendar', icon: Calendar, label: 'Thu 10:00 AM', sublabel: 'Booked', top: '-30px', right: '-60px', rotate: '4deg', depth: '-50px' },
+    { id: 'reminder', icon: Bell, label: 'Reminder set', sublabel: 'SMS 9:00 AM', bottom: '60px', right: '-65px', rotate: '-3deg', depth: '-30px' },
+    { id: 'ticket', icon: Ticket, label: 'Ticket #4821', sublabel: 'CRM', top: '80px', left: '-55px', rotate: '-5deg', depth: '-60px' },
   ],
   outreach: [
     { id: 'email', icon: Mail, label: 'Drip sent', sublabel: 'Email sequence', top: '-30px', right: '-60px', rotate: '4deg', depth: '-50px' },
