@@ -181,28 +181,24 @@ function BlingAction({ action }) {
   )
 }
 
-function TypingOrb() {
+function TypingIndicator() {
   return (
     <div className="flex justify-start mb-1.5">
-      <div className="flex items-center gap-1.5">
+      <div className="flex items-end gap-1.5">
         <div
-          className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
-          style={{
-            background: 'linear-gradient(135deg, #4a6fc2, #3859a8, #2a4688)',
-            animation: 'orb-pulse 1.2s ease-in-out infinite',
-          }}
+          className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+          style={{ background: 'linear-gradient(135deg, #4a6fc2, #3859a8)' }}
         >
-          <Logo size={12} tone="on-dark" animate={false} />
+          <Logo size={9} tone="on-dark" animate={false} />
         </div>
-        <div className="flex items-center gap-[2px] px-2 py-1.5 rounded-xl rounded-bl-sm bg-[#f1f3f5]">
-          {Array.from({ length: 4 }).map((_, i) => (
+        <div className="flex items-center gap-[3px] px-3 py-2 rounded-xl rounded-bl-sm bg-[#f1f3f5]">
+          {[0, 1, 2].map((i) => (
             <div
               key={i}
-              className="w-[2.5px] rounded-full"
+              className="w-[5px] h-[5px] rounded-full"
               style={{
-                height: 12,
-                backgroundColor: '#3859a8',
-                animation: `wave-bar 0.7s ease-in-out ${i * 0.08}s infinite`,
+                backgroundColor: '#9ca3af',
+                animation: `typing-dot 1.2s ease-in-out ${i * 0.15}s infinite`,
               }}
             />
           ))}
@@ -367,7 +363,7 @@ export function MessengerScreen({ isActive, onAction }) {
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.2 }}
             >
-              <TypingOrb />
+              <TypingIndicator />
             </motion.div>
           )}
 
@@ -384,37 +380,21 @@ export function MessengerScreen({ isActive, onAction }) {
         </AnimatePresence>
       </div>
 
-      {/* Bottom orb + input */}
+      {/* Bottom input bar */}
       <div className="shrink-0 px-3 py-2 border-t border-gray-100 flex items-center gap-2">
-        <div className="relative">
-          {isTyping && [0, 1].map((i) => (
-            <div
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                width: 28, height: 28,
-                top: '50%', left: '50%',
-                marginTop: -14, marginLeft: -14,
-                border: '1px solid rgba(56,89,168,0.12)',
-                animation: `ring-expand 1.4s ease-out ${i * 0.35}s infinite`,
-              }}
-            />
-          ))}
-          <div
-            className="w-7 h-7 rounded-full flex items-center justify-center"
-            style={{
-              background: isTyping
-                ? 'linear-gradient(135deg, #22D3EE, #3859a8, #6366F1)'
-                : 'linear-gradient(135deg, #4a6fc2, #3859a8)',
-              boxShadow: isTyping
-                ? '0 0 12px rgba(34,211,238,0.4), 0 0 20px rgba(56,89,168,0.2)'
-                : '0 2px 6px rgba(56,89,168,0.2)',
-              animation: isTyping ? 'orb-pulse 1s ease-in-out infinite' : 'none',
-              transition: 'background 0.4s, box-shadow 0.4s',
-            }}
-          >
-            <Logo size={11} tone="on-dark" animate={false} />
-          </div>
+        <div
+          className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
+          style={{
+            background: isTyping
+              ? 'linear-gradient(135deg, #4a6fc2, #3859a8, #6366F1)'
+              : 'linear-gradient(135deg, #4a6fc2, #3859a8)',
+            boxShadow: isTyping
+              ? '0 0 8px rgba(56,89,168,0.3)'
+              : '0 2px 6px rgba(56,89,168,0.15)',
+            transition: 'background 0.4s, box-shadow 0.4s',
+          }}
+        >
+          <Logo size={11} tone="on-dark" animate={false} />
         </div>
         <div className="flex-1 bg-gray-50 rounded-full px-3 py-1.5 text-[10px] text-gray-400">Type a message...</div>
         <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: '#3859a8' }}>
