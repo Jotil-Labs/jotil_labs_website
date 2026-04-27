@@ -1,11 +1,11 @@
-export function MonitorMockup({ children }) {
+export function MonitorMockup({ children, glass = false }) {
   return (
     <div className="flex flex-col items-center">
       {/* Screen */}
       <div
         className="w-[460px] rounded-xl overflow-hidden relative"
         style={{
-          border: '2px solid #1a1a1e',
+          border: glass ? '2px solid rgba(26, 26, 30, 0.5)' : '2px solid #1a1a1e',
           boxShadow: [
             'inset 0 0 0 1px rgba(255,255,255,0.04)',
             '0 4px 12px rgba(15,17,41,0.12)',
@@ -17,17 +17,17 @@ export function MonitorMockup({ children }) {
         <div className="bg-white aspect-[16/10] overflow-hidden relative">
           {children}
         </div>
-        {/* Chin with logo dot */}
+        {/* Chin */}
         <div
           className="h-[6px] flex items-center justify-center"
-          style={{ background: 'linear-gradient(180deg, #2a2a2e, #1a1a1e)' }}
+          style={{ background: glass ? 'rgba(42, 42, 46, 0.6)' : 'linear-gradient(180deg, #2a2a2e, #1a1a1e)' }}
         />
       </div>
       {/* Stand neck */}
       <div
         className="w-[60px] h-[28px]"
         style={{
-          background: 'linear-gradient(90deg, #c0c0c4, #d4d4d8, #c0c0c4)',
+          background: glass ? 'rgba(192, 192, 196, 0.6)' : 'linear-gradient(90deg, #c0c0c4, #d4d4d8, #c0c0c4)',
         }}
       />
       {/* Stand base */}

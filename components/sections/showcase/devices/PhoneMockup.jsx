@@ -1,4 +1,4 @@
-export function PhoneMockup({ children, vibrate = false }) {
+export function PhoneMockup({ children, vibrate = false, glass = false }) {
   return (
     <div className="relative" style={{ perspective: 1200 }}>
       {/* Side buttons - left */}
@@ -23,9 +23,13 @@ export function PhoneMockup({ children, vibrate = false }) {
       <div
         className={`w-[280px] h-[580px] rounded-[46px] p-[10px] relative ${vibrate ? 'animate-phone-vibrate' : ''}`}
         style={{
-          background: 'linear-gradient(160deg, #2c2c30 0%, #1c1c20 40%, #0e0e12 100%)',
+          background: glass
+            ? 'rgba(20, 20, 24, 0.55)'
+            : 'linear-gradient(160deg, #2c2c30 0%, #1c1c20 40%, #0e0e12 100%)',
+          backdropFilter: glass ? 'blur(12px)' : 'none',
+          WebkitBackdropFilter: glass ? 'blur(12px)' : 'none',
           boxShadow: [
-            'inset 0 1px 0 rgba(255,255,255,0.06)',
+            'inset 0 1px 0 rgba(255,255,255,0.08)',
             'inset 0 -1px 0 rgba(0,0,0,0.3)',
             '0 1px 2px rgba(0,0,0,0.15)',
             '0 4px 12px rgba(15,17,41,0.15)',
@@ -37,7 +41,7 @@ export function PhoneMockup({ children, vibrate = false }) {
         {/* Top edge highlight */}
         <div
           className="absolute top-0 left-[25%] right-[25%] h-px rounded-full"
-          style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent)' }}
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)' }}
         />
 
         {/* Dynamic Island */}
@@ -47,7 +51,7 @@ export function PhoneMockup({ children, vibrate = false }) {
             width: 92,
             height: 26,
             borderRadius: 13,
-            background: '#0a0a0e',
+            background: glass ? 'rgba(10,10,14,0.8)' : '#0a0a0e',
           }}
         >
           <div

@@ -1,78 +1,79 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Send } from 'lucide-react'
 
 const channels = ['Web', 'SMS', 'WhatsApp', 'Teams']
 
-const chatMessages = [
-  { role: 'user', text: 'Hi, do you offer same-day service?' },
-  { role: 'ai', text: 'Yes! We have same-day availability today. Would you like me to check open slots for your area?' },
-  { role: 'user', text: "Yes please, I'm in downtown Lehi" },
-  { role: 'typing', text: '' },
-  { role: 'ai', text: "Great news! We have a 2:30 PM and a 4:00 PM slot available today. Want me to book one?" },
+const MESSAGES = [
+  { role: 'user', text: 'Do you offer same-day service?' },
+  { role: 'ai', text: 'Yes! I have 2:30 PM and 4:00 PM today.' },
   { role: 'user', text: '2:30 works. Book it!' },
+  { role: 'ai', text: "Booked! I'll send confirmation to WhatsApp." },
 ]
+
+const LOOP_DURATION = 10000
 
 function JAvatar({ size = 18 }) {
   return (
     <div
       className="rounded-full flex items-center justify-center text-white font-bold shrink-0"
-      style={{
-        width: size,
-        height: size,
-        background: 'linear-gradient(135deg, #3859a8, #2a4688)',
-        fontSize: size * 0.5,
-      }}
+      style={{ width: size, height: size, background: 'linear-gradient(135deg, #3859a8, #2a4688)', fontSize: size * 0.5 }}
     >
       J
     </div>
   )
 }
 
-export function MessengerScreen({ isActive }) {
+export function MessengerScreen({ isActive, onAction }) {
   const [visibleMessages, setVisibleMessages] = useState(0)
-  const [activeTab, setActiveTab] = useState(0)
-  const [showWhatsAppBanner, setShowWhatsAppBanner] = useState(false)
+  const [showWhatsApp, setShowWhatsApp] = useState(false)
+  const loopRef = useRef(null)
 
   useEffect(() => {
     if (!isActive) {
       setVisibleMessages(0)
-      setShowWhatsAppBanner(false)
+      setShowWhatsApp(false)
+      if (loopRef.current) loopRef.current.forEach(clearTimeout)
       return
     }
 
-    let msgIndex = 0
-    const timer = setInterval(() => {
-      msgIndex++
-      if (msgIndex >= chatMessages.length) {
-        setVisibleMessages(chatMessages.length)
-        clearInterval(timer)
-      } else {
-        setVisibleMessages(msgIndex)
-      }
-    }, 600)
+    const timers = []
+    const schedule = (fn, ms) => { const id = setTimeout(fn, ms); timers.push(id); return id }
 
-    setVisibleMessages(1)
+    const runLoop = () => {
+      setVisibleMessages(0)
+      setShowWhatsApp(false)
 
-    return () => clearInterval(timer)
-  }, [isActive])
+      schedule(() => setVisibleMessages(1), 800)
+      schedule(() => setVisibleMessages(2), 2000)
+      schedule(() => setVisibleMessages(3), 3200)
 
-  // WhatsApp notification after message 3 appears
-  useEffect(() => {
-    if (visibleMessages === 3) {
-      setShowWhatsAppBanner(true)
-      const hideTimer = setTimeout(() => setShowWhatsAppBanner(false), 2000)
-      return () => clearTimeout(hideTimer)
+      schedule(() => {
+        setShowWhatsApp(true)
+        if (onAction) onAction('whatsapp')
+      }, 4000)
+      schedule(() => setShowWhatsApp(false), 5500)
+
+      schedule(() => setVisibleMessages(4), 5000)
+
+      schedule(() => { if (onAction) onAction('teams') }, 6500)
+      schedule(() => { if (onAction) onAction('handoff') }, 7500)
+
+      schedule(runLoop, LOOP_DURATION)
     }
-  }, [visibleMessages])
+
+    runLoop()
+    loopRef.current = timers
+    return () => timers.forEach(clearTimeout)
+  }, [isActive, onAction])
 
   return (
     <div className="w-full h-full flex flex-col bg-white text-[11px] relative overflow-hidden">
-      {/* WhatsApp notification banner */}
+      {/* WhatsApp banner */}
       <AnimatePresence>
-        {showWhatsAppBanner && (
+        {showWhatsApp && (
           <motion.div
             initial={{ y: -40 }}
             animate={{ y: 0 }}
@@ -89,19 +90,9 @@ export function MessengerScreen({ isActive }) {
       {/* Channel tabs */}
       <div className="pt-8 px-2 flex border-b border-gray-100 shrink-0">
         {channels.map((ch, i) => (
-          <button
-            key={ch}
-            onClick={() => setActiveTab(i)}
-            className="flex-1 pb-1.5 text-center text-[9px] font-medium relative"
-            style={{ color: i === activeTab ? '#3859a8' : '#999' }}
-          >
+          <button key={ch} className="flex-1 pb-1.5 text-center text-[9px] font-medium relative" style={{ color: i === 0 ? '#3859a8' : '#999' }}>
             {ch}
-            {i === activeTab && (
-              <span
-                className="absolute bottom-0 left-1/4 right-1/4 h-[2px] rounded-full"
-                style={{ backgroundColor: '#3859a8' }}
-              />
-            )}
+            {i === 0 && <span className="absolute bottom-0 left-1/4 right-1/4 h-[2px] rounded-full" style={{ backgroundColor: '#3859a8' }} />}
           </button>
         ))}
       </div>
@@ -118,36 +109,10 @@ export function MessengerScreen({ isActive }) {
         </div>
       </div>
 
-      {/* Chat messages */}
+      {/* Messages */}
       <div className="flex-1 px-3 py-2 overflow-hidden space-y-2">
         <AnimatePresence>
-          {chatMessages.slice(0, visibleMessages).map((msg, i) => {
-            if (msg.role === 'typing') {
-              return (
-                <motion.div
-                  key={`typing-${i}`}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="flex items-end gap-1.5"
-                >
-                  <JAvatar size={16} />
-                  <div className="bg-[#f1f3f5] rounded-xl rounded-bl-sm px-3 py-2 flex gap-1">
-                    {[0, 1, 2].map((d) => (
-                      <span
-                        key={d}
-                        className="w-1.5 h-1.5 rounded-full bg-gray-400"
-                        style={{
-                          animation: `typing-dot 1.2s ease-in-out ${d * 0.2}s infinite`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-              )
-            }
-
+          {MESSAGES.slice(0, visibleMessages).map((msg, i) => {
             const isUser = msg.role === 'user'
             return (
               <motion.div
@@ -160,13 +125,9 @@ export function MessengerScreen({ isActive }) {
                 {!isUser && <JAvatar size={16} />}
                 <div
                   className={`max-w-[75%] px-2.5 py-1.5 text-[10.5px] leading-[1.4] ${
-                    isUser
-                      ? 'rounded-xl rounded-br-sm text-white'
-                      : 'rounded-xl rounded-bl-sm text-gray-900'
+                    isUser ? 'rounded-xl rounded-br-sm text-white' : 'rounded-xl rounded-bl-sm text-gray-900'
                   }`}
-                  style={{
-                    backgroundColor: isUser ? '#3859a8' : '#f1f3f5',
-                  }}
+                  style={{ backgroundColor: isUser ? '#3859a8' : '#f1f3f5' }}
                 >
                   {msg.text}
                 </div>
@@ -178,13 +139,8 @@ export function MessengerScreen({ isActive }) {
 
       {/* Input bar */}
       <div className="px-3 py-2 border-t border-gray-100 flex items-center gap-2 shrink-0">
-        <div className="flex-1 bg-gray-50 rounded-full px-3 py-1.5 text-[10px] text-gray-400">
-          Type a message...
-        </div>
-        <div
-          className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
-          style={{ backgroundColor: '#3859a8' }}
-        >
+        <div className="flex-1 bg-gray-50 rounded-full px-3 py-1.5 text-[10px] text-gray-400">Type a message...</div>
+        <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: '#3859a8' }}>
           <Send className="w-3.5 h-3.5 text-white" strokeWidth={1.5} />
         </div>
       </div>
