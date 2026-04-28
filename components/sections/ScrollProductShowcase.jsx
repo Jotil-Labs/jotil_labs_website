@@ -83,15 +83,15 @@ export function ScrollProductShowcase() {
 
       slides.forEach((slide, i) => {
         if (i === 0) {
-          gsap.set(slide, { opacity: 1, visibility: 'visible' })
+          gsap.set(slide, { opacity: 1, pointerEvents: 'auto' })
           gsap.set(slide.querySelectorAll('.slide-text > *'), { y: 0, opacity: 1 })
           const deviceEl = slide.querySelector('[data-device]')
           if (deviceEl) gsap.set(deviceEl, { y: 0, opacity: 1, scale: 1 })
         } else {
-          gsap.set(slide, { opacity: 0, visibility: 'hidden' })
-          gsap.set(slide.querySelectorAll('.slide-text > *'), { y: 50, opacity: 0 })
+          gsap.set(slide, { opacity: 0, pointerEvents: 'none' })
+          gsap.set(slide.querySelectorAll('.slide-text > *'), { y: 40, opacity: 0 })
           const deviceEl = slide.querySelector('[data-device]')
-          if (deviceEl) gsap.set(deviceEl, { y: 40, opacity: 0, scale: 0.9 })
+          if (deviceEl) gsap.set(deviceEl, { y: 32, opacity: 0, scale: 0.92 })
         }
       })
 
@@ -101,32 +101,28 @@ export function ScrollProductShowcase() {
 
         if (i > 0) {
           tl.addLabel(`enter-${i}`)
-          tl.set(slide, { visibility: 'visible' }, `enter-${i}`)
-          tl.to(slide, { opacity: 1, duration: 0.12, ease: 'power1.in' }, `enter-${i}`)
+          tl.set(slide, { pointerEvents: 'auto' }, `enter-${i}`)
+          tl.to(slide, { opacity: 1, duration: 0.4, ease: 'power2.out' }, `enter-${i}`)
           tl.to(textEls, {
             y: 0, opacity: 1,
-            stagger: 0.04,
-            duration: 0.25,
+            stagger: 0.05,
+            duration: 0.5,
             ease: 'power3.out',
-          }, `enter-${i}+=0.04`)
+          }, `enter-${i}`)
           if (deviceEl) {
             tl.to(deviceEl, {
               y: 0, opacity: 1, scale: 1,
-              duration: 0.3,
+              duration: 0.55,
               ease: 'power3.out',
-            }, `enter-${i}+=0.08`)
+            }, `enter-${i}`)
           }
         }
 
         if (i === MESSENGER_INDEX) {
-          const holdDur = 0.4 * MESSENGER_CHANNELS
+          const holdDur = 0.5 * MESSENGER_CHANNELS
           const proxy = { progress: 0 }
 
           tl.addLabel(`hold-${i}`)
-          for (let ch = 0; ch < MESSENGER_CHANNELS; ch++) {
-            tl.addLabel(`channel-${ch}`, `hold-${i}+=${(ch / MESSENGER_CHANNELS) * holdDur}`)
-          }
-
           tl.to(proxy, {
             progress: 1,
             duration: holdDur,
@@ -136,14 +132,10 @@ export function ScrollProductShowcase() {
             },
           })
         } else if (i === SPACE_INDEX) {
-          const holdDur = 0.4 * SPACE_SCENES
+          const holdDur = 0.5 * SPACE_SCENES
           const proxy = { progress: 0 }
 
           tl.addLabel(`hold-${i}`)
-          for (let sc = 0; sc < SPACE_SCENES; sc++) {
-            tl.addLabel(`space-scene-${sc}`, `hold-${i}+=${(sc / SPACE_SCENES) * holdDur}`)
-          }
-
           tl.to(proxy, {
             progress: 1,
             duration: holdDur,
@@ -154,46 +146,30 @@ export function ScrollProductShowcase() {
           })
         } else {
           tl.addLabel(`hold-${i}`)
-          tl.to({}, { duration: 0.4 })
+          tl.to({}, { duration: 0.5 })
         }
 
         if (i < slides.length - 1) {
           tl.addLabel(`exit-${i}`)
           tl.to(textEls, {
-            y: -35, opacity: 0,
-            stagger: 0.02,
-            duration: 0.2,
+            y: -30, opacity: 0,
+            stagger: 0.03,
+            duration: 0.4,
             ease: 'power2.inOut',
           }, `exit-${i}`)
           if (deviceEl) {
             tl.to(deviceEl, {
-              y: -25, opacity: 0, scale: 1.04,
-              duration: 0.22,
+              y: -22, opacity: 0, scale: 1.03,
+              duration: 0.45,
               ease: 'power2.inOut',
             }, `exit-${i}`)
           }
-          tl.to(slide, { opacity: 0, duration: 0.08, ease: 'power1.out' }, `exit-${i}+=0.18`)
-          tl.set(slide, { visibility: 'hidden' }, `exit-${i}+=0.26`)
-          tl.to({}, { duration: 0.04 })
+          tl.to(slide, { opacity: 0, duration: 0.3, ease: 'power1.inOut' }, `exit-${i}+=0.15`)
+          tl.set(slide, { pointerEvents: 'none' }, `exit-${i}+=0.45`)
         }
       })
 
       const totalDuration = tl.duration()
-
-      const snapPoints = []
-      slides.forEach((_, i) => {
-        if (i === MESSENGER_INDEX) {
-          for (let ch = 0; ch < MESSENGER_CHANNELS; ch++) {
-            snapPoints.push(tl.labels[`channel-${ch}`] / totalDuration)
-          }
-        } else if (i === SPACE_INDEX) {
-          for (let sc = 0; sc < SPACE_SCENES; sc++) {
-            snapPoints.push(tl.labels[`space-scene-${sc}`] / totalDuration)
-          }
-        } else {
-          snapPoints.push(tl.labels[`hold-${i}`] / totalDuration)
-        }
-      })
 
       const slideHoldPoints = []
       slides.forEach((_, i) => {
@@ -203,17 +179,13 @@ export function ScrollProductShowcase() {
       ScrollTrigger.create({
         trigger: container,
         pin: true,
+        pinType: 'transform',
+        anticipatePin: 1,
         start: 'top top',
         end: `+=${TOTAL_SCROLL}`,
-        scrub: 0.6,
-        snap: {
-          snapTo: snapPoints,
-          duration: { min: 0.4, max: 0.9 },
-          delay: 0.3,
-          ease: 'power2.inOut',
-          inertia: false,
-        },
+        scrub: 1,
         animation: tl,
+        invalidateOnRefresh: true,
         onUpdate: (self) => {
           const progress = self.progress
           let closest = 0

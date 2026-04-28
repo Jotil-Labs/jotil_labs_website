@@ -26,8 +26,8 @@ export function FloatingCards({ slug, highlightedCards = new Set() }) {
               transformStyle: 'preserve-3d',
             }}
             animate={{
-              opacity: isHighlighted ? 1 : 0.5,
-              scale: isHighlighted ? 1.08 : 0.96,
+              opacity: isHighlighted ? 1 : 0.85,
+              scale: isHighlighted ? 1.08 : 0.98,
             }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
           >
