@@ -14,7 +14,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger)
 const MESSENGER_INDEX = 1
 const MESSENGER_CHANNELS = 4
 const SPACE_INDEX = 3
-const SPACE_SCENES = 3
+const SPACE_SCENES = 1
 const BASE_SCROLL = 1200
 const TOTAL_SCROLL = PRODUCT_SLIDES.reduce((sum, _, i) => {
   if (i === MESSENGER_INDEX) return sum + BASE_SCROLL * MESSENGER_CHANNELS

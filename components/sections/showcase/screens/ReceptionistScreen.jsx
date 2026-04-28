@@ -126,7 +126,7 @@ function RingingPhase() {
 
 function AiOrb() {
   return (
-    <div className="flex justify-start mb-1.5">
+    <div className="flex justify-start mb-3">
       <div className="flex items-center gap-1.5">
         <div
           className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
@@ -157,7 +157,7 @@ function AiOrb() {
 
 function CallerWave() {
   return (
-    <div className="flex justify-end mb-1.5">
+    <div className="flex justify-end mb-3">
       <div className="flex items-center gap-[2px] px-2.5 py-1.5 rounded-xl rounded-br-sm" style={{ backgroundColor: '#3859a8' }}>
         {Array.from({ length: 5 }).map((_, i) => (
           <div
@@ -235,13 +235,13 @@ function ChatBubble({ line }) {
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
-      className={`flex mb-1.5 ${isAI ? 'justify-start' : 'justify-end'}`}
+      className={`flex mb-3 ${isAI ? 'justify-start' : 'justify-end'}`}
     >
       <div
         className={`max-w-[82%] px-2.5 py-1.5 text-[10px] leading-[1.4] ${
-          isAI ? 'rounded-xl rounded-bl-sm bg-[#f1f3f5] text-gray-900' : 'rounded-xl rounded-br-sm text-white'
+          isAI ? 'rounded-xl rounded-bl-sm text-white' : 'rounded-xl rounded-br-sm bg-[#f1f3f5] text-gray-900'
         }`}
-        style={isAI ? {} : { backgroundColor: '#3859a8' }}
+        style={isAI ? { backgroundColor: '#3859a8' } : {}}
       >
         {line.text}
       </div>

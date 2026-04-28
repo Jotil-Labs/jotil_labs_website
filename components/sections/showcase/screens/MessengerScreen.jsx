@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import gsap from 'gsap'
 import { Calendar, Bell, Ticket, Send, MessageSquare, Globe, MessageCircle, Users } from 'lucide-react'
 import Logo from '@/components/ui/Logo'
@@ -44,6 +44,7 @@ const CONVERSATIONS = [
     messages: [
       { role: 'user', text: 'Can you create a support ticket for the billing issue?' },
       { role: 'ai', text: "I'll create that with all conversation details." },
+      { role: 'user', text: 'Please mark it high priority.' },
     ],
     action: { icon: Ticket, label: 'Ticket created', sublabel: 'Added to CRM' },
     finalMsg: 'Ticket #4821 assigned to your account manager.',
@@ -61,9 +62,70 @@ function lerp(a, b, t) {
   return a + (b - a) * t
 }
 
-function ChannelCard({ channel, conversation }) {
+function ChannelCard({ channel, conversation, isActive }) {
   const Icon = channel.icon
   const ActionIcon = conversation.action.icon
+  const [phase, setPhase] = useState('idle')
+  const [typedText, setTypedText] = useState('')
+  const [showSentMsg, setShowSentMsg] = useState(false)
+  const [sendPulse, setSendPulse] = useState(false)
+  const scrollRef = useRef(null)
+
+  useEffect(() => {
+    if (!isActive) {
+      setPhase('idle')
+      setTypedText('')
+      setShowSentMsg(false)
+      setSendPulse(false)
+      return
+    }
+
+    let timers = []
+    const t = (fn, ms) => { const id = setTimeout(fn, ms); timers.push(id); return id }
+
+    const runCycle = () => {
+      setPhase('thinking')
+      setTypedText('')
+      setSendPulse(false)
+
+      t(() => {
+        setPhase('typing')
+        const message = conversation.finalMsg
+        const typeSpeed = 32
+        message.split('').forEach((_, i) => {
+          t(() => setTypedText(message.slice(0, i + 1)), i * typeSpeed)
+        })
+        const totalType = message.length * typeSpeed
+
+        t(() => {
+          setSendPulse(true)
+          t(() => setSendPulse(false), 280)
+        }, totalType + 280)
+
+        t(() => {
+          setShowSentMsg(true)
+          setTypedText('')
+          setPhase('thinking')
+        }, totalType + 600)
+
+        t(() => {
+          setShowSentMsg(false)
+          runCycle()
+        }, totalType + 2200)
+      }, 800)
+    }
+
+    const startId = setTimeout(runCycle, 200)
+    timers.push(startId)
+
+    return () => timers.forEach(clearTimeout)
+  }, [isActive, conversation.finalMsg])
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    }
+  }, [showSentMsg, phase])
 
   return (
     <div className="w-full h-full flex flex-col bg-white overflow-hidden" style={{ borderRadius: 30 }}>
@@ -87,11 +149,11 @@ function ChannelCard({ channel, conversation }) {
         </div>
       </div>
 
-      <div className="flex-1 px-3 py-2 overflow-hidden">
+      <div ref={scrollRef} className="flex-1 px-3 py-2 overflow-hidden">
         {conversation.messages.map((msg, i) => (
           <div
             key={i}
-            className={`flex mb-1.5 ${msg.role === 'user' ? 'justify-end' : 'items-end gap-1.5'}`}
+            className={`flex mb-3 ${msg.role === 'user' ? 'justify-end' : 'items-end gap-1.5'}`}
           >
             {msg.role === 'ai' && (
               <div
@@ -104,10 +166,10 @@ function ChannelCard({ channel, conversation }) {
             <div
               className={`max-w-[78%] px-2.5 py-1.5 text-[10px] leading-[1.4] ${
                 msg.role === 'user'
-                  ? 'rounded-xl rounded-br-sm text-white'
-                  : 'rounded-xl rounded-bl-sm text-gray-900'
+                  ? 'rounded-xl rounded-br-sm text-gray-900'
+                  : 'rounded-xl rounded-bl-sm text-white'
               }`}
-              style={{ backgroundColor: msg.role === 'user' ? channel.color : '#f1f3f5' }}
+              style={{ backgroundColor: msg.role === 'user' ? '#f1f3f5' : channel.color }}
             >
               {msg.text}
             </div>
@@ -130,54 +192,91 @@ function ChannelCard({ channel, conversation }) {
           </div>
         </div>
 
-        <div className="flex items-end gap-1.5 mb-1.5">
+        {showSentMsg && (
           <div
-            className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-            style={{ background: 'linear-gradient(135deg, #4a6fc2, #3859a8)' }}
+            className="flex items-end gap-1.5 mb-3"
+            style={{ animation: 'sent-bubble-in 0.45s ease-out' }}
           >
-            <Logo size={9} tone="on-dark" animate={false} />
+            <div
+              className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+              style={{ background: 'linear-gradient(135deg, #4a6fc2, #3859a8)' }}
+            >
+              <Logo size={9} tone="on-dark" animate={false} />
+            </div>
+            <div
+              className="max-w-[78%] px-2.5 py-1.5 text-[10px] leading-[1.4] rounded-xl rounded-bl-sm text-white"
+              style={{ backgroundColor: channel.color }}
+            >
+              {conversation.finalMsg}
+            </div>
           </div>
-          <div className="max-w-[78%] px-2.5 py-1.5 text-[10px] leading-[1.4] rounded-xl rounded-bl-sm text-gray-900 bg-[#f1f3f5]">
-            {conversation.finalMsg}
-          </div>
-        </div>
-
-        <div className="flex items-end gap-1.5">
-          <div
-            className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-            style={{ background: 'linear-gradient(135deg, #4a6fc2, #3859a8)' }}
-          >
-            <Logo size={9} tone="on-dark" animate={false} />
-          </div>
-          <div className="flex items-center gap-[3px] px-2.5 py-2 rounded-xl rounded-bl-sm bg-[#f1f3f5]">
-            {[0, 1, 2].map((dot) => (
-              <div
-                key={dot}
-                className="w-[5px] h-[5px] rounded-full"
-                style={{
-                  backgroundColor: channel.color,
-                  opacity: 0.5,
-                  animation: `typing-dot 1.4s ease-in-out ${dot * 0.2}s infinite`,
-                }}
-              />
-            ))}
-          </div>
-        </div>
+        )}
       </div>
 
       <div className="shrink-0 px-3 py-2 border-t border-gray-100 flex items-center gap-2">
+        <div className="relative shrink-0" style={{ width: 24, height: 24 }}>
+          {phase === 'thinking' && [0, 1, 2].map((i) => (
+            <span
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                width: 24, height: 24,
+                top: 0, left: 0,
+                border: `1.5px solid ${channel.color}`,
+                opacity: 0.35 - i * 0.08,
+                animation: `ring-expand 1.4s ease-out ${i * 0.35}s infinite`,
+              }}
+            />
+          ))}
+          <div
+            className="w-6 h-6 rounded-full flex items-center justify-center relative"
+            style={{
+              background: `linear-gradient(135deg, ${channel.color}, ${channel.color}cc)`,
+              animation: phase === 'thinking' ? 'orb-pulse 1.2s ease-in-out infinite' : 'none',
+            }}
+          >
+            <Logo size={10} tone="on-dark" animate={false} />
+          </div>
+        </div>
+        <div className="flex-1 bg-gray-50 rounded-full px-3 py-1 text-[9px] flex items-center min-h-5">
+          {phase === 'thinking' ? (
+            <span className="flex items-center gap-0.75">
+              {[0, 1, 2].map((d) => (
+                <span
+                  key={d}
+                  className="w-1 h-1 rounded-full"
+                  style={{
+                    backgroundColor: channel.color,
+                    opacity: 0.6,
+                    animation: `typing-dot 1.4s ease-in-out ${d * 0.2}s infinite`,
+                  }}
+                />
+              ))}
+            </span>
+          ) : phase === 'typing' ? (
+            <span className="text-gray-800">
+              {typedText}
+              <span
+                className="inline-block w-px ml-px align-middle"
+                style={{
+                  height: 9,
+                  backgroundColor: channel.color,
+                  animation: 'caret-blink 0.8s step-end infinite',
+                }}
+              />
+            </span>
+          ) : (
+            <span className="text-gray-400">Type a message...</span>
+          )}
+        </div>
         <div
           className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
-          style={{ background: `linear-gradient(135deg, ${channel.color}, ${channel.color}cc)` }}
-        >
-          <Logo size={10} tone="on-dark" animate={false} />
-        </div>
-        <div className="flex-1 bg-gray-50 rounded-full px-3 py-1 text-[9px] text-gray-400">
-          Type a message...
-        </div>
-        <div
-          className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
-          style={{ backgroundColor: channel.color }}
+          style={{
+            backgroundColor: channel.color,
+            transform: sendPulse ? 'scale(1.18)' : 'scale(1)',
+            boxShadow: sendPulse ? `0 0 0 4px ${channel.color}33` : 'none',
+            transition: 'transform 0.2s ease-out, box-shadow 0.2s ease-out',
+          }}
         >
           <Send className="w-3 h-3 text-white" strokeWidth={1.5} />
         </div>
@@ -260,7 +359,7 @@ export function MessengerScreen({ isActive, onAction, progressRef }) {
             overflow: 'hidden',
           }}
         >
-          <ChannelCard channel={ch} conversation={CONVERSATIONS[i]} />
+          <ChannelCard channel={ch} conversation={CONVERSATIONS[i]} isActive={isActive} />
         </div>
       ))}
     </div>
