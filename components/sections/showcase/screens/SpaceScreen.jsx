@@ -1,288 +1,356 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
-import gsap from 'gsap'
-import { MessageCircle, Users, BarChart3, Cpu, Settings, Check, Calendar, Loader2 } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Send, ChevronDown, Check, Paperclip, Mic } from 'lucide-react'
 import Logo from '@/components/ui/Logo'
 
-const SIDEBAR_ICONS = [MessageCircle, Users, BarChart3, Cpu, Settings]
-
-const SCENE_SIDEBAR_ACTIVE = [3, 0, 1]
-
 const MODELS = [
-  { name: 'GPT-4', tag: 'Fast reasoning', color: '#10a37f' },
-  { name: 'Claude', tag: 'Long context', color: '#d97706' },
-  { name: 'Gemini', tag: 'Multimodal', color: '#4285f4' },
-  { name: 'Llama 3', tag: 'Open source', color: '#7c3aed' },
+  { name: 'GPT-4o', provider: 'OpenAI', color: '#10a37f' },
+  { name: 'Claude 4.7', provider: 'Anthropic', color: '#d97706' },
+  { name: 'Gemini 2.5', provider: 'Google', color: '#4285f4' },
+  { name: 'Llama 3', provider: 'Meta', color: '#7c3aed' },
 ]
 
-const SELECTED_MODEL = 1
+const PROMPT_TEXT = "Summarize today's missed calls"
+const RESPONSE_TEXT = 'You had 3 missed calls today. Two from returning clients asking about pricing — I can send the rate sheet. One new lead from Google Ads — I recommend an immediate callback.'
 
-const CHAT_MESSAGES = [
-  { role: 'user', text: 'Summarize today\'s missed calls and suggest follow-ups' },
-  { role: 'ai', text: 'You had 3 missed calls today. Two from returning clients asking about pricing. I recommend a follow-up text with your rate sheet. One new lead from Google Ads. I suggest an immediate callback.' },
-  { role: 'user', text: 'Schedule the callback for 2 PM' },
-]
+export function SpaceScreen({ isActive, onAction }) {
+  const [phase, setPhase] = useState('idle')
+  const [selectedModel, setSelectedModel] = useState(0)
+  const [highlightedModel, setHighlightedModel] = useState(-1)
+  const [pickerOpen, setPickerOpen] = useState(false)
+  const [promptTyped, setPromptTyped] = useState('')
+  const [responseTyped, setResponseTyped] = useState('')
+  const [sendPulse, setSendPulse] = useState(false)
+  const [showUserMsg, setShowUserMsg] = useState(false)
+  const [showAiMsg, setShowAiMsg] = useState(false)
+  const loopRef = useRef(null)
 
-function Sidebar({ activeScene }) {
-  const activeIdx = SCENE_SIDEBAR_ACTIVE[activeScene] ?? 3
+  useEffect(() => {
+    if (!isActive) {
+      setPhase('idle')
+      setSelectedModel(0)
+      setHighlightedModel(-1)
+      setPickerOpen(false)
+      setPromptTyped('')
+      setResponseTyped('')
+      setSendPulse(false)
+      setShowUserMsg(false)
+      setShowAiMsg(false)
+      if (loopRef.current) loopRef.current.forEach(clearTimeout)
+      return
+    }
+
+    const timers = []
+    const t = (fn, ms) => { const id = setTimeout(fn, ms); timers.push(id); return id }
+
+    const runLoop = () => {
+      setPhase('idle')
+      setPickerOpen(false)
+      setHighlightedModel(-1)
+      setPromptTyped('')
+      setResponseTyped('')
+      setShowUserMsg(false)
+      setShowAiMsg(false)
+      setSendPulse(false)
+      setSelectedModel(0)
+
+      // Phase: picker opens at 600ms
+      t(() => {
+        setPhase('picker')
+        setPickerOpen(true)
+      }, 600)
+
+      // Hover through models
+      const hoverSchedule = [0, 1, 2, 1]
+      hoverSchedule.forEach((idx, i) => {
+        t(() => setHighlightedModel(idx), 1100 + i * 280)
+      })
+
+      // Click on Claude (index 1) at 2400ms
+      t(() => {
+        setSelectedModel(1)
+        setHighlightedModel(-1)
+      }, 2400)
+
+      // Close picker
+      t(() => {
+        setPickerOpen(false)
+      }, 2700)
+
+      // Start typing prompt at 3300ms
+      t(() => setPhase('prompt'), 3300)
+      const promptStart = 3400
+      const promptSpeed = 38
+      PROMPT_TEXT.split('').forEach((_, i) => {
+        t(() => setPromptTyped(PROMPT_TEXT.slice(0, i + 1)), promptStart + i * promptSpeed)
+      })
+      const promptEnd = promptStart + PROMPT_TEXT.length * promptSpeed
+
+      // Send pulse + clear input + show user message
+      t(() => {
+        setSendPulse(true)
+        t(() => setSendPulse(false), 280)
+      }, promptEnd + 250)
+
+      t(() => {
+        setShowUserMsg(true)
+        setPromptTyped('')
+        setPhase('thinking')
+      }, promptEnd + 600)
+
+      // AI thinking, then typing response
+      const responseStart = promptEnd + 1700
+      t(() => {
+        setPhase('responding')
+        setShowAiMsg(true)
+        if (onAction) onAction('model')
+      }, responseStart)
+
+      const responseSpeed = 22
+      RESPONSE_TEXT.split('').forEach((_, i) => {
+        t(() => setResponseTyped(RESPONSE_TEXT.slice(0, i + 1)), responseStart + i * responseSpeed)
+      })
+      const responseEnd = responseStart + RESPONSE_TEXT.length * responseSpeed
+
+      // Hold then loop
+      t(() => {
+        if (onAction) onAction('inbox')
+      }, responseEnd + 200)
+
+      t(runLoop, responseEnd + 2800)
+    }
+
+    runLoop()
+    loopRef.current = timers
+    return () => timers.forEach(clearTimeout)
+  }, [isActive, onAction])
+
+  const model = MODELS[selectedModel]
+
   return (
-    <div className="w-10 bg-white border-r border-gray-100 flex flex-col items-center py-3 gap-3 shrink-0">
-      {SIDEBAR_ICONS.map((Icon, i) => (
-        <div
-          key={i}
-          className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors duration-300"
-          style={{ backgroundColor: i === activeIdx ? 'rgba(56, 89, 168, 0.1)' : 'transparent' }}
-        >
-          <Icon className="w-3.5 h-3.5" strokeWidth={1.5} style={{ color: i === activeIdx ? '#3859a8' : '#a0a0a0' }} />
-        </div>
-      ))}
-    </div>
-  )
-}
+    <div className="w-full h-full flex flex-col bg-white text-[10px] relative overflow-hidden">
+      {/* Top bar with model picker */}
+      <div className="shrink-0 flex items-center justify-between px-3 pt-3 pb-2 border-b border-gray-100 relative">
+        <div className="relative">
+          <button
+            className="flex items-center gap-1.5 px-2 py-1 rounded-lg transition-colors"
+            style={{
+              backgroundColor: pickerOpen ? `${model.color}10` : 'transparent',
+              border: `1px solid ${pickerOpen ? `${model.color}40` : '#e5e7eb'}`,
+            }}
+          >
+            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: model.color }} />
+            <span className="text-[10px] font-semibold text-gray-900">{model.name}</span>
+            <ChevronDown
+              className="w-2.5 h-2.5 text-gray-400 transition-transform duration-300"
+              strokeWidth={2}
+              style={{ transform: pickerOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+            />
+          </button>
 
-function ModelSelectionScene({ progress }) {
-  return (
-    <div className="flex-1 flex flex-col p-3 min-w-0">
-      <div className="flex items-center justify-between mb-2.5">
-        <p className="text-[11px] font-semibold text-gray-900">Select a Model</p>
-        <div className="px-2 py-0.5 rounded-full text-[8px] font-medium text-white" style={{ backgroundColor: '#3859a8' }}>
-          Configure
-        </div>
-      </div>
-
-      <div className="grid grid-cols-2 gap-2">
-        {MODELS.map((model, i) => {
-          const isSelected = i === SELECTED_MODEL && progress > 0.4
-          return (
-            <div
-              key={model.name}
-              className="rounded-lg border p-2 relative transition-all duration-300"
-              style={{
-                borderColor: isSelected ? model.color : '#e5e7eb',
-                backgroundColor: isSelected ? `${model.color}08` : '#fff',
-                transform: isSelected ? 'scale(1.02)' : 'scale(1)',
-              }}
-            >
-              {isSelected && (
-                <div
-                  className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: model.color }}
-                >
-                  <Check className="w-2.5 h-2.5 text-white" strokeWidth={2.5} />
+          <AnimatePresence>
+            {pickerOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -4, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -4, scale: 0.96 }}
+                transition={{ duration: 0.2 }}
+                className="absolute top-full left-0 mt-1 w-[170px] rounded-xl bg-white z-30 overflow-hidden"
+                style={{
+                  border: '1px solid #e5e7eb',
+                  boxShadow: '0 12px 32px rgba(15,17,41,0.10), 0 2px 8px rgba(15,17,41,0.05)',
+                }}
+              >
+                <div className="px-2 py-1.5 border-b border-gray-100">
+                  <p className="text-[8px] uppercase tracking-wider text-gray-400 font-semibold">Models</p>
                 </div>
-              )}
-              <div className="flex items-center gap-1.5 mb-1">
-                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: model.color }} />
-                <p className="text-[10px] font-semibold text-gray-900">{model.name}</p>
-              </div>
-              <p className="text-[8px] text-gray-400">{model.tag}</p>
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
-function ChatScene() {
-  const selectedModel = MODELS[SELECTED_MODEL]
-  return (
-    <div className="flex-1 flex flex-col p-3 min-w-0">
-      <div className="flex items-center justify-between mb-2.5">
-        <div className="flex items-center gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: selectedModel.color }} />
-          <p className="text-[11px] font-semibold text-gray-900">{selectedModel.name} Chat</p>
+                <div className="py-1">
+                  {MODELS.map((m, i) => {
+                    const isHighlighted = i === highlightedModel
+                    const isSelected = i === selectedModel
+                    return (
+                      <div
+                        key={m.name}
+                        className="flex items-center gap-2 px-2 py-1.5 transition-colors"
+                        style={{
+                          backgroundColor: isHighlighted ? `${m.color}10` : 'transparent',
+                        }}
+                      >
+                        <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: m.color }} />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[10px] font-semibold text-gray-900">{m.name}</p>
+                          <p className="text-[8px] text-gray-400">{m.provider}</p>
+                        </div>
+                        {isSelected && (
+                          <Check className="w-2.5 h-2.5" style={{ color: m.color }} strokeWidth={2.5} />
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
+
         <div className="flex items-center gap-1">
-          <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
           <span className="text-[8px] text-green-600">Online</span>
         </div>
       </div>
 
-      <div className="flex-1 overflow-hidden">
-        {CHAT_MESSAGES.map((msg, i) => (
-          <div
-            key={i}
-            className={`flex mb-1.5 ${msg.role === 'user' ? 'justify-end' : 'items-end gap-1.5'}`}
-          >
-            {msg.role === 'ai' && (
+      {/* Chat area */}
+      <div className="flex-1 px-3 py-3 overflow-hidden flex flex-col">
+        <AnimatePresence mode="wait">
+          {!showUserMsg && !showAiMsg ? (
+            <motion.div
+              key="greeting"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="flex-1 flex flex-col items-center justify-center gap-2"
+            >
               <div
-                className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                style={{ background: `linear-gradient(135deg, ${selectedModel.color}, ${selectedModel.color}cc)` }}
+                className="w-9 h-9 rounded-2xl flex items-center justify-center"
+                style={{
+                  background: `linear-gradient(135deg, ${model.color}, ${model.color}cc)`,
+                  boxShadow: `0 4px 14px ${model.color}33`,
+                }}
               >
-                <Logo size={9} tone="on-dark" animate={false} />
+                <Logo size={16} tone="on-dark" animate={false} />
               </div>
-            )}
-            <div
-              className={`max-w-[80%] px-2 py-1.5 text-[9px] leading-[1.4] ${
-                msg.role === 'user'
-                  ? 'rounded-xl rounded-br-sm text-white'
-                  : 'rounded-xl rounded-bl-sm text-gray-900 bg-[#f1f3f5]'
-              }`}
-              style={msg.role === 'user' ? { backgroundColor: '#3859a8' } : undefined}
+              <div className="text-center">
+                <p className="text-[12px] font-bold text-gray-900">Good afternoon</p>
+                <p className="text-[9px] text-gray-400 mt-0.5">Powered by {model.name}</p>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="conversation"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="flex-1 flex flex-col gap-2"
             >
-              {msg.text}
-            </div>
-          </div>
-        ))}
+              {showUserMsg && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex justify-end"
+                >
+                  <div
+                    className="max-w-[80%] px-2.5 py-1.5 text-[10px] leading-[1.4] rounded-xl rounded-br-sm text-gray-900"
+                    style={{ backgroundColor: '#f1f3f5' }}
+                  >
+                    {PROMPT_TEXT}
+                  </div>
+                </motion.div>
+              )}
 
-        <div className="flex flex-col items-center py-2 my-1">
-          <div className="w-7 h-7 rounded-xl flex items-center justify-center" style={{ background: 'rgba(56, 89, 168, 0.08)' }}>
-            <Calendar size={12} strokeWidth={1.5} style={{ color: '#3859a8' }} />
-          </div>
-          <div className="flex items-center gap-1 mt-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-            <span className="text-[8px] font-semibold" style={{ color: '#3859a8' }}>Callback scheduled</span>
-            <span className="text-[7px] text-gray-400">2:00 PM</span>
-          </div>
-        </div>
-      </div>
+              {(phase === 'thinking' || phase === 'responding') && (
+                <div className="flex items-end gap-1.5">
+                  <div className="relative shrink-0" style={{ width: 22, height: 22 }}>
+                    {phase === 'thinking' && [0, 1, 2].map((i) => (
+                      <span
+                        key={i}
+                        className="absolute rounded-full"
+                        style={{
+                          width: 22, height: 22,
+                          top: 0, left: 0,
+                          border: `1.5px solid ${model.color}`,
+                          opacity: 0.35 - i * 0.08,
+                          animation: `ring-expand 1.4s ease-out ${i * 0.35}s infinite`,
+                        }}
+                      />
+                    ))}
+                    <div
+                      className="w-[22px] h-[22px] rounded-full flex items-center justify-center relative"
+                      style={{
+                        background: `linear-gradient(135deg, ${model.color}, ${model.color}cc)`,
+                        animation: phase === 'thinking' ? 'orb-pulse 1.2s ease-in-out infinite' : 'none',
+                      }}
+                    >
+                      <Logo size={10} tone="on-dark" animate={false} />
+                    </div>
+                  </div>
 
-      <div className="shrink-0 pt-1.5 border-t border-gray-100 flex items-center gap-2">
-        <div className="flex-1 bg-gray-50 rounded-full px-2.5 py-1 text-[8px] text-gray-400">
-          Type a message...
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function AgentCreationScene({ progress }) {
-  const subProgress = (progress - 0.66) / 0.34
-  const phase = subProgress < 0.33 ? 'form' : subProgress < 0.66 ? 'creating' : 'success'
-
-  return (
-    <div className="flex-1 flex flex-col p-3 min-w-0">
-      <div className="flex items-center justify-between mb-2.5">
-        <p className="text-[11px] font-semibold text-gray-900">Create New Agent</p>
-      </div>
-
-      <div className="flex-1 flex items-start justify-center pt-2">
-        <div className="w-full rounded-lg border border-gray-200 bg-white p-3">
-          <div className="space-y-2 mb-3">
-            <div>
-              <p className="text-[8px] text-gray-400 mb-0.5">Name</p>
-              <p className="text-[10px] text-gray-900 font-medium">Sales Assistant</p>
-            </div>
-            <div>
-              <p className="text-[8px] text-gray-400 mb-0.5">Model</p>
-              <div className="flex items-center gap-1">
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: MODELS[SELECTED_MODEL].color }} />
-                <p className="text-[10px] text-gray-900 font-medium">{MODELS[SELECTED_MODEL].name}</p>
-              </div>
-            </div>
-            <div>
-              <p className="text-[8px] text-gray-400 mb-0.5">Purpose</p>
-              <p className="text-[10px] text-gray-900 font-medium">Follow-up & scheduling</p>
-            </div>
-          </div>
-
-          {phase === 'form' && (
-            <button
-              className="w-full py-1.5 rounded-lg text-[10px] font-semibold text-white"
-              style={{ backgroundColor: '#3859a8' }}
-            >
-              Create Agent
-            </button>
+                  {phase === 'thinking' ? (
+                    <div
+                      className="flex items-center gap-1 px-2.5 py-2 rounded-xl rounded-bl-sm"
+                      style={{ backgroundColor: model.color }}
+                    >
+                      {[0, 1, 2].map((d) => (
+                        <span
+                          key={d}
+                          className="w-1 h-1 rounded-full"
+                          style={{
+                            backgroundColor: '#ffffff',
+                            opacity: 0.7,
+                            animation: `typing-dot 1.4s ease-in-out ${d * 0.2}s infinite`,
+                          }}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <div
+                      className="max-w-[82%] px-2.5 py-1.5 text-[10px] leading-[1.4] rounded-xl rounded-bl-sm text-white"
+                      style={{ backgroundColor: model.color }}
+                    >
+                      {responseTyped}
+                      {phase === 'responding' && responseTyped.length < RESPONSE_TEXT.length && (
+                        <span
+                          className="inline-block w-px ml-px align-middle"
+                          style={{
+                            height: 9,
+                            backgroundColor: 'rgba(255,255,255,0.8)',
+                            animation: 'caret-blink 0.8s step-end infinite',
+                          }}
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+            </motion.div>
           )}
-
-          {phase === 'creating' && (
-            <div className="w-full py-1.5 rounded-lg text-[10px] font-semibold text-white flex items-center justify-center gap-1.5" style={{ backgroundColor: '#3859a8' }}>
-              <Loader2 className="w-3 h-3 animate-spin" />
-              Creating...
-            </div>
-          )}
-
-          {phase === 'success' && (
-            <div className="w-full py-2 rounded-lg border border-green-200 bg-green-50 flex flex-col items-center gap-1">
-              <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
-                <Check className="w-3 h-3 text-white" strokeWidth={2.5} />
-              </div>
-              <p className="text-[10px] font-semibold text-green-700">Agent Created</p>
-              <div className="flex items-center gap-1">
-                <p className="text-[9px] text-gray-600">Sales Assistant</p>
-                <span className="px-1.5 py-0.5 rounded-full text-[7px] font-medium bg-green-100 text-green-700">Active</span>
-              </div>
-            </div>
-          )}
-        </div>
+        </AnimatePresence>
       </div>
-    </div>
-  )
-}
 
-export function SpaceScreen({ isActive, onAction, progressRef }) {
-  const sceneRefs = useRef([])
-  const tickerRef = useRef(null)
-  const sceneIndexRef = useRef(0)
-
-  useEffect(() => {
-    if (!isActive) {
-      sceneRefs.current.forEach((el) => {
-        if (el) gsap.set(el, { clearProps: 'all' })
-      })
-      return
-    }
-
-    const updateScenes = () => {
-      const progress = progressRef?.current ?? 0
-      const sceneFloat = progress * 3
-      const activeScene = Math.min(Math.floor(sceneFloat), 2)
-      sceneIndexRef.current = activeScene
-
-      sceneRefs.current.forEach((el, i) => {
-        if (!el) return
-
-        if (i === activeScene) {
-          gsap.set(el, { opacity: 1, visibility: 'visible', zIndex: 2 })
-        } else {
-          const dist = Math.abs(i - sceneFloat)
-          const fade = Math.max(0, 1 - dist * 4)
-          if (fade > 0.01) {
-            gsap.set(el, { opacity: fade, visibility: 'visible', zIndex: 1 })
-          } else {
-            gsap.set(el, { opacity: 0, visibility: 'hidden', zIndex: 0 })
-          }
-        }
-      })
-    }
-
-    gsap.ticker.add(updateScenes)
-    tickerRef.current = updateScenes
-
-    return () => {
-      gsap.ticker.remove(updateScenes)
-    }
-  }, [isActive, progressRef])
-
-  const progress = progressRef?.current ?? 0
-  const activeScene = Math.min(Math.floor(progress * 3), 2)
-
-  return (
-    <div className="w-full h-full flex bg-[#fafbfd] text-[10px] overflow-hidden">
-      <Sidebar activeScene={activeScene} />
-
-      <div className="flex-1 relative min-w-0">
-        <div
-          ref={(el) => { sceneRefs.current[0] = el }}
-          className="absolute inset-0 flex"
-        >
-          <ModelSelectionScene progress={progress} />
+      {/* Input bar */}
+      <div className="shrink-0 px-3 py-2 border-t border-gray-100 flex items-center gap-2">
+        <Paperclip className="w-3 h-3 text-gray-400 shrink-0" strokeWidth={1.6} />
+        <div className="flex-1 bg-gray-50 rounded-full px-3 py-1 text-[9px] flex items-center min-h-5">
+          {phase === 'prompt' && promptTyped ? (
+            <span className="text-gray-800">
+              {promptTyped}
+              <span
+                className="inline-block w-px ml-px align-middle"
+                style={{
+                  height: 9,
+                  backgroundColor: model.color,
+                  animation: 'caret-blink 0.8s step-end infinite',
+                }}
+              />
+            </span>
+          ) : (
+            <span className="text-gray-400">Ask anything...</span>
+          )}
         </div>
-
+        <Mic className="w-3 h-3 text-gray-400 shrink-0" strokeWidth={1.6} />
         <div
-          ref={(el) => { sceneRefs.current[1] = el }}
-          className="absolute inset-0 flex"
+          className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
+          style={{
+            backgroundColor: model.color,
+            transform: sendPulse ? 'scale(1.18)' : 'scale(1)',
+            boxShadow: sendPulse ? `0 0 0 4px ${model.color}33` : 'none',
+            transition: 'transform 0.2s ease-out, box-shadow 0.2s ease-out',
+          }}
         >
-          <ChatScene />
-        </div>
-
-        <div
-          ref={(el) => { sceneRefs.current[2] = el }}
-          className="absolute inset-0 flex"
-        >
-          <AgentCreationScene progress={progress} />
+          <Send className="w-2.5 h-2.5 text-white" strokeWidth={1.8} />
         </div>
       </div>
     </div>

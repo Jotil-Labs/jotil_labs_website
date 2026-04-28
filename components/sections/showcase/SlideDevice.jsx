@@ -4,7 +4,6 @@ import { useState, useCallback, useRef } from 'react'
 import { PhoneMockup } from './devices/PhoneMockup'
 import { LaptopMockup } from './devices/LaptopMockup'
 import { MonitorMockup } from './devices/MonitorMockup'
-import { FloatingCards } from './cards/FloatingCards'
 import { ReceptionistScreen } from './screens/ReceptionistScreen'
 import { MessengerScreen } from './screens/MessengerScreen'
 import { OutreachScreen } from './screens/OutreachScreen'
@@ -68,8 +67,6 @@ export function SlideDevice({ slug, deviceType, isActive, messengerProgressRef, 
           transform: TILT[deviceType],
         }}
       >
-        <FloatingCards slug={slug} highlightedCards={highlightedCards} />
-
         <div className="relative" style={{ transform: 'translateZ(0px)' }}>
           {isMessenger ? (
             <div className="relative" style={{ width: 320, height: 660 }}>

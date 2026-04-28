@@ -741,6 +741,17 @@ textarea:focus-visible {
   100% { transform: scale(0.5); opacity: 0; }
 }
 
+@keyframes caret-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes sent-bubble-in {
+  0% { transform: translateY(8px) scale(0.9); opacity: 0; }
+  60% { transform: translateY(-1px) scale(1.02); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
 .animate-phone-vibrate {
   animation: phone-vibrate 0.6s ease-in-out 3;
 }
