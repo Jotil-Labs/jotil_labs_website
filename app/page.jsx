@@ -1,5 +1,5 @@
 import { Hero } from '@/components/sections/Hero'
-import { LogoCloud } from '@/components/sections/LogoCloud'
+// import { LogoCloud } from '@/components/sections/LogoCloud'
 import { ScrollProductShowcase } from '@/components/sections/ScrollProductShowcase'
 import { HowItWorks } from '@/components/sections/HowItWorks'
 import { Stats } from '@/components/sections/Stats'
@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <LogoCloud />
+      {/* <LogoCloud /> */}
       <ScrollProductShowcase />
       <HowItWorks />
       <Stats />
