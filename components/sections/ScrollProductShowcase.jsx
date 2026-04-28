@@ -12,7 +12,7 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const MESSENGER_INDEX = 1
-const MESSENGER_CHANNELS = 4
+const MESSENGER_CHANNELS = 3
 const SPACE_INDEX = 3
 const SPACE_SCENES = 1
 const BASE_SCROLL = 1200
@@ -188,16 +188,15 @@ export function ScrollProductShowcase() {
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const progress = self.progress
-          let closest = 0
-          let minDist = Infinity
+          let active = 0
           for (let i = 0; i < slideHoldPoints.length; i++) {
-            const dist = Math.abs(progress - slideHoldPoints[i])
-            if (dist < minDist) {
-              minDist = dist
-              closest = i
+            if (progress >= slideHoldPoints[i]) {
+              active = i
+            } else {
+              break
             }
           }
-          setActiveIndex(closest)
+          setActiveIndex(active)
         },
       })
     })

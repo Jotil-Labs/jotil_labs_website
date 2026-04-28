@@ -2,14 +2,13 @@
 
 import { useRef, useEffect, useState } from 'react'
 import gsap from 'gsap'
-import { Calendar, Bell, Ticket, Send, MessageSquare, Globe, MessageCircle, Users } from 'lucide-react'
+import { Calendar, Bell, Send, MessageSquare, Globe, MessageCircle } from 'lucide-react'
 import Logo from '@/components/ui/Logo'
 
 const CHANNELS = [
   { id: 'sms', label: 'SMS', icon: MessageSquare, color: '#3859a8' },
   { id: 'web', label: 'Web Chat', icon: Globe, color: '#6366F1' },
   { id: 'whatsapp', label: 'WhatsApp', icon: MessageCircle, color: '#25d366' },
-  { id: 'teams', label: 'Teams', icon: Users, color: '#5b5fc7' },
 ]
 
 const CONVERSATIONS = [
@@ -40,15 +39,6 @@ const CONVERSATIONS = [
     action: { icon: Calendar, label: 'Rescheduled', sublabel: 'Tue, 11:00 AM' },
     finalMsg: 'Updated! Calendar invite sent.',
   },
-  {
-    messages: [
-      { role: 'user', text: 'Can you create a support ticket for the billing issue?' },
-      { role: 'ai', text: "I'll create that with all conversation details." },
-      { role: 'user', text: 'Please mark it high priority.' },
-    ],
-    action: { icon: Ticket, label: 'Ticket created', sublabel: 'Added to CRM' },
-    finalMsg: 'Ticket #4821 assigned to your account manager.',
-  },
 ]
 
 const STACK_OFFSETS = [
@@ -62,70 +52,116 @@ function lerp(a, b, t) {
   return a + (b - a) * t
 }
 
-function ChannelCard({ channel, conversation, isActive }) {
+function ChannelCard({ channel, conversation, isActive, isFront }) {
   const Icon = channel.icon
   const ActionIcon = conversation.action.icon
   const [phase, setPhase] = useState('idle')
+  const [currentRole, setCurrentRole] = useState(null)
   const [typedText, setTypedText] = useState('')
-  const [showSentMsg, setShowSentMsg] = useState(false)
+  const [sentItems, setSentItems] = useState([])
   const [sendPulse, setSendPulse] = useState(false)
   const scrollRef = useRef(null)
 
   useEffect(() => {
-    if (!isActive) {
+    const fullItems = [
+      ...conversation.messages.map((m) => ({ kind: 'msg', ...m })),
+      { kind: 'action' },
+      { kind: 'msg', role: 'ai', text: conversation.finalMsg },
+    ]
+
+    if (!isActive || !isFront) {
       setPhase('idle')
+      setCurrentRole(null)
       setTypedText('')
-      setShowSentMsg(false)
+      setSentItems([])
       setSendPulse(false)
       return
     }
 
-    let timers = []
+    const timers = []
     const t = (fn, ms) => { const id = setTimeout(fn, ms); timers.push(id); return id }
 
     const runCycle = () => {
-      setPhase('thinking')
+      setPhase('idle')
+      setCurrentRole(null)
       setTypedText('')
+      setSentItems([])
       setSendPulse(false)
 
-      t(() => {
-        setPhase('typing')
-        const message = conversation.finalMsg
-        const typeSpeed = 32
-        message.split('').forEach((_, i) => {
-          t(() => setTypedText(message.slice(0, i + 1)), i * typeSpeed)
-        })
-        const totalType = message.length * typeSpeed
+      const events = fullItems
 
-        t(() => {
-          setSendPulse(true)
-          t(() => setSendPulse(false), 280)
-        }, totalType + 280)
+      let now = 600
 
-        t(() => {
-          setShowSentMsg(true)
-          setTypedText('')
-          setPhase('thinking')
-        }, totalType + 600)
+      events.forEach((event) => {
+        if (event.kind === 'msg') {
+          const isAI = event.role === 'ai'
+          const text = event.text
+          const speed = isAI ? 26 : 32
 
-        t(() => {
-          setShowSentMsg(false)
-          runCycle()
-        }, totalType + 2200)
-      }, 800)
+          if (isAI) {
+            const startNow = now
+            t(() => {
+              setPhase('thinking')
+              setCurrentRole('ai')
+              setTypedText('')
+            }, startNow)
+            now += 850
+            t(() => setPhase('typing'), now)
+          } else {
+            const startNow = now
+            t(() => {
+              setPhase('typing')
+              setCurrentRole('user')
+              setTypedText('')
+            }, startNow)
+          }
+
+          const charsStart = now
+          text.split('').forEach((_, i) => {
+            t(() => setTypedText(text.slice(0, i + 1)), charsStart + (i + 1) * speed)
+          })
+          now += text.length * speed
+
+          now += 220
+          const pulseAt = now
+          t(() => setSendPulse(true), pulseAt)
+          t(() => setSendPulse(false), pulseAt + 280)
+
+          now += 280
+          const role = event.role
+          t(() => {
+            setSentItems((prev) => [...prev, { kind: 'msg', role, text }])
+            setTypedText('')
+            setPhase('idle')
+            setCurrentRole(null)
+          }, now)
+          now += 480
+        } else if (event.kind === 'action') {
+          t(() => {
+            setSentItems((prev) => [...prev, { kind: 'action' }])
+          }, now)
+          now += 1300
+        }
+      })
+
+      t(runCycle, now + 2800)
     }
 
     const startId = setTimeout(runCycle, 200)
     timers.push(startId)
 
     return () => timers.forEach(clearTimeout)
-  }, [isActive, conversation.finalMsg])
+  }, [isActive, isFront, conversation])
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
-  }, [showSentMsg, phase])
+  }, [sentItems, phase, typedText])
+
+  const showAvatarRings = phase === 'thinking' && currentRole === 'ai'
+  const showAvatarPulse = (phase === 'thinking' || phase === 'typing') && currentRole === 'ai'
+  const inputCaretColor = currentRole === 'ai' ? channel.color : '#3859a8'
 
   return (
     <div className="w-full h-full flex flex-col bg-white overflow-hidden" style={{ borderRadius: 30 }}>
@@ -150,72 +186,63 @@ function ChannelCard({ channel, conversation, isActive }) {
       </div>
 
       <div ref={scrollRef} className="flex-1 px-3 py-2 overflow-hidden">
-        {conversation.messages.map((msg, i) => (
-          <div
-            key={i}
-            className={`flex mb-3 ${msg.role === 'user' ? 'justify-end' : 'items-end gap-1.5'}`}
-          >
-            {msg.role === 'ai' && (
+        {sentItems.map((item, i) => {
+          if (item.kind === 'msg') {
+            const isUser = item.role === 'user'
+            return (
               <div
-                className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                style={{ background: 'linear-gradient(135deg, #4a6fc2, #3859a8)' }}
+                key={`item-${i}`}
+                className={`flex mb-3 ${isUser ? 'justify-end' : 'items-end gap-1.5'}`}
+                style={{ animation: 'sent-bubble-in 0.4s ease-out' }}
               >
-                <Logo size={9} tone="on-dark" animate={false} />
+                {!isUser && (
+                  <div
+                    className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+                    style={{ background: 'linear-gradient(135deg, #4a6fc2, #3859a8)' }}
+                  >
+                    <Logo size={9} tone="on-dark" animate={false} />
+                  </div>
+                )}
+                <div
+                  className={`max-w-[78%] px-2.5 py-1.5 text-[10px] leading-[1.4] ${
+                    isUser
+                      ? 'rounded-xl rounded-br-sm text-gray-900'
+                      : 'rounded-xl rounded-bl-sm text-white'
+                  }`}
+                  style={{ backgroundColor: isUser ? '#f1f3f5' : channel.color }}
+                >
+                  {item.text}
+                </div>
               </div>
-            )}
+            )
+          }
+          return (
             <div
-              className={`max-w-[78%] px-2.5 py-1.5 text-[10px] leading-[1.4] ${
-                msg.role === 'user'
-                  ? 'rounded-xl rounded-br-sm text-gray-900'
-                  : 'rounded-xl rounded-bl-sm text-white'
-              }`}
-              style={{ backgroundColor: msg.role === 'user' ? '#f1f3f5' : channel.color }}
+              key={`item-${i}`}
+              className="flex flex-col items-center py-2 my-1"
+              style={{ animation: 'sent-bubble-in 0.4s ease-out' }}
             >
-              {msg.text}
+              <div
+                className="w-8 h-8 rounded-xl flex items-center justify-center"
+                style={{ background: `linear-gradient(135deg, ${channel.color}18, ${channel.color}08)` }}
+              >
+                <ActionIcon size={14} strokeWidth={1.5} style={{ color: channel.color }} />
+              </div>
+              <div className="flex items-center gap-1 mt-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                <span className="text-[8px] font-semibold" style={{ color: channel.color }}>
+                  {conversation.action.label}
+                </span>
+                <span className="text-[7px] text-gray-400">{conversation.action.sublabel}</span>
+              </div>
             </div>
-          </div>
-        ))}
-
-        <div className="flex flex-col items-center py-2 my-1">
-          <div
-            className="w-8 h-8 rounded-xl flex items-center justify-center"
-            style={{ background: `linear-gradient(135deg, ${channel.color}18, ${channel.color}08)` }}
-          >
-            <ActionIcon size={14} strokeWidth={1.5} style={{ color: channel.color }} />
-          </div>
-          <div className="flex items-center gap-1 mt-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-            <span className="text-[8px] font-semibold" style={{ color: channel.color }}>
-              {conversation.action.label}
-            </span>
-            <span className="text-[7px] text-gray-400">{conversation.action.sublabel}</span>
-          </div>
-        </div>
-
-        {showSentMsg && (
-          <div
-            className="flex items-end gap-1.5 mb-3"
-            style={{ animation: 'sent-bubble-in 0.45s ease-out' }}
-          >
-            <div
-              className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-              style={{ background: 'linear-gradient(135deg, #4a6fc2, #3859a8)' }}
-            >
-              <Logo size={9} tone="on-dark" animate={false} />
-            </div>
-            <div
-              className="max-w-[78%] px-2.5 py-1.5 text-[10px] leading-[1.4] rounded-xl rounded-bl-sm text-white"
-              style={{ backgroundColor: channel.color }}
-            >
-              {conversation.finalMsg}
-            </div>
-          </div>
-        )}
+          )
+        })}
       </div>
 
       <div className="shrink-0 px-3 py-2 border-t border-gray-100 flex items-center gap-2">
         <div className="relative shrink-0" style={{ width: 24, height: 24 }}>
-          {phase === 'thinking' && [0, 1, 2].map((i) => (
+          {showAvatarRings && [0, 1, 2].map((i) => (
             <span
               key={i}
               className="absolute rounded-full"
@@ -232,7 +259,7 @@ function ChannelCard({ channel, conversation, isActive }) {
             className="w-6 h-6 rounded-full flex items-center justify-center relative"
             style={{
               background: `linear-gradient(135deg, ${channel.color}, ${channel.color}cc)`,
-              animation: phase === 'thinking' ? 'orb-pulse 1.2s ease-in-out infinite' : 'none',
+              animation: showAvatarPulse ? 'orb-pulse 1.2s ease-in-out infinite' : 'none',
             }}
           >
             <Logo size={10} tone="on-dark" animate={false} />
@@ -260,7 +287,7 @@ function ChannelCard({ channel, conversation, isActive }) {
                 className="inline-block w-px ml-px align-middle"
                 style={{
                   height: 9,
-                  backgroundColor: channel.color,
+                  backgroundColor: inputCaretColor,
                   animation: 'caret-blink 0.8s step-end infinite',
                 }}
               />
@@ -288,18 +315,27 @@ function ChannelCard({ channel, conversation, isActive }) {
 export function MessengerScreen({ isActive, onAction, progressRef }) {
   const cardRefs = useRef([])
   const tickerRef = useRef(null)
+  const [activeChannelIdx, setActiveChannelIdx] = useState(0)
+  const lastActiveIdxRef = useRef(0)
 
   useEffect(() => {
     if (!isActive) {
       cardRefs.current.forEach((card) => {
         if (card) gsap.set(card, { clearProps: 'all' })
       })
+      lastActiveIdxRef.current = 0
+      setActiveChannelIdx(0)
       return
     }
 
     const updateCards = () => {
       const progress = progressRef?.current ?? 0
       const activeFloat = progress * (CHANNELS.length - 1)
+      const newIdx = Math.max(0, Math.min(CHANNELS.length - 1, Math.round(activeFloat)))
+      if (newIdx !== lastActiveIdxRef.current) {
+        lastActiveIdxRef.current = newIdx
+        setActiveChannelIdx(newIdx)
+      }
 
       cardRefs.current.forEach((card, i) => {
         if (!card) return
@@ -337,6 +373,7 @@ export function MessengerScreen({ isActive, onAction, progressRef }) {
       })
     }
 
+    updateCards()
     gsap.ticker.add(updateCards)
     tickerRef.current = updateCards
 
@@ -359,7 +396,7 @@ export function MessengerScreen({ isActive, onAction, progressRef }) {
             overflow: 'hidden',
           }}
         >
-          <ChannelCard channel={ch} conversation={CONVERSATIONS[i]} isActive={isActive} />
+          <ChannelCard channel={ch} conversation={CONVERSATIONS[i]} isActive={isActive} isFront={i === activeChannelIdx} />
         </div>
       ))}
     </div>

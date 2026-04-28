@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Send, ChevronDown, Check, Paperclip, Mic } from 'lucide-react'
 import Logo from '@/components/ui/Logo'
 
+const BRAND_BLUE = '#3859a8'
+
 const MODELS = [
   { name: 'GPT-4o', provider: 'OpenAI', color: '#10a37f' },
   { name: 'Claude 4.7', provider: 'Anthropic', color: '#d97706' },
@@ -12,20 +14,38 @@ const MODELS = [
   { name: 'Llama 3', provider: 'Meta', color: '#7c3aed' },
 ]
 
-const PROMPT_TEXT = "Summarize today's missed calls"
-const RESPONSE_TEXT = 'You had 3 missed calls today. Two from returning clients asking about pricing — I can send the rate sheet. One new lead from Google Ads — I recommend an immediate callback.'
+const TURNS = [
+  {
+    user: 'Prepare my quarterly sales report',
+    ai: 'Q4 totals: $847K revenue, up 23% YoY. 312 deals closed across all channels.',
+  },
+  {
+    user: 'Break it down by channel',
+    ai: 'Voice $342K, Email $251K, Web $172K, SMS $82K. Voice converts highest at 34%.',
+  },
+  {
+    user: 'Email me the full report',
+    ai: 'Sent. Full PDF with charts and forecasts is in your inbox.',
+  },
+]
 
 export function SpaceScreen({ isActive, onAction }) {
   const [phase, setPhase] = useState('idle')
   const [selectedModel, setSelectedModel] = useState(0)
   const [highlightedModel, setHighlightedModel] = useState(-1)
   const [pickerOpen, setPickerOpen] = useState(false)
-  const [promptTyped, setPromptTyped] = useState('')
-  const [responseTyped, setResponseTyped] = useState('')
+  const [typedInput, setTypedInput] = useState('')
+  const [sentMessages, setSentMessages] = useState([])
+  const [aiInflight, setAiInflight] = useState(null)
   const [sendPulse, setSendPulse] = useState(false)
-  const [showUserMsg, setShowUserMsg] = useState(false)
-  const [showAiMsg, setShowAiMsg] = useState(false)
   const loopRef = useRef(null)
+  const scrollRef = useRef(null)
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    }
+  }, [sentMessages, aiInflight, typedInput])
 
   useEffect(() => {
     if (!isActive) {
@@ -33,11 +53,10 @@ export function SpaceScreen({ isActive, onAction }) {
       setSelectedModel(0)
       setHighlightedModel(-1)
       setPickerOpen(false)
-      setPromptTyped('')
-      setResponseTyped('')
+      setTypedInput('')
+      setSentMessages([])
+      setAiInflight(null)
       setSendPulse(false)
-      setShowUserMsg(false)
-      setShowAiMsg(false)
       if (loopRef.current) loopRef.current.forEach(clearTimeout)
       return
     }
@@ -49,85 +68,82 @@ export function SpaceScreen({ isActive, onAction }) {
       setPhase('idle')
       setPickerOpen(false)
       setHighlightedModel(-1)
-      setPromptTyped('')
-      setResponseTyped('')
-      setShowUserMsg(false)
-      setShowAiMsg(false)
+      setTypedInput('')
+      setSentMessages([])
+      setAiInflight(null)
       setSendPulse(false)
       setSelectedModel(0)
 
-      // Phase: picker opens at 600ms
       t(() => {
         setPhase('picker')
         setPickerOpen(true)
       }, 600)
 
-      // Hover through models
       const hoverSchedule = [0, 1, 2, 1]
       hoverSchedule.forEach((idx, i) => {
         t(() => setHighlightedModel(idx), 1100 + i * 280)
       })
 
-      // Click on Claude (index 1) at 2400ms
       t(() => {
         setSelectedModel(1)
         setHighlightedModel(-1)
       }, 2400)
 
-      // Close picker
-      t(() => {
-        setPickerOpen(false)
-      }, 2700)
+      t(() => setPickerOpen(false), 2700)
+      t(() => setPhase('conversation'), 3100)
 
-      // Start typing prompt at 3300ms
-      t(() => setPhase('prompt'), 3300)
-      const promptStart = 3400
-      const promptSpeed = 38
-      PROMPT_TEXT.split('').forEach((_, i) => {
-        t(() => setPromptTyped(PROMPT_TEXT.slice(0, i + 1)), promptStart + i * promptSpeed)
+      let now = 3300
+
+      TURNS.forEach((turn) => {
+        const userText = turn.user
+        const userSpeed = 32
+
+        t(() => setTypedInput(''), now)
+        userText.split('').forEach((_, i) => {
+          t(() => setTypedInput(userText.slice(0, i + 1)), now + (i + 1) * userSpeed)
+        })
+        now += userText.length * userSpeed + 250
+
+        const pulseAt = now
+        t(() => setSendPulse(true), pulseAt)
+        t(() => setSendPulse(false), pulseAt + 280)
+        now += 280
+
+        t(() => {
+          setSentMessages((prev) => [...prev, { role: 'user', text: userText }])
+          setTypedInput('')
+        }, now)
+        now += 400
+
+        t(() => setAiInflight({ phase: 'thinking', text: '' }), now)
+        now += 1100
+
+        const aiText = turn.ai
+        const aiSpeed = 22
+        t(() => setAiInflight({ phase: 'typing', text: '' }), now)
+
+        aiText.split('').forEach((_, i) => {
+          t(() => setAiInflight({ phase: 'typing', text: aiText.slice(0, i + 1) }), now + (i + 1) * aiSpeed)
+        })
+        now += aiText.length * aiSpeed + 80
+
+        t(() => {
+          setSentMessages((prev) => [...prev, { role: 'ai', text: aiText }])
+          setAiInflight(null)
+        }, now)
+        now += 700
       })
-      const promptEnd = promptStart + PROMPT_TEXT.length * promptSpeed
 
-      // Send pulse + clear input + show user message
-      t(() => {
-        setSendPulse(true)
-        t(() => setSendPulse(false), 280)
-      }, promptEnd + 250)
-
-      t(() => {
-        setShowUserMsg(true)
-        setPromptTyped('')
-        setPhase('thinking')
-      }, promptEnd + 600)
-
-      // AI thinking, then typing response
-      const responseStart = promptEnd + 1700
-      t(() => {
-        setPhase('responding')
-        setShowAiMsg(true)
-        if (onAction) onAction('model')
-      }, responseStart)
-
-      const responseSpeed = 22
-      RESPONSE_TEXT.split('').forEach((_, i) => {
-        t(() => setResponseTyped(RESPONSE_TEXT.slice(0, i + 1)), responseStart + i * responseSpeed)
-      })
-      const responseEnd = responseStart + RESPONSE_TEXT.length * responseSpeed
-
-      // Hold then loop
-      t(() => {
-        if (onAction) onAction('inbox')
-      }, responseEnd + 200)
-
-      t(runLoop, responseEnd + 2800)
+      t(runLoop, now + 2500)
     }
 
     runLoop()
     loopRef.current = timers
     return () => timers.forEach(clearTimeout)
-  }, [isActive, onAction])
+  }, [isActive])
 
   const model = MODELS[selectedModel]
+  const showGreeting = sentMessages.length === 0 && !aiInflight
 
   return (
     <div className="w-full h-full flex flex-col bg-white text-[10px] relative overflow-hidden">
@@ -202,9 +218,9 @@ export function SpaceScreen({ isActive, onAction }) {
       </div>
 
       {/* Chat area */}
-      <div className="flex-1 px-3 py-3 overflow-hidden flex flex-col">
+      <div ref={scrollRef} className="flex-1 px-3 py-3 overflow-y-auto flex flex-col">
         <AnimatePresence mode="wait">
-          {!showUserMsg && !showAiMsg ? (
+          {showGreeting ? (
             <motion.div
               key="greeting"
               initial={{ opacity: 0 }}
@@ -216,8 +232,8 @@ export function SpaceScreen({ isActive, onAction }) {
               <div
                 className="w-9 h-9 rounded-2xl flex items-center justify-center"
                 style={{
-                  background: `linear-gradient(135deg, ${model.color}, ${model.color}cc)`,
-                  boxShadow: `0 4px 14px ${model.color}33`,
+                  background: `linear-gradient(135deg, ${BRAND_BLUE}, ${BRAND_BLUE}cc)`,
+                  boxShadow: `0 4px 14px ${BRAND_BLUE}33`,
                 }}
               >
                 <Logo size={16} tone="on-dark" animate={false} />
@@ -235,53 +251,80 @@ export function SpaceScreen({ isActive, onAction }) {
               transition={{ duration: 0.3 }}
               className="flex-1 flex flex-col gap-2"
             >
-              {showUserMsg && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex justify-end"
-                >
-                  <div
-                    className="max-w-[80%] px-2.5 py-1.5 text-[10px] leading-[1.4] rounded-xl rounded-br-sm text-gray-900"
-                    style={{ backgroundColor: '#f1f3f5' }}
+              {sentMessages.map((msg, i) => {
+                if (msg.role === 'user') {
+                  return (
+                    <motion.div
+                      key={`msg-${i}`}
+                      initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex justify-end"
+                    >
+                      <div
+                        className="max-w-[80%] px-2.5 py-1.5 text-[10px] leading-[1.4] rounded-xl rounded-br-sm text-gray-900"
+                        style={{ backgroundColor: '#f1f3f5' }}
+                      >
+                        {msg.text}
+                      </div>
+                    </motion.div>
+                  )
+                }
+                return (
+                  <motion.div
+                    key={`msg-${i}`}
+                    initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex items-end gap-1.5"
                   >
-                    {PROMPT_TEXT}
-                  </div>
-                </motion.div>
-              )}
+                    <div
+                      className="w-5.5 h-5.5 rounded-full flex items-center justify-center shrink-0"
+                      style={{ background: `linear-gradient(135deg, ${BRAND_BLUE}, ${BRAND_BLUE}cc)` }}
+                    >
+                      <Logo size={10} tone="on-dark" animate={false} />
+                    </div>
+                    <div
+                      className="max-w-[82%] px-2.5 py-1.5 text-[10px] leading-[1.4] rounded-xl rounded-bl-sm text-white"
+                      style={{ backgroundColor: BRAND_BLUE }}
+                    >
+                      {msg.text}
+                    </div>
+                  </motion.div>
+                )
+              })}
 
-              {(phase === 'thinking' || phase === 'responding') && (
+              {aiInflight && (
                 <div className="flex items-end gap-1.5">
                   <div className="relative shrink-0" style={{ width: 22, height: 22 }}>
-                    {phase === 'thinking' && [0, 1, 2].map((i) => (
+                    {aiInflight.phase === 'thinking' && [0, 1, 2].map((i) => (
                       <span
                         key={i}
                         className="absolute rounded-full"
                         style={{
                           width: 22, height: 22,
                           top: 0, left: 0,
-                          border: `1.5px solid ${model.color}`,
+                          border: `1.5px solid ${BRAND_BLUE}`,
                           opacity: 0.35 - i * 0.08,
                           animation: `ring-expand 1.4s ease-out ${i * 0.35}s infinite`,
                         }}
                       />
                     ))}
                     <div
-                      className="w-[22px] h-[22px] rounded-full flex items-center justify-center relative"
+                      className="w-5.5 h-5.5 rounded-full flex items-center justify-center relative"
                       style={{
-                        background: `linear-gradient(135deg, ${model.color}, ${model.color}cc)`,
-                        animation: phase === 'thinking' ? 'orb-pulse 1.2s ease-in-out infinite' : 'none',
+                        background: `linear-gradient(135deg, ${BRAND_BLUE}, ${BRAND_BLUE}cc)`,
+                        animation: aiInflight.phase === 'thinking' ? 'orb-pulse 1.2s ease-in-out infinite' : 'none',
                       }}
                     >
                       <Logo size={10} tone="on-dark" animate={false} />
                     </div>
                   </div>
 
-                  {phase === 'thinking' ? (
+                  {aiInflight.phase === 'thinking' ? (
                     <div
                       className="flex items-center gap-1 px-2.5 py-2 rounded-xl rounded-bl-sm"
-                      style={{ backgroundColor: model.color }}
+                      style={{ backgroundColor: BRAND_BLUE }}
                     >
                       {[0, 1, 2].map((d) => (
                         <span
@@ -298,19 +341,17 @@ export function SpaceScreen({ isActive, onAction }) {
                   ) : (
                     <div
                       className="max-w-[82%] px-2.5 py-1.5 text-[10px] leading-[1.4] rounded-xl rounded-bl-sm text-white"
-                      style={{ backgroundColor: model.color }}
+                      style={{ backgroundColor: BRAND_BLUE }}
                     >
-                      {responseTyped}
-                      {phase === 'responding' && responseTyped.length < RESPONSE_TEXT.length && (
-                        <span
-                          className="inline-block w-px ml-px align-middle"
-                          style={{
-                            height: 9,
-                            backgroundColor: 'rgba(255,255,255,0.8)',
-                            animation: 'caret-blink 0.8s step-end infinite',
-                          }}
-                        />
-                      )}
+                      {aiInflight.text}
+                      <span
+                        className="inline-block w-px ml-px align-middle"
+                        style={{
+                          height: 9,
+                          backgroundColor: 'rgba(255,255,255,0.8)',
+                          animation: 'caret-blink 0.8s step-end infinite',
+                        }}
+                      />
                     </div>
                   )}
                 </div>
@@ -324,14 +365,14 @@ export function SpaceScreen({ isActive, onAction }) {
       <div className="shrink-0 px-3 py-2 border-t border-gray-100 flex items-center gap-2">
         <Paperclip className="w-3 h-3 text-gray-400 shrink-0" strokeWidth={1.6} />
         <div className="flex-1 bg-gray-50 rounded-full px-3 py-1 text-[9px] flex items-center min-h-5">
-          {phase === 'prompt' && promptTyped ? (
+          {typedInput ? (
             <span className="text-gray-800">
-              {promptTyped}
+              {typedInput}
               <span
                 className="inline-block w-px ml-px align-middle"
                 style={{
                   height: 9,
-                  backgroundColor: model.color,
+                  backgroundColor: BRAND_BLUE,
                   animation: 'caret-blink 0.8s step-end infinite',
                 }}
               />
@@ -344,9 +385,9 @@ export function SpaceScreen({ isActive, onAction }) {
         <div
           className="w-6 h-6 rounded-full flex items-center justify-center shrink-0"
           style={{
-            backgroundColor: model.color,
+            backgroundColor: BRAND_BLUE,
             transform: sendPulse ? 'scale(1.18)' : 'scale(1)',
-            boxShadow: sendPulse ? `0 0 0 4px ${model.color}33` : 'none',
+            boxShadow: sendPulse ? `0 0 0 4px ${BRAND_BLUE}33` : 'none',
             transition: 'transform 0.2s ease-out, box-shadow 0.2s ease-out',
           }}
         >

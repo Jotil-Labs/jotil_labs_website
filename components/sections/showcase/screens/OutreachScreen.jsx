@@ -2,15 +2,25 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FileSpreadsheet, Phone, MessageCircle, Mail, Check, Upload } from 'lucide-react'
+import { FileSpreadsheet, Phone, MessageCircle, Mail, Check, Upload, User } from 'lucide-react'
 
 const CONTACTS_TOTAL = 247
 
 const CHANNELS = [
-  { id: 'call', icon: Phone, label: 'Calling leads', color: '#3859a8', cardId: 'dialer' },
-  { id: 'sms', icon: MessageCircle, label: 'Sending SMS', color: '#22D3EE', cardId: 'dialer' },
-  { id: 'email', icon: Mail, label: 'Sending emails', color: '#6366F1', cardId: 'email' },
+  { id: 'call', icon: Phone, label: 'Calling leads', color: '#3859a8' },
+  { id: 'sms', icon: MessageCircle, label: 'Sending SMS', color: '#22D3EE' },
+  { id: 'email', icon: Mail, label: 'Sending emails', color: '#6366F1' },
 ]
+
+const CONTACTS = [
+  { name: 'Sarah Johnson', phone: '+1 (555) 123-4567', email: 'sarah@acmeco.com' },
+  { name: 'Michael Chen', phone: '+1 (555) 234-5678', email: 'mchen@plus.io' },
+  { name: 'Emily Davis', phone: '+1 (555) 345-6789', email: 'emily@flux.com' },
+  { name: 'David Park', phone: '+1 (555) 456-7890', email: 'd.park@nova.co' },
+]
+
+const SMS_TEMPLATE = "Hi {name}, this is JotilLabs. Got 2 mins to chat about your sales pipeline?"
+const EMAIL_SUBJECT = 'Quick idea for your team'
 
 const FINAL_STATS = [
   { label: 'Contacted', target: 247 },
@@ -23,9 +33,9 @@ const PHASE_TIMES = {
   uploadDuration: 1800,
   parsed: 2500,
   channelStart: 3300,
-  channelDuration: 1700,
-  finalStats: 9300,
-  loop: 12000,
+  channelDuration: 2700,
+  finalStats: 11500,
+  loop: 14500,
 }
 
 function ProgressBar({ progress, color }) {
@@ -39,64 +49,237 @@ function ProgressBar({ progress, color }) {
   )
 }
 
-function ChannelRow({ channel, state, count }) {
-  const Icon = channel.icon
-  const isActive = state === 'active'
-  const isDone = state === 'done'
-  const progress = isDone ? 1 : isActive ? Math.min(count / CONTACTS_TOTAL, 1) : 0
-
+function CallVisual({ contact, channel }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: state === 'pending' ? 0.4 : 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="flex items-center gap-2.5 py-2 px-2.5 rounded-xl"
-      style={{
-        backgroundColor: isActive ? `${channel.color}10` : '#f8f9fb',
-        border: `1px solid ${isActive ? `${channel.color}30` : 'transparent'}`,
-        transition: 'background-color 0.3s, border-color 0.3s',
-      }}
-    >
-      <div
-        className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 relative"
-        style={{
-          backgroundColor: isActive || isDone ? `${channel.color}18` : 'rgba(0,0,0,0.04)',
-          transition: 'background-color 0.3s',
-        }}
-      >
-        {isActive && (
+    <div className="flex flex-col items-center gap-2.5 py-3">
+      <div className="relative" style={{ width: 64, height: 64 }}>
+        {[0, 1, 2].map((i) => (
           <span
-            className="absolute inset-0 rounded-lg"
+            key={i}
+            className="absolute rounded-full"
             style={{
+              width: 64,
+              height: 64,
+              top: 0,
+              left: 0,
               border: `1.5px solid ${channel.color}`,
-              animation: 'ring-expand 1.4s ease-out infinite',
-              opacity: 0.4,
+              opacity: 0.4 - i * 0.1,
+              animation: `ring-expand 1.6s ease-out ${i * 0.4}s infinite`,
             }}
           />
-        )}
-        <Icon className="w-4 h-4" style={{ color: isActive || isDone ? channel.color : '#9ca3af' }} strokeWidth={1.6} />
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between mb-1">
-          <p className="text-[10.5px] font-semibold text-gray-900">{channel.label}</p>
-          <p className="text-[10px] font-mono tabular-nums" style={{ color: isActive || isDone ? channel.color : '#9ca3af' }}>
-            {Math.floor(progress * CONTACTS_TOTAL)}/{CONTACTS_TOTAL}
-          </p>
-        </div>
-        <ProgressBar progress={progress} color={channel.color} />
-      </div>
-      {isDone && (
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 18 }}
-          className="w-4 h-4 rounded-full flex items-center justify-center shrink-0"
-          style={{ backgroundColor: '#22c55e' }}
+        ))}
+        <div
+          className="w-16 h-16 rounded-full flex items-center justify-center"
+          style={{
+            background: `linear-gradient(135deg, ${channel.color}, ${channel.color}cc)`,
+            boxShadow: `0 6px 20px ${channel.color}40`,
+          }}
         >
-          <Check className="w-2.5 h-2.5 text-white" strokeWidth={3} />
+          <Phone className="w-6 h-6 text-white" strokeWidth={1.5} />
+        </div>
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={contact.phone}
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -4 }}
+          transition={{ duration: 0.25 }}
+          className="text-center"
+        >
+          <p className="text-[11px] font-bold text-gray-900">{contact.name}</p>
+          <p className="text-[9px] text-gray-500 font-mono">{contact.phone}</p>
         </motion.div>
-      )}
-    </motion.div>
+      </AnimatePresence>
+
+      <div className="flex items-center gap-1.5">
+        <span
+          className="w-1.5 h-1.5 rounded-full"
+          style={{
+            backgroundColor: channel.color,
+            animation: 'orb-pulse 1.2s ease-in-out infinite',
+          }}
+        />
+        <span className="text-[9px] font-semibold" style={{ color: channel.color }}>
+          Calling...
+        </span>
+      </div>
+    </div>
+  )
+}
+
+function SmsVisual({ contact, channel }) {
+  const firstName = contact.name.split(' ')[0]
+  return (
+    <div className="flex flex-col gap-2 py-2.5">
+      <div className="flex items-center gap-2 px-1">
+        <div
+          className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
+          style={{ backgroundColor: `${channel.color}25` }}
+        >
+          <User className="w-3.5 h-3.5" style={{ color: channel.color }} strokeWidth={1.6} />
+        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={contact.phone}
+            initial={{ opacity: 0, y: 2 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -2 }}
+            transition={{ duration: 0.2 }}
+            className="min-w-0"
+          >
+            <p className="text-[10px] font-bold text-gray-900 truncate">{contact.name}</p>
+            <p className="text-[8.5px] text-gray-500 font-mono truncate">{contact.phone}</p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={contact.phone}
+          initial={{ opacity: 0, scale: 0.95, y: 6 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.3 }}
+          className="flex justify-end px-1"
+        >
+          <div
+            className="max-w-[88%] px-2.5 py-1.5 rounded-xl rounded-br-sm text-white"
+            style={{
+              backgroundColor: channel.color,
+              boxShadow: `0 2px 10px ${channel.color}40`,
+            }}
+          >
+            <p className="text-[9.5px] leading-snug">
+              {SMS_TEMPLATE.replace('{name}', firstName)}
+            </p>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="flex justify-end items-center gap-0.5 px-2">
+        <Check className="w-2.5 h-2.5" style={{ color: channel.color }} strokeWidth={2.5} />
+        <Check className="w-2.5 h-2.5 -ml-1.5" style={{ color: channel.color }} strokeWidth={2.5} />
+        <span className="text-[8px] text-gray-400 ml-0.5">Delivered</span>
+      </div>
+    </div>
+  )
+}
+
+function EmailVisual({ contact, channel }) {
+  const firstName = contact.name.split(' ')[0]
+  return (
+    <div className="flex flex-col gap-2 py-2.5">
+      <div
+        className="rounded-lg bg-white overflow-hidden"
+        style={{ border: `1px solid ${channel.color}25`, boxShadow: `0 2px 10px ${channel.color}15` }}
+      >
+        <div className="px-2.5 py-1.5 border-b border-gray-100 flex items-center gap-1.5">
+          <Mail className="w-3 h-3 shrink-0" style={{ color: channel.color }} strokeWidth={1.6} />
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={contact.email}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="text-[9px] text-gray-500 truncate"
+            >
+              To: <span className="text-gray-900 font-mono">{contact.email}</span>
+            </motion.p>
+          </AnimatePresence>
+        </div>
+
+        <div className="px-2.5 py-1.5 border-b border-gray-100">
+          <p className="text-[10px] font-bold text-gray-900 truncate">{EMAIL_SUBJECT}</p>
+        </div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={contact.email}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="px-2.5 py-2"
+          >
+            <p className="text-[9px] text-gray-700 leading-snug">
+              Hi {firstName},
+            </p>
+            <p className="text-[9px] text-gray-600 leading-snug mt-1">
+              Noticed your team has been growing fast. Quick idea on streamlining your outreach...
+            </p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      <div className="flex items-center gap-1.5 px-1">
+        <span
+          className="w-1.5 h-1.5 rounded-full"
+          style={{
+            backgroundColor: channel.color,
+            animation: 'orb-pulse 1.2s ease-in-out infinite',
+          }}
+        />
+        <span className="text-[9px] font-semibold" style={{ color: channel.color }}>
+          Delivering...
+        </span>
+      </div>
+    </div>
+  )
+}
+
+function ChannelStage({ channel, progress, isDone }) {
+  const Icon = channel.icon
+  const contactIdx = Math.min(Math.floor(progress * CONTACTS.length * 0.999), CONTACTS.length - 1)
+  const contact = CONTACTS[contactIdx]
+  const count = Math.floor(progress * CONTACTS_TOTAL)
+
+  return (
+    <div className="flex flex-col gap-2.5">
+      <div className="flex items-center gap-2 px-1">
+        <div
+          className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+          style={{ backgroundColor: `${channel.color}18` }}
+        >
+          <Icon className="w-4 h-4" style={{ color: channel.color }} strokeWidth={1.6} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-[11px] font-bold text-gray-900">{channel.label}</p>
+        </div>
+        {isDone && (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 18 }}
+            className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+            style={{ backgroundColor: '#22c55e' }}
+          >
+            <Check className="w-3 h-3 text-white" strokeWidth={3} />
+          </motion.div>
+        )}
+      </div>
+
+      <div
+        className="rounded-xl px-3"
+        style={{
+          background: `linear-gradient(160deg, ${channel.color}06, ${channel.color}14)`,
+          border: `1px solid ${channel.color}25`,
+        }}
+      >
+        {channel.id === 'call' && <CallVisual contact={contact} channel={channel} />}
+        {channel.id === 'sms' && <SmsVisual contact={contact} channel={channel} />}
+        {channel.id === 'email' && <EmailVisual contact={contact} channel={channel} />}
+      </div>
+
+      <div className="flex items-center gap-2 px-1">
+        <ProgressBar progress={progress} color={channel.color} />
+        <p className="text-[10px] font-mono tabular-nums whitespace-nowrap" style={{ color: channel.color }}>
+          {count}/{CONTACTS_TOTAL}
+        </p>
+      </div>
+    </div>
   )
 }
 
@@ -113,8 +296,9 @@ function FinalStatCard({ label, target, suffix = '', progress }) {
 export function OutreachScreen({ isActive, onAction }) {
   const [phase, setPhase] = useState('idle')
   const [uploadProgress, setUploadProgress] = useState(0)
-  const [channelStates, setChannelStates] = useState(['pending', 'pending', 'pending'])
-  const [channelCounts, setChannelCounts] = useState([0, 0, 0])
+  const [activeChannelIdx, setActiveChannelIdx] = useState(-1)
+  const [channelProgress, setChannelProgress] = useState([0, 0, 0])
+  const [channelDone, setChannelDone] = useState([false, false, false])
   const [finalStatsProgress, setFinalStatsProgress] = useState(0)
   const loopRef = useRef(null)
 
@@ -122,8 +306,9 @@ export function OutreachScreen({ isActive, onAction }) {
     if (!isActive) {
       setPhase('idle')
       setUploadProgress(0)
-      setChannelStates(['pending', 'pending', 'pending'])
-      setChannelCounts([0, 0, 0])
+      setActiveChannelIdx(-1)
+      setChannelProgress([0, 0, 0])
+      setChannelDone([false, false, false])
       setFinalStatsProgress(0)
       if (loopRef.current) loopRef.current.forEach(clearTimeout)
       return
@@ -135,59 +320,57 @@ export function OutreachScreen({ isActive, onAction }) {
     const runLoop = () => {
       setPhase('idle')
       setUploadProgress(0)
-      setChannelStates(['pending', 'pending', 'pending'])
-      setChannelCounts([0, 0, 0])
+      setActiveChannelIdx(-1)
+      setChannelProgress([0, 0, 0])
+      setChannelDone([false, false, false])
       setFinalStatsProgress(0)
 
       schedule(() => setPhase('upload'), PHASE_TIMES.uploadStart)
-
       const uploadSteps = 30
       for (let i = 0; i <= uploadSteps; i++) {
-        schedule(() => setUploadProgress(i / uploadSteps), PHASE_TIMES.uploadStart + (i / uploadSteps) * PHASE_TIMES.uploadDuration)
+        schedule(
+          () => setUploadProgress(i / uploadSteps),
+          PHASE_TIMES.uploadStart + (i / uploadSteps) * PHASE_TIMES.uploadDuration,
+        )
       }
 
       schedule(() => setPhase('parsed'), PHASE_TIMES.parsed)
-      schedule(() => setPhase('channels'), PHASE_TIMES.channelStart)
 
       CHANNELS.forEach((ch, idx) => {
         const start = PHASE_TIMES.channelStart + idx * PHASE_TIMES.channelDuration
+
         schedule(() => {
-          setChannelStates((prev) => {
-            const next = [...prev]
-            next[idx] = 'active'
-            return next
-          })
-          if (onAction) onAction(ch.cardId)
+          setPhase('channels')
+          setActiveChannelIdx(idx)
         }, start)
 
-        const countSteps = 24
+        const countSteps = 30
         for (let s = 1; s <= countSteps; s++) {
           schedule(() => {
-            setChannelCounts((prev) => {
+            setChannelProgress((prev) => {
               const next = [...prev]
-              next[idx] = Math.floor(CONTACTS_TOTAL * (s / countSteps))
+              next[idx] = s / countSteps
               return next
             })
-          }, start + (s / countSteps) * (PHASE_TIMES.channelDuration - 200))
+          }, start + (s / countSteps) * (PHASE_TIMES.channelDuration - 300))
         }
 
         schedule(() => {
-          setChannelStates((prev) => {
+          setChannelDone((prev) => {
             const next = [...prev]
-            next[idx] = 'done'
+            next[idx] = true
             return next
           })
-        }, start + PHASE_TIMES.channelDuration - 100)
+        }, start + PHASE_TIMES.channelDuration - 250)
       })
 
-      schedule(() => {
-        setPhase('summary')
-        if (onAction) onAction('analytics')
-      }, PHASE_TIMES.finalStats)
-
+      schedule(() => setPhase('summary'), PHASE_TIMES.finalStats)
       const statSteps = 24
       for (let s = 1; s <= statSteps; s++) {
-        schedule(() => setFinalStatsProgress(s / statSteps), PHASE_TIMES.finalStats + 200 + (s / statSteps) * 1400)
+        schedule(
+          () => setFinalStatsProgress(s / statSteps),
+          PHASE_TIMES.finalStats + 200 + (s / statSteps) * 1400,
+        )
       }
 
       schedule(runLoop, PHASE_TIMES.loop)
@@ -196,7 +379,9 @@ export function OutreachScreen({ isActive, onAction }) {
     runLoop()
     loopRef.current = timers
     return () => timers.forEach(clearTimeout)
-  }, [isActive, onAction])
+  }, [isActive])
+
+  const activeChannel = activeChannelIdx >= 0 ? CHANNELS[activeChannelIdx] : null
 
   return (
     <div className="w-full h-full flex flex-col bg-white text-[11px]">
@@ -209,7 +394,6 @@ export function OutreachScreen({ isActive, onAction }) {
       </div>
 
       <div className="flex-1 px-3 py-3 overflow-hidden flex flex-col gap-3">
-        {/* Upload card */}
         <AnimatePresence mode="wait">
           {(phase === 'idle' || phase === 'upload') && (
             <motion.div
@@ -294,36 +478,28 @@ export function OutreachScreen({ isActive, onAction }) {
               </motion.div>
               <div className="flex-1">
                 <p className="text-[11px] font-semibold text-gray-900">{CONTACTS_TOTAL} contacts imported</p>
-                <p className="text-[9px] text-gray-400 mt-0.5">Ready for outreach</p>
+                <p className="text-[9px] text-gray-400 mt-0.5">Starting outreach...</p>
               </div>
+            </motion.div>
+          )}
+
+          {phase === 'channels' && activeChannel && (
+            <motion.div
+              key={`channel-${activeChannelIdx}`}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.35 }}
+            >
+              <ChannelStage
+                channel={activeChannel}
+                progress={channelProgress[activeChannelIdx]}
+                isDone={channelDone[activeChannelIdx]}
+              />
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Channels sequence */}
-        {(phase === 'channels' || phase === 'summary') && (
-          <motion.div
-            key="channels"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-            className="flex flex-col gap-1.5"
-          >
-            <p className="text-[9px] font-semibold text-gray-400 uppercase tracking-wider mb-0.5 px-1">
-              Outreach in progress
-            </p>
-            {CHANNELS.map((ch, i) => (
-              <ChannelRow
-                key={ch.id}
-                channel={ch}
-                state={channelStates[i]}
-                count={channelCounts[i]}
-              />
-            ))}
-          </motion.div>
-        )}
-
-        {/* Final stats */}
         <AnimatePresence>
           {phase === 'summary' && (
             <motion.div
