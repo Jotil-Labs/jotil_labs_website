@@ -11,7 +11,7 @@ export function LaptopMockup({ children, glass = false }) {
     <div className="flex flex-col items-center">
       {/* Screen */}
       <div
-        className="w-[480px] rounded-t-xl overflow-hidden relative"
+        className="w-160 rounded-t-xl overflow-hidden relative"
         style={{
           border: borderStyle,
           borderBottom: 'none',
@@ -60,7 +60,7 @@ export function LaptopMockup({ children, glass = false }) {
       </div>
       {/* Keyboard deck */}
       <div
-        className="w-[520px] h-[14px] rounded-b-lg"
+        className="w-180 h-4 rounded-b-lg"
         style={{
           background: glass
             ? 'linear-gradient(180deg, rgba(230,230,235,0.7), rgba(210,210,218,0.6))'

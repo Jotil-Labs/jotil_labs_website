@@ -12,7 +12,7 @@ import { AnimatedSection } from '@/components/ui/AnimatedSection'
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const MESSENGER_INDEX = 1
-const MESSENGER_CHANNELS = 3
+const MESSENGER_CHANNELS = 4
 const SPACE_INDEX = 3
 const SPACE_SCENES = 1
 const BASE_SCROLL = 1200
