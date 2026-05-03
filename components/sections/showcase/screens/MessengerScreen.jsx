@@ -2,25 +2,17 @@
 
 import { useRef, useEffect, useState } from 'react'
 import gsap from 'gsap'
-import { Calendar, Bell, Send, MessageSquare, Globe, MessageCircle } from 'lucide-react'
+import { Calendar, Bell, Ticket, Send, MessageSquare, Globe, MessageCircle, Users } from 'lucide-react'
 import Logo from '@/components/ui/Logo'
 
 const CHANNELS = [
-  { id: 'sms', label: 'SMS', icon: MessageSquare, color: '#3859a8' },
   { id: 'web', label: 'Web Chat', icon: Globe, color: '#6366F1' },
+  { id: 'sms', label: 'SMS', icon: MessageSquare, color: '#3859a8' },
   { id: 'whatsapp', label: 'WhatsApp', icon: MessageCircle, color: '#25d366' },
+  { id: 'teams', label: 'Teams', icon: Users, color: '#5b5fc7' },
 ]
 
 const CONVERSATIONS = [
-  {
-    messages: [
-      { role: 'user', text: 'Hey, do you have any openings this week?' },
-      { role: 'ai', text: 'I have Thursday at 10 AM and Friday at 3 PM. Which works?' },
-      { role: 'user', text: 'Thursday at 10, please.' },
-    ],
-    action: { icon: Calendar, label: 'Appointment booked', sublabel: 'Thu, 10:00 AM' },
-    finalMsg: "You're all set! I'll send a confirmation.",
-  },
   {
     messages: [
       { role: 'user', text: "What's on the lunch menu today?" },
@@ -32,12 +24,30 @@ const CONVERSATIONS = [
   },
   {
     messages: [
+      { role: 'user', text: 'Hey, do you have any openings this week?' },
+      { role: 'ai', text: 'I have Thursday at 10 AM and Friday at 3 PM. Which works?' },
+      { role: 'user', text: 'Thursday at 10, please.' },
+    ],
+    action: { icon: Calendar, label: 'Appointment booked', sublabel: 'Thu, 10:00 AM' },
+    finalMsg: "You're all set! I'll send a confirmation.",
+  },
+  {
+    messages: [
       { role: 'user', text: 'I need to reschedule my Friday meeting.' },
       { role: 'ai', text: 'Monday 2 PM or Tuesday 11 AM available. Preference?' },
       { role: 'user', text: 'Tuesday 11 works.' },
     ],
     action: { icon: Calendar, label: 'Rescheduled', sublabel: 'Tue, 11:00 AM' },
     finalMsg: 'Updated! Calendar invite sent.',
+  },
+  {
+    messages: [
+      { role: 'user', text: 'Can you create a support ticket for the billing issue?' },
+      { role: 'ai', text: "I'll log it now with all conversation details. What's the impact?" },
+      { role: 'user', text: 'High priority. Affecting payouts this week.' },
+    ],
+    action: { icon: Ticket, label: 'Ticket created', sublabel: 'Added to CRM' },
+    finalMsg: 'Ticket #4821 assigned to your account manager.',
   },
 ]
 
@@ -52,7 +62,7 @@ function lerp(a, b, t) {
   return a + (b - a) * t
 }
 
-function ChannelCard({ channel, conversation, isActive, isFront }) {
+function ChannelCard({ channel, conversation, isActive, isFront, animated }) {
   const Icon = channel.icon
   const ActionIcon = conversation.action.icon
   const [phase, setPhase] = useState('idle')
@@ -74,6 +84,15 @@ function ChannelCard({ channel, conversation, isActive, isFront }) {
       setCurrentRole(null)
       setTypedText('')
       setSentItems([])
+      setSendPulse(false)
+      return
+    }
+
+    if (!animated) {
+      setPhase('idle')
+      setCurrentRole(null)
+      setTypedText('')
+      setSentItems(fullItems)
       setSendPulse(false)
       return
     }
@@ -151,7 +170,7 @@ function ChannelCard({ channel, conversation, isActive, isFront }) {
     timers.push(startId)
 
     return () => timers.forEach(clearTimeout)
-  }, [isActive, isFront, conversation])
+  }, [isActive, isFront, animated, conversation])
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -170,14 +189,14 @@ function ChannelCard({ channel, conversation, isActive, isFront }) {
         style={{ paddingTop: 28, paddingBottom: 8, borderBottom: `2px solid ${channel.color}15` }}
       >
         <div
-          className="w-7 h-7 rounded-lg flex items-center justify-center"
+          className="w-9 h-9 rounded-lg flex items-center justify-center"
           style={{ backgroundColor: `${channel.color}15` }}
         >
-          <Icon size={14} strokeWidth={1.5} style={{ color: channel.color }} />
+          <Icon size={18} strokeWidth={1.5} style={{ color: channel.color }} />
         </div>
         <div>
-          <p className="text-[11px] font-bold" style={{ color: channel.color }}>{channel.label}</p>
-          <p className="text-[8px] text-gray-400">JotilLabs AI</p>
+          <p className="text-[15px] font-bold leading-tight" style={{ color: channel.color }}>{channel.label}</p>
+          <p className="text-[9px] text-gray-400">JotilLabs AI</p>
         </div>
         <div className="ml-auto flex items-center gap-1">
           <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
@@ -384,21 +403,33 @@ export function MessengerScreen({ isActive, onAction, progressRef }) {
 
   return (
     <div className="relative" style={{ width: 300, height: 640 }}>
-      {CHANNELS.map((ch, i) => (
-        <div
-          key={ch.id}
-          ref={(el) => { cardRefs.current[i] = el }}
-          className="absolute inset-0"
-          style={{
-            willChange: 'transform, opacity',
-            boxShadow: '0 8px 30px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
-            borderRadius: 30,
-            overflow: 'hidden',
-          }}
-        >
-          <ChannelCard channel={ch} conversation={CONVERSATIONS[i]} isActive={isActive} isFront={i === activeChannelIdx} />
-        </div>
-      ))}
+      {CHANNELS.map((ch, i) => {
+        const initialOffset = STACK_OFFSETS[Math.min(i, STACK_OFFSETS.length - 1)]
+        return (
+          <div
+            key={ch.id}
+            ref={(el) => { cardRefs.current[i] = el }}
+            className="absolute inset-0"
+            style={{
+              willChange: 'transform, opacity',
+              boxShadow: '0 8px 30px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
+              borderRadius: 30,
+              overflow: 'hidden',
+              transform: `translate(${initialOffset.x}px, ${initialOffset.y}px) scale(${initialOffset.scale})`,
+              opacity: initialOffset.opacity,
+              zIndex: 10 - i,
+            }}
+          >
+            <ChannelCard
+              channel={ch}
+              conversation={CONVERSATIONS[i]}
+              isActive={isActive}
+              isFront={i === activeChannelIdx}
+              animated={ch.id === 'web'}
+            />
+          </div>
+        )
+      })}
     </div>
   )
 }
