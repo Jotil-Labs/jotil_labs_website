@@ -403,27 +403,33 @@ export function MessengerScreen({ isActive, onAction, progressRef }) {
 
   return (
     <div className="relative" style={{ width: 300, height: 640 }}>
-      {CHANNELS.map((ch, i) => (
-        <div
-          key={ch.id}
-          ref={(el) => { cardRefs.current[i] = el }}
-          className="absolute inset-0"
-          style={{
-            willChange: 'transform, opacity',
-            boxShadow: '0 8px 30px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
-            borderRadius: 30,
-            overflow: 'hidden',
-          }}
-        >
-          <ChannelCard
-            channel={ch}
-            conversation={CONVERSATIONS[i]}
-            isActive={isActive}
-            isFront={i === activeChannelIdx}
-            animated={ch.id === 'web'}
-          />
-        </div>
-      ))}
+      {CHANNELS.map((ch, i) => {
+        const initialOffset = STACK_OFFSETS[Math.min(i, STACK_OFFSETS.length - 1)]
+        return (
+          <div
+            key={ch.id}
+            ref={(el) => { cardRefs.current[i] = el }}
+            className="absolute inset-0"
+            style={{
+              willChange: 'transform, opacity',
+              boxShadow: '0 8px 30px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
+              borderRadius: 30,
+              overflow: 'hidden',
+              transform: `translate(${initialOffset.x}px, ${initialOffset.y}px) scale(${initialOffset.scale})`,
+              opacity: initialOffset.opacity,
+              zIndex: 10 - i,
+            }}
+          >
+            <ChannelCard
+              channel={ch}
+              conversation={CONVERSATIONS[i]}
+              isActive={isActive}
+              isFront={i === activeChannelIdx}
+              animated={ch.id === 'web'}
+            />
+          </div>
+        )
+      })}
     </div>
   )
 }

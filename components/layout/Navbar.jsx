@@ -25,14 +25,14 @@ const PRODUCT_ITEMS = products.map((p) => ({
 }))
 
 const INDUSTRY_ITEMS = [
-  { name: 'Restaurant', slug: 'restaurant', description: 'Reservations, orders, and guest experience', icon: UtensilsCrossed, color: '#EF4444' },
-  { name: 'Dental & Medical', slug: 'dental-medical', description: 'Dental offices and medical practices', icon: Stethoscope, color: '#3B82F6' },
-  { name: 'Real Estate', slug: 'real-estate', description: 'Agents, brokerages, and property managers', icon: Home, color: '#F59E0B' },
-  { name: 'Legal', slug: 'legal', description: 'Law firms and legal practices', icon: Scale, color: '#3B82F6' },
-  { name: 'Hospitality', slug: 'hospitality', description: 'Hotels, venues, and event spaces', icon: Hotel, color: '#EC4899' },
-  { name: 'Finance & Insurance', slug: 'finance-insurance', description: 'Financial advisors and insurance agencies', icon: TrendingUp, color: '#10B981' },
-  { name: 'E-commerce', slug: 'ecommerce', description: 'Online stores and retail businesses', icon: ShoppingCart, color: '#8B5CF6' },
-  { name: 'Home Services', slug: 'home-services', description: 'HVAC, plumbing, and field service teams', icon: Wrench, color: '#F97316' },
+  { name: 'Restaurant', slug: 'restaurant', description: 'Reservations, orders, and guest experience', icon: UtensilsCrossed, color: '#3859a8' },
+  { name: 'Dental & Medical', slug: 'dental-medical', description: 'Dental offices and medical practices', icon: Stethoscope, color: '#3859a8' },
+  { name: 'Real Estate', slug: 'real-estate', description: 'Agents, brokerages, and property managers', icon: Home, color: '#3859a8' },
+  { name: 'Legal', slug: 'legal', description: 'Law firms and legal practices', icon: Scale, color: '#3859a8' },
+  { name: 'Hospitality', slug: 'hospitality', description: 'Hotels, venues, and event spaces', icon: Hotel, color: '#3859a8' },
+  { name: 'Finance & Insurance', slug: 'finance-insurance', description: 'Financial advisors and insurance agencies', icon: TrendingUp, color: '#3859a8' },
+  { name: 'E-commerce', slug: 'ecommerce', description: 'Online stores and retail businesses', icon: ShoppingCart, color: '#3859a8' },
+  { name: 'Home Services', slug: 'home-services', description: 'HVAC, plumbing, and field service teams', icon: Wrench, color: '#3859a8' },
 ]
 
 const RESOURCE_ITEMS = [
@@ -218,7 +218,7 @@ export function Navbar() {
                                   return (
                                     <Link
                                       key={item.slug}
-                                      href={`/use-cases#${item.slug}`}
+                                      href={`/use-cases/${item.slug}`}
                                       className="flex items-start gap-3 px-3 py-3 rounded-xl no-underline transition-all duration-150 group hover:bg-[#F8FAFF]"
                                     >
                                       <div
@@ -433,7 +433,7 @@ export function Navbar() {
                                       return (
                                         <Link
                                           key={item.slug}
-                                          href={`/use-cases#${item.slug}`}
+                                          href={`/use-cases/${item.slug}`}
                                           onClick={closeMobile}
                                           className="flex items-center gap-2.5 no-underline rounded-lg px-3 py-2.5 hover:bg-surface transition-colors"
                                         >
