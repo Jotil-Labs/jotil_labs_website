@@ -36,7 +36,7 @@ export function BrandBackground({ variant = 'quiet' }) {
       const tiltX = (currentY - 0.5) * -14
       const tiltY = (currentX - 0.5) * 18
       if (watermarkRef.current) {
-        watermarkRef.current.style.transform = `perspective(1100px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`
+        watermarkRef.current.style.transform = `perspective(1100px) translateX(15%) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`
       }
 
       if (
@@ -57,78 +57,83 @@ export function BrandBackground({ variant = 'quiet' }) {
   const isHero = variant === 'hero'
 
   return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
-    >
-      {/* Atmosphere layer 1: violet + pink wash, top-left biased */}
+    <>
+      {/* Atmosphere + grain — fixed at z-0, behind main content */}
       <div
-        className={isHero ? 'atmosphere-drift-1' : ''}
-        style={{
-          position: 'absolute',
-          top: '-20%',
-          left: '-10%',
-          width: '70%',
-          height: '80%',
-          background:
-            'radial-gradient(circle at 30% 30%, rgba(138, 107, 255, 0.35), transparent 60%), radial-gradient(circle at 70% 60%, rgba(255, 122, 182, 0.25), transparent 55%)',
-          filter: 'blur(60px)',
-          opacity: (isHero ? 1 : 0.72) * 0.4,
-          willChange: isHero ? 'transform' : 'auto',
-        }}
-      />
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      >
+        {/* Atmosphere layer 1: violet + pink wash, top-left biased */}
+        <div
+          className={isHero ? 'atmosphere-drift-1' : ''}
+          style={{
+            position: 'absolute',
+            top: '-20%',
+            left: '-10%',
+            width: '70%',
+            height: '80%',
+            background:
+              'radial-gradient(circle at 30% 30%, rgba(138, 107, 255, 0.35), transparent 60%), radial-gradient(circle at 70% 60%, rgba(255, 122, 182, 0.25), transparent 55%)',
+            filter: 'blur(60px)',
+            opacity: (isHero ? 1 : 0.72) * 0.4,
+            willChange: isHero ? 'transform' : 'auto',
+          }}
+        />
 
-      {/* Atmosphere layer 2: blue + peach wash, bottom-right biased */}
-      <div
-        className={isHero ? 'atmosphere-drift-2' : ''}
-        style={{
-          position: 'absolute',
-          top: '10%',
-          right: '-15%',
-          width: '65%',
-          height: '70%',
-          background:
-            'radial-gradient(circle at 60% 40%, rgba(47, 91, 255, 0.28), transparent 60%), radial-gradient(circle at 30% 70%, rgba(255, 201, 163, 0.3), transparent 55%)',
-          filter: 'blur(70px)',
-          opacity: (isHero ? 1 : 0.72) * 0.4,
-          willChange: isHero ? 'transform' : 'auto',
-        }}
-      />
+        {/* Atmosphere layer 2: blue + peach wash, bottom-right biased */}
+        <div
+          className={isHero ? 'atmosphere-drift-2' : ''}
+          style={{
+            position: 'absolute',
+            top: '10%',
+            right: '-15%',
+            width: '65%',
+            height: '70%',
+            background:
+              'radial-gradient(circle at 60% 40%, rgba(47, 91, 255, 0.28), transparent 60%), radial-gradient(circle at 30% 70%, rgba(255, 201, 163, 0.3), transparent 55%)',
+            filter: 'blur(70px)',
+            opacity: (isHero ? 1 : 0.72) * 0.4,
+            willChange: isHero ? 'transform' : 'auto',
+          }}
+        />
 
-      {/* Noise grain overlay */}
-      <div
-        style={{
-          position: 'fixed',
-          inset: 0,
-          pointerEvents: 'none',
-          zIndex: 1,
-          opacity: 0.35 * 0.4,
-          mixBlendMode: 'overlay',
-          backgroundImage: `url("${NOISE_SVG}")`,
-          backgroundSize: '200px 200px',
-          backgroundRepeat: 'repeat',
-        }}
-      />
+        {/* Noise grain overlay */}
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            pointerEvents: 'none',
+            zIndex: 1,
+            opacity: 0.35 * 0.4,
+            mixBlendMode: 'overlay',
+            backgroundImage: `url("${NOISE_SVG}")`,
+            backgroundSize: '200px 200px',
+            backgroundRepeat: 'repeat',
+          }}
+        />
+      </div>
 
-      {/* Watermark logo (above noise, no grain on it) */}
+      {/* Watermark — fixed at z-[15], above section bgs (main z-10) but below navbar (z-50).
+          Static across the full home page during scroll. Homepage only. */}
       {isHero && (
         <div
-          className="absolute inset-y-0 right-0 hidden md:flex items-center"
-          style={{ transform: 'translateX(40%)', zIndex: 2 }}
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-15 hidden md:flex items-center justify-end overflow-hidden"
         >
           <div
             ref={watermarkRef}
-            className="will-change-transform"
+            className="will-change-transform mr-8 lg:mr-16"
             style={{
               opacity: 0.06,
+              transform: 'translateX(15%)',
               transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
               transformStyle: 'preserve-3d',
             }}
           >
-            <Logo size={1600} tone="brand" animate={false} />
+            <Logo size={700} tone="brand" animate={false} />
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }

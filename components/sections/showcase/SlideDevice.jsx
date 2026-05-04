@@ -52,51 +52,53 @@ export function SlideDevice({ slug, deviceType, isActive, messengerProgressRef, 
   const isMessenger = slug === 'messenger'
 
   return (
-    <div
-      className="relative flex justify-center items-center scale-[0.72] md:scale-100 origin-center"
-      style={{
-        perspective: '1200px',
-        perspectiveOrigin: '50% 50%',
-      }}
-      data-device
-    >
+    <div data-device-frame data-device-type={deviceType}>
       <div
-        className="relative"
+        className="device-inner"
         style={{
-          transformStyle: 'preserve-3d',
-          transform: TILT[deviceType],
+          perspective: '1200px',
+          perspectiveOrigin: '50% 50%',
         }}
+        data-device
       >
-        <div className="relative" style={{ transform: 'translateZ(0px)' }}>
-          {isMessenger ? (
-            <div className="relative" style={{ width: 320, height: 660 }}>
-              <Device glass>
-                <div className="w-full h-full bg-gray-50/50" />
-              </Device>
-              <div
-                className="absolute"
-                style={{
-                  top: 10, left: 10,
-                  width: 300, height: 640,
-                  overflow: 'visible',
-                }}
-              >
+        <div
+          className="relative w-full h-full flex items-center justify-center"
+          style={{
+            transformStyle: 'preserve-3d',
+            transform: TILT[deviceType],
+          }}
+        >
+          <div className="relative" style={{ transform: 'translateZ(0px)' }}>
+            {isMessenger ? (
+              <div className="relative" style={{ width: 320, height: 660 }}>
+                <Device glass>
+                  <div className="w-full h-full bg-gray-50/50" />
+                </Device>
+                <div
+                  className="absolute"
+                  style={{
+                    top: 10, left: 10,
+                    width: 300, height: 640,
+                    overflow: 'visible',
+                  }}
+                >
+                  <Screen
+                    isActive={isActive}
+                    onAction={onAction}
+                    progressRef={messengerProgressRef}
+                  />
+                </div>
+              </div>
+            ) : (
+              <Device vibrate={vibrate && isActive} glass>
                 <Screen
                   isActive={isActive}
                   onAction={onAction}
-                  progressRef={messengerProgressRef}
+                  progressRef={spaceProgressRef}
                 />
-              </div>
-            </div>
-          ) : (
-            <Device vibrate={vibrate && isActive} glass>
-              <Screen
-                isActive={isActive}
-                onAction={onAction}
-                progressRef={spaceProgressRef}
-              />
-            </Device>
-          )}
+              </Device>
+            )}
+          </div>
         </div>
       </div>
     </div>

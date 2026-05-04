@@ -196,7 +196,7 @@ export default function ProductsPage() {
       <AtmosphericDivider from="var(--color-bg)" to="var(--color-bg-alt)" height={40} />
 
       {/* ─── Comparison table ─── */}
-      <section className="py-20 px-4 surface-sunken">
+      <section className="py-20 px-4 surface-sunken overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <AnimatedSection className="text-center mb-12">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Compare</p>
@@ -211,10 +211,8 @@ export default function ProductsPage() {
             </p>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.1}>
-            <div className="bg-white border border-black/5 rounded-2xl overflow-hidden shadow-sm">
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-[600px]">
+          <AnimatedSection delay={0.1} className="overflow-x-auto rounded-2xl border border-black/5 bg-white shadow-sm">
+            <table className="w-full min-w-[600px]">
                   <thead>
                     <tr className="border-b border-black/5 bg-[#F8FAFF]">
                       <th scope="col" className="text-left px-6 py-4 text-xs font-semibold text-text-secondary uppercase tracking-wider w-40">
@@ -264,8 +262,6 @@ export default function ProductsPage() {
                     ))}
                   </tbody>
                 </table>
-              </div>
-            </div>
           </AnimatedSection>
         </div>
       </section>
