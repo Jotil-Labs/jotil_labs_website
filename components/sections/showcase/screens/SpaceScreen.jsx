@@ -104,8 +104,8 @@ function BarChartCard({ bars, animate }) {
       style={{ boxShadow: `0 4px 12px ${BRAND_BLUE}10` }}
     >
       <div className="flex items-center justify-between mb-2">
-        <p className="text-[9px] font-bold text-gray-700 uppercase tracking-wider">Q4 by channel</p>
-        <p className="text-[8.5px] text-gray-400 font-mono">total $847K</p>
+        <p className="text-[13px] font-bold text-gray-700 uppercase tracking-wider">Q4 by channel</p>
+        <p className="text-[16px] text-gray-400 font-mono">total $847K</p>
       </div>
       <div className="flex items-end justify-around gap-2 h-20">
         {bars.map((bar, i) => {
@@ -116,7 +116,7 @@ function BarChartCard({ bars, animate }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: animate ? 1 : 0 }}
                 transition={{ duration: 0.3, delay: 0.4 + i * 0.1 }}
-                className="text-[8px] font-bold text-gray-700 font-mono tabular-nums"
+                className="text-[16px] font-bold text-gray-700 font-mono tabular-nums"
               >
                 ${bar.value}K
               </motion.div>
@@ -140,7 +140,7 @@ function BarChartCard({ bars, animate }) {
       <div className="flex items-center justify-around gap-2 mt-1">
         {bars.map((bar) => (
           <div key={bar.label} className="flex-1 text-center">
-            <p className="text-[8px] text-gray-500">{bar.label}</p>
+            <p className="text-[16px] text-gray-500">{bar.label}</p>
           </div>
         ))}
       </div>
@@ -166,7 +166,7 @@ function SalespersonCard({ data }) {
           className="w-9 h-9 rounded-full flex items-center justify-center"
           style={{ background: `linear-gradient(135deg, ${BRAND_BLUE}, ${BRAND_BLUE}cc)` }}
         >
-          <span className="text-white font-bold text-[11px]">{initials}</span>
+          <span className="text-white font-bold text-[15px]">{initials}</span>
         </div>
         <div
           className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full flex items-center justify-center border-2 border-white"
@@ -176,19 +176,19 @@ function SalespersonCard({ data }) {
         </div>
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-[11px] font-bold text-gray-900 truncate">{data.name}</p>
-        <p className="text-[8.5px] text-gray-500 truncate">{data.role}</p>
+        <p className="text-[15px] font-bold text-gray-900 truncate">{data.name}</p>
+        <p className="text-[16px] text-gray-500 truncate">{data.role}</p>
       </div>
       <div className="flex gap-2.5 shrink-0">
         {data.stats.map((s) => (
           <div key={s.label} className="text-center">
             <p
-              className="text-[11px] font-bold tabular-nums leading-none"
+              className="text-[15px] font-bold tabular-nums leading-none"
               style={{ color: BRAND_BLUE }}
             >
               {s.value}
             </p>
-            <p className="text-[7.5px] text-gray-400 uppercase tracking-wider mt-0.5">{s.label}</p>
+            <p className="text-[15px] text-gray-400 uppercase tracking-wider mt-0.5">{s.label}</p>
           </div>
         ))}
       </div>
@@ -208,7 +208,7 @@ function ChatTopBar({ model, pickerOpen, highlightedModel, selectedModel }) {
           }}
         >
           <span className="w-2 h-2 rounded-full" style={{ backgroundColor: model.color }} />
-          <span className="text-[10px] font-semibold text-gray-900">{model.name}</span>
+          <span className="text-[14px] font-semibold text-gray-900">{model.name}</span>
           <ChevronDown
             className="w-2.5 h-2.5 text-gray-400 transition-transform duration-300"
             strokeWidth={2}
@@ -230,7 +230,7 @@ function ChatTopBar({ model, pickerOpen, highlightedModel, selectedModel }) {
               }}
             >
               <div className="px-2 py-1.5 border-b border-gray-100">
-                <p className="text-[8px] uppercase tracking-wider text-gray-400 font-semibold">Models</p>
+                <p className="text-[16px] uppercase tracking-wider text-gray-400 font-semibold">Models</p>
               </div>
               <div className="py-1">
                 {MODELS.map((m, i) => {
@@ -244,8 +244,8 @@ function ChatTopBar({ model, pickerOpen, highlightedModel, selectedModel }) {
                     >
                       <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: m.color }} />
                       <div className="flex-1 min-w-0">
-                        <p className="text-[10px] font-semibold text-gray-900">{m.name}</p>
-                        <p className="text-[8px] text-gray-400">{m.provider}</p>
+                        <p className="text-[14px] font-semibold text-gray-900">{m.name}</p>
+                        <p className="text-[16px] text-gray-400">{m.provider}</p>
                       </div>
                       {isSelected && (
                         <Check className="w-2.5 h-2.5" style={{ color: m.color }} strokeWidth={2.5} />
@@ -261,7 +261,7 @@ function ChatTopBar({ model, pickerOpen, highlightedModel, selectedModel }) {
 
       <div className="flex items-center gap-1">
         <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-        <span className="text-[8px] text-green-600">Online</span>
+        <span className="text-[16px] text-green-600">Online</span>
       </div>
     </div>
   )
@@ -301,8 +301,8 @@ function ChatView({
               <Logo size={18} tone="on-dark" animate={false} />
             </div>
             <div className="text-center">
-              <p className="text-[12px] font-bold text-gray-900">Good afternoon</p>
-              <p className="text-[9px] text-gray-400 mt-0.5">Powered by {model.name}</p>
+              <p className="text-[16px] font-bold text-gray-900">Good afternoon</p>
+              <p className="text-[13px] text-gray-400 mt-0.5">Powered by {model.name}</p>
             </div>
           </div>
         )}
@@ -318,7 +318,7 @@ function ChatView({
                 className="flex justify-end"
               >
                 <div
-                  className="max-w-[78%] px-3 py-1.5 text-[10.5px] leading-snug rounded-xl rounded-br-sm text-gray-900"
+                  className="max-w-[78%] px-3 py-1.5 text-[14px] leading-snug rounded-xl rounded-br-sm text-gray-900"
                   style={{ backgroundColor: '#f1f3f5' }}
                 >
                   {msg.text}
@@ -342,7 +342,7 @@ function ChatView({
                   <Logo size={11} tone="on-dark" animate={false} />
                 </div>
                 <div
-                  className="px-3 py-1.5 text-[10.5px] leading-snug rounded-xl rounded-bl-sm text-white"
+                  className="px-3 py-1.5 text-[14px] leading-snug rounded-xl rounded-bl-sm text-white"
                   style={{ backgroundColor: BRAND_BLUE }}
                 >
                   {msg.text}
@@ -408,7 +408,7 @@ function ChatView({
               </div>
             ) : (
               <div
-                className="max-w-[80%] px-3 py-1.5 text-[10.5px] leading-snug rounded-xl rounded-bl-sm text-white"
+                className="max-w-[80%] px-3 py-1.5 text-[14px] leading-snug rounded-xl rounded-bl-sm text-white"
                 style={{ backgroundColor: BRAND_BLUE }}
               >
                 {aiInflight.text}
@@ -428,7 +428,7 @@ function ChatView({
 
       <div className="shrink-0 px-3 py-2 border-t border-gray-100 flex items-center gap-2">
         <Paperclip className="w-3.5 h-3.5 text-gray-400 shrink-0" strokeWidth={1.6} />
-        <div className="flex-1 bg-gray-50 rounded-full px-3 py-1.5 text-[10px] flex items-center min-h-6">
+        <div className="flex-1 bg-gray-50 rounded-full px-3 py-1.5 text-[14px] flex items-center min-h-6">
           {typedInput ? (
             <span className="text-gray-800">
               {typedInput}
@@ -475,10 +475,10 @@ function AgentView({
       <div className="shrink-0 flex items-center justify-between px-4 py-2.5 border-b border-gray-100">
         <div className="flex items-center gap-1.5">
           <Sparkles className="w-3.5 h-3.5" style={{ color: BRAND_BLUE }} strokeWidth={1.8} />
-          <p className="text-[11px] font-bold text-gray-900">Create new agent</p>
+          <p className="text-[15px] font-bold text-gray-900">Create new agent</p>
         </div>
         <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-full" style={{ backgroundColor: `${BRAND_BLUE}10` }}>
-          <span className="text-[8px] font-semibold" style={{ color: BRAND_BLUE }}>Draft</span>
+          <span className="text-[16px] font-semibold" style={{ color: BRAND_BLUE }}>Draft</span>
         </div>
       </div>
 
@@ -503,8 +503,8 @@ function AgentView({
                 <Check className="w-7 h-7 text-white" strokeWidth={3} />
               </motion.div>
               <div className="text-center">
-                <p className="text-[12px] font-bold text-gray-900">Agent deployed</p>
-                <p className="text-[9.5px] text-gray-500 mt-0.5">
+                <p className="text-[16px] font-bold text-gray-900">Agent deployed</p>
+                <p className="text-[13px] text-gray-500 mt-0.5">
                   {AGENT.name} is now handling leads across {AGENT.channels.length} channels
                 </p>
               </div>
@@ -518,9 +518,9 @@ function AgentView({
               className="flex flex-col gap-2"
             >
               <div>
-                <p className="text-[8.5px] font-semibold text-gray-500 uppercase tracking-wider mb-1">Agent name</p>
+                <p className="text-[16px] font-semibold text-gray-500 uppercase tracking-wider mb-1">Agent name</p>
                 <div
-                  className="rounded-lg px-2.5 py-1.5 text-[10px] bg-white"
+                  className="rounded-lg px-2.5 py-1.5 text-[14px] bg-white"
                   style={{ border: `1px solid ${agentNameTyped ? `${BRAND_BLUE}40` : '#e5e7eb'}` }}
                 >
                   {agentNameTyped ? (
@@ -540,9 +540,9 @@ function AgentView({
               </div>
 
               <div>
-                <p className="text-[8.5px] font-semibold text-gray-500 uppercase tracking-wider mb-1">Role</p>
+                <p className="text-[16px] font-semibold text-gray-500 uppercase tracking-wider mb-1">Role</p>
                 <div
-                  className="rounded-lg px-2.5 py-1.5 text-[10px] bg-white flex items-center justify-between"
+                  className="rounded-lg px-2.5 py-1.5 text-[14px] bg-white flex items-center justify-between"
                   style={{ border: `1px solid ${agentRoleSelected ? `${BRAND_BLUE}40` : '#e5e7eb'}` }}
                 >
                   <span className={agentRoleSelected ? 'text-gray-900 font-medium' : 'text-gray-400'}>
@@ -553,9 +553,9 @@ function AgentView({
               </div>
 
               <div>
-                <p className="text-[8.5px] font-semibold text-gray-500 uppercase tracking-wider mb-1">Greeting</p>
+                <p className="text-[16px] font-semibold text-gray-500 uppercase tracking-wider mb-1">Greeting</p>
                 <div
-                  className="rounded-lg px-2.5 py-1.5 text-[10px] bg-white min-h-7"
+                  className="rounded-lg px-2.5 py-1.5 text-[14px] bg-white min-h-7"
                   style={{ border: `1px solid ${agentGreetingTyped ? `${BRAND_BLUE}40` : '#e5e7eb'}` }}
                 >
                   {agentGreetingTyped ? (
@@ -575,14 +575,14 @@ function AgentView({
               </div>
 
               <div>
-                <p className="text-[8.5px] font-semibold text-gray-500 uppercase tracking-wider mb-1">Channels</p>
+                <p className="text-[16px] font-semibold text-gray-500 uppercase tracking-wider mb-1">Channels</p>
                 <div className="flex gap-1.5 flex-wrap">
                   {AGENT.channels.map((ch, i) => {
                     const isChecked = agentChannelsChecked > i
                     return (
                       <div
                         key={ch}
-                        className="flex items-center gap-1 px-2 py-1 rounded-full text-[9.5px] transition-all"
+                        className="flex items-center gap-1 px-2 py-1 rounded-full text-[13px] transition-all"
                         style={{
                           backgroundColor: isChecked ? `${BRAND_BLUE}12` : '#f4f6fb',
                           border: `1px solid ${isChecked ? `${BRAND_BLUE}40` : '#e5e7eb'}`,
@@ -608,7 +608,7 @@ function AgentView({
 
               <div className="mt-1.5">
                 <div
-                  className="rounded-lg px-3 py-1.5 flex items-center justify-center gap-1.5 text-[10px] font-semibold text-white"
+                  className="rounded-lg px-3 py-1.5 flex items-center justify-center gap-1.5 text-[14px] font-semibold text-white"
                   style={{
                     background: `linear-gradient(135deg, ${BRAND_BLUE}, ${BRAND_BLUE}dd)`,
                     transform: agentSubmitPulse ? 'scale(1.02)' : 'scale(1)',

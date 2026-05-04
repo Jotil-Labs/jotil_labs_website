@@ -91,8 +91,8 @@ export function Hero() {
   useEffect(() => setMounted(true), [])
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Background handled by BrandBackground */}
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-white">
+      {/* Clean white base — atmospheric BrandBackground sits behind via fixed positioning */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center min-h-[calc(100vh-80px)] py-16">

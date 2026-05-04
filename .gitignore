@@ -21,6 +21,19 @@ dist-ssr
 test-results
 playwright-report
 .playwright-mcp
+# Ad-hoc Playwright screenshots dropped at repo root during dev/audits
+/d-*.png
+/d-*.jpg
+/d-*.jpeg
+/m-*.png
+/m-*.jpg
+/m-*.jpeg
+/t-*.png
+/t-*.jpg
+/t-*.jpeg
+/mobile-*.png
+/mobile-*.jpg
+/mobile-*.jpeg
 
 # Editor directories and files
 .vscode/*

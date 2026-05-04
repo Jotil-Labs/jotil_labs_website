@@ -756,6 +756,42 @@ textarea:focus-visible {
   animation: phone-vibrate 0.6s ease-in-out 3;
 }
 
+/* ── Showcase device glow halo ──
+   Multi-color cyan→blue→purple→pink wash that pulses behind each device.
+   Inspired by the CogniDrift mockup: subtle outer bloom + tighter inner halo. */
+@keyframes device-glow-pulse-outer {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes device-glow-pulse-inner {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.03);
+  }
+}
+
+.device-glow-outer {
+  animation: device-glow-pulse-outer 4.8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.device-glow-inner {
+  animation: device-glow-pulse-inner 3.6s ease-in-out infinite;
+  animation-delay: -1.2s;
+  will-change: transform, opacity;
+}
+
 /* ── Showcase device responsive scaling ──
    Each device renders at its natural pixel dimensions, then is scaled
    visually AND its layout box is reduced to the scaled size, so the page
@@ -782,23 +818,27 @@ textarea:focus-visible {
 [data-device-frame][data-device-type="phone"]   { --w: 320px; --h: 660px; --s: 0.82; }
 [data-device-frame][data-device-type="laptop"]  { --w: 720px; --h: 460px; --s: 0.42; }
 [data-device-frame][data-device-type="monitor"] { --w: 460px; --h: 330px; --s: 0.65; }
+[data-device-frame][data-device-type="browser"] { --w: 820px; --h: 560px; --s: 0.38; }
 
 @media (min-width: 480px) {
   [data-device-frame][data-device-type="phone"]   { --s: 0.95; }
   [data-device-frame][data-device-type="laptop"]  { --s: 0.55; }
   [data-device-frame][data-device-type="monitor"] { --s: 0.85; }
+  [data-device-frame][data-device-type="browser"] { --s: 0.5; }
 }
 
 @media (min-width: 640px) {
   [data-device-frame][data-device-type="phone"]   { --s: 1; }
   [data-device-frame][data-device-type="laptop"]  { --s: 0.78; }
   [data-device-frame][data-device-type="monitor"] { --s: 1; }
+  [data-device-frame][data-device-type="browser"] { --s: 0.7; }
 }
 
 @media (min-width: 768px) {
   [data-device-frame][data-device-type="phone"]   { --s: 1; }
   [data-device-frame][data-device-type="laptop"]  { --s: 0.92; }
   [data-device-frame][data-device-type="monitor"] { --s: 1; }
+  [data-device-frame][data-device-type="browser"] { --s: 0.78; }
 }
 
 @media (min-width: 1024px) {
@@ -806,10 +846,12 @@ textarea:focus-visible {
   [data-device-frame][data-device-type="phone"]   { --s: 1; }
   [data-device-frame][data-device-type="laptop"]  { --s: 0.55; }
   [data-device-frame][data-device-type="monitor"] { --s: 0.85; }
+  [data-device-frame][data-device-type="browser"] { --s: 0.5; }
 }
 
 @media (min-width: 1280px) {
   [data-device-frame][data-device-type="phone"]   { --s: 1; }
   [data-device-frame][data-device-type="laptop"]  { --s: 0.72; }
   [data-device-frame][data-device-type="monitor"] { --s: 1; }
+  [data-device-frame][data-device-type="browser"] { --s: 0.68; }
 }

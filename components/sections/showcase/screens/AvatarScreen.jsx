@@ -283,32 +283,6 @@ export function AvatarScreen({ isActive, onAction }) {
 
   return (
     <div className="w-full h-full flex flex-col bg-white relative overflow-hidden">
-      {/* Browser tab chrome */}
-      <div className="shrink-0 flex items-center gap-2 px-3 py-2 bg-gray-50 border-b border-gray-200">
-        <div className="flex items-center gap-1">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-          <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-        </div>
-        <div className="flex items-center gap-1.5 ml-2">
-          <div className="px-2.5 py-1 bg-white rounded-t-md border-t border-l border-r border-gray-200 flex items-center gap-1.5">
-            <Logo size={9} animate={false} />
-            <span className="text-[9px] font-semibold text-gray-700">JotilAvatar</span>
-            <span className="w-3 h-3 rounded-full hover:bg-gray-200 flex items-center justify-center text-gray-400 text-[8px]">×</span>
-          </div>
-        </div>
-        <div className="flex-1 flex items-center justify-center">
-          <div className="bg-white rounded-md px-3 py-0.5 text-[8px] text-gray-500 font-mono border border-gray-200 max-w-45 w-full text-center">
-            app.jotillabs.com/avatar
-          </div>
-        </div>
-        <div className="flex items-center gap-1">
-          <span className="w-1 h-1 rounded-full bg-gray-300" />
-          <span className="w-1 h-1 rounded-full bg-gray-300" />
-          <span className="w-1 h-1 rounded-full bg-gray-300" />
-        </div>
-      </div>
-
       {/* Content: avatar left, chat right */}
       <div className="flex-1 flex min-h-0">
         {/* Left: Avatar */}
@@ -319,14 +293,14 @@ export function AvatarScreen({ isActive, onAction }) {
               {aiSpeaking && (
                 <div className="absolute top-2 left-2 flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-white/90 backdrop-blur" style={{ boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}>
                   <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                  <span className="text-[7px] font-semibold text-gray-700">LIVE</span>
+                  <span className="text-[11px] font-semibold text-gray-700">LIVE</span>
                 </div>
               )}
             </div>
           </div>
           <div className="shrink-0 px-3 pb-2 pt-1 flex flex-col items-center gap-1">
-            <p className="text-[10px] font-bold text-gray-900">Sarah</p>
-            <p className="text-[8px] text-gray-500">AI Brand Ambassador</p>
+            <p className="text-[14px] font-bold text-gray-900">Sarah</p>
+            <p className="text-[12px] text-gray-500">AI Brand Ambassador</p>
             <div className="flex items-center gap-2 mt-1">
               <div
                 className="w-6 h-6 rounded-full flex items-center justify-center"
@@ -347,11 +321,11 @@ export function AvatarScreen({ isActive, onAction }) {
               <div className="w-5 h-5 rounded-md flex items-center justify-center" style={{ backgroundColor: `${BRAND_BLUE}15` }}>
                 <Logo size={10} animate={false} />
               </div>
-              <p className="text-[10px] font-bold text-gray-900">Live Conversation</p>
+              <p className="text-[14px] font-bold text-gray-900">Live Conversation</p>
             </div>
             <div className="flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-[8px] text-green-600">Active</span>
+              <span className="text-[12px] text-green-600">Active</span>
             </div>
           </div>
 
@@ -368,7 +342,7 @@ export function AvatarScreen({ isActive, onAction }) {
                     className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`max-w-[88%] px-2 py-1.5 text-[9.5px] leading-snug ${
+                      className={`max-w-[88%] px-2 py-1.5 text-[13px] leading-snug ${
                         isUser
                           ? 'rounded-xl rounded-br-sm text-gray-900'
                           : 'rounded-xl rounded-bl-sm text-white'
@@ -401,7 +375,7 @@ export function AvatarScreen({ isActive, onAction }) {
           </div>
 
           <div className="shrink-0 px-3 py-1.5 border-t border-gray-100 flex items-center gap-2">
-            <div className="flex-1 bg-gray-50 rounded-full px-2.5 py-1 text-[8.5px] text-gray-400">
+            <div className="flex-1 bg-gray-50 rounded-full px-2.5 py-1 text-[12px] text-gray-400">
               Type or speak...
             </div>
             <div

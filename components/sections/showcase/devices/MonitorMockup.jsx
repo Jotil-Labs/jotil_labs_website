@@ -1,6 +1,9 @@
+import { DeviceGlow } from './DeviceGlow'
+
 export function MonitorMockup({ children, glass = false }) {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center relative">
+      <DeviceGlow radius={26} inset={-30} intensity={0.9} />
       {/* Screen */}
       <div
         className="w-[460px] rounded-xl overflow-hidden relative"

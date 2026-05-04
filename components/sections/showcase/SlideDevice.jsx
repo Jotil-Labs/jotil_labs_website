@@ -4,6 +4,7 @@ import { useState, useCallback, useRef } from 'react'
 import { PhoneMockup } from './devices/PhoneMockup'
 import { LaptopMockup } from './devices/LaptopMockup'
 import { MonitorMockup } from './devices/MonitorMockup'
+import { BrowserMockup } from './devices/BrowserMockup'
 import { ReceptionistScreen } from './screens/ReceptionistScreen'
 import { MessengerScreen } from './screens/MessengerScreen'
 import { OutreachScreen } from './screens/OutreachScreen'
@@ -22,12 +23,19 @@ const DEVICES = {
   phone: PhoneMockup,
   laptop: LaptopMockup,
   monitor: MonitorMockup,
+  browser: BrowserMockup,
 }
 
 const TILT = {
   phone: 'none',
   laptop: 'none',
   monitor: 'none',
+  browser: 'none',
+}
+
+const BROWSER_URL = {
+  space: 'app.jotillabs.com',
+  avatar: 'app.jotillabs.com/avatar',
 }
 
 export function SlideDevice({ slug, deviceType, isActive, messengerProgressRef, spaceProgressRef }) {
@@ -90,7 +98,13 @@ export function SlideDevice({ slug, deviceType, isActive, messengerProgressRef, 
                 </div>
               </div>
             ) : (
-              <Device vibrate={vibrate && isActive} glass>
+              <Device
+                vibrate={vibrate && isActive}
+                glass
+                {...(deviceType === 'browser' && BROWSER_URL[slug]
+                  ? { url: BROWSER_URL[slug] }
+                  : {})}
+              >
                 <Screen
                   isActive={isActive}
                   onAction={onAction}
