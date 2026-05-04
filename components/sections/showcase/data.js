@@ -51,7 +51,7 @@ export const PRODUCT_SLIDES = [
       'Real-time conversation analytics',
       'Unified inbox across all channels',
     ],
-    deviceType: 'laptop',
+    deviceType: 'browser',
   },
   {
     slug: 'avatar',
@@ -64,6 +64,6 @@ export const PRODUCT_SLIDES = [
       'Natural conversation with real expressions',
       'Guided selling and onboarding',
     ],
-    deviceType: 'monitor',
+    deviceType: 'browser',
   },
 ]

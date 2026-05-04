@@ -1,3 +1,5 @@
+import { DeviceGlow } from './DeviceGlow'
+
 export function LaptopMockup({ children, glass = false }) {
   const borderStyle = glass
     ? '2px solid rgba(255, 255, 255, 0.5)'
@@ -8,7 +10,8 @@ export function LaptopMockup({ children, glass = false }) {
     : undefined
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center relative">
+      <DeviceGlow radius={32} inset={-32} intensity={0.9} />
       {/* Screen */}
       <div
         className="w-160 rounded-t-xl overflow-hidden relative"

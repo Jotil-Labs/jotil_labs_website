@@ -122,10 +122,10 @@ function StepCard({ step, index }) {
     >
       {/* Step number */}
       <span
-        className="text-[3.5rem] font-extrabold leading-none select-none"
+        className="block text-[3.5rem] font-extrabold leading-[1.25] select-none pt-1"
         style={{
           fontFamily: 'var(--font-jetbrains), JetBrains Mono, monospace',
-          background: `linear-gradient(135deg, ${color}, ${color}55)`,
+          background: `linear-gradient(135deg, ${color}, ${color}aa)`,
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',

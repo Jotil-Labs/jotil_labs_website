@@ -1,7 +1,10 @@
+import { DeviceGlow } from './DeviceGlow'
+
 export function PhoneMockup({ children, vibrate = false, glass = false }) {
   if (!glass) {
     return (
       <div className="relative" style={{ perspective: 1200 }}>
+        <DeviceGlow radius={62} inset={-22} />
         <div className="absolute left-[-2.5px] top-[90px] w-[3px] h-[20px] rounded-l-sm" style={{ background: 'linear-gradient(180deg, #3a3a40, #2a2a30)' }} />
         <div className="absolute left-[-2.5px] top-[124px] w-[3px] h-[32px] rounded-l-sm" style={{ background: 'linear-gradient(180deg, #3a3a40, #2a2a30)' }} />
         <div className="absolute left-[-2.5px] top-[164px] w-[3px] h-[32px] rounded-l-sm" style={{ background: 'linear-gradient(180deg, #3a3a40, #2a2a30)' }} />
@@ -32,6 +35,7 @@ export function PhoneMockup({ children, vibrate = false, glass = false }) {
 
   return (
     <div className="relative" style={{ perspective: 1200 }}>
+      <DeviceGlow radius={62} inset={-22} intensity={0.85} />
       {/* Side buttons -- light silver for glass variant */}
       <div className="absolute left-[-2px] top-[90px] w-[2.5px] h-[20px] rounded-l-sm" style={{ background: 'linear-gradient(180deg, #d8d8dc, #c0c0c4)' }} />
       <div className="absolute left-[-2px] top-[124px] w-[2.5px] h-[32px] rounded-l-sm" style={{ background: 'linear-gradient(180deg, #d8d8dc, #c0c0c4)' }} />
