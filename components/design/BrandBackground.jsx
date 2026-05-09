@@ -1,59 +1,8 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import Logo from '@/components/ui/Logo'
-
 const NOISE_SVG = `data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E`
 
 export function BrandBackground({ variant = 'quiet' }) {
-  const watermarkRef = useRef(null)
-
-  useEffect(() => {
-    if (variant !== 'hero') return
-    if (typeof window === 'undefined') return
-
-    const fine = window.matchMedia('(pointer: fine)').matches
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (!fine || reduced) return
-
-    let mouseX = 0.5
-    let mouseY = 0.5
-    let currentX = 0.5
-    let currentY = 0.5
-    let rafId = 0
-
-    const onMouseMove = (e) => {
-      mouseX = e.clientX / window.innerWidth
-      mouseY = e.clientY / window.innerHeight
-      if (!rafId) rafId = requestAnimationFrame(update)
-    }
-
-    const update = () => {
-      rafId = 0
-      currentX += (mouseX - currentX) * 0.08
-      currentY += (mouseY - currentY) * 0.08
-
-      const tiltX = (currentY - 0.5) * -14
-      const tiltY = (currentX - 0.5) * 18
-      if (watermarkRef.current) {
-        watermarkRef.current.style.transform = `perspective(1100px) translateX(15%) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`
-      }
-
-      if (
-        Math.abs(mouseX - currentX) > 0.002 ||
-        Math.abs(mouseY - currentY) > 0.002
-      ) {
-        rafId = requestAnimationFrame(update)
-      }
-    }
-
-    window.addEventListener('mousemove', onMouseMove, { passive: true })
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove)
-      if (rafId) cancelAnimationFrame(rafId)
-    }
-  }, [variant])
-
   const isHero = variant === 'hero'
 
   return (
@@ -112,28 +61,6 @@ export function BrandBackground({ variant = 'quiet' }) {
           }}
         />
       </div>
-
-      {/* Watermark — fixed at z-[15], above section bgs (main z-10) but below navbar (z-50).
-          Static across the full home page during scroll. Homepage only. */}
-      {isHero && (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none fixed inset-0 z-15 hidden md:flex items-center justify-end overflow-hidden"
-        >
-          <div
-            ref={watermarkRef}
-            className="will-change-transform mr-8 lg:mr-16"
-            style={{
-              opacity: 0.06,
-              transform: 'translateX(15%)',
-              transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
-              transformStyle: 'preserve-3d',
-            }}
-          >
-            <Logo size={700} tone="brand" animate={false} />
-          </div>
-        </div>
-      )}
     </>
   )
 }

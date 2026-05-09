@@ -6,6 +6,7 @@ import { Stats } from '@/components/sections/Stats'
 import { Testimonials } from '@/components/sections/Testimonials'
 import { IntegrationStrip } from '@/components/sections/IntegrationStrip'
 import { CTASection } from '@/components/sections/CTASection'
+import { HomeWatermark } from '@/components/design/HomeWatermark'
 
 export const metadata = {
   title: 'JotilLabs - AI Voice, Chat & Automation Platform',
@@ -16,6 +17,7 @@ export const metadata = {
 export default function Home() {
   return (
     <>
+      <HomeWatermark />
       <Hero />
       {/* <LogoCloud /> */}
       <ScrollProductShowcase />

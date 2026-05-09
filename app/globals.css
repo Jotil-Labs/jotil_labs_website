@@ -761,23 +761,23 @@ textarea:focus-visible {
    Inspired by the CogniDrift mockup: subtle outer bloom + tighter inner halo. */
 @keyframes device-glow-pulse-outer {
   0%, 100% {
-    opacity: 0.45;
+    opacity: 0.25;
     transform: scale(1);
   }
   50% {
-    opacity: 0.75;
-    transform: scale(1.04);
+    opacity: 0.42;
+    transform: scale(1.03);
   }
 }
 
 @keyframes device-glow-pulse-inner {
   0%, 100% {
-    opacity: 0.25;
+    opacity: 0.13;
     transform: scale(1);
   }
   50% {
-    opacity: 0.5;
-    transform: scale(1.03);
+    opacity: 0.26;
+    transform: scale(1.02);
   }
 }
 
@@ -802,6 +802,9 @@ textarea:focus-visible {
   margin-inline: auto;
   width: calc(var(--w) * var(--s));
   height: calc(var(--h) * var(--s));
+  /* Stack devices ABOVE the homepage watermark (which sits at z-1 inside
+     <main>) so opaque device screens cover the watermark. */
+  z-index: 2;
 }
 
 [data-device-frame] > .device-inner {
